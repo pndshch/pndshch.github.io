@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>pndshch's Games</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background: #0d1117;
+    color: #e6edf3;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 60px 20px 80px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 10px;
+}
+header h1 span { color: #7c3aed; }
+header p {
+    color: #7d8590;
+    font-size: 15px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    width: 100%;
+    max-width: 720px;
+}
+
+.card {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.18s, border-color 0.18s, box-shadow 0.18s;
+}
+.card:hover {
+    transform: translateY(-4px);
+    border-color: #7c3aed;
+    box-shadow: 0 8px 32px rgba(124,58,237,0.18);
+}
+
+.card-thumb {
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 72px;
+    user-select: none;
+}
+.card-thumb.fruit { background: linear-gradient(135deg, #0f172a 0%, #1e0d3a 100%); }
+.card-thumb.dots  { background: linear-gradient(135deg, #0f2a1a 0%, #0d2a3a 100%); }
+
+.card-body {
+    padding: 20px 22px 24px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.card-body h2 { font-size: 19px; font-weight: 700; }
+.card-body p  { font-size: 13px; color: #8b949e; line-height: 1.65; flex: 1; }
+
+.tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+.tag {
+    font-size: 11px;
+    padding: 3px 9px;
+    border-radius: 20px;
+    background: #21262d;
+    border: 1px solid #30363d;
+    color: #7d8590;
+}
+
+.play-btn {
+    display: block;
+    margin-top: 14px;
+    padding: 11px;
+    background: #238636;
+    border: 1px solid #2ea043;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    transition: background 0.15s;
+}
+.play-btn:hover { background: #2ea043; }
+
+footer {
+    margin-top: 72px;
+    color: #484f58;
+    font-size: 12px;
+    text-align: center;
+    line-height: 2;
+}
+footer a { color: #7d8590; text-decoration: none; }
+footer a:hover { color: #e6edf3; }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>pndshch<span>'s</span> Games</h1>
+    <p>ブラウザで遊べるゲーム集</p>
+</header>
+
+<div class="grid">
+
+    <div class="card">
+        <div class="card-thumb fruit">🍓</div>
+        <div class="card-body">
+            <h2>Fruit Drop AI</h2>
+            <p>フルーツを落として同じ種類を合体させるゲーム。遺伝的アルゴリズムでAIが自分で学習します。ポムとクロのお助けキャラ付き。</p>
+            <div class="tags">
+                <span class="tag">物理エンジン</span>
+                <span class="tag">遺伝的アルゴリズム</span>
+                <span class="tag">AI学習</span>
+            </div>
+            <a class="play-btn" href="https://pndshch.github.io/fruit-drop-ai/" target="_blank">▶ 遊ぶ</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-thumb dots">✏️</div>
+        <div class="card-body">
+            <h2>てんつなぎ</h2>
+            <p>点と点をつないで絵を完成させる、子ども向けのシンプルなゲーム。ブラウザだけで遊べます。</p>
+            <div class="tags">
+                <span class="tag">子ども向け</span>
+                <span class="tag">パズル</span>
+            </div>
+            <a class="play-btn" href="https://pndshch.github.io/tentsunagi/" target="_blank">▶ 遊ぶ</a>
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    <p>
+        <a href="https://github.com/pndshch" target="_blank">@pndshch on GitHub</a>
+    </p>
+</footer>
+
+</body>
+</html>
