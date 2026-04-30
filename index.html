@@ -133,20 +133,25 @@ header p {
 .btn-play   { background: #238636; border: 1px solid #2ea043; }
 .btn-store  { background: #0a84ff; border: 1px solid #409cff; }
 
-/* ── Buy Me a Coffee ── */
-.bmc-float {
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    z-index: 100;
-    opacity: 0.9;
-    transition: opacity 0.2s, transform 0.2s;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+/* ── Support section ── */
+.support {
+    margin-top: 56px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
 }
-.bmc-float:hover { opacity: 1; transform: translateY(-2px); }
-.bmc-float img { display: block; height: 44px; width: auto; }
+.support p {
+    color: #7d8590;
+    font-size: 13px;
+}
+.support a {
+    display: inline-block;
+    transition: opacity 0.2s, transform 0.2s;
+}
+.support a:hover { opacity: 0.85; transform: translateY(-2px); }
+.support img { display: block; height: 48px; width: auto; }
 
 /* ── Footer ── */
 footer {
@@ -162,10 +167,8 @@ footer a:hover { color: #e6edf3; }
 
 /* ── Responsive ── */
 @media (max-width: 480px) {
-    body { padding: 40px 14px 100px; }
+    body { padding: 40px 14px 80px; }
     .logo-text { font-size: 24px; }
-    .bmc-float { bottom: 16px; right: 16px; }
-    .bmc-float img { height: 38px; }
 }
 </style>
 </head>
@@ -249,18 +252,17 @@ footer a:hover { color: #e6edf3; }
     </div>
 </div>
 
-<!-- Buy Me a Coffee (floating) -->
-<a class="bmc-float" href="https://www.buymeacoffee.com/pndshch" target="_blank" rel="noopener">
-    <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee">
-</a>
+<!-- Support -->
+<div class="support">
+    <p>気に入ったら支援していただけると嬉しいです。</p>
+    <a href="https://www.buymeacoffee.com/pndshch" target="_blank" rel="noopener">
+        <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee">
+    </a>
+</div>
 
 <!-- Footer -->
 <footer>
-    <p>
-        <a href="https://github.com/pndshch" target="_blank">GitHub</a>
-        <span class="footer-sep">·</span>
-        <a href="https://www.buymeacoffee.com/pndshch" target="_blank">Buy Me a Coffee</a>
-    </p>
+    <p><a href="https://github.com/pndshch" target="_blank">GitHub</a></p>
     <p style="margin-top:4px">© 2026 Pinda Lab</p>
 </footer>
 
