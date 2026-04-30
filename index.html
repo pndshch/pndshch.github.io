@@ -133,36 +133,10 @@ header p {
 .btn-play   { background: #238636; border: 1px solid #2ea043; }
 .btn-store  { background: #0a84ff; border: 1px solid #409cff; }
 
-/* ── Support hint (header) ── */
-.support-hint {
-    display: inline-block;
-    margin-top: 14px;
-    font-size: 12px;
-    color: #484f58;
-    text-decoration: none;
-    transition: color 0.15s;
-}
-.support-hint:hover { color: #8b949e; }
-
-/* ── Support section (bottom) ── */
-.support {
-    margin-top: 56px;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 16px;
-}
-.support p {
-    color: #7d8590;
-    font-size: 13px;
-}
-.support a {
-    display: inline-block;
-    transition: opacity 0.2s, transform 0.2s;
-}
-.support a:hover { opacity: 0.85; transform: translateY(-2px); }
-.support img { display: block; height: 48px; width: auto; }
+/* ── Buy Me a Coffee (header) ── */
+.bmc-top { display: inline-block; margin-top: 18px; transition: opacity 0.15s; }
+.bmc-top:hover { opacity: 0.85; }
+.bmc-top img { display: block; height: 48px; width: auto; }
 
 /* ── Footer ── */
 footer {
@@ -192,8 +166,8 @@ footer a:hover { color: #e6edf3; }
         <div class="logo-text">Pinda<span> Lab</span></div>
     </div>
     <p>ゲーム・教育・ツール — ブラウザとアプリで届けます</p>
-    <a class="support-hint" href="https://www.buymeacoffee.com/pndshch" target="_blank" rel="noopener">
-        気に入ったら支援していただけると嬉しいです ☕
+    <a class="bmc-top" href="https://www.buymeacoffee.com/pndshch" target="_blank" rel="noopener">
+        <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee">
     </a>
 </header>
 
@@ -264,14 +238,6 @@ footer a:hover { color: #e6edf3; }
             <a class="card-btn btn-store" href="https://github.com/pndshch/merukari-sizer" target="_blank">→ 詳細を見る</a>
         </div>
     </div>
-</div>
-
-<!-- Support -->
-<div class="support">
-    <p>気に入ったら支援していただけると嬉しいです。</p>
-    <a href="https://www.buymeacoffee.com/pndshch" target="_blank" rel="noopener">
-        <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee">
-    </a>
 </div>
 
 <!-- Footer -->
