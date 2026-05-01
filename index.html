@@ -18,6 +18,37 @@ body {
     padding: 64px 20px 120px;
 }
 
+/* ── Language switch ── */
+.lang-switch {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    display: flex;
+    gap: 2px;
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 3px;
+    z-index: 100;
+}
+.lang-btn {
+    background: transparent;
+    border: none;
+    color: #7d8590;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+}
+.lang-btn:hover { color: #e6edf3; }
+.lang-btn.active {
+    background: #7c3aed;
+    color: #fff;
+}
+
 /* ── Header ── */
 header { text-align: center; margin-bottom: 56px; }
 
@@ -85,15 +116,25 @@ header p {
 }
 
 .card-thumb {
+    position: relative;
     height: 140px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 64px;
     user-select: none;
+    overflow: hidden;
 }
-.thumb-fruit   { background: linear-gradient(135deg, #0f172a 0%, #1e0d3a 100%); }
-.thumb-dots    { background: linear-gradient(135deg, #0f2a1a 0%, #0a2035 100%); }
+.thumb-emoji { font-size: 64px; z-index: 1; }
+.thumb-gif {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 2;
+}
+.thumb-fruit    { background: linear-gradient(135deg, #0f172a 0%, #1e0d3a 100%); }
+.thumb-dots     { background: linear-gradient(135deg, #0f2a1a 0%, #0a2035 100%); }
 .thumb-mercari  { background: linear-gradient(135deg, #1a0a0a 0%, #2a0a1a 100%); }
 .thumb-hiragana { background: linear-gradient(135deg, #1a0a2a 0%, #2a0a2a 100%); }
 
@@ -155,10 +196,17 @@ footer a:hover { color: #e6edf3; }
 @media (max-width: 480px) {
     body { padding: 40px 14px 80px; }
     .logo-text { font-size: 24px; }
+    .lang-switch { top: 10px; right: 10px; }
 }
 </style>
 </head>
 <body>
+
+<!-- Language switch -->
+<div class="lang-switch">
+    <button class="lang-btn active" data-lang="ja">JP</button>
+    <button class="lang-btn" data-lang="en">EN</button>
+</div>
 
 <!-- Header -->
 <header>
@@ -166,91 +214,106 @@ footer a:hover { color: #e6edf3; }
         <div class="logo-mark">◆</div>
         <div class="logo-text">Pinda<span> Lab</span></div>
     </div>
-    <p>ゲーム・教育・ツール — ブラウザとアプリで届けます</p>
-    <p class="bmc-label">気に入ったら支援していただけると嬉しいです</p>
+    <p data-i18n="tagline">ゲーム・教育・ツール — ブラウザとアプリで届けます</p>
+    <p class="bmc-label" data-i18n="bmcLabel">気に入ったら支援していただけると嬉しいです</p>
     <a class="bmc-top" href="https://www.buymeacoffee.com/pndshch" target="_blank" rel="noopener">
         <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee">
     </a>
 </header>
 
 <!-- Games -->
-<div class="section-label">🎮 ゲーム</div>
+<div class="section-label" data-i18n="secGames">🎮 ゲーム</div>
 <div class="grid">
     <div class="card">
-        <div class="card-thumb thumb-fruit">🍓</div>
+        <div class="card-thumb thumb-fruit">
+            <span class="thumb-emoji">🍓</span>
+            <img class="thumb-gif" src="assets/fruit-drop.gif" alt="" onerror="this.remove()">
+        </div>
         <div class="card-body">
-            <h2>Fruit Drop AI</h2>
-            <p>フルーツを落として同種を合体させる物理ゲーム。遺伝的アルゴリズムがリアルタイムで学習し、AIが上達していく様子を観察できます。</p>
+            <h2 data-i18n="fruitTitle">Fruit Drop AI</h2>
+            <p data-i18n="fruitDesc">フルーツを落として同種を合体させる物理ゲーム。遺伝的アルゴリズムがリアルタイムで学習し、AIが上達していく様子を観察できます。</p>
             <div class="tags">
-                <span class="tag">物理演算</span>
-                <span class="tag">AI学習</span>
-                <span class="tag">遺伝的アルゴリズム</span>
+                <span class="tag" data-i18n="fruitTag1">物理演算</span>
+                <span class="tag" data-i18n="fruitTag2">AI学習</span>
+                <span class="tag" data-i18n="fruitTag3">遺伝的アルゴリズム</span>
             </div>
-            <a class="card-btn btn-play" href="https://pndshch.github.io/fruit-drop-ai/" target="_blank">▶ ブラウザで遊ぶ</a>
+            <a class="card-btn btn-play" href="https://pndshch.github.io/fruit-drop-ai/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
         </div>
     </div>
 </div>
 
 <!-- Education -->
-<div class="section-label">📚 教育・知育</div>
+<div class="section-label" data-i18n="secEdu">📚 教育・知育</div>
 <div class="grid">
     <div class="card">
-        <div class="card-thumb thumb-dots">✏️</div>
+        <div class="card-thumb thumb-dots">
+            <span class="thumb-emoji">✏️</span>
+            <img class="thumb-gif" src="assets/tentsunagi.gif" alt="" onerror="this.remove()">
+        </div>
         <div class="card-body">
-            <h2>てんつなぎ</h2>
-            <p>点と点をつないで絵を完成させる、子ども向けのシンプルなゲーム。タブレット・スマホでも快適に遊べます。</p>
+            <h2 data-i18n="dotsTitle">てんつなぎ</h2>
+            <p data-i18n="dotsDesc">点と点をつないで絵を完成させる、子ども向けのシンプルなゲーム。タブレット・スマホでも快適に遊べます。</p>
             <div class="tags">
-                <span class="tag">子ども向け</span>
-                <span class="tag">知育</span>
-                <span class="tag">パズル</span>
+                <span class="tag" data-i18n="kidsTag">子ども向け</span>
+                <span class="tag" data-i18n="eduTag">知育</span>
+                <span class="tag" data-i18n="puzzleTag">パズル</span>
             </div>
-            <a class="card-btn btn-play" href="https://pndshch.github.io/tentsunagi/" target="_blank">▶ ブラウザで遊ぶ</a>
+            <a class="card-btn btn-play" href="https://pndshch.github.io/tentsunagi/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
         </div>
     </div>
 
     <div class="card">
-        <div class="card-thumb thumb-hiragana">🌸</div>
+        <div class="card-thumb thumb-hiragana">
+            <span class="thumb-emoji">🌸</span>
+            <img class="thumb-gif" src="assets/hiragana-game.gif" alt="" onerror="this.remove()">
+        </div>
         <div class="card-body">
-            <h2>ひらがな あそび</h2>
-            <p>ひらがなを楽しく覚えられる子ども向け学習ゲーム。文字を見て・聞いて・答えることで自然に身につきます。</p>
+            <h2 data-i18n="hiraTitle">ひらがな あそび</h2>
+            <p data-i18n="hiraDesc">ひらがなを楽しく覚えられる子ども向け学習ゲーム。文字を見て・聞いて・答えることで自然に身につきます。</p>
             <div class="tags">
-                <span class="tag">子ども向け</span>
-                <span class="tag">ひらがな</span>
-                <span class="tag">知育</span>
+                <span class="tag" data-i18n="kidsTag">子ども向け</span>
+                <span class="tag" data-i18n="hiraTag">ひらがな</span>
+                <span class="tag" data-i18n="eduTag">知育</span>
             </div>
-            <a class="card-btn btn-play" href="https://pndshch.github.io/hiragana-game/" target="_blank">▶ ブラウザで遊ぶ</a>
+            <a class="card-btn btn-play" href="https://pndshch.github.io/hiragana-game/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
         </div>
     </div>
 
     <div class="card">
-        <div class="card-thumb thumb-hiragana">🌀</div>
+        <div class="card-thumb thumb-hiragana">
+            <span class="thumb-emoji">🌀</span>
+            <img class="thumb-gif" src="assets/hiragana-maze.gif" alt="" onerror="this.remove()">
+        </div>
         <div class="card-body">
-            <h2>ひらがな迷路</h2>
-            <p>ひらがなをたどって出口を目指す迷路ゲーム。文字を読みながら進むことで、自然と読み方が身につきます。</p>
+            <h2 data-i18n="mazeTitle">ひらがな迷路</h2>
+            <p data-i18n="mazeDesc">ひらがなをたどって出口を目指す迷路ゲーム。文字を読みながら進むことで、自然と読み方が身につきます。</p>
             <div class="tags">
-                <span class="tag">子ども向け</span>
-                <span class="tag">ひらがな</span>
-                <span class="tag">迷路</span>
+                <span class="tag" data-i18n="kidsTag">子ども向け</span>
+                <span class="tag" data-i18n="hiraTag">ひらがな</span>
+                <span class="tag" data-i18n="mazeTag">迷路</span>
             </div>
-            <a class="card-btn btn-play" href="https://pndshch.github.io/hiragana-maze/" target="_blank">▶ ブラウザで遊ぶ</a>
+            <a class="card-btn btn-play" href="https://pndshch.github.io/hiragana-maze/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
         </div>
     </div>
 </div>
 
 <!-- Tools -->
-<div class="section-label">🔧 ツール</div>
+<div class="section-label" data-i18n="secTools">🔧 ツール</div>
 <div class="grid">
     <div class="card">
-        <div class="card-thumb thumb-mercari">📦</div>
+        <div class="card-thumb thumb-mercari">
+            <span class="thumb-emoji">📦</span>
+            <img class="thumb-gif" src="assets/mercari-sizer.gif" alt="" onerror="this.remove()">
+        </div>
         <div class="card-body">
-            <h2>Mercari Sizer</h2>
-            <p>カメラで荷物のサイズを計測し、最適なメルカリ便のサイズを自動提案するツール。ブラウザでもiOSでも動作します。</p>
+            <h2 data-i18n="merTitle">Mercari Sizer</h2>
+            <p data-i18n="merDesc">カメラで荷物のサイズを計測し、最適なメルカリ便のサイズを自動提案するツール。ブラウザでもiOSでも動作します。</p>
             <div class="tags">
-                <span class="tag">メルカリ</span>
-                <span class="tag">サイズ計測</span>
-                <span class="tag">iOS / ブラウザ</span>
+                <span class="tag" data-i18n="merTag1">メルカリ</span>
+                <span class="tag" data-i18n="merTag2">サイズ計測</span>
+                <span class="tag" data-i18n="merTag3">iOS / ブラウザ</span>
             </div>
-            <a class="card-btn btn-play" href="https://pndshch.github.io/merukari-sizer/" target="_blank">▶ ブラウザで試す</a>
+            <a class="card-btn btn-play" href="https://pndshch.github.io/merukari-sizer/" target="_blank" data-i18n="tryBrowser">▶ ブラウザで試す</a>
         </div>
     </div>
 </div>
@@ -260,6 +323,102 @@ footer a:hover { color: #e6edf3; }
     <p><a href="https://github.com/pndshch" target="_blank">GitHub</a></p>
     <p style="margin-top:4px">© 2026 Pinda Lab</p>
 </footer>
+
+<script>
+const I18N = {
+    ja: {
+        tagline: "ゲーム・教育・ツール — ブラウザとアプリで届けます",
+        bmcLabel: "気に入ったら支援していただけると嬉しいです",
+        secGames: "🎮 ゲーム",
+        secEdu:   "📚 教育・知育",
+        secTools: "🔧 ツール",
+        playBrowser: "▶ ブラウザで遊ぶ",
+        tryBrowser:  "▶ ブラウザで試す",
+
+        fruitTitle: "Fruit Drop AI",
+        fruitDesc:  "フルーツを落として同種を合体させる物理ゲーム。遺伝的アルゴリズムがリアルタイムで学習し、AIが上達していく様子を観察できます。",
+        fruitTag1: "物理演算", fruitTag2: "AI学習", fruitTag3: "遺伝的アルゴリズム",
+
+        dotsTitle: "てんつなぎ",
+        dotsDesc:  "点と点をつないで絵を完成させる、子ども向けのシンプルなゲーム。タブレット・スマホでも快適に遊べます。",
+
+        hiraTitle: "ひらがな あそび",
+        hiraDesc:  "ひらがなを楽しく覚えられる子ども向け学習ゲーム。文字を見て・聞いて・答えることで自然に身につきます。",
+
+        mazeTitle: "ひらがな迷路",
+        mazeDesc:  "ひらがなをたどって出口を目指す迷路ゲーム。文字を読みながら進むことで、自然と読み方が身につきます。",
+
+        kidsTag:   "子ども向け",
+        eduTag:    "知育",
+        puzzleTag: "パズル",
+        hiraTag:   "ひらがな",
+        mazeTag:   "迷路",
+
+        merTitle: "Mercari Sizer",
+        merDesc:  "カメラで荷物のサイズを計測し、最適なメルカリ便のサイズを自動提案するツール。ブラウザでもiOSでも動作します。",
+        merTag1: "メルカリ", merTag2: "サイズ計測", merTag3: "iOS / ブラウザ"
+    },
+    en: {
+        tagline:   "Games · Education · Tools — delivered via browser and apps",
+        bmcLabel:  "If you enjoy what I make, your support means a lot",
+        secGames:  "🎮 Games",
+        secEdu:    "📚 Education",
+        secTools:  "🔧 Tools",
+        playBrowser: "▶ Play in browser",
+        tryBrowser:  "▶ Try in browser",
+
+        fruitTitle: "Fruit Drop AI",
+        fruitDesc:  "A physics game where matching fruits merge on contact. Watch a genetic algorithm learn the game in real time and improve generation by generation.",
+        fruitTag1: "Physics", fruitTag2: "AI learning", fruitTag3: "Genetic algorithm",
+
+        dotsTitle: "Connect the Dots",
+        dotsDesc:  "A simple connect-the-dots game for kids. Trace numbered dots to reveal the picture — works smoothly on tablets and phones.",
+
+        hiraTitle: "Hiragana Play",
+        hiraDesc:  "A friendly learning game for kids picking up Japanese hiragana. See, hear, and answer — the characters stick naturally.",
+
+        mazeTitle: "Hiragana Maze",
+        mazeDesc:  "Find the exit by following hiragana through a maze. Reading characters along the way helps cement how each one is pronounced.",
+
+        kidsTag:   "Kids",
+        eduTag:    "Educational",
+        puzzleTag: "Puzzle",
+        hiraTag:   "Hiragana",
+        mazeTag:   "Maze",
+
+        merTitle: "Mercari Sizer",
+        merDesc:  "Measure your package with the camera and get the best Mercari shipping size suggested automatically. Runs in the browser and on iOS.",
+        merTag1: "Mercari", merTag2: "Size measurement", merTag3: "iOS / Browser"
+    }
+};
+
+function applyLang(lang) {
+    const dict = I18N[lang] || I18N.ja;
+    document.documentElement.lang = lang;
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (dict[key] != null) el.textContent = dict[key];
+    });
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === lang);
+    });
+    try { localStorage.setItem('pl-lang', lang); } catch (e) {}
+}
+
+document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', () => applyLang(btn.dataset.lang));
+});
+
+(function init() {
+    let lang = null;
+    try { lang = localStorage.getItem('pl-lang'); } catch (e) {}
+    if (!lang) {
+        const nav = (navigator.language || 'ja').toLowerCase();
+        lang = nav.startsWith('ja') ? 'ja' : 'en';
+    }
+    applyLang(lang);
+})();
+</script>
 
 </body>
 </html>
