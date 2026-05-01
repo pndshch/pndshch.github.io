@@ -141,6 +141,11 @@ header p {
 .thumb-finger  { background: linear-gradient(135deg, #2a0a2a 0%, #1a0a1a 100%); }
 .thumb-cat     { background: linear-gradient(135deg, #2a1a0a 0%, #1a0d0a 100%); }
 .thumb-egg     { background: linear-gradient(135deg, #2a0a0d 0%, #1a0a0d 100%); }
+.thumb-qr      { background: linear-gradient(135deg, #0a2a2a 0%, #0d1a1a 100%); }
+.thumb-timer   { background: linear-gradient(135deg, #2a1a0a 0%, #1a1a0d 100%); }
+.thumb-shop    { background: linear-gradient(135deg, #0a2a1a 0%, #1a2a0d 100%); }
+.thumb-dice    { background: linear-gradient(135deg, #1a0a2a 0%, #0d0a2a 100%); }
+.thumb-draw    { background: linear-gradient(135deg, #2a0a1a 0%, #1a1a2a 100%); }
 .new-badge {
     position: absolute;
     top: 10px;
@@ -532,6 +537,23 @@ footer a:hover { color: #e6edf3; }
 <div class="section-label" data-i18n="secTools">🔧 ツール</div>
 <div class="grid">
     <div class="card">
+        <div class="card-thumb thumb-qr">
+            <span class="new-badge" data-i18n="newBadge">NEW</span>
+            <span class="thumb-emoji">📱</span>
+        </div>
+        <div class="card-body">
+            <h2 data-i18n="qrTitle">クイックQR</h2>
+            <p data-i18n="qrDesc">テキストやURLをQRコードに即変換!色変更・サイズ変更・PNG保存・画像コピー対応。WiFi/メール/電話のQRも作れる。</p>
+            <div class="tags">
+                <span class="tag" data-i18n="qrTag1">QR</span>
+                <span class="tag" data-i18n="utilityTag">ツール</span>
+                <span class="tag" data-i18n="qrTag2">PNG保存</span>
+            </div>
+            <a class="card-btn btn-play" href="https://pndshch.github.io/quick-qr/" target="_blank" data-i18n="useTool">▶ ツールを使う</a>
+        </div>
+    </div>
+
+    <div class="card">
         <div class="card-thumb thumb-mercari">
             <span class="thumb-emoji">📦</span>
             <img class="thumb-gif" src="assets/mercari-sizer.gif" alt="" onerror="this.remove()">
@@ -598,6 +620,11 @@ const I18N = {
         goriTag1:  "翻訳",
         playBrowser: "▶ ブラウザで遊ぶ",
         tryBrowser:  "▶ ブラウザで試す",
+        useTool:     "▶ ツールを使う",
+        utilityTag:  "ツール",
+        qrTitle:     "クイックQR",
+        qrDesc:      "テキストやURLをQRコードに即変換!色変更・サイズ変更・PNG保存・画像コピー対応。WiFi/メール/電話のQRも作れる。",
+        qrTag1: "QR", qrTag2: "PNG保存",
 
         fruitTitle: "Fruit Drop AI",
         fruitDesc:  "フルーツを落として同種を合体させる物理ゲーム。遺伝的アルゴリズムがリアルタイムで学習し、AIが上達していく様子を観察できます。",
@@ -672,6 +699,11 @@ const I18N = {
         goriTag1:  "Translate",
         playBrowser: "▶ Play in browser",
         tryBrowser:  "▶ Try in browser",
+        useTool:     "▶ Use the tool",
+        utilityTag:  "Utility",
+        qrTitle:     "Quick QR",
+        qrDesc:      "Turn text or URLs into QR codes instantly! Custom colors, sizes, PNG download, image copy. WiFi / email / phone QRs supported.",
+        qrTag1: "QR", qrTag2: "PNG export",
 
         fruitTitle: "Fruit Drop AI",
         fruitDesc:  "A physics game where matching fruits merge on contact. Watch a genetic algorithm learn the game in real time and improve generation by generation.",
