@@ -3,7 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pinda Lab</title>
+<title>Pinda Lab — Browser Games · Education · Tools</title>
+<meta name="description" content="Pinda Lab — ブラウザで動く ゲーム・教育・ツール。Fruit Drop AI、ひらがなあそび、Mercari Sizer など。">
+<meta property="og:title" content="Pinda Lab">
+<meta property="og:description" content="ゲーム・教育・ツール — ブラウザとアプリで届けます">
+<meta property="og:url" content="https://pndshch.github.io/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -123,6 +129,21 @@ header p {
     justify-content: center;
     user-select: none;
     overflow: hidden;
+}
+.thumb-keisan { background: linear-gradient(135deg, #1a0a2a 0%, #2a1a0a 100%); }
+.new-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: linear-gradient(135deg, #ec4899, #f97316);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    padding: 3px 8px;
+    border-radius: 20px;
+    z-index: 3;
+    box-shadow: 0 2px 8px rgba(236,72,153,0.4);
 }
 .thumb-emoji { font-size: 64px; z-index: 1; }
 .thumb-gif {
@@ -246,6 +267,24 @@ footer a:hover { color: #e6edf3; }
 <div class="section-label" data-i18n="secEdu">📚 教育・知育</div>
 <div class="grid">
     <div class="card">
+        <div class="card-thumb thumb-keisan">
+            <span class="new-badge" data-i18n="newBadge">NEW</span>
+            <span class="thumb-emoji">🐼</span>
+            <img class="thumb-gif" src="assets/1pun-keisan.gif" alt="" onerror="this.remove()">
+        </div>
+        <div class="card-body">
+            <h2 data-i18n="keisanTitle">1分けいさん</h2>
+            <p data-i18n="keisanDesc">1分間でなんもん解けるかな?たし算・ひき算・かけ算をリズムよく練習できる、子ども向けのシンプルな計算ドリル。</p>
+            <div class="tags">
+                <span class="tag" data-i18n="kidsTag">子ども向け</span>
+                <span class="tag" data-i18n="keisanTag1">けいさん</span>
+                <span class="tag" data-i18n="keisanTag2">1分</span>
+            </div>
+            <a class="card-btn btn-play" href="https://pndshch.github.io/1pun-keisan/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+        </div>
+    </div>
+
+    <div class="card">
         <div class="card-thumb thumb-dots">
             <span class="thumb-emoji">✏️</span>
             <img class="thumb-gif" src="assets/tentsunagi.gif" alt="" onerror="this.remove()">
@@ -356,6 +395,11 @@ const I18N = {
         fruitDesc:  "フルーツを落として同種を合体させる物理ゲーム。遺伝的アルゴリズムがリアルタイムで学習し、AIが上達していく様子を観察できます。",
         fruitTag1: "物理演算", fruitTag2: "AI学習", fruitTag3: "遺伝的アルゴリズム",
 
+        keisanTitle: "1分けいさん",
+        keisanDesc:  "1分間でなんもん解けるかな?たし算・ひき算・かけ算をリズムよく練習できる、子ども向けのシンプルな計算ドリル。",
+        keisanTag1: "けいさん", keisanTag2: "1分",
+        newBadge: "NEW",
+
         dotsTitle: "てんつなぎ",
         dotsDesc:  "点と点をつないで絵を完成させる、子ども向けのシンプルなゲーム。タブレット・スマホでも快適に遊べます。",
 
@@ -391,6 +435,11 @@ const I18N = {
         fruitTitle: "Fruit Drop AI",
         fruitDesc:  "A physics game where matching fruits merge on contact. Watch a genetic algorithm learn the game in real time and improve generation by generation.",
         fruitTag1: "Physics", fruitTag2: "AI learning", fruitTag3: "Genetic algorithm",
+
+        keisanTitle: "1-Minute Math",
+        keisanDesc:  "How many can you solve in 60 seconds? A bite-sized math drill for kids covering addition, subtraction, and multiplication.",
+        keisanTag1: "Arithmetic", keisanTag2: "60s drill",
+        newBadge: "NEW",
 
         dotsTitle: "Connect the Dots",
         dotsDesc:  "A simple connect-the-dots game for kids. Trace numbered dots to reveal the picture — works smoothly on tablets and phones.",
