@@ -537,8 +537,24 @@ footer a:hover { color: #e6edf3; }
 <div class="section-label" data-i18n="secTools">🔧 ツール</div>
 <div class="grid">
     <div class="card">
-        <div class="card-thumb thumb-qr">
+        <div class="card-thumb thumb-timer">
             <span class="new-badge" data-i18n="newBadge">NEW</span>
+            <span class="thumb-emoji">⏰</span>
+        </div>
+        <div class="card-body">
+            <h2 data-i18n="timerTitle">みえるタイマー</h2>
+            <p data-i18n="timerDesc">のこり時間が円で見える 子ども向けタイマー。お片付け・宿題・歯みがきに。プリセット8種+カスタム時間。</p>
+            <div class="tags">
+                <span class="tag" data-i18n="kidsTag">子ども向け</span>
+                <span class="tag" data-i18n="utilityTag">ツール</span>
+                <span class="tag" data-i18n="timerTag1">タイマー</span>
+            </div>
+            <a class="card-btn btn-play" href="https://pndshch.github.io/mieru-timer/" target="_blank" data-i18n="useTool">▶ ツールを使う</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-thumb thumb-qr">
             <span class="thumb-emoji">📱</span>
         </div>
         <div class="card-body">
@@ -625,6 +641,9 @@ const I18N = {
         qrTitle:     "クイックQR",
         qrDesc:      "テキストやURLをQRコードに即変換!色変更・サイズ変更・PNG保存・画像コピー対応。WiFi/メール/電話のQRも作れる。",
         qrTag1: "QR", qrTag2: "PNG保存",
+        timerTitle: "みえるタイマー",
+        timerDesc:  "のこり時間が円で見える 子ども向けタイマー。お片付け・宿題・歯みがきに。プリセット8種+カスタム時間。",
+        timerTag1: "タイマー",
 
         fruitTitle: "Fruit Drop AI",
         fruitDesc:  "フルーツを落として同種を合体させる物理ゲーム。遺伝的アルゴリズムがリアルタイムで学習し、AIが上達していく様子を観察できます。",
@@ -704,6 +723,9 @@ const I18N = {
         qrTitle:     "Quick QR",
         qrDesc:      "Turn text or URLs into QR codes instantly! Custom colors, sizes, PNG download, image copy. WiFi / email / phone QRs supported.",
         qrTag1: "QR", qrTag2: "PNG export",
+        timerTitle: "Visual Timer",
+        timerDesc:  "Remaining time visible as a shrinking circle. Perfect for kids — clean-up time, homework, brushing teeth. 8 presets + custom.",
+        timerTag1: "Timer",
 
         fruitTitle: "Fruit Drop AI",
         fruitDesc:  "A physics game where matching fruits merge on contact. Watch a genetic algorithm learn the game in real time and improve generation by generation.",
