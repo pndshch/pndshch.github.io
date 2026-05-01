@@ -537,8 +537,24 @@ footer a:hover { color: #e6edf3; }
 <div class="section-label" data-i18n="secTools">🔧 ツール</div>
 <div class="grid">
     <div class="card">
-        <div class="card-thumb thumb-dice">
+        <div class="card-thumb thumb-draw">
             <span class="new-badge" data-i18n="newBadge">NEW</span>
+            <span class="thumb-emoji">✏️</span>
+        </div>
+        <div class="card-body">
+            <h2 data-i18n="drawTitle">てがきメモ</h2>
+            <p data-i18n="drawDesc">指でもスタイラスでもサッと描けるお絵かき&手書きメモ。8色・4サイズ・けしごむ・元に戻す・PNG保存対応。</p>
+            <div class="tags">
+                <span class="tag" data-i18n="utilityTag">ツール</span>
+                <span class="tag" data-i18n="drawTag1">お絵かき</span>
+                <span class="tag" data-i18n="drawTag2">手書き</span>
+            </div>
+            <a class="card-btn btn-play" href="https://pndshch.github.io/tegaki-memo/" target="_blank" data-i18n="useTool">▶ ツールを使う</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-thumb thumb-dice">
             <span class="thumb-emoji">🎲</span>
         </div>
         <div class="card-body">
@@ -682,6 +698,9 @@ const I18N = {
         diceTitle: "サイコロボックス",
         diceDesc:  "d4/d6/d8/d10/d12/d20を最大6個まで同時に振れる多機能サイコロ。ボードゲーム・TRPG・順番決めに。最大値・最小値ハイライトつき。",
         diceTag1: "サイコロ", diceTag2: "ボードゲーム",
+        drawTitle: "てがきメモ",
+        drawDesc:  "指でもスタイラスでもサッと描けるお絵かき&手書きメモ。8色・4サイズ・けしごむ・元に戻す・PNG保存対応。",
+        drawTag1: "お絵かき", drawTag2: "手書き",
 
         fruitTitle: "Fruit Drop AI",
         fruitDesc:  "フルーツを落として同種を合体させる物理ゲーム。遺伝的アルゴリズムがリアルタイムで学習し、AIが上達していく様子を観察できます。",
@@ -770,6 +789,9 @@ const I18N = {
         diceTitle: "Dice Box",
         diceDesc:  "Roll up to 6 dice in d4/d6/d8/d10/d12/d20. For board games, TRPG, or settling who goes first. Crit/fail highlights included.",
         diceTag1: "Dice", diceTag2: "Board games",
+        drawTitle: "Tegaki Note",
+        drawDesc:  "Quick handwritten notes and doodles. Finger or stylus. 8 colors, 4 sizes, eraser, undo, PNG export.",
+        drawTag1: "Drawing", drawTag2: "Handwriting",
 
         fruitTitle: "Fruit Drop AI",
         fruitDesc:  "A physics game where matching fruits merge on contact. Watch a genetic algorithm learn the game in real time and improve generation by generation.",
