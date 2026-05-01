@@ -131,6 +131,16 @@ header p {
     overflow: hidden;
 }
 .thumb-keisan { background: linear-gradient(135deg, #1a0a2a 0%, #2a1a0a 100%); }
+.thumb-poop    { background: linear-gradient(135deg, #3a200d 0%, #1a1004 100%); }
+.thumb-gorilla { background: linear-gradient(135deg, #1a2a0d 0%, #0a1a0d 100%); }
+.thumb-face    { background: linear-gradient(135deg, #2a0a1a 0%, #1a0a0d 100%); }
+.thumb-dino    { background: linear-gradient(135deg, #0a2a1a 0%, #0d1a0a 100%); }
+.thumb-tree    { background: linear-gradient(135deg, #0a2a0a 0%, #0d2a1a 100%); }
+.thumb-button  { background: linear-gradient(135deg, #2a2a0a 0%, #1a1a0d 100%); }
+.thumb-shiri   { background: linear-gradient(135deg, #0a1a2a 0%, #0d0a2a 100%); }
+.thumb-finger  { background: linear-gradient(135deg, #2a0a2a 0%, #1a0a1a 100%); }
+.thumb-cat     { background: linear-gradient(135deg, #2a1a0a 0%, #1a0d0a 100%); }
+.thumb-egg     { background: linear-gradient(135deg, #2a0a0d 0%, #1a0a0d 100%); }
 .new-badge {
     position: absolute;
     top: 10px;
@@ -353,6 +363,27 @@ footer a:hover { color: #e6edf3; }
     </div>
 </div>
 
+<!-- Fun (silly) -->
+<div class="section-label" data-i18n="secFun">🎪 おもしろ</div>
+<div class="grid">
+    <div class="card">
+        <div class="card-thumb thumb-poop">
+            <span class="new-badge" data-i18n="newBadge">NEW</span>
+            <span class="thumb-emoji">💩</span>
+        </div>
+        <div class="card-body">
+            <h2 data-i18n="poopTitle">うんち占い</h2>
+            <p data-i18n="poopDesc">きょうの うんち運を チェック!毎日かわる SS〜D ランクと、ラッキーフード・運勢メッセージ。</p>
+            <div class="tags">
+                <span class="tag" data-i18n="kidsTag">子ども向け</span>
+                <span class="tag" data-i18n="poopTag1">うらない</span>
+                <span class="tag" data-i18n="dailyTag">毎日</span>
+            </div>
+            <a class="card-btn btn-play" href="https://pndshch.github.io/unchi-uranai/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+        </div>
+    </div>
+</div>
+
 <!-- Tools -->
 <div class="section-label" data-i18n="secTools">🔧 ツール</div>
 <div class="grid">
@@ -387,7 +418,12 @@ const I18N = {
         bmcLabel: "気に入ったら支援していただけると嬉しいです",
         secGames: "🎮 ゲーム",
         secEdu:   "📚 教育・知育",
+        secFun:   "🎪 おもしろ",
         secTools: "🔧 ツール",
+        dailyTag: "毎日",
+        poopTitle: "うんち占い",
+        poopDesc:  "きょうの うんち運を チェック!毎日かわる SS〜D ランクと、ラッキーフード・運勢メッセージ。",
+        poopTag1: "うらない",
         playBrowser: "▶ ブラウザで遊ぶ",
         tryBrowser:  "▶ ブラウザで試す",
 
@@ -428,7 +464,12 @@ const I18N = {
         bmcLabel:  "If you enjoy what I make, your support means a lot",
         secGames:  "🎮 Games",
         secEdu:    "📚 Education",
+        secFun:    "🎪 Fun",
         secTools:  "🔧 Tools",
+        dailyTag:  "Daily",
+        poopTitle: "Poop Fortune",
+        poopDesc:  "Check today's poop fortune! Daily SS–D ranking with lucky food and fortune message.",
+        poopTag1:  "Fortune",
         playBrowser: "▶ Play in browser",
         tryBrowser:  "▶ Try in browser",
 
