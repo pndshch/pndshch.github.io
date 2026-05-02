@@ -146,6 +146,7 @@ header p {
 .thumb-shop    { background: linear-gradient(135deg, #0a2a1a 0%, #1a2a0d 100%); }
 .thumb-dice    { background: linear-gradient(135deg, #1a0a2a 0%, #0d0a2a 100%); }
 .thumb-draw    { background: linear-gradient(135deg, #2a0a1a 0%, #1a1a2a 100%); }
+.thumb-tarot   { background: linear-gradient(135deg, #1e1b4b 0%, #0f0a1f 100%); }
 .new-badge {
     position: absolute;
     top: 10px;
@@ -537,8 +538,24 @@ footer a:hover { color: #e6edf3; }
 <div class="section-label" data-i18n="secTools">🔧 ツール</div>
 <div class="grid">
     <div class="card">
-        <div class="card-thumb thumb-draw">
+        <div class="card-thumb thumb-tarot">
             <span class="new-badge" data-i18n="newBadge">NEW</span>
+            <span class="thumb-emoji">🔮</span>
+        </div>
+        <div class="card-body">
+            <h2 data-i18n="tarotTitle">タロットの意味</h2>
+            <p data-i18n="tarotDesc">プロのタロットリーダー向け 78枚 即時リファレンス。正位置・逆位置・恋愛/仕事/金銭/健康/総合を一度に表示。1枚ドロー&3枚スプレッドつき。</p>
+            <div class="tags">
+                <span class="tag" data-i18n="utilityTag">ツール</span>
+                <span class="tag" data-i18n="tarotTag1">タロット</span>
+                <span class="tag" data-i18n="tarotTag2">占い</span>
+            </div>
+            <a class="card-btn btn-play" href="https://pndshch.github.io/tarot-imi/" target="_blank" data-i18n="useTool">▶ ツールを使う</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-thumb thumb-draw">
             <span class="thumb-emoji">✏️</span>
         </div>
         <div class="card-body">
@@ -701,6 +718,9 @@ const I18N = {
         drawTitle: "てがきメモ",
         drawDesc:  "指でもスタイラスでもサッと描けるお絵かき&手書きメモ。8色・4サイズ・けしごむ・元に戻す・PNG保存対応。",
         drawTag1: "お絵かき", drawTag2: "手書き",
+        tarotTitle: "タロットの意味",
+        tarotDesc:  "プロのタロットリーダー向け 78枚 即時リファレンス。正位置・逆位置・恋愛/仕事/金銭/健康/総合を一度に表示。1枚ドロー&3枚スプレッドつき。",
+        tarotTag1: "タロット", tarotTag2: "占い",
 
         fruitTitle: "Fruit Drop AI",
         fruitDesc:  "フルーツを落として同種を合体させる物理ゲーム。遺伝的アルゴリズムがリアルタイムで学習し、AIが上達していく様子を観察できます。",
@@ -792,6 +812,9 @@ const I18N = {
         drawTitle: "Tegaki Note",
         drawDesc:  "Quick handwritten notes and doodles. Finger or stylus. 8 colors, 4 sizes, eraser, undo, PNG export.",
         drawTag1: "Drawing", drawTag2: "Handwriting",
+        tarotTitle: "Tarot Meanings",
+        tarotDesc:  "Quick reference for professional tarot readers. All 78 cards with upright + reversed meanings across love, work, money, health. 1-card and 3-card spread modes.",
+        tarotTag1: "Tarot", tarotTag2: "Divination",
 
         fruitTitle: "Fruit Drop AI",
         fruitDesc:  "A physics game where matching fruits merge on contact. Watch a genetic algorithm learn the game in real time and improve generation by generation.",
