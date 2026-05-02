@@ -149,6 +149,7 @@ header p {
 .thumb-tarot   { background: linear-gradient(135deg, #1e1b4b 0%, #0f0a1f 100%); }
 .thumb-numero  { background: linear-gradient(135deg, #2d0852 0%, #0a0426 100%); }
 .thumb-astro   { background: linear-gradient(135deg, #1a1849 0%, #0a0a2a 100%); }
+.thumb-stone   { background: linear-gradient(135deg, #1a0a3a 0%, #2a0844 100%); }
 .new-badge {
     position: absolute;
     top: 10px;
@@ -574,8 +575,24 @@ footer a:hover { color: #e6edf3; }
     </div>
 
     <div class="card">
-        <div class="card-thumb thumb-astro">
+        <div class="card-thumb thumb-stone">
             <span class="new-badge" data-i18n="newBadge">NEW</span>
+            <span class="thumb-emoji">💎</span>
+        </div>
+        <div class="card-body">
+            <h2 data-i18n="stoneTitle">パワーストーンの意味</h2>
+            <p data-i18n="stoneDesc">40種以上のパワーストーンを目的別・チャクラ別・色別に検索できるリファレンス。誕生石・浄化方法・相性つき。プロのヒーラー・占い師にも。</p>
+            <div class="tags">
+                <span class="tag" data-i18n="utilityTag">ツール</span>
+                <span class="tag" data-i18n="stoneTag1">パワーストーン</span>
+                <span class="tag" data-i18n="stoneTag2">ヒーリング</span>
+            </div>
+            <a class="card-btn btn-play" href="https://pndshch.github.io/stone-imi/" target="_blank" data-i18n="useTool">▶ ツールを使う</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-thumb thumb-astro">
             <span class="thumb-emoji">✨</span>
         </div>
         <div class="card-body">
@@ -763,6 +780,9 @@ const I18N = {
         astroTitle: "西洋占星術の意味",
         astroDesc:  "12星座・10惑星・12ハウス・5アスペクトの意味を即座に検索できるリファレンス。元素・区分の早見表、誕生日→太陽星座、相性ジャンプ機能つき。",
         astroTag1: "占星術", astroTag2: "星座",
+        stoneTitle: "パワーストーンの意味",
+        stoneDesc:  "40種以上のパワーストーンを目的別・チャクラ別・色別に検索できるリファレンス。誕生石・浄化方法・相性つき。プロのヒーラー・占い師にも。",
+        stoneTag1: "パワーストーン", stoneTag2: "ヒーリング",
 
         fruitTitle: "Fruit Drop AI",
         fruitDesc:  "フルーツを落として同種を合体させる物理ゲーム。遺伝的アルゴリズムがリアルタイムで学習し、AIが上達していく様子を観察できます。",
@@ -857,6 +877,9 @@ const I18N = {
         tarotTitle: "Tarot Meanings",
         tarotDesc:  "Quick reference for professional tarot readers. All 78 cards with upright + reversed meanings across love, work, money, health. 1-card and 3-card spread modes.",
         tarotTag1: "Tarot", tarotTag2: "Divination",
+        stoneTitle: "Power Stone Reference",
+        stoneDesc:  "40+ crystals searchable by purpose, chakra, and color. Birthstones, cleansing methods, and compatibility included. For healers and readers.",
+        stoneTag1: "Crystals", stoneTag2: "Healing",
         astroTitle: "Western Astrology Reference",
         astroDesc:  "Quick reference for 12 signs, 10 planets, 12 houses, and 5 aspects. Includes element × modality table, birthday → sun sign lookup, and compatibility cross-links.",
         astroTag1: "Astrology", astroTag2: "Zodiac",
