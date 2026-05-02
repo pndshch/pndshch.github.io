@@ -173,6 +173,7 @@ header p {
     object-fit: cover;
     z-index: 2;
 }
+.thumb-city     { background: linear-gradient(135deg, #0a1628 0%, #162040 100%); }
 .thumb-fruit    { background: linear-gradient(135deg, #0f172a 0%, #1e0d3a 100%); }
 .thumb-dots     { background: linear-gradient(135deg, #0f2a1a 0%, #0a2035 100%); }
 .thumb-mercari  { background: linear-gradient(135deg, #1a0a0a 0%, #2a0a1a 100%); }
@@ -264,6 +265,23 @@ footer a:hover { color: #e6edf3; }
 <!-- Games -->
 <div class="section-label" data-i18n="secGames">🎮 ゲーム</div>
 <div class="grid">
+    <div class="card">
+        <div class="card-thumb thumb-city">
+            <span class="new-badge" data-i18n="newBadge">NEW</span>
+            <span class="thumb-emoji">🏙️</span>
+        </div>
+        <div class="card-body">
+            <h2 data-i18n="cityTitle">City Drive</h2>
+            <p data-i18n="cityDesc">Blenderで作った3Dの街を自由にドライブ！三人称・ドライバー・俯瞰の3視点を切り替えて、ビル・街路樹・街灯が並ぶ街を走り抜けよう。</p>
+            <div class="tags">
+                <span class="tag" data-i18n="cityTag1">3D</span>
+                <span class="tag" data-i18n="cityTag2">ドライブ</span>
+                <span class="tag" data-i18n="cityTag3">Blender</span>
+            </div>
+            <a class="card-btn btn-play" href="https://pndshch.github.io/city-drive/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+        </div>
+    </div>
+
     <div class="card">
         <div class="card-thumb thumb-fruit">
             <span class="thumb-emoji">🍓</span>
@@ -886,6 +904,10 @@ const I18N = {
         numeroTitle:"Numerology Reading",
         numeroDesc: "From a birthdate, computes Life Path, Birth Day, and Personal Year numbers — with master numbers (11/22/33) preserved. Detailed persona, love, career, lucky color/stone/day. Built for fortune-tellers.",
         numeroTag1: "Numerology", numeroTag2: "Divination",
+
+        cityTitle: "City Drive",
+        cityDesc:  "Drive freely through a 3D city crafted in Blender! Switch between third-person, driver, and bird's-eye views as you cruise past buildings, trees, and street lamps.",
+        cityTag1: "3D", cityTag2: "Driving", cityTag3: "Blender",
 
         fruitTitle: "Fruit Drop AI",
         fruitDesc:  "A physics game where matching fruits merge on contact. Watch a genetic algorithm learn the game in real time and improve generation by generation.",
