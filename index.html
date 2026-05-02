@@ -148,6 +148,7 @@ header p {
 .thumb-draw    { background: linear-gradient(135deg, #2a0a1a 0%, #1a1a2a 100%); }
 .thumb-tarot   { background: linear-gradient(135deg, #1e1b4b 0%, #0f0a1f 100%); }
 .thumb-numero  { background: linear-gradient(135deg, #2d0852 0%, #0a0426 100%); }
+.thumb-astro   { background: linear-gradient(135deg, #1a1849 0%, #0a0a2a 100%); }
 .new-badge {
     position: absolute;
     top: 10px;
@@ -573,6 +574,23 @@ footer a:hover { color: #e6edf3; }
     </div>
 
     <div class="card">
+        <div class="card-thumb thumb-astro">
+            <span class="new-badge" data-i18n="newBadge">NEW</span>
+            <span class="thumb-emoji">✨</span>
+        </div>
+        <div class="card-body">
+            <h2 data-i18n="astroTitle">西洋占星術の意味</h2>
+            <p data-i18n="astroDesc">12星座・10惑星・12ハウス・5アスペクトの意味を即座に検索できるリファレンス。元素・区分の早見表、誕生日→太陽星座、相性ジャンプ機能つき。</p>
+            <div class="tags">
+                <span class="tag" data-i18n="utilityTag">ツール</span>
+                <span class="tag" data-i18n="astroTag1">占星術</span>
+                <span class="tag" data-i18n="astroTag2">星座</span>
+            </div>
+            <a class="card-btn btn-play" href="https://pndshch.github.io/astro-imi/" target="_blank" data-i18n="useTool">▶ ツールを使う</a>
+        </div>
+    </div>
+
+    <div class="card">
         <div class="card-thumb thumb-draw">
             <span class="thumb-emoji">✏️</span>
         </div>
@@ -742,6 +760,9 @@ const I18N = {
         numeroTitle:"数秘術 占い",
         numeroDesc: "生年月日から運命数・誕生日数・個人年数を算出する数秘術アプリ。マスターナンバー(11/22/33)対応で、性格・恋愛・仕事・ラッキー要素まで詳しく表示。プロの占い師にも。",
         numeroTag1: "数秘術", numeroTag2: "占い",
+        astroTitle: "西洋占星術の意味",
+        astroDesc:  "12星座・10惑星・12ハウス・5アスペクトの意味を即座に検索できるリファレンス。元素・区分の早見表、誕生日→太陽星座、相性ジャンプ機能つき。",
+        astroTag1: "占星術", astroTag2: "星座",
 
         fruitTitle: "Fruit Drop AI",
         fruitDesc:  "フルーツを落として同種を合体させる物理ゲーム。遺伝的アルゴリズムがリアルタイムで学習し、AIが上達していく様子を観察できます。",
@@ -836,6 +857,9 @@ const I18N = {
         tarotTitle: "Tarot Meanings",
         tarotDesc:  "Quick reference for professional tarot readers. All 78 cards with upright + reversed meanings across love, work, money, health. 1-card and 3-card spread modes.",
         tarotTag1: "Tarot", tarotTag2: "Divination",
+        astroTitle: "Western Astrology Reference",
+        astroDesc:  "Quick reference for 12 signs, 10 planets, 12 houses, and 5 aspects. Includes element × modality table, birthday → sun sign lookup, and compatibility cross-links.",
+        astroTag1: "Astrology", astroTag2: "Zodiac",
         numeroTitle:"Numerology Reading",
         numeroDesc: "From a birthdate, computes Life Path, Birth Day, and Personal Year numbers — with master numbers (11/22/33) preserved. Detailed persona, love, career, lucky color/stone/day. Built for fortune-tellers.",
         numeroTag1: "Numerology", numeroTag2: "Divination",
