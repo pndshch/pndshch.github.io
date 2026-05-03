@@ -186,6 +186,7 @@ header p {
 .thumb-yen      { background: linear-gradient(135deg, #2a2a0a 0%, #3a2a0d 100%); }
 .thumb-gwrain   { background: linear-gradient(135deg, #0a1a2a 0%, #1a2040 100%); }
 .thumb-aitodai  { background: linear-gradient(135deg, #1a0a2a 0%, #2a1a3a 100%); }
+.thumb-healthtd { background: linear-gradient(135deg, #0a1a14 0%, #0d2a1a 100%); }
 
 .card-body {
     padding: 18px 20px 22px;
@@ -449,6 +450,24 @@ footer a:hover { color: #e6edf3; }
                 <span class="tag" data-i18n="aitodaiTag3">AI対戦</span>
             </div>
             <a class="card-btn btn-play" href="https://pndshch.github.io/ai-vs-todai/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-thumb thumb-healthtd">
+            <span class="new-badge" data-i18n="newBadge">NEW</span>
+            <span class="thumb-emoji">🛡️</span>
+            <img class="thumb-gif" src="assets/health-td.gif" alt="" onerror="this.remove()">
+        </div>
+        <div class="card-body">
+            <h2 data-i18n="healthtdTitle">免疫タワーディフェンス</h2>
+            <p data-i18n="healthtdDesc">ウイルスや悪玉菌が体に侵入してくる！ビタミンC・白血球・ブロッコリーなど健康タワーを設置して15Waveを生き抜け。アップグレードで免疫力MAX！</p>
+            <div class="tags">
+                <span class="tag" data-i18n="healthtdTag1">3D</span>
+                <span class="tag" data-i18n="healthtdTag2">タワーディフェンス</span>
+                <span class="tag" data-i18n="healthtdTag3">健康</span>
+            </div>
+            <a class="card-btn btn-play" href="https://pndshch.github.io/health-td/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
         </div>
     </div>
 </div>
@@ -1010,7 +1029,10 @@ const I18N = {
         gwrainTag1: "3D", gwrainTag2: "ランナー", gwrainTag3: "GW",
         aitodaiTitle: "AI vs 東大",
         aitodaiDesc:  "ChatGPTが東大入試突破のニュースがテーマ！3Dクイズバトルでプレイヤー（脳）vs AI（ロボ）が対決。35問の日本語クイズに挑戦しよう。",
-        aitodaiTag1: "3D", aitodaiTag2: "クイズ", aitodaiTag3: "AI対戦"
+        aitodaiTag1: "3D", aitodaiTag2: "クイズ", aitodaiTag3: "AI対戦",
+        healthtdTitle: "免疫タワーディフェンス",
+        healthtdDesc:  "ウイルスや悪玉菌が体に侵入してくる！ビタミンC・白血球・ブロッコリーなど健康タワーを設置して15Waveを生き抜け。アップグレードで免疫力MAX！",
+        healthtdTag1: "3D", healthtdTag2: "タワーディフェンス", healthtdTag3: "健康"
     },
     en: {
         tagline:   "Games · Education · Tools — delivered via browser and apps",
@@ -1142,7 +1164,10 @@ const I18N = {
         gwrainTag1: "3D", gwrainTag2: "Runner", gwrainTag3: "GW",
         aitodaiTitle: "AI vs Tokyo U",
         aitodaiDesc:  "Inspired by news of ChatGPT passing Tokyo University's entrance exam! Battle AI in a 3D quiz arena — player (brain) vs AI (robot). Take on 35 Japanese trivia questions.",
-        aitodaiTag1: "3D", aitodaiTag2: "Quiz", aitodaiTag3: "AI Battle"
+        aitodaiTag1: "3D", aitodaiTag2: "Quiz", aitodaiTag3: "AI Battle",
+        healthtdTitle: "Immune Tower Defense",
+        healthtdDesc:  "Viruses and bad bacteria are invading your body! Place health towers like Vitamin C, White Blood Cells, and Broccoli to survive 15 waves. Upgrade for max immunity!",
+        healthtdTag1: "3D", healthtdTag2: "Tower Defense", healthtdTag3: "Health"
     }
 };
 
