@@ -188,6 +188,7 @@ header p {
 .thumb-aitodai  { background: linear-gradient(135deg, #1a0a2a 0%, #2a1a3a 100%); }
 .thumb-healthtd { background: linear-gradient(135deg, #0a1a14 0%, #0d2a1a 100%); }
 .thumb-yamiichi { background: linear-gradient(135deg, #3f1d1d 0%, #1a0a0a 100%); }
+.thumb-skymail  { background: linear-gradient(135deg, #1e3a8a 0%, #0a1530 100%); }
 
 
 .card-body {
@@ -488,6 +489,24 @@ footer a:hover { color: #e6edf3; }
                 <span class="tag" data-i18n="yamiichiTag3">タイムアタック</span>
             </div>
             <a class="card-btn btn-play" href="https://pndshch.github.io/yamiichi/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-thumb thumb-skymail">
+            <span class="new-badge" data-i18n="newBadge">NEW</span>
+            <span class="thumb-emoji">✉️</span>
+            <img class="thumb-gif" src="assets/skymail.gif" alt="" onerror="this.remove()">
+        </div>
+        <div class="card-body">
+            <h2 data-i18n="skymailTitle">スカイメール</h2>
+            <p data-i18n="skymailDesc">飛行船で大西洋横断！↑↓で高度を変え、郵便袋を回収しながらNJラクハーストを目指せ。雷雲に3回当たると墜落。</p>
+            <div class="tags">
+                <span class="tag" data-i18n="skymailTag1">3D</span>
+                <span class="tag" data-i18n="skymailTag2">フライト</span>
+                <span class="tag" data-i18n="skymailTag3">回避</span>
+            </div>
+            <a class="card-btn btn-play" href="https://pndshch.github.io/skymail/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
         </div>
     </div>
 </div>
@@ -1055,6 +1074,9 @@ const I18N = {
         yamiichiTitle: "ヤミイチ",
         yamiichiDesc:  "戦後闇市の屋台主になれ！客の頭上の吹き出しを見て、正しい商品をドラッグで渡せ。素早く正解でボーナス — 60秒で何円稼げる？",
         yamiichiTag1: "3D", yamiichiTag2: "ドラッグ", yamiichiTag3: "タイムアタック",
+        skymailTitle: "スカイメール",
+        skymailDesc:  "飛行船で大西洋横断！↑↓で高度を変え、郵便袋を回収しながらNJラクハーストを目指せ。雷雲に3回当たると墜落。",
+        skymailTag1: "3D", skymailTag2: "フライト", skymailTag3: "回避",
     },
     en: {
         tagline:   "Games · Education · Tools — delivered via browser and apps",
@@ -1193,6 +1215,9 @@ const I18N = {
         yamiichiTitle: "Yamiichi",
         yamiichiDesc:  "Run a postwar black-market stall! Read the customer's thought bubble and drag the right item. Quick service = bonus — how much can you earn in 60 seconds?",
         yamiichiTag1: "3D", yamiichiTag2: "Drag", yamiichiTag3: "Time Attack",
+        skymailTitle: "Sky Mail",
+        skymailDesc:  "Pilot an airship across the Atlantic! ↑↓ to change altitude, catch mailbags on the way to Lakehurst NJ. 3 storm hits = crash.",
+        skymailTag1: "3D", skymailTag2: "Flight", skymailTag3: "Dodge",
     }
 };
 
