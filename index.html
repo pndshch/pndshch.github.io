@@ -194,6 +194,7 @@ header p {
 .thumb-shuriken  { background: linear-gradient(135deg, #0a0a2a 0%, #1a1a3a 100%); }
 .thumb-quantum   { background: linear-gradient(135deg, #0a002a 0%, #1a0a3a 100%); }
 .thumb-fastslow  { background: linear-gradient(135deg, #1a1a0a 0%, #2a2a1a 100%); }
+.thumb-choco     { background: linear-gradient(135deg, #2a1508 0%, #1a0e06 100%); }
 
 .card-body {
     padding: 18px 20px 22px;
@@ -511,6 +512,24 @@ footer a:hover { color: #e6edf3; }
                 <span class="tag" data-i18n="shurikenTag3">忍者</span>
             </div>
             <a class="card-btn btn-play" href="https://pndshch.github.io/shuriken-master/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-thumb thumb-choco">
+            <span class="new-badge" data-i18n="newBadge">NEW</span>
+            <span class="thumb-emoji">🍫</span>
+            <img class="thumb-gif" src="assets/choco-bomber.gif" alt="" onerror="this.remove()">
+        </div>
+        <div class="card-body">
+            <h2 data-i18n="chocoTitle">チョコボンバー</h2>
+            <p data-i18n="chocoDesc">たまごをタップしてチョコチップを誕生させよう！チョコチップが大きくなると…どかーん！爆発で近くのたまごも連鎖で割れる。少ないタップで全部割ろう。</p>
+            <div class="tags">
+                <span class="tag" data-i18n="chocoTag1">パズル</span>
+                <span class="tag" data-i18n="chocoTag2">連鎖</span>
+                <span class="tag" data-i18n="chocoTag3">どかーん</span>
+            </div>
+            <a class="card-btn btn-play" href="https://pndshch.github.io/choco-bomber/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
         </div>
     </div>
 
@@ -1187,6 +1206,9 @@ const I18N = {
         birthdayTitle: "33のキャンドル",
         birthdayDesc:  "33本のキャンドルが灯る3Dバースデーケーキ。タップして一本ずつ吹き消そう。全部消えたら花火でお祝い！",
         birthdayTag1: "3D", birthdayTag2: "インタラクティブ", birthdayTag3: "お祝い",
+        chocoTitle: "チョコボンバー",
+        chocoDesc:  "たまごをタップしてチョコチップを誕生させよう！チョコチップが大きくなると…どかーん！爆発で近くのたまごも連鎖で割れる。少ないタップで全部割ろう。",
+        chocoTag1: "パズル", chocoTag2: "連鎖", chocoTag3: "どかーん",
     },
     en: {
         tagline:   "Games · Education · Tools — delivered via browser and apps",
@@ -1343,6 +1365,9 @@ const I18N = {
         birthdayTitle: "33 Candles",
         birthdayDesc:  "A 3D birthday cake with 33 flickering candles. Tap to blow them out one by one — fireworks celebrate when the last flame goes out!",
         birthdayTag1: "3D", birthdayTag2: "Interactive", birthdayTag3: "Celebration",
+        chocoTitle: "Choco Bomber",
+        chocoDesc:  "Tap eggs to hatch chocolate chip characters! They grow bigger and bigger until... BOOM! Explosions crack nearby eggs for chain reactions. Clear all eggs with minimal taps.",
+        chocoTag1: "Puzzle", chocoTag2: "Chain Reaction", chocoTag3: "Boom!",
     }
 };
 
