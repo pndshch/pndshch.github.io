@@ -189,6 +189,7 @@ header p {
 .thumb-healthtd { background: linear-gradient(135deg, #0a1a14 0%, #0d2a1a 100%); }
 .thumb-yamiichi { background: linear-gradient(135deg, #3f1d1d 0%, #1a0a0a 100%); }
 .thumb-melon   { background: linear-gradient(135deg, #1a4a2a 0%, #0a2a1a 100%); }
+.thumb-ehmate  { background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%); }
 .thumb-capitalism { background: linear-gradient(135deg, #1a0a00 0%, #2a1a0a 100%); }
 .thumb-birthday  { background: linear-gradient(135deg, #2a0a2a 0%, #3a1a2a 100%); }
 .thumb-shuriken  { background: linear-gradient(135deg, #0a0a2a 0%, #1a1a3a 100%); }
@@ -572,6 +573,24 @@ footer a:hover { color: #e6edf3; }
 <!-- Education -->
 <div class="section-label" data-i18n="secEdu">📚 教育・知育</div>
 <div class="grid">
+    <div class="card">
+        <div class="card-thumb thumb-ehmate">
+            <span class="new-badge" data-i18n="newBadge">NEW</span>
+            <span class="thumb-emoji">🏠</span>
+            <img class="thumb-gif" src="assets/english-housemate.gif" alt="" onerror="this.remove()">
+        </div>
+        <div class="card-body">
+            <h2 data-i18n="ehmateTitle">English Housemate</h2>
+            <p data-i18n="ehmateDesc">AIの同居人Alexが英語で話しかけてくる！マイクで返事するか、タイプしてもOK。日本語で答えても英語に直してくれる。自動で会話を始めてくれるから、気づいたら英語を話してる。</p>
+            <div class="tags">
+                <span class="tag" data-i18n="ehmateTag1">英会話</span>
+                <span class="tag" data-i18n="ehmateTag2">AI</span>
+                <span class="tag" data-i18n="ehmateTag3">音声</span>
+            </div>
+            <a class="card-btn btn-play" href="https://pndshch.github.io/english-housemate/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+        </div>
+    </div>
+
     <div class="card">
         <div class="card-thumb thumb-keisan">
             <span class="new-badge" data-i18n="newBadge">NEW</span>
@@ -1194,6 +1213,9 @@ const I18N = {
         melonTitle: "花メロン探し",
         melonDesc:  "花畑に隠れたメロンを見つけよう！花をタップすると、つながったツルが色でヒントを教えてくれる。赤＝すぐそば、緑＝遠い。少ないタップで⭐3つを目指せ！",
         melonTag1: "3D", melonTag2: "パズル", melonTag3: "タップ",
+        ehmateTitle: "English Housemate",
+        ehmateDesc:  "AIの同居人Alexが英語で話しかけてくる！マイクで返事するか、タイプしてもOK。日本語で答えても英語に直してくれる。自動で会話を始めてくれるから、気づいたら英語を話してる。",
+        ehmateTag1: "英会話", ehmateTag2: "AI", ehmateTag3: "音声",
         capitalismTitle: "格差パニック",
         capitalismDesc:  "Plinkoボードで資本主義の富の分配を可視化。規制・税制をリアルタイムに操作して、ジニ係数の変化を観察しよう。",
         capitalismTag1: "シミュレーション", capitalismTag2: "経済学", capitalismTag3: "Plinko",
@@ -1353,6 +1375,9 @@ const I18N = {
         melonTitle: "Melon Garden Search",
         melonDesc:  "Find melons hidden in a flower garden! Tap flowers to search — connected vines glow with color hints. Red = right next to a melon, green = far away. Find all 5 with the fewest taps for ⭐⭐⭐!",
         melonTag1: "3D", melonTag2: "Puzzle", melonTag3: "Tap",
+        ehmateTitle: "English Housemate",
+        ehmateDesc:  "AI housemate Alex starts English conversations with you! Reply by voice or typing. Even if you answer in Japanese, Alex gently rephrases in English. Auto-initiates chats so you practice without thinking about it.",
+        ehmateTag1: "English", ehmateTag2: "AI", ehmateTag3: "Voice",
         capitalismTitle: "Inequality Panic",
         capitalismDesc:  "Visualize wealth distribution with a Plinko board. Tweak regulations and tax policies in real time and watch the Gini coefficient shift.",
         capitalismTag1: "Simulation", capitalismTag2: "Economics", capitalismTag3: "Plinko",
