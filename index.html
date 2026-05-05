@@ -197,6 +197,7 @@ header p {
 .thumb-fastslow  { background: linear-gradient(135deg, #1a1a0a 0%, #2a2a1a 100%); }
 .thumb-choco     { background: linear-gradient(135deg, #2a1508 0%, #1a0e06 100%); }
 .thumb-4minwall  { background: linear-gradient(135deg, #0a0b18 0%, #1a0a2a 100%); }
+.thumb-yokonige  { background: linear-gradient(135deg, #0a1420 0%, #1a0810 100%); }
 
 .card-body {
     padding: 18px 20px 22px;
@@ -814,6 +815,22 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="grid-header" data-cat-header="games" data-i18n="secGridGames">🎮 ゲーム</div>
     <div class="card" data-cat="games">
+            <div class="card-thumb thumb-yokonige">
+                <span class="new-badge" data-i18n="newBadge">NEW</span>
+                <span class="thumb-emoji">🦀</span>
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="yokonigeTitle">よこにげ</h2>
+                <p data-i18n="yokonigeDesc">なぜカニは横に歩くのか？ 2億年前の海に戻り、進化の選択を体験する生存アクション。小さな選択が7,900種の未来をつくった——あなたの選択は？</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="yokonigeTag1">進化</span>
+                    <span class="tag" data-i18n="yokonigeTag2">サバイバル</span>
+                    <span class="tag" data-i18n="yokonigeTag3">サイエンス</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/yokonige/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
+    <div class="card" data-cat="games">
             <div class="card-thumb thumb-4minwall">
                 <span class="new-badge" data-i18n="newBadge">NEW</span>
                 <span class="thumb-emoji">🏃</span>
@@ -1374,6 +1391,9 @@ const I18N = {
         chocoTitle: "チョコボンバー",
         chocoDesc:  "たまごをタップしてチョコチップを誕生させよう！チョコチップが大きくなると…どかーん！爆発で近くのたまごも連鎖で割れる。少ないタップで全部割ろう。",
         chocoTag1: "パズル", chocoTag2: "連鎖", chocoTag3: "どかーん",
+        yokonigeTitle: "よこにげ",
+        yokonigeDesc:  "なぜカニは横に歩くのか？ 2億年前の海に戻り、進化の選択を体験する生存アクション。小さな選択が7,900種の未来をつくった——あなたの選択は？",
+        yokonigeTag1: "進化", yokonigeTag2: "サバイバル", yokonigeTag3: "サイエンス",
     },
     en: {
         tagline:   "Games · Education · Tools — delivered via browser and apps",
@@ -1551,6 +1571,9 @@ const I18N = {
         chocoTitle: "Choco Bomber",
         chocoDesc:  "Tap eggs to hatch chocolate chip characters! They grow bigger and bigger until... BOOM! Explosions crack nearby eggs for chain reactions. Clear all eggs with minimal taps.",
         chocoTag1: "Puzzle", chocoTag2: "Chain Reaction", chocoTag3: "Boom!",
+        yokonigeTitle: "Sideways Escape",
+        yokonigeDesc:  "Why do crabs walk sideways? Travel back 200 million years and make an evolutionary choice. One small step created the future of 7,900 species — what will yours create?",
+        yokonigeTag1: "Evolution", yokonigeTag2: "Survival", yokonigeTag3: "Science",
     }
 };
 
