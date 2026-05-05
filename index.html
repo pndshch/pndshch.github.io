@@ -197,6 +197,7 @@ header p {
 .thumb-fastslow  { background: linear-gradient(135deg, #1a1a0a 0%, #2a2a1a 100%); }
 .thumb-choco     { background: linear-gradient(135deg, #2a1508 0%, #1a0e06 100%); }
 .thumb-4minwall  { background: linear-gradient(135deg, #0a0b18 0%, #1a0a2a 100%); }
+.thumb-kitkat     { background: linear-gradient(135deg, #2a0a0a 0%, #1a1010 100%); }
 .thumb-yokonige  { background: linear-gradient(135deg, #0a1420 0%, #1a0810 100%); }
 
 .card-body {
@@ -401,6 +402,13 @@ footer a:hover { color: #e6edf3; }
 <!-- Featured -->
 <div class="section-label" data-i18n="secFeatured">⭐ おすすめ</div>
 <div class="feat-row">
+        <a class="feat-card" href="https://pndshch.github.io/kitkat-highway/" target="_blank">
+            <div class="card-thumb thumb-kitkat">
+            <span class="new-badge" data-i18n="newBadge">NEW</span>
+            <span class="thumb-emoji">🍫</span>
+        </div>
+            <span class="feat-title" data-i18n="kitkatTitle">キットカット・ハイウェイ</span>
+        </a>
         <a class="feat-card" href="https://pndshch.github.io/city-drive/" target="_blank">
             <div class="card-thumb thumb-city">
             <span class="new-badge" data-i18n="newBadge">NEW</span>
@@ -814,6 +822,22 @@ footer a:hover { color: #e6edf3; }
             </div>
         </div>
     <div class="grid-header" data-cat-header="games" data-i18n="secGridGames">🎮 ゲーム</div>
+    <div class="card" data-cat="games">
+            <div class="card-thumb thumb-kitkat">
+                <span class="new-badge" data-i18n="newBadge">NEW</span>
+                <span class="thumb-emoji">🍫</span>
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="kitkatTitle">キットカット・ハイウェイ</h2>
+                <p data-i18n="kitkatDesc">2026年の41万本キットカット強奪事件にインスパイア。トラックからキットカットを盗め——でも欲張りすぎると警察に捕まり全没収。「いつ逃げるか」が全て。足るを知る者は富む。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="kitkatTag1">ドライビング</span>
+                    <span class="tag" data-i18n="kitkatTag2">リスク＆リターン</span>
+                    <span class="tag" data-i18n="kitkatTag3">実話ベース</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/kitkat-highway/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
     <div class="card" data-cat="games">
             <div class="card-thumb thumb-yokonige">
                 <span class="new-badge" data-i18n="newBadge">NEW</span>
@@ -1410,6 +1434,9 @@ const I18N = {
         chocoTitle: "チョコボンバー",
         chocoDesc:  "たまごをタップしてチョコチップを誕生させよう！チョコチップが大きくなると…どかーん！爆発で近くのたまごも連鎖で割れる。少ないタップで全部割ろう。",
         chocoTag1: "パズル", chocoTag2: "連鎖", chocoTag3: "どかーん",
+        kitkatTitle: "キットカット・ハイウェイ",
+        kitkatDesc:  "2026年の41万本キットカット強奪事件にインスパイア。トラックからキットカットを盗め——でも欲張りすぎると警察に捕まり全没収。「いつ逃げるか」が全て。足るを知る者は富む。",
+        kitkatTag1: "ドライビング", kitkatTag2: "リスク＆リターン", kitkatTag3: "実話ベース",
         yokonigeTitle: "よこにげ",
         yokonigeDesc:  "なぜカニは横に歩くのか？ 2億年前の海に戻り、進化の選択を体験する生存アクション。小さな選択が7,900種の未来をつくった——あなたの選択は？",
         yokonigeTag1: "進化", yokonigeTag2: "サバイバル", yokonigeTag3: "サイエンス",
@@ -1593,6 +1620,9 @@ const I18N = {
         chocoTitle: "Choco Bomber",
         chocoDesc:  "Tap eggs to hatch chocolate chip characters! They grow bigger and bigger until... BOOM! Explosions crack nearby eggs for chain reactions. Clear all eggs with minimal taps.",
         chocoTag1: "Puzzle", chocoTag2: "Chain Reaction", chocoTag3: "Boom!",
+        kitkatTitle: "KitKat Highway",
+        kitkatDesc:  "Inspired by the 2026 heist of 400,000 KitKat bars in Europe. Steal KitKats from trucks — but get too greedy and the police catch you, confiscating everything. Knowing when to quit is the only rule.",
+        kitkatTag1: "Driving", kitkatTag2: "Risk & Reward", kitkatTag3: "True Story",
         yokonigeTitle: "Sideways Escape",
         yokonigeDesc:  "Why do crabs walk sideways? Travel back 200 million years and make an evolutionary choice. One small step created the future of 7,900 species — what will yours create?",
         yokonigeTag1: "Evolution", yokonigeTag2: "Survival", yokonigeTag3: "Science",
