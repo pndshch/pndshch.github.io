@@ -199,6 +199,7 @@ header p {
 .thumb-4minwall  { background: linear-gradient(135deg, #0a0b18 0%, #1a0a2a 100%); }
 .thumb-kitkat     { background: linear-gradient(135deg, #2a0a0a 0%, #1a1010 100%); }
 .thumb-yokonige  { background: linear-gradient(135deg, #0a1420 0%, #1a0810 100%); }
+.thumb-spore     { background: linear-gradient(135deg, #020a08 0%, #081a10 100%); }
 
 .card-body {
     padding: 18px 20px 22px;
@@ -823,6 +824,22 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="grid-header" data-cat-header="games" data-i18n="secGridGames">🎮 ゲーム</div>
     <div class="card" data-cat="games">
+            <div class="card-thumb thumb-spore">
+                <span class="new-badge" data-i18n="newBadge">NEW</span>
+                <span class="thumb-emoji">🌿</span>
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="sporeTitle">胞子航海</h2>
+                <p data-i18n="sporeDesc">北海道大学の苔胞子・宇宙生存実験に着想。あなたは宇宙を漂う胞子。タップで休眠し宇宙線を防ぎ、離して光を吸収。ほとんどのゲームは「動け」と言う——このゲームは「止まれ」と言う。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="sporeTag1">サバイバル</span>
+                    <span class="tag" data-i18n="sporeTag2">サイエンス</span>
+                    <span class="tag" data-i18n="sporeTag3">休眠の戦略</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/spore-voyage/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
+    <div class="card" data-cat="games">
             <div class="card-thumb thumb-kitkat">
                 <span class="new-badge" data-i18n="newBadge">NEW</span>
                 <span class="thumb-emoji">🍫</span>
@@ -1440,6 +1457,9 @@ const I18N = {
         yokonigeTitle: "よこにげ",
         yokonigeDesc:  "なぜカニは横に歩くのか？ 2億年前の海に戻り、進化の選択を体験する生存アクション。小さな選択が7,900種の未来をつくった——あなたの選択は？",
         yokonigeTag1: "進化", yokonigeTag2: "サバイバル", yokonigeTag3: "サイエンス",
+        sporeTitle: "胞子航海",
+        sporeDesc:  "北海道大学の苔胞子・宇宙生存実験に着想。あなたは宇宙を漂う胞子。タップで休眠し宇宙線を防ぎ、離して光を吸収。ほとんどのゲームは「動け」と言う——このゲームは「止まれ」と言う。",
+        sporeTag1: "サバイバル", sporeTag2: "サイエンス", sporeTag3: "休眠の戦略",
     },
     en: {
         tagline:   "Games · Education · Tools — delivered via browser and apps",
@@ -1626,6 +1646,9 @@ const I18N = {
         yokonigeTitle: "Sideways Escape",
         yokonigeDesc:  "Why do crabs walk sideways? Travel back 200 million years and make an evolutionary choice. One small step created the future of 7,900 species — what will yours create?",
         yokonigeTag1: "Evolution", yokonigeTag2: "Survival", yokonigeTag3: "Science",
+        sporeTitle: "Spore Voyage",
+        sporeDesc:  "Inspired by Hokkaido University's discovery that moss spores survived 9 months in space. You're a spore drifting through the cosmos. Tap to go dormant and block cosmic rays; release to absorb starlight. Most games say 'move' — this one says 'be still.'",
+        sporeTag1: "Survival", sporeTag2: "Science", sporeTag3: "Dormancy Strategy",
     }
 };
 
