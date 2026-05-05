@@ -196,6 +196,7 @@ header p {
 .thumb-quantum   { background: linear-gradient(135deg, #0a002a 0%, #1a0a3a 100%); }
 .thumb-fastslow  { background: linear-gradient(135deg, #1a1a0a 0%, #2a2a1a 100%); }
 .thumb-choco     { background: linear-gradient(135deg, #2a1508 0%, #1a0e06 100%); }
+.thumb-koi       { background: linear-gradient(135deg, #0d3a66 0%, #062441 100%); }
 .thumb-4minwall  { background: linear-gradient(135deg, #0a0b18 0%, #1a0a2a 100%); }
 .thumb-kitkat     { background: linear-gradient(135deg, #2a0a0a 0%, #1a1010 100%); }
 .thumb-yokonige  { background: linear-gradient(135deg, #0a1420 0%, #1a0810 100%); }
@@ -823,6 +824,23 @@ footer a:hover { color: #e6edf3; }
             </div>
         </div>
     <div class="grid-header" data-cat-header="games" data-i18n="secGridGames">🎮 ゲーム</div>
+    <div class="card" data-cat="games">
+            <div class="card-thumb thumb-koi">
+                <span class="new-badge" data-i18n="newBadge">NEW</span>
+                <span class="thumb-emoji">🐉</span>
+                <img class="thumb-gif" src="assets/koi-no-taki.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="koiTitle">鯉の滝登り</h2>
+                <p data-i18n="koiDesc">5月5日こどもの日。鯉となって龍門の滝を登り切れば龍と化す——故事「登竜門」を題材にした縦スクロール。鯉のぼりの由来、その意味を遊びながら知る。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="koiTag1">こどもの日</span>
+                    <span class="tag" data-i18n="koiTag2">縦スクロール</span>
+                    <span class="tag" data-i18n="koiTag3">故事成語</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/koi-no-taki/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
     <div class="card" data-cat="games">
             <div class="card-thumb thumb-spore">
                 <span class="new-badge" data-i18n="newBadge">NEW</span>
@@ -1460,6 +1478,9 @@ const I18N = {
         sporeTitle: "胞子航海",
         sporeDesc:  "北海道大学の苔胞子・宇宙生存実験に着想。あなたは宇宙を漂う胞子。タップで休眠し宇宙線を防ぎ、離して光を吸収。ほとんどのゲームは「動け」と言う——このゲームは「止まれ」と言う。",
         sporeTag1: "サバイバル", sporeTag2: "サイエンス", sporeTag3: "休眠の戦略",
+        koiTitle: "鯉の滝登り",
+        koiDesc:  "5月5日こどもの日。鯉となって龍門の滝を登り切れば龍と化す——故事「登竜門」を題材にした縦スクロール。鯉のぼりの由来、その意味を遊びながら知る。",
+        koiTag1: "こどもの日", koiTag2: "縦スクロール", koiTag3: "故事成語",
     },
     en: {
         tagline:   "Games · Education · Tools — delivered via browser and apps",
@@ -1649,6 +1670,9 @@ const I18N = {
         sporeTitle: "Spore Voyage",
         sporeDesc:  "Inspired by Hokkaido University's discovery that moss spores survived 9 months in space. You're a spore drifting through the cosmos. Tap to go dormant and block cosmic rays; release to absorb starlight. Most games say 'move' — this one says 'be still.'",
         sporeTag1: "Survival", sporeTag2: "Science", sporeTag3: "Dormancy Strategy",
+        koiTitle: "Koi Falls — Dragon Gate",
+        koiDesc:  "May 5 — Children's Day in Japan. Be the carp climbing the legendary Dragon Gate falls. Reach the top and you become a dragon — origin of the idiom \"tōryūmon\", the gateway to greatness behind every koinobori carp streamer.",
+        koiTag1: "Children's Day", koiTag2: "Vertical scroller", koiTag3: "Folklore",
     }
 };
 
