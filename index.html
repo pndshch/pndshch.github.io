@@ -196,6 +196,7 @@ header p {
 .thumb-quantum   { background: linear-gradient(135deg, #0a002a 0%, #1a0a3a 100%); }
 .thumb-fastslow  { background: linear-gradient(135deg, #1a1a0a 0%, #2a2a1a 100%); }
 .thumb-choco     { background: linear-gradient(135deg, #2a1508 0%, #1a0e06 100%); }
+.thumb-4minwall  { background: linear-gradient(135deg, #0a0b18 0%, #1a0a2a 100%); }
 
 .card-body {
     padding: 18px 20px 22px;
@@ -813,6 +814,23 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="grid-header" data-cat-header="games" data-i18n="secGridGames">🎮 ゲーム</div>
     <div class="card" data-cat="games">
+            <div class="card-thumb thumb-4minwall">
+                <span class="new-badge" data-i18n="newBadge">NEW</span>
+                <span class="thumb-emoji">🏃</span>
+                <img class="thumb-gif" src="assets/4min-wall.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="4minTitle">4分の壁</h2>
+                <p data-i18n="4minDesc">1954年5月6日、バニスターは「不可能」を破った。壁を見極め、突破せよ。すべての壁が本物とは限らない——壊すほど、次が見えてくる。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="4minTag1">ランナー</span>
+                    <span class="tag" data-i18n="4minTag2">心理</span>
+                    <span class="tag" data-i18n="4minTag3">バニスター効果</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/4min-wall/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
+    <div class="card" data-cat="games">
             <div class="card-thumb thumb-city">
                 <span class="new-badge" data-i18n="newBadge">NEW</span>
                 <span class="thumb-emoji">🏙️</span>
@@ -1344,6 +1362,9 @@ const I18N = {
         quantumTitle: "量子パズル",
         quantumDesc:  "量子力学の世界を体験！量子トンネル・波動関数の収縮・量子もつれを使ってパズルを解く教育ゲーム。10レベルに挑戦しよう。",
         quantumTag1: "3D", quantumTag2: "パズル", quantumTag3: "量子力学",
+        "4minTitle": "4分の壁",
+        "4minDesc":  "1954年5月6日、バニスターは「不可能」を破った。壁を見極め、突破せよ。すべての壁が本物とは限らない——壊すほど、次が見えてくる。",
+        "4minTag1": "ランナー", "4minTag2": "心理", "4minTag3": "バニスター効果",
         fastslowTitle: "ファストアンドスロー",
         fastslowDesc:  "カーネマンの名著に基づく認知バイアスチャレンジ。直感(System1)と論理(System2)を切り替えて20問に挑戦！",
         fastslowTag1: "心理学", fastslowTag2: "認知科学", fastslowTag3: "教育",
@@ -1518,6 +1539,9 @@ const I18N = {
         quantumTitle: "Quantum Puzzle",
         quantumDesc:  "Experience quantum mechanics! Solve puzzles using quantum tunneling, wavefunction collapse, and entanglement across 10 levels.",
         quantumTag1: "3D", quantumTag2: "Puzzle", quantumTag3: "Quantum",
+        "4minTitle": "The 4-Minute Wall",
+        "4minDesc":  "On May 6, 1954, Bannister broke the 'impossible.' Read the walls — charge or jump. Not all walls are real. The more you break, the more you see.",
+        "4minTag1": "Runner", "4minTag2": "Psychology", "4minTag3": "Bannister Effect",
         fastslowTitle: "Fast & Slow",
         fastslowDesc:  "A cognitive bias challenge based on Kahneman's book. Switch between intuition (System 1) and logic (System 2) across 20 rounds!",
         fastslowTag1: "Psychology", fastslowTag2: "Cognitive Science", fastslowTag3: "Education",
