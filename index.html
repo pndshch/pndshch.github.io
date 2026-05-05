@@ -256,6 +256,112 @@ footer a:hover { color: #e6edf3; }
     body { padding: 40px 14px 80px; }
     .logo-text { font-size: 24px; }
     .lang-switch { top: 10px; right: 10px; }
+    .cat-filter { gap: 6px; padding: 10px 0 14px; }
+    .cat-btn { font-size: 11px; padding: 6px 12px; }
+    .feat-card { width: 120px; }
+    .feat-card .card-thumb { height: 75px; }
+}
+
+/* ── Category filter ── */
+.cat-filter {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    max-width: 720px;
+    margin-bottom: 28px;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: linear-gradient(to bottom, #0d1117 60%, transparent);
+    padding: 14px 0 18px;
+}
+.cat-btn {
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 20px;
+    color: #8b949e;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+.cat-btn:hover { border-color: #7c3aed; color: #e6edf3; }
+.cat-btn.active {
+    background: #7c3aed;
+    border-color: #7c3aed;
+    color: #fff;
+}
+.cat-btn .cat-count {
+    font-size: 10px;
+    opacity: 0.7;
+    margin-left: 3px;
+}
+
+/* ── Featured row ── */
+.feat-row {
+    display: flex;
+    gap: 14px;
+    width: 100%;
+    max-width: 720px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 10px;
+    margin-bottom: 28px;
+    scrollbar-width: none;
+}
+.feat-row::-webkit-scrollbar { display: none; }
+.feat-card {
+    flex: 0 0 auto;
+    width: 140px;
+    text-decoration: none;
+    text-align: center;
+    scroll-snap-align: start;
+    transition: transform 0.15s;
+}
+.feat-card:hover { transform: translateY(-3px); }
+.feat-card .card-thumb {
+    height: 90px;
+    border-radius: 10px;
+    border: 2px solid #30363d;
+    transition: border-color 0.2s;
+}
+.feat-card:hover .card-thumb { border-color: #7c3aed; }
+.feat-card .new-badge { display: none; }
+.feat-card .thumb-emoji { font-size: 36px; }
+.feat-title {
+    display: block;
+    margin-top: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #c9d1d9;
+    line-height: 1.3;
+}
+
+/* ── Grid section sub-headers ── */
+.grid-header {
+    grid-column: 1 / -1;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: #484f58;
+    padding: 20px 0 6px;
+    border-bottom: 1px solid #21262d;
+    margin-top: 8px;
+}
+.grid-header:first-child { margin-top: 0; padding-top: 0; }
+
+/* ── Card filter transition ── */
+#app-grid .card {
+    transition: opacity 0.2s, transform 0.2s;
+}
+#app-grid .card.cat-hidden {
+    display: none;
 }
 </style>
 </head>
@@ -280,790 +386,791 @@ footer a:hover { color: #e6edf3; }
     </a>
 </header>
 
-<!-- Games -->
-<div class="section-label" data-i18n="secGames">🎮 ゲーム</div>
-<div class="grid">
-    <div class="card">
-        <div class="card-thumb thumb-city">
+<!-- Category filter -->
+<div class="cat-filter">
+    <button class="cat-btn active" data-cat="all" data-i18n="catAll">すべて</button>
+    <button class="cat-btn" data-cat="kids-play" data-i18n="catKidsPlay">🎈 こどもがあそぶ</button>
+    <button class="cat-btn" data-cat="kids-learn" data-i18n="catKidsLearn">📖 こどもがまなぶ</button>
+    <button class="cat-btn" data-cat="games" data-i18n="catGames">🎮 ゲーム</button>
+    <button class="cat-btn" data-cat="fortune" data-i18n="catFortune">🔮 うらない</button>
+    <button class="cat-btn" data-cat="tools" data-i18n="catTools">🛠️ くらしでつかう</button>
+</div>
+
+<!-- Featured -->
+<div class="section-label" data-i18n="secFeatured">⭐ おすすめ</div>
+<div class="feat-row">
+        <a class="feat-card" href="https://pndshch.github.io/city-drive/" target="_blank">
+            <div class="card-thumb thumb-city">
             <span class="new-badge" data-i18n="newBadge">NEW</span>
             <span class="thumb-emoji">🏙️</span>
             <img class="thumb-gif" src="assets/city-drive.gif" alt="" onerror="this.remove()">
         </div>
-        <div class="card-body">
-            <h2 data-i18n="cityTitle">City Drive</h2>
-            <p data-i18n="cityDesc">Blenderで作った3Dの街を自由にドライブ！三人称・ドライバー・俯瞰の3視点を切り替えて、ビル・街路樹・街灯が並ぶ街を走り抜けよう。</p>
-            <div class="tags">
-                <span class="tag" data-i18n="cityTag1">3D</span>
-                <span class="tag" data-i18n="cityTag2">ドライブ</span>
-                <span class="tag" data-i18n="cityTag3">Blender</span>
-            </div>
-            <a class="card-btn btn-play" href="https://pndshch.github.io/city-drive/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-thumb thumb-fruit">
-            <span class="thumb-emoji">🍓</span>
-            <img class="thumb-gif" src="assets/fruit-drop-ai.gif" alt="" onerror="this.remove()">
-        </div>
-        <div class="card-body">
-            <h2 data-i18n="fruitTitle">Fruit Drop AI</h2>
-            <p data-i18n="fruitDesc">フルーツを落として同種を合体させる物理ゲーム。遺伝的アルゴリズムがリアルタイムで学習し、AIが上達していく様子を観察できます。</p>
-            <div class="tags">
-                <span class="tag" data-i18n="fruitTag1">物理演算</span>
-                <span class="tag" data-i18n="fruitTag2">AI学習</span>
-                <span class="tag" data-i18n="fruitTag3">遺伝的アルゴリズム</span>
-            </div>
-            <a class="card-btn btn-play" href="https://pndshch.github.io/fruit-drop-ai/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-thumb thumb-strep">
-            <span class="new-badge" data-i18n="newBadge">NEW</span>
-            <span class="thumb-emoji">🦠</span>
-            <img class="thumb-gif" src="assets/strep-buster.gif" alt="" onerror="this.remove()">
-        </div>
-        <div class="card-body">
-            <h2 data-i18n="strepTitle">ようれんきんバスター</h2>
-            <p data-i18n="strepDesc">白血球になって溶連菌を退治するFPSシューティング！Blenderで作った体内3Dステージを駆け巡り、抗生物質を発射して菌を倒そう。</p>
-            <div class="tags">
-                <span class="tag" data-i18n="strepTag1">3D FPS</span>
-                <span class="tag" data-i18n="strepTag2">シューティング</span>
-                <span class="tag" data-i18n="strepTag3">Blender</span>
-            </div>
-            <a class="card-btn btn-play" href="https://pndshch.github.io/strep-buster/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-thumb thumb-okuri">
-            <span class="new-badge" data-i18n="newBadge">NEW</span>
-            <span class="thumb-emoji">🚗</span>
-            <img class="thumb-gif" src="assets/okuri-mukae.gif" alt="" onerror="this.remove()">
-        </div>
-        <div class="card-body">
-            <h2 data-i18n="okuriTitle">おくりむかえ</h2>
-            <p data-i18n="okuriDesc">習い事の送迎をテーマにした3Dドライブゲーム！Blenderで作った街を走り、子どもたちを時間内にピックアップ＆ドロップオフしよう。</p>
-            <div class="tags">
-                <span class="tag" data-i18n="okuriTag1">3D</span>
-                <span class="tag" data-i18n="okuriTag2">ドライブ</span>
-                <span class="tag" data-i18n="okuriTag3">Blender</span>
-            </div>
-            <a class="card-btn btn-play" href="https://pndshch.github.io/okuri-mukae/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-thumb thumb-fortune">
-            <span class="new-badge" data-i18n="newBadge">NEW</span>
-            <span class="thumb-emoji">🔮</span>
-            <img class="thumb-gif" src="assets/fortune-mom.gif" alt="" onerror="this.remove()">
-        </div>
-        <div class="card-body">
-            <h2 data-i18n="fortuneTitle">おかあさん占い師</h2>
-            <p data-i18n="fortuneDesc">お母さんが占い師！Blenderで作った神秘的な3D占いの館で、タロット・水晶玉・手相を選んで運勢を占おう。毎回違う結果が出るよ。</p>
-            <div class="tags">
-                <span class="tag" data-i18n="fortuneTag1">3D</span>
-                <span class="tag" data-i18n="fortuneTag2">占い</span>
-                <span class="tag" data-i18n="fortuneTag3">Blender</span>
-            </div>
-            <a class="card-btn btn-play" href="https://pndshch.github.io/fortune-mom/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-thumb thumb-rugby">
-            <span class="new-badge" data-i18n="newBadge">NEW</span>
-            <span class="thumb-emoji">🏉</span>
-            <img class="thumb-gif" src="assets/rugby-try.gif" alt="" onerror="this.remove()">
-        </div>
-        <div class="card-body">
-            <h2 data-i18n="rugbyTitle">青天トライ</h2>
-            <p data-i18n="rugbyDesc">青空の下でトライを決めろ！Blenderで作った3Dラグビーフィールドを駆け抜け、ディフェンダーをかわしてゴールラインを目指すランナーゲーム。</p>
-            <div class="tags">
-                <span class="tag" data-i18n="rugbyTag1">3D</span>
-                <span class="tag" data-i18n="rugbyTag2">ラグビー</span>
-                <span class="tag" data-i18n="rugbyTag3">Blender</span>
-            </div>
-            <a class="card-btn btn-play" href="https://pndshch.github.io/rugby-try/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-thumb thumb-panpan">
-            <span class="new-badge" data-i18n="newBadge">NEW</span>
-            <span class="thumb-emoji">👖</span>
-            <img class="thumb-gif" src="assets/pocket-panpan.gif" alt="" onerror="this.remove()">
-        </div>
-        <div class="card-body">
-            <h2 data-i18n="panpanTitle">ポケットパンパン</h2>
-            <p data-i18n="panpanDesc">空から降ってくるアイテムをポケットでキャッチ！Blenderで作った3Dステージで左右に動いて、ポケットがパンパンになる前にスコアを稼ごう。</p>
-            <div class="tags">
-                <span class="tag" data-i18n="panpanTag1">3D</span>
-                <span class="tag" data-i18n="panpanTag2">キャッチ</span>
-                <span class="tag" data-i18n="panpanTag3">Blender</span>
-            </div>
-            <a class="card-btn btn-play" href="https://pndshch.github.io/pocket-panpan/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-thumb thumb-yen">
-            <span class="new-badge" data-i18n="newBadge">NEW</span>
-            <span class="thumb-emoji">💴</span>
-            <img class="thumb-gif" src="assets/yen-defender.gif" alt="" onerror="this.remove()">
-        </div>
-        <div class="card-body">
-            <h2 data-i18n="yenTitle">円を守れ！</h2>
-            <p data-i18n="yenDesc">円安から日本円を守れ！落ちてくる外貨をシールドで弾き返して為替レートを安定させる3Dディフェンスゲーム。コンボを繋げてハイスコアを目指そう。</p>
-            <div class="tags">
-                <span class="tag" data-i18n="yenTag1">3D</span>
-                <span class="tag" data-i18n="yenTag2">ディフェンス</span>
-                <span class="tag" data-i18n="yenTag3">為替</span>
-            </div>
-            <a class="card-btn btn-play" href="https://pndshch.github.io/yen-defender/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-thumb thumb-gwrain">
-            <span class="new-badge" data-i18n="newBadge">NEW</span>
-            <span class="thumb-emoji">🌧️</span>
-            <img class="thumb-gif" src="assets/gw-rain-runner.gif" alt="" onerror="this.remove()">
-        </div>
-        <div class="card-body">
-            <h2 data-i18n="gwrainTitle">GW雨よけランナー</h2>
-            <p data-i18n="gwrainDesc">ゴールデンウィークの大雨を避けろ！巨大な雨粒をかわし、水たまりを飛び越え、傘を拾って走り抜ける3Dエンドレスランナー。</p>
-            <div class="tags">
-                <span class="tag" data-i18n="gwrainTag1">3D</span>
-                <span class="tag" data-i18n="gwrainTag2">ランナー</span>
-                <span class="tag" data-i18n="gwrainTag3">GW</span>
-            </div>
-            <a class="card-btn btn-play" href="https://pndshch.github.io/gw-rain-runner/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-thumb thumb-aitodai">
-            <span class="new-badge" data-i18n="newBadge">NEW</span>
-            <span class="thumb-emoji">🧠</span>
-            <img class="thumb-gif" src="assets/ai-vs-todai.gif" alt="" onerror="this.remove()">
-        </div>
-        <div class="card-body">
-            <h2 data-i18n="aitodaiTitle">AI vs 東大</h2>
-            <p data-i18n="aitodaiDesc">人間の知力でAIに勝てるか？3Dステージで繰り広げるクイズバトル！数学・科学・言語など幅広い問題に挑戦。制限時間内に正解してAIを打ち負かそう。</p>
-            <div class="tags">
-                <span class="tag" data-i18n="aitodaiTag1">3D</span>
-                <span class="tag" data-i18n="aitodaiTag2">クイズ</span>
-                <span class="tag" data-i18n="aitodaiTag3">AI対戦</span>
-            </div>
-            <a class="card-btn btn-play" href="https://pndshch.github.io/ai-vs-todai/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-thumb thumb-healthtd">
-            <span class="new-badge" data-i18n="newBadge">NEW</span>
-            <span class="thumb-emoji">🛡️</span>
-            <img class="thumb-gif" src="assets/health-td.gif" alt="" onerror="this.remove()">
-        </div>
-        <div class="card-body">
-            <h2 data-i18n="healthtdTitle">免疫タワーディフェンス</h2>
-            <p data-i18n="healthtdDesc">ウイルスや悪玉菌が体に侵入してくる！ビタミンC・白血球・ブロッコリーなど健康タワーを設置して15Waveを生き抜け。アップグレードで免疫力MAX！</p>
-            <div class="tags">
-                <span class="tag" data-i18n="healthtdTag1">3D</span>
-                <span class="tag" data-i18n="healthtdTag2">タワーディフェンス</span>
-                <span class="tag" data-i18n="healthtdTag3">健康</span>
-            </div>
-            <a class="card-btn btn-play" href="https://pndshch.github.io/health-td/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-thumb thumb-capitalism">
-            <span class="new-badge" data-i18n="newBadge">NEW</span>
-            <span class="thumb-emoji">💰</span>
-            <img class="thumb-gif" src="assets/capitalism-sim.gif" alt="" onerror="this.remove()">
-        </div>
-        <div class="card-body">
-            <h2 data-i18n="capitalismTitle">格差パニック</h2>
-            <p data-i18n="capitalismDesc">Plinkoボードで資本主義の富の分配を可視化。規制・税制をリアルタイムに操作して、ジニ係数の変化を観察しよう。</p>
-            <div class="tags">
-                <span class="tag" data-i18n="capitalismTag1">シミュレーション</span>
-                <span class="tag" data-i18n="capitalismTag2">経済学</span>
-                <span class="tag" data-i18n="capitalismTag3">Plinko</span>
-            </div>
-            <a class="card-btn btn-play" href="https://pndshch.github.io/capitalism-sim/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-thumb thumb-shuriken">
-            <span class="new-badge" data-i18n="newBadge">NEW</span>
-            <span class="thumb-emoji">🥷</span>
-            <img class="thumb-gif" src="assets/shuriken-master.gif" alt="" onerror="this.remove()">
-        </div>
-        <div class="card-body">
-            <h2 data-i18n="shurikenTitle">手裏剣マスター</h2>
-            <p data-i18n="shurikenDesc">忍者の修行場で手裏剣を投げまくれ！影分身・螺旋丸・写輪眼の3つの忍術で的を破壊。コンボを繋いで高スコアを狙おう。</p>
-            <div class="tags">
-                <span class="tag" data-i18n="shurikenTag1">3D</span>
-                <span class="tag" data-i18n="shurikenTag2">アクション</span>
-                <span class="tag" data-i18n="shurikenTag3">忍者</span>
-            </div>
-            <a class="card-btn btn-play" href="https://pndshch.github.io/shuriken-master/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-thumb thumb-choco">
+            <span class="feat-title" data-i18n="cityTitle">City Drive</span>
+        </a>
+        <a class="feat-card" href="https://pndshch.github.io/choco-bomber/" target="_blank">
+            <div class="card-thumb thumb-choco">
             <span class="new-badge" data-i18n="newBadge">NEW</span>
             <span class="thumb-emoji">🍫</span>
             <img class="thumb-gif" src="assets/choco-bomber.gif" alt="" onerror="this.remove()">
         </div>
-        <div class="card-body">
-            <h2 data-i18n="chocoTitle">チョコボンバー</h2>
-            <p data-i18n="chocoDesc">たまごをタップしてチョコチップを誕生させよう！チョコチップが大きくなると…どかーん！爆発で近くのたまごも連鎖で割れる。少ないタップで全部割ろう。</p>
-            <div class="tags">
-                <span class="tag" data-i18n="chocoTag1">パズル</span>
-                <span class="tag" data-i18n="chocoTag2">連鎖</span>
-                <span class="tag" data-i18n="chocoTag3">どかーん</span>
-            </div>
-            <a class="card-btn btn-play" href="https://pndshch.github.io/choco-bomber/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-thumb thumb-yamiichi">
-            <span class="new-badge" data-i18n="newBadge">NEW</span>
-            <span class="thumb-emoji">🏪</span>
-            <img class="thumb-gif" src="assets/yamiichi.gif" alt="" onerror="this.remove()">
-        </div>
-        <div class="card-body">
-            <h2 data-i18n="yamiichiTitle">ヤミイチ</h2>
-            <p data-i18n="yamiichiDesc">戦後闇市の屋台主になれ！客の頭上の吹き出しを見て、正しい商品をドラッグで渡せ。素早く正解でボーナス — 60秒で何円稼げる？</p>
-            <div class="tags">
-                <span class="tag" data-i18n="yamiichiTag1">3D</span>
-                <span class="tag" data-i18n="yamiichiTag2">ドラッグ</span>
-                <span class="tag" data-i18n="yamiichiTag3">タイムアタック</span>
-            </div>
-            <a class="card-btn btn-play" href="https://pndshch.github.io/yamiichi/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-thumb thumb-melon">
-            <span class="new-badge" data-i18n="newBadge">NEW</span>
-            <span class="thumb-emoji">🍈</span>
-            <img class="thumb-gif" src="assets/melon-garden.gif" alt="" onerror="this.remove()">
-        </div>
-        <div class="card-body">
-            <h2 data-i18n="melonTitle">花メロン探し</h2>
-            <p data-i18n="melonDesc">花畑に隠れたメロンを見つけよう！花をタップすると、つながったツルが色で教えてくれる。赤＝すぐそば、緑＝遠い。少ないタップで全部見つけて⭐3つを目指せ！</p>
-            <div class="tags">
-                <span class="tag" data-i18n="melonTag1">3D</span>
-                <span class="tag" data-i18n="melonTag2">パズル</span>
-                <span class="tag" data-i18n="melonTag3">タップ</span>
-            </div>
-            <a class="card-btn btn-play" href="https://pndshch.github.io/melon-garden/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
-        </div>
-    </div>
-</div>
-<!-- Education -->
-<div class="section-label" data-i18n="secEdu">📚 教育・知育</div>
-<div class="grid">
-    <div class="card">
-        <div class="card-thumb thumb-ehmate">
-            <span class="new-badge" data-i18n="newBadge">NEW</span>
-            <span class="thumb-emoji">🏠</span>
-            <img class="thumb-gif" src="assets/english-housemate.gif" alt="" onerror="this.remove()">
-        </div>
-        <div class="card-body">
-            <h2 data-i18n="ehmateTitle">English Housemate</h2>
-            <p data-i18n="ehmateDesc">AIの同居人Alexが英語で話しかけてくる！マイクで返事するか、タイプしてもOK。日本語で答えても英語に直してくれる。自動で会話を始めてくれるから、気づいたら英語を話してる。</p>
-            <div class="tags">
-                <span class="tag" data-i18n="ehmateTag1">英会話</span>
-                <span class="tag" data-i18n="ehmateTag2">AI</span>
-                <span class="tag" data-i18n="ehmateTag3">音声</span>
-            </div>
-            <a class="card-btn btn-play" href="https://pndshch.github.io/english-housemate/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-thumb thumb-keisan">
-            <span class="new-badge" data-i18n="newBadge">NEW</span>
-            <span class="thumb-emoji">🐼</span>
-            <img class="thumb-gif" src="assets/1pun-keisan.gif" alt="" onerror="this.remove()">
-        </div>
-        <div class="card-body">
-            <h2 data-i18n="keisanTitle">1分けいさん</h2>
-            <p data-i18n="keisanDesc">1分間でなんもん解けるかな?たし算・ひき算・かけ算をリズムよく練習できる、子ども向けのシンプルな計算ドリル。</p>
-            <div class="tags">
-                <span class="tag" data-i18n="kidsTag">子ども向け</span>
-                <span class="tag" data-i18n="keisanTag1">けいさん</span>
-                <span class="tag" data-i18n="keisanTag2">1分</span>
-            </div>
-            <a class="card-btn btn-play" href="https://pndshch.github.io/1pun-keisan/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-thumb thumb-dots">
-            <span class="thumb-emoji">✏️</span>
-            <img class="thumb-gif" src="assets/tentsunagi.gif" alt="" onerror="this.remove()">
-        </div>
-        <div class="card-body">
-            <h2 data-i18n="dotsTitle">てんつなぎ</h2>
-            <p data-i18n="dotsDesc">点と点をつないで絵を完成させる、子ども向けのシンプルなゲーム。タブレット・スマホでも快適に遊べます。</p>
-            <div class="tags">
-                <span class="tag" data-i18n="kidsTag">子ども向け</span>
-                <span class="tag" data-i18n="eduTag">知育</span>
-                <span class="tag" data-i18n="puzzleTag">パズル</span>
-            </div>
-            <a class="card-btn btn-play" href="https://pndshch.github.io/tentsunagi/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-thumb thumb-hiragana">
+            <span class="feat-title" data-i18n="chocoTitle">チョコボンバー</span>
+        </a>
+        <a class="feat-card" href="https://pndshch.github.io/hiragana-game/" target="_blank">
+            <div class="card-thumb thumb-hiragana">
             <span class="thumb-emoji">🌸</span>
             <img class="thumb-gif" src="assets/hiragana-game.gif" alt="" onerror="this.remove()">
         </div>
-        <div class="card-body">
-            <h2 data-i18n="hiraTitle">ひらがな あそび</h2>
-            <p data-i18n="hiraDesc">ひらがなを楽しく覚えられる子ども向け学習ゲーム。文字を見て・聞いて・答えることで自然に身につきます。</p>
-            <div class="tags">
-                <span class="tag" data-i18n="kidsTag">子ども向け</span>
-                <span class="tag" data-i18n="hiraTag">ひらがな</span>
-                <span class="tag" data-i18n="eduTag">知育</span>
-            </div>
-            <a class="card-btn btn-play" href="https://pndshch.github.io/hiragana-game/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-thumb thumb-hiragana">
-            <span class="thumb-emoji">🌀</span>
-            <img class="thumb-gif" src="assets/hiragana-maze.gif" alt="" onerror="this.remove()">
-        </div>
-        <div class="card-body">
-            <h2 data-i18n="mazeTitle">ひらがな迷路</h2>
-            <p data-i18n="mazeDesc">ひらがなをたどって出口を目指す迷路ゲーム。文字を読みながら進むことで、自然と読み方が身につきます。</p>
-            <div class="tags">
-                <span class="tag" data-i18n="kidsTag">子ども向け</span>
-                <span class="tag" data-i18n="hiraTag">ひらがな</span>
-                <span class="tag" data-i18n="mazeTag">迷路</span>
-            </div>
-            <a class="card-btn btn-play" href="https://pndshch.github.io/hiragana-maze/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-thumb thumb-hiragana">
-            <span class="thumb-emoji">🚀</span>
-            <img class="thumb-gif" src="assets/hiragana-shooter.gif" alt="" onerror="this.remove()">
-        </div>
-        <div class="card-body">
-            <h2 data-i18n="shooterTitle">ひらがなシューター</h2>
-            <p data-i18n="shooterDesc">ロケットを動かして、降ってくるひらがなを撃ち落とすシューティングゲーム。文字を見て音を聞いて、遊びながら読み方が身につきます。</p>
-            <div class="tags">
-                <span class="tag" data-i18n="kidsTag">子ども向け</span>
-                <span class="tag" data-i18n="hiraTag">ひらがな</span>
-                <span class="tag" data-i18n="shooterTag">シューティング</span>
-            </div>
-            <a class="card-btn btn-play" href="https://pndshch.github.io/hiragana-shooter/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-thumb thumb-quantum">
+            <span class="feat-title" data-i18n="hiraTitle">ひらがな あそび</span>
+        </a>
+        <a class="feat-card" href="https://pndshch.github.io/health-td/" target="_blank">
+            <div class="card-thumb thumb-healthtd">
             <span class="new-badge" data-i18n="newBadge">NEW</span>
-            <span class="thumb-emoji">⚛️</span>
-            <img class="thumb-gif" src="assets/quantum-jump.gif" alt="" onerror="this.remove()">
+            <span class="thumb-emoji">🛡️</span>
+            <img class="thumb-gif" src="assets/health-td.gif" alt="" onerror="this.remove()">
         </div>
-        <div class="card-body">
-            <h2 data-i18n="quantumTitle">量子パズル</h2>
-            <p data-i18n="quantumDesc">量子力学の世界を体験！量子トンネル・波動関数の収縮・量子もつれを使ってパズルを解く教育ゲーム。10レベルに挑戦しよう。</p>
-            <div class="tags">
-                <span class="tag" data-i18n="quantumTag1">3D</span>
-                <span class="tag" data-i18n="quantumTag2">パズル</span>
-                <span class="tag" data-i18n="quantumTag3">量子力学</span>
-            </div>
-            <a class="card-btn btn-play" href="https://pndshch.github.io/quantum-jump/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-thumb thumb-fastslow">
-            <span class="new-badge" data-i18n="newBadge">NEW</span>
-            <span class="thumb-emoji">🧠</span>
-            <img class="thumb-gif" src="assets/fast-and-slow.gif" alt="" onerror="this.remove()">
-        </div>
-        <div class="card-body">
-            <h2 data-i18n="fastslowTitle">ファストアンドスロー</h2>
-            <p data-i18n="fastslowDesc">カーネマンの名著に基づく認知バイアスチャレンジ。直感(System1)と論理(System2)を切り替えて20問に挑戦！</p>
-            <div class="tags">
-                <span class="tag" data-i18n="fastslowTag1">心理学</span>
-                <span class="tag" data-i18n="fastslowTag2">認知科学</span>
-                <span class="tag" data-i18n="fastslowTag3">教育</span>
-            </div>
-            <a class="card-btn btn-play" href="https://pndshch.github.io/fast-and-slow/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
-        </div>
-    </div>
-</div>
-
-<!-- Fun (silly) -->
-<div class="section-label" data-i18n="secFun">🎪 おもしろ</div>
-<div class="grid">
-    <div class="card">
-        <div class="card-thumb thumb-birthday">
-            <span class="new-badge" data-i18n="newBadge">NEW</span>
-            <span class="thumb-emoji">🎂</span>
-            <img class="thumb-gif" src="assets/birthday-33.gif" alt="" onerror="this.remove()">
-        </div>
-        <div class="card-body">
-            <h2 data-i18n="birthdayTitle">33のキャンドル</h2>
-            <p data-i18n="birthdayDesc">33本のキャンドルが灯る3Dバースデーケーキ。タップして一本ずつ吹き消そう。全部消えたら花火でお祝い！</p>
-            <div class="tags">
-                <span class="tag" data-i18n="birthdayTag1">3D</span>
-                <span class="tag" data-i18n="birthdayTag2">インタラクティブ</span>
-                <span class="tag" data-i18n="birthdayTag3">お祝い</span>
-            </div>
-            <a class="card-btn btn-play" href="https://pndshch.github.io/birthday-33/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-thumb thumb-egg">
-            <span class="new-badge" data-i18n="newBadge">NEW</span>
-            <span class="thumb-emoji">🥚</span>
-        </div>
-        <div class="card-body">
-            <h2 data-i18n="eggTitle">きょうりゅうたまご</h2>
-            <p data-i18n="eggDesc">たまごをタップして孵化!12種類の恐竜をコレクション。コモン・レア・エピック・レジェンドのレアリティ付き。</p>
-            <div class="tags">
-                <span class="tag" data-i18n="kidsTag">子ども向け</span>
-                <span class="tag" data-i18n="eggTag1">コレクション</span>
-                <span class="tag" data-i18n="eggTag2">恐竜</span>
-            </div>
-            <a class="card-btn btn-play" href="https://pndshch.github.io/dino-egg/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-thumb thumb-cat">
-            <span class="thumb-emoji">🐱</span>
-        </div>
-        <div class="card-body">
-            <h2 data-i18n="nekoTitle">ねこすいボタン</h2>
-            <p data-i18n="nekoDesc">ボタンを長おしして ねこを すう なごみアプリ。ねこの しあわせメーターを上げよう。6種類のねこチェンジつき。</p>
-            <div class="tags">
-                <span class="tag" data-i18n="kidsTag">子ども向け</span>
-                <span class="tag" data-i18n="funnyTag">ふざけ</span>
-                <span class="tag" data-i18n="nekoTag1">なごみ</span>
-            </div>
-            <a class="card-btn btn-play" href="https://pndshch.github.io/neko-sui/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-thumb thumb-finger">
-            <span class="thumb-emoji">👑</span>
-        </div>
-        <div class="card-body">
-            <h2 data-i18n="yubiTitle">ゆびおうじゃ</h2>
-            <p data-i18n="yubiDesc">みんなで指を画面につけると、ランダムで王様を決定!4モード(おうさま/おに/順番/チーム分け)。家族・お友達と。</p>
-            <div class="tags">
-                <span class="tag" data-i18n="kidsTag">子ども向け</span>
-                <span class="tag" data-i18n="yubiTag1">パーティ</span>
-                <span class="tag" data-i18n="yubiTag2">マルチタッチ</span>
-            </div>
-            <a class="card-btn btn-play" href="https://pndshch.github.io/yubi-ouja/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-thumb thumb-shiri">
-            <span class="thumb-emoji">🐼</span>
-        </div>
-        <div class="card-body">
-            <h2 data-i18n="shiriTitle">しりとりさん</h2>
-            <p data-i18n="shiriDesc">ぴんだとエンドレスしりとり対決!400語以上の子ども向け語彙を内蔵。れんさ記録もとれる。</p>
-            <div class="tags">
-                <span class="tag" data-i18n="kidsTag">子ども向け</span>
-                <span class="tag" data-i18n="eduTag">知育</span>
-                <span class="tag" data-i18n="shiriTag1">しりとり</span>
-            </div>
-            <a class="card-btn btn-play" href="https://pndshch.github.io/shiritori-san/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-thumb thumb-button">
-            <span class="thumb-emoji">🔘</span>
-        </div>
-        <div class="card-body">
-            <h2 data-i18n="fushigiTitle">ふしぎボタン</h2>
-            <p data-i18n="fushigiDesc">押すたびに何かが起こる、ふしぎなボタン。背景がかわったり、絵文字が降ってきたり、形が変わったり…30種類以上の反応!</p>
-            <div class="tags">
-                <span class="tag" data-i18n="kidsTag">子ども向け</span>
-                <span class="tag" data-i18n="funnyTag">ふざけ</span>
-                <span class="tag" data-i18n="fushigiTag1">連打</span>
-            </div>
-            <a class="card-btn btn-play" href="https://pndshch.github.io/fushigi-button/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-thumb thumb-tree">
-            <span class="thumb-emoji">🌳</span>
-        </div>
-        <div class="card-body">
-            <h2 data-i18n="pyonTitle">ぴょんぴょんき</h2>
-            <p data-i18n="pyonDesc">タップすると木が ぴょん!と跳ねて すこしずつ大きくなる。100回・500回… 育てるほど花や実がついて、伝説の木へ。</p>
-            <div class="tags">
-                <span class="tag" data-i18n="kidsTag">子ども向け</span>
-                <span class="tag" data-i18n="pyonTag1">のんびり</span>
-                <span class="tag" data-i18n="pyonTag2">育成</span>
-            </div>
-            <a class="card-btn btn-play" href="https://pndshch.github.io/pyon-tree/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-thumb thumb-dino">
-            <span class="thumb-emoji">🦖</span>
-        </div>
-        <div class="card-body">
-            <h2 data-i18n="dinoTitle">きょうりゅうずかん</h2>
-            <p data-i18n="dinoDesc">12種類の恐竜の図鑑。時代・大きさ・食べもの・豆知識まで。人間との大きさ比較つき。</p>
-            <div class="tags">
-                <span class="tag" data-i18n="kidsTag">子ども向け</span>
-                <span class="tag" data-i18n="dinoTag1">恐竜</span>
-                <span class="tag" data-i18n="dinoTag2">図鑑</span>
-            </div>
-            <a class="card-btn btn-play" href="https://pndshch.github.io/dino-roar/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-thumb thumb-face">
-            <span class="thumb-emoji">🤡</span>
-        </div>
-        <div class="card-body">
-            <h2 data-i18n="hengaoTitle">へんがおラボ</h2>
-            <p data-i18n="hengaoDesc">ボタンを押すとヘンな顔ができる!目・口・帽子・ほっぺが組み合わさって無限のヘン顔が生まれる。お気に入りはコレクションに保存できるよ。</p>
-            <div class="tags">
-                <span class="tag" data-i18n="kidsTag">子ども向け</span>
-                <span class="tag" data-i18n="hengaoTag1">変顔</span>
-                <span class="tag" data-i18n="hengaoTag2">コレクション</span>
-            </div>
-            <a class="card-btn btn-play" href="https://pndshch.github.io/hengao-lab/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-thumb thumb-gorilla">
-            <span class="thumb-emoji">🦍</span>
-        </div>
-        <div class="card-body">
-            <h2 data-i18n="goriTitle">動物ことば暗号</h2>
-            <p data-i18n="goriDesc">ひらがなを動物のことばに暗号化!ゴリラ/おさる/ねこ/いぬの4種類。デコード機能つきで、友達と秘密のメッセージが送れる。</p>
-            <div class="tags">
-                <span class="tag" data-i18n="kidsTag">子ども向け</span>
-                <span class="tag" data-i18n="goriTag1">暗号</span>
-                <span class="tag" data-i18n="goriTag2">動物</span>
-            </div>
-            <a class="card-btn btn-play" href="https://pndshch.github.io/gorila-go/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-thumb thumb-poop">
-            <span class="thumb-emoji">💩</span>
-        </div>
-        <div class="card-body">
-            <h2 data-i18n="poopTitle">うんち占い</h2>
-            <p data-i18n="poopDesc">きょうの うんち運を チェック!毎日かわる SS〜D ランクと、ラッキーフード・運勢メッセージ。</p>
-            <div class="tags">
-                <span class="tag" data-i18n="kidsTag">子ども向け</span>
-                <span class="tag" data-i18n="poopTag1">うらない</span>
-                <span class="tag" data-i18n="dailyTag">毎日</span>
-            </div>
-            <a class="card-btn btn-play" href="https://pndshch.github.io/unchi-uranai/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
-        </div>
-    </div>
-</div>
-
-<!-- Tools -->
-<div class="section-label" data-i18n="secTools">🔧 ツール</div>
-<div class="grid">
-    <div class="card">
-        <div class="card-thumb thumb-tarot">
-            <span class="new-badge" data-i18n="newBadge">NEW</span>
-            <span class="thumb-emoji">🔮</span>
-        </div>
-        <div class="card-body">
-            <h2 data-i18n="tarotTitle">タロットの意味</h2>
-            <p data-i18n="tarotDesc">プロのタロットリーダー向け 78枚 即時リファレンス。正位置・逆位置・恋愛/仕事/金銭/健康/総合を一度に表示。1枚ドロー&3枚スプレッドつき。</p>
-            <div class="tags">
-                <span class="tag" data-i18n="utilityTag">ツール</span>
-                <span class="tag" data-i18n="tarotTag1">タロット</span>
-                <span class="tag" data-i18n="tarotTag2">占い</span>
-            </div>
-            <a class="card-btn btn-play" href="https://pndshch.github.io/tarot-imi/" target="_blank" data-i18n="useTool">▶ ツールを使う</a>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-thumb thumb-numero">
-            <span class="new-badge" data-i18n="newBadge">NEW</span>
-            <span class="thumb-emoji">🌙</span>
-        </div>
-        <div class="card-body">
-            <h2 data-i18n="numeroTitle">数秘術 占い</h2>
-            <p data-i18n="numeroDesc">生年月日から運命数・誕生日数・個人年数を算出する数秘術アプリ。マスターナンバー(11/22/33)対応で、性格・恋愛・仕事・ラッキー要素まで詳しく表示。プロの占い師にも。</p>
-            <div class="tags">
-                <span class="tag" data-i18n="utilityTag">ツール</span>
-                <span class="tag" data-i18n="numeroTag1">数秘術</span>
-                <span class="tag" data-i18n="numeroTag2">占い</span>
-            </div>
-            <a class="card-btn btn-play" href="https://pndshch.github.io/numerology/" target="_blank" data-i18n="useTool">▶ ツールを使う</a>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-thumb thumb-stone">
-            <span class="new-badge" data-i18n="newBadge">NEW</span>
-            <span class="thumb-emoji">💎</span>
-        </div>
-        <div class="card-body">
-            <h2 data-i18n="stoneTitle">パワーストーンの意味</h2>
-            <p data-i18n="stoneDesc">40種以上のパワーストーンを目的別・チャクラ別・色別に検索できるリファレンス。誕生石・浄化方法・相性つき。プロのヒーラー・占い師にも。</p>
-            <div class="tags">
-                <span class="tag" data-i18n="utilityTag">ツール</span>
-                <span class="tag" data-i18n="stoneTag1">パワーストーン</span>
-                <span class="tag" data-i18n="stoneTag2">ヒーリング</span>
-            </div>
-            <a class="card-btn btn-play" href="https://pndshch.github.io/stone-imi/" target="_blank" data-i18n="useTool">▶ ツールを使う</a>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-thumb thumb-astro">
-            <span class="thumb-emoji">✨</span>
-        </div>
-        <div class="card-body">
-            <h2 data-i18n="astroTitle">西洋占星術の意味</h2>
-            <p data-i18n="astroDesc">12星座・10惑星・12ハウス・5アスペクトの意味を即座に検索できるリファレンス。元素・区分の早見表、誕生日→太陽星座、相性ジャンプ機能つき。</p>
-            <div class="tags">
-                <span class="tag" data-i18n="utilityTag">ツール</span>
-                <span class="tag" data-i18n="astroTag1">占星術</span>
-                <span class="tag" data-i18n="astroTag2">星座</span>
-            </div>
-            <a class="card-btn btn-play" href="https://pndshch.github.io/astro-imi/" target="_blank" data-i18n="useTool">▶ ツールを使う</a>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-thumb thumb-draw">
-            <span class="thumb-emoji">✏️</span>
-        </div>
-        <div class="card-body">
-            <h2 data-i18n="drawTitle">てがきメモ</h2>
-            <p data-i18n="drawDesc">指でもスタイラスでもサッと描けるお絵かき&手書きメモ。8色・4サイズ・けしごむ・元に戻す・PNG保存対応。</p>
-            <div class="tags">
-                <span class="tag" data-i18n="utilityTag">ツール</span>
-                <span class="tag" data-i18n="drawTag1">お絵かき</span>
-                <span class="tag" data-i18n="drawTag2">手書き</span>
-            </div>
-            <a class="card-btn btn-play" href="https://pndshch.github.io/tegaki-memo/" target="_blank" data-i18n="useTool">▶ ツールを使う</a>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-thumb thumb-dice">
-            <span class="thumb-emoji">🎲</span>
-        </div>
-        <div class="card-body">
-            <h2 data-i18n="diceTitle">サイコロボックス</h2>
-            <p data-i18n="diceDesc">d4/d6/d8/d10/d12/d20を最大6個まで同時に振れる多機能サイコロ。ボードゲーム・TRPG・順番決めに。最大値・最小値ハイライトつき。</p>
-            <div class="tags">
-                <span class="tag" data-i18n="utilityTag">ツール</span>
-                <span class="tag" data-i18n="diceTag1">サイコロ</span>
-                <span class="tag" data-i18n="diceTag2">ボードゲーム</span>
-            </div>
-            <a class="card-btn btn-play" href="https://pndshch.github.io/dice-box/" target="_blank" data-i18n="useTool">▶ ツールを使う</a>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-thumb thumb-shop">
-            <span class="thumb-emoji">🛒</span>
-        </div>
-        <div class="card-body">
-            <h2 data-i18n="shopTitle">おかいものメモ</h2>
-            <p data-i18n="shopDesc">タップで追加・タップでチェック。シンプルな買い物リスト。よくかうものプリセット・リスト共有つき。</p>
-            <div class="tags">
-                <span class="tag" data-i18n="utilityTag">ツール</span>
-                <span class="tag" data-i18n="shopTag1">買い物</span>
-                <span class="tag" data-i18n="shopTag2">リスト</span>
-            </div>
-            <a class="card-btn btn-play" href="https://pndshch.github.io/okaimono-memo/" target="_blank" data-i18n="useTool">▶ ツールを使う</a>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-thumb thumb-timer">
-            <span class="thumb-emoji">⏰</span>
-        </div>
-        <div class="card-body">
-            <h2 data-i18n="timerTitle">みえるタイマー</h2>
-            <p data-i18n="timerDesc">のこり時間が円で見える 子ども向けタイマー。お片付け・宿題・歯みがきに。プリセット8種+カスタム時間。</p>
-            <div class="tags">
-                <span class="tag" data-i18n="kidsTag">子ども向け</span>
-                <span class="tag" data-i18n="utilityTag">ツール</span>
-                <span class="tag" data-i18n="timerTag1">タイマー</span>
-            </div>
-            <a class="card-btn btn-play" href="https://pndshch.github.io/mieru-timer/" target="_blank" data-i18n="useTool">▶ ツールを使う</a>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-thumb thumb-qr">
-            <span class="thumb-emoji">📱</span>
-        </div>
-        <div class="card-body">
-            <h2 data-i18n="qrTitle">クイックQR</h2>
-            <p data-i18n="qrDesc">テキストやURLをQRコードに即変換!色変更・サイズ変更・PNG保存・画像コピー対応。WiFi/メール/電話のQRも作れる。</p>
-            <div class="tags">
-                <span class="tag" data-i18n="qrTag1">QR</span>
-                <span class="tag" data-i18n="utilityTag">ツール</span>
-                <span class="tag" data-i18n="qrTag2">PNG保存</span>
-            </div>
-            <a class="card-btn btn-play" href="https://pndshch.github.io/quick-qr/" target="_blank" data-i18n="useTool">▶ ツールを使う</a>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-thumb thumb-mercari">
+            <span class="feat-title" data-i18n="healthtdTitle">免疫タワーディフェンス</span>
+        </a>
+        <a class="feat-card" href="https://pndshch.github.io/merukari-sizer/" target="_blank">
+            <div class="card-thumb thumb-mercari">
             <span class="thumb-emoji">📦</span>
             <img class="thumb-gif" src="assets/mercari-sizer.gif" alt="" onerror="this.remove()">
         </div>
-        <div class="card-body">
-            <h2 data-i18n="merTitle">Mercari Sizer</h2>
-            <p data-i18n="merDesc">カメラで荷物のサイズを計測し、最適なメルカリ便のサイズを自動提案するツール。ブラウザでもiOSでも動作します。</p>
-            <div class="tags">
-                <span class="tag" data-i18n="merTag1">メルカリ</span>
-                <span class="tag" data-i18n="merTag2">サイズ計測</span>
-                <span class="tag" data-i18n="merTag3">iOS / ブラウザ</span>
-            </div>
-            <a class="card-btn btn-play" href="https://pndshch.github.io/merukari-sizer/" target="_blank" data-i18n="tryBrowser">▶ ブラウザで試す</a>
-        </div>
-    </div>
+            <span class="feat-title" data-i18n="merTitle">Mercari Sizer</span>
+        </a>
+</div>
 
+<!-- All apps -->
+<div class="grid" id="app-grid">
+    <div class="grid-header" data-cat-header="kids-play" data-i18n="secGridKidsPlay">🎈 こどもがあそぶ</div>
+    <div class="card" data-cat="kids-play">
+            <div class="card-thumb thumb-choco">
+                <span class="new-badge" data-i18n="newBadge">NEW</span>
+                <span class="thumb-emoji">🍫</span>
+                <img class="thumb-gif" src="assets/choco-bomber.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="chocoTitle">チョコボンバー</h2>
+                <p data-i18n="chocoDesc">たまごをタップしてチョコチップを誕生させよう！チョコチップが大きくなると…どかーん！爆発で近くのたまごも連鎖で割れる。少ないタップで全部割ろう。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="chocoTag1">パズル</span>
+                    <span class="tag" data-i18n="chocoTag2">連鎖</span>
+                    <span class="tag" data-i18n="chocoTag3">どかーん</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/choco-bomber/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
+    <div class="card" data-cat="kids-play">
+            <div class="card-thumb thumb-shuriken">
+                <span class="new-badge" data-i18n="newBadge">NEW</span>
+                <span class="thumb-emoji">🥷</span>
+                <img class="thumb-gif" src="assets/shuriken-master.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="shurikenTitle">手裏剣マスター</h2>
+                <p data-i18n="shurikenDesc">忍者の修行場で手裏剣を投げまくれ！影分身・螺旋丸・写輪眼の3つの忍術で的を破壊。コンボを繋いで高スコアを狙おう。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="shurikenTag1">3D</span>
+                    <span class="tag" data-i18n="shurikenTag2">アクション</span>
+                    <span class="tag" data-i18n="shurikenTag3">忍者</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/shuriken-master/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
+    <div class="card" data-cat="kids-play">
+            <div class="card-thumb thumb-melon">
+                <span class="new-badge" data-i18n="newBadge">NEW</span>
+                <span class="thumb-emoji">🍈</span>
+                <img class="thumb-gif" src="assets/melon-garden.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="melonTitle">花メロン探し</h2>
+                <p data-i18n="melonDesc">花畑に隠れたメロンを見つけよう！花をタップすると、つながったツルが色で教えてくれる。赤＝すぐそば、緑＝遠い。少ないタップで全部見つけて⭐3つを目指せ！</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="melonTag1">3D</span>
+                    <span class="tag" data-i18n="melonTag2">パズル</span>
+                    <span class="tag" data-i18n="melonTag3">タップ</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/melon-garden/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
+    <div class="card" data-cat="kids-play">
+            <div class="card-thumb thumb-strep">
+                <span class="new-badge" data-i18n="newBadge">NEW</span>
+                <span class="thumb-emoji">🦠</span>
+                <img class="thumb-gif" src="assets/strep-buster.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="strepTitle">ようれんきんバスター</h2>
+                <p data-i18n="strepDesc">白血球になって溶連菌を退治するFPSシューティング！Blenderで作った体内3Dステージを駆け巡り、抗生物質を発射して菌を倒そう。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="strepTag1">3D FPS</span>
+                    <span class="tag" data-i18n="strepTag2">シューティング</span>
+                    <span class="tag" data-i18n="strepTag3">Blender</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/strep-buster/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
+    <div class="card" data-cat="kids-play">
+            <div class="card-thumb thumb-okuri">
+                <span class="new-badge" data-i18n="newBadge">NEW</span>
+                <span class="thumb-emoji">🚗</span>
+                <img class="thumb-gif" src="assets/okuri-mukae.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="okuriTitle">おくりむかえ</h2>
+                <p data-i18n="okuriDesc">習い事の送迎をテーマにした3Dドライブゲーム！Blenderで作った街を走り、子どもたちを時間内にピックアップ＆ドロップオフしよう。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="okuriTag1">3D</span>
+                    <span class="tag" data-i18n="okuriTag2">ドライブ</span>
+                    <span class="tag" data-i18n="okuriTag3">Blender</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/okuri-mukae/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
+    <div class="card" data-cat="kids-play">
+            <div class="card-thumb thumb-panpan">
+                <span class="new-badge" data-i18n="newBadge">NEW</span>
+                <span class="thumb-emoji">👖</span>
+                <img class="thumb-gif" src="assets/pocket-panpan.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="panpanTitle">ポケットパンパン</h2>
+                <p data-i18n="panpanDesc">空から降ってくるアイテムをポケットでキャッチ！Blenderで作った3Dステージで左右に動いて、ポケットがパンパンになる前にスコアを稼ごう。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="panpanTag1">3D</span>
+                    <span class="tag" data-i18n="panpanTag2">キャッチ</span>
+                    <span class="tag" data-i18n="panpanTag3">Blender</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/pocket-panpan/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
+    <div class="card" data-cat="kids-play">
+            <div class="card-thumb thumb-birthday">
+                <span class="new-badge" data-i18n="newBadge">NEW</span>
+                <span class="thumb-emoji">🎂</span>
+                <img class="thumb-gif" src="assets/birthday-33.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="birthdayTitle">33のキャンドル</h2>
+                <p data-i18n="birthdayDesc">33本のキャンドルが灯る3Dバースデーケーキ。タップして一本ずつ吹き消そう。全部消えたら花火でお祝い！</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="birthdayTag1">3D</span>
+                    <span class="tag" data-i18n="birthdayTag2">インタラクティブ</span>
+                    <span class="tag" data-i18n="birthdayTag3">お祝い</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/birthday-33/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
+    <div class="card" data-cat="kids-play fortune">
+            <div class="card-thumb thumb-fortune">
+                <span class="new-badge" data-i18n="newBadge">NEW</span>
+                <span class="thumb-emoji">🔮</span>
+                <img class="thumb-gif" src="assets/fortune-mom.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="fortuneTitle">おかあさん占い師</h2>
+                <p data-i18n="fortuneDesc">お母さんが占い師！Blenderで作った神秘的な3D占いの館で、タロット・水晶玉・手相を選んで運勢を占おう。毎回違う結果が出るよ。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="fortuneTag1">3D</span>
+                    <span class="tag" data-i18n="fortuneTag2">占い</span>
+                    <span class="tag" data-i18n="fortuneTag3">Blender</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/fortune-mom/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
+    <div class="card" data-cat="kids-play">
+            <div class="card-thumb thumb-egg">
+                <span class="new-badge" data-i18n="newBadge">NEW</span>
+                <span class="thumb-emoji">🥚</span>
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="eggTitle">きょうりゅうたまご</h2>
+                <p data-i18n="eggDesc">たまごをタップして孵化!12種類の恐竜をコレクション。コモン・レア・エピック・レジェンドのレアリティ付き。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="kidsTag">子ども向け</span>
+                    <span class="tag" data-i18n="eggTag1">コレクション</span>
+                    <span class="tag" data-i18n="eggTag2">恐竜</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/dino-egg/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
+    <div class="card" data-cat="kids-play">
+            <div class="card-thumb thumb-cat">
+                <span class="thumb-emoji">🐱</span>
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="nekoTitle">ねこすいボタン</h2>
+                <p data-i18n="nekoDesc">ボタンを長おしして ねこを すう なごみアプリ。ねこの しあわせメーターを上げよう。6種類のねこチェンジつき。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="kidsTag">子ども向け</span>
+                    <span class="tag" data-i18n="funnyTag">ふざけ</span>
+                    <span class="tag" data-i18n="nekoTag1">なごみ</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/neko-sui/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
+    <div class="card" data-cat="kids-play">
+            <div class="card-thumb thumb-finger">
+                <span class="thumb-emoji">👑</span>
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="yubiTitle">ゆびおうじゃ</h2>
+                <p data-i18n="yubiDesc">みんなで指を画面につけると、ランダムで王様を決定!4モード(おうさま/おに/順番/チーム分け)。家族・お友達と。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="kidsTag">子ども向け</span>
+                    <span class="tag" data-i18n="yubiTag1">パーティ</span>
+                    <span class="tag" data-i18n="yubiTag2">マルチタッチ</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/yubi-ouja/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
+    <div class="card" data-cat="kids-play">
+            <div class="card-thumb thumb-button">
+                <span class="thumb-emoji">🔘</span>
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="fushigiTitle">ふしぎボタン</h2>
+                <p data-i18n="fushigiDesc">押すたびに何かが起こる、ふしぎなボタン。背景がかわったり、絵文字が降ってきたり、形が変わったり…30種類以上の反応!</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="kidsTag">子ども向け</span>
+                    <span class="tag" data-i18n="funnyTag">ふざけ</span>
+                    <span class="tag" data-i18n="fushigiTag1">連打</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/fushigi-button/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
+    <div class="card" data-cat="kids-play">
+            <div class="card-thumb thumb-tree">
+                <span class="thumb-emoji">🌳</span>
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="pyonTitle">ぴょんぴょんき</h2>
+                <p data-i18n="pyonDesc">タップすると木が ぴょん!と跳ねて すこしずつ大きくなる。100回・500回… 育てるほど花や実がついて、伝説の木へ。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="kidsTag">子ども向け</span>
+                    <span class="tag" data-i18n="pyonTag1">のんびり</span>
+                    <span class="tag" data-i18n="pyonTag2">育成</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/pyon-tree/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
+    <div class="card" data-cat="kids-play">
+            <div class="card-thumb thumb-face">
+                <span class="thumb-emoji">🤡</span>
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="hengaoTitle">へんがおラボ</h2>
+                <p data-i18n="hengaoDesc">ボタンを押すとヘンな顔ができる!目・口・帽子・ほっぺが組み合わさって無限のヘン顔が生まれる。お気に入りはコレクションに保存できるよ。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="kidsTag">子ども向け</span>
+                    <span class="tag" data-i18n="hengaoTag1">変顔</span>
+                    <span class="tag" data-i18n="hengaoTag2">コレクション</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/hengao-lab/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
+    <div class="card" data-cat="kids-play fortune">
+            <div class="card-thumb thumb-poop">
+                <span class="thumb-emoji">💩</span>
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="poopTitle">うんち占い</h2>
+                <p data-i18n="poopDesc">きょうの うんち運を チェック!毎日かわる SS〜D ランクと、ラッキーフード・運勢メッセージ。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="kidsTag">子ども向け</span>
+                    <span class="tag" data-i18n="poopTag1">うらない</span>
+                    <span class="tag" data-i18n="dailyTag">毎日</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/unchi-uranai/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
+    <div class="grid-header" data-cat-header="kids-learn" data-i18n="secGridKidsLearn">📖 こどもがまなぶ</div>
+    <div class="card" data-cat="kids-learn">
+            <div class="card-thumb thumb-hiragana">
+                <span class="thumb-emoji">🌸</span>
+                <img class="thumb-gif" src="assets/hiragana-game.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="hiraTitle">ひらがな あそび</h2>
+                <p data-i18n="hiraDesc">ひらがなを楽しく覚えられる子ども向け学習ゲーム。文字を見て・聞いて・答えることで自然に身につきます。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="kidsTag">子ども向け</span>
+                    <span class="tag" data-i18n="hiraTag">ひらがな</span>
+                    <span class="tag" data-i18n="eduTag">知育</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/hiragana-game/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
+    <div class="card" data-cat="kids-learn">
+            <div class="card-thumb thumb-keisan">
+                <span class="new-badge" data-i18n="newBadge">NEW</span>
+                <span class="thumb-emoji">🐼</span>
+                <img class="thumb-gif" src="assets/1pun-keisan.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="keisanTitle">1分けいさん</h2>
+                <p data-i18n="keisanDesc">1分間でなんもん解けるかな?たし算・ひき算・かけ算をリズムよく練習できる、子ども向けのシンプルな計算ドリル。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="kidsTag">子ども向け</span>
+                    <span class="tag" data-i18n="keisanTag1">けいさん</span>
+                    <span class="tag" data-i18n="keisanTag2">1分</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/1pun-keisan/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
+    <div class="card" data-cat="kids-learn">
+            <div class="card-thumb thumb-hiragana">
+                <span class="thumb-emoji">🌀</span>
+                <img class="thumb-gif" src="assets/hiragana-maze.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="mazeTitle">ひらがな迷路</h2>
+                <p data-i18n="mazeDesc">ひらがなをたどって出口を目指す迷路ゲーム。文字を読みながら進むことで、自然と読み方が身につきます。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="kidsTag">子ども向け</span>
+                    <span class="tag" data-i18n="hiraTag">ひらがな</span>
+                    <span class="tag" data-i18n="mazeTag">迷路</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/hiragana-maze/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
+    <div class="card" data-cat="kids-learn">
+            <div class="card-thumb thumb-hiragana">
+                <span class="thumb-emoji">🚀</span>
+                <img class="thumb-gif" src="assets/hiragana-shooter.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="shooterTitle">ひらがなシューター</h2>
+                <p data-i18n="shooterDesc">ロケットを動かして、降ってくるひらがなを撃ち落とすシューティングゲーム。文字を見て音を聞いて、遊びながら読み方が身につきます。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="kidsTag">子ども向け</span>
+                    <span class="tag" data-i18n="hiraTag">ひらがな</span>
+                    <span class="tag" data-i18n="shooterTag">シューティング</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/hiragana-shooter/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
+    <div class="card" data-cat="kids-learn">
+            <div class="card-thumb thumb-dots">
+                <span class="thumb-emoji">✏️</span>
+                <img class="thumb-gif" src="assets/tentsunagi.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="dotsTitle">てんつなぎ</h2>
+                <p data-i18n="dotsDesc">点と点をつないで絵を完成させる、子ども向けのシンプルなゲーム。タブレット・スマホでも快適に遊べます。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="kidsTag">子ども向け</span>
+                    <span class="tag" data-i18n="eduTag">知育</span>
+                    <span class="tag" data-i18n="puzzleTag">パズル</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/tentsunagi/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
+    <div class="card" data-cat="kids-learn kids-play">
+            <div class="card-thumb thumb-shiri">
+                <span class="thumb-emoji">🐼</span>
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="shiriTitle">しりとりさん</h2>
+                <p data-i18n="shiriDesc">ぴんだとエンドレスしりとり対決!400語以上の子ども向け語彙を内蔵。れんさ記録もとれる。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="kidsTag">子ども向け</span>
+                    <span class="tag" data-i18n="eduTag">知育</span>
+                    <span class="tag" data-i18n="shiriTag1">しりとり</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/shiritori-san/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
+    <div class="card" data-cat="kids-learn kids-play">
+            <div class="card-thumb thumb-dino">
+                <span class="thumb-emoji">🦖</span>
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="dinoTitle">きょうりゅうずかん</h2>
+                <p data-i18n="dinoDesc">12種類の恐竜の図鑑。時代・大きさ・食べもの・豆知識まで。人間との大きさ比較つき。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="kidsTag">子ども向け</span>
+                    <span class="tag" data-i18n="dinoTag1">恐竜</span>
+                    <span class="tag" data-i18n="dinoTag2">図鑑</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/dino-roar/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
+    <div class="card" data-cat="kids-learn kids-play">
+            <div class="card-thumb thumb-gorilla">
+                <span class="thumb-emoji">🦍</span>
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="goriTitle">動物ことば暗号</h2>
+                <p data-i18n="goriDesc">ひらがなを動物のことばに暗号化!ゴリラ/おさる/ねこ/いぬの4種類。デコード機能つきで、友達と秘密のメッセージが送れる。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="kidsTag">子ども向け</span>
+                    <span class="tag" data-i18n="goriTag1">暗号</span>
+                    <span class="tag" data-i18n="goriTag2">動物</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/gorila-go/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
+    <div class="grid-header" data-cat-header="games" data-i18n="secGridGames">🎮 ゲーム</div>
+    <div class="card" data-cat="games">
+            <div class="card-thumb thumb-city">
+                <span class="new-badge" data-i18n="newBadge">NEW</span>
+                <span class="thumb-emoji">🏙️</span>
+                <img class="thumb-gif" src="assets/city-drive.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="cityTitle">City Drive</h2>
+                <p data-i18n="cityDesc">Blenderで作った3Dの街を自由にドライブ！三人称・ドライバー・俯瞰の3視点を切り替えて、ビル・街路樹・街灯が並ぶ街を走り抜けよう。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="cityTag1">3D</span>
+                    <span class="tag" data-i18n="cityTag2">ドライブ</span>
+                    <span class="tag" data-i18n="cityTag3">Blender</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/city-drive/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
+    <div class="card" data-cat="games">
+            <div class="card-thumb thumb-fruit">
+                <span class="thumb-emoji">🍓</span>
+                <img class="thumb-gif" src="assets/fruit-drop-ai.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="fruitTitle">Fruit Drop AI</h2>
+                <p data-i18n="fruitDesc">フルーツを落として同種を合体させる物理ゲーム。遺伝的アルゴリズムがリアルタイムで学習し、AIが上達していく様子を観察できます。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="fruitTag1">物理演算</span>
+                    <span class="tag" data-i18n="fruitTag2">AI学習</span>
+                    <span class="tag" data-i18n="fruitTag3">遺伝的アルゴリズム</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/fruit-drop-ai/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
+    <div class="card" data-cat="games">
+            <div class="card-thumb thumb-rugby">
+                <span class="new-badge" data-i18n="newBadge">NEW</span>
+                <span class="thumb-emoji">🏉</span>
+                <img class="thumb-gif" src="assets/rugby-try.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="rugbyTitle">青天トライ</h2>
+                <p data-i18n="rugbyDesc">青空の下でトライを決めろ！Blenderで作った3Dラグビーフィールドを駆け抜け、ディフェンダーをかわしてゴールラインを目指すランナーゲーム。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="rugbyTag1">3D</span>
+                    <span class="tag" data-i18n="rugbyTag2">ラグビー</span>
+                    <span class="tag" data-i18n="rugbyTag3">Blender</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/rugby-try/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
+    <div class="card" data-cat="games">
+            <div class="card-thumb thumb-healthtd">
+                <span class="new-badge" data-i18n="newBadge">NEW</span>
+                <span class="thumb-emoji">🛡️</span>
+                <img class="thumb-gif" src="assets/health-td.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="healthtdTitle">免疫タワーディフェンス</h2>
+                <p data-i18n="healthtdDesc">ウイルスや悪玉菌が体に侵入してくる！ビタミンC・白血球・ブロッコリーなど健康タワーを設置して15Waveを生き抜け。アップグレードで免疫力MAX！</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="healthtdTag1">3D</span>
+                    <span class="tag" data-i18n="healthtdTag2">タワーディフェンス</span>
+                    <span class="tag" data-i18n="healthtdTag3">健康</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/health-td/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
+    <div class="card" data-cat="games">
+            <div class="card-thumb thumb-aitodai">
+                <span class="new-badge" data-i18n="newBadge">NEW</span>
+                <span class="thumb-emoji">🧠</span>
+                <img class="thumb-gif" src="assets/ai-vs-todai.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="aitodaiTitle">AI vs 東大</h2>
+                <p data-i18n="aitodaiDesc">人間の知力でAIに勝てるか？3Dステージで繰り広げるクイズバトル！数学・科学・言語など幅広い問題に挑戦。制限時間内に正解してAIを打ち負かそう。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="aitodaiTag1">3D</span>
+                    <span class="tag" data-i18n="aitodaiTag2">クイズ</span>
+                    <span class="tag" data-i18n="aitodaiTag3">AI対戦</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/ai-vs-todai/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
+    <div class="card" data-cat="games">
+            <div class="card-thumb thumb-yen">
+                <span class="new-badge" data-i18n="newBadge">NEW</span>
+                <span class="thumb-emoji">💴</span>
+                <img class="thumb-gif" src="assets/yen-defender.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="yenTitle">円を守れ！</h2>
+                <p data-i18n="yenDesc">円安から日本円を守れ！落ちてくる外貨をシールドで弾き返して為替レートを安定させる3Dディフェンスゲーム。コンボを繋げてハイスコアを目指そう。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="yenTag1">3D</span>
+                    <span class="tag" data-i18n="yenTag2">ディフェンス</span>
+                    <span class="tag" data-i18n="yenTag3">為替</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/yen-defender/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
+    <div class="card" data-cat="games">
+            <div class="card-thumb thumb-gwrain">
+                <span class="new-badge" data-i18n="newBadge">NEW</span>
+                <span class="thumb-emoji">🌧️</span>
+                <img class="thumb-gif" src="assets/gw-rain-runner.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="gwrainTitle">GW雨よけランナー</h2>
+                <p data-i18n="gwrainDesc">ゴールデンウィークの大雨を避けろ！巨大な雨粒をかわし、水たまりを飛び越え、傘を拾って走り抜ける3Dエンドレスランナー。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="gwrainTag1">3D</span>
+                    <span class="tag" data-i18n="gwrainTag2">ランナー</span>
+                    <span class="tag" data-i18n="gwrainTag3">GW</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/gw-rain-runner/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
+    <div class="card" data-cat="games">
+            <div class="card-thumb thumb-yamiichi">
+                <span class="new-badge" data-i18n="newBadge">NEW</span>
+                <span class="thumb-emoji">🏪</span>
+                <img class="thumb-gif" src="assets/yamiichi.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="yamiichiTitle">ヤミイチ</h2>
+                <p data-i18n="yamiichiDesc">戦後闇市の屋台主になれ！客の頭上の吹き出しを見て、正しい商品をドラッグで渡せ。素早く正解でボーナス — 60秒で何円稼げる？</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="yamiichiTag1">3D</span>
+                    <span class="tag" data-i18n="yamiichiTag2">ドラッグ</span>
+                    <span class="tag" data-i18n="yamiichiTag3">タイムアタック</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/yamiichi/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
+    <div class="card" data-cat="games">
+            <div class="card-thumb thumb-capitalism">
+                <span class="new-badge" data-i18n="newBadge">NEW</span>
+                <span class="thumb-emoji">💰</span>
+                <img class="thumb-gif" src="assets/capitalism-sim.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="capitalismTitle">格差パニック</h2>
+                <p data-i18n="capitalismDesc">Plinkoボードで資本主義の富の分配を可視化。規制・税制をリアルタイムに操作して、ジニ係数の変化を観察しよう。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="capitalismTag1">シミュレーション</span>
+                    <span class="tag" data-i18n="capitalismTag2">経済学</span>
+                    <span class="tag" data-i18n="capitalismTag3">Plinko</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/capitalism-sim/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
+    <div class="card" data-cat="games">
+            <div class="card-thumb thumb-quantum">
+                <span class="new-badge" data-i18n="newBadge">NEW</span>
+                <span class="thumb-emoji">⚛️</span>
+                <img class="thumb-gif" src="assets/quantum-jump.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="quantumTitle">量子パズル</h2>
+                <p data-i18n="quantumDesc">量子力学の世界を体験！量子トンネル・波動関数の収縮・量子もつれを使ってパズルを解く教育ゲーム。10レベルに挑戦しよう。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="quantumTag1">3D</span>
+                    <span class="tag" data-i18n="quantumTag2">パズル</span>
+                    <span class="tag" data-i18n="quantumTag3">量子力学</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/quantum-jump/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
+    <div class="card" data-cat="games">
+            <div class="card-thumb thumb-fastslow">
+                <span class="new-badge" data-i18n="newBadge">NEW</span>
+                <span class="thumb-emoji">🧠</span>
+                <img class="thumb-gif" src="assets/fast-and-slow.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="fastslowTitle">ファストアンドスロー</h2>
+                <p data-i18n="fastslowDesc">カーネマンの名著に基づく認知バイアスチャレンジ。直感(System1)と論理(System2)を切り替えて20問に挑戦！</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="fastslowTag1">心理学</span>
+                    <span class="tag" data-i18n="fastslowTag2">認知科学</span>
+                    <span class="tag" data-i18n="fastslowTag3">教育</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/fast-and-slow/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
+    <div class="grid-header" data-cat-header="fortune" data-i18n="secGridFortune">🔮 うらない</div>
+    <div class="card" data-cat="fortune">
+            <div class="card-thumb thumb-tarot">
+                <span class="new-badge" data-i18n="newBadge">NEW</span>
+                <span class="thumb-emoji">🔮</span>
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="tarotTitle">タロットの意味</h2>
+                <p data-i18n="tarotDesc">プロのタロットリーダー向け 78枚 即時リファレンス。正位置・逆位置・恋愛/仕事/金銭/健康/総合を一度に表示。1枚ドロー&3枚スプレッドつき。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="utilityTag">ツール</span>
+                    <span class="tag" data-i18n="tarotTag1">タロット</span>
+                    <span class="tag" data-i18n="tarotTag2">占い</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/tarot-imi/" target="_blank" data-i18n="useTool">▶ ツールを使う</a>
+            </div>
+        </div>
+    <div class="card" data-cat="fortune">
+            <div class="card-thumb thumb-numero">
+                <span class="new-badge" data-i18n="newBadge">NEW</span>
+                <span class="thumb-emoji">🌙</span>
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="numeroTitle">数秘術 占い</h2>
+                <p data-i18n="numeroDesc">生年月日から運命数・誕生日数・個人年数を算出する数秘術アプリ。マスターナンバー(11/22/33)対応で、性格・恋愛・仕事・ラッキー要素まで詳しく表示。プロの占い師にも。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="utilityTag">ツール</span>
+                    <span class="tag" data-i18n="numeroTag1">数秘術</span>
+                    <span class="tag" data-i18n="numeroTag2">占い</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/numerology/" target="_blank" data-i18n="useTool">▶ ツールを使う</a>
+            </div>
+        </div>
+    <div class="card" data-cat="fortune">
+            <div class="card-thumb thumb-stone">
+                <span class="new-badge" data-i18n="newBadge">NEW</span>
+                <span class="thumb-emoji">💎</span>
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="stoneTitle">パワーストーンの意味</h2>
+                <p data-i18n="stoneDesc">40種以上のパワーストーンを目的別・チャクラ別・色別に検索できるリファレンス。誕生石・浄化方法・相性つき。プロのヒーラー・占い師にも。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="utilityTag">ツール</span>
+                    <span class="tag" data-i18n="stoneTag1">パワーストーン</span>
+                    <span class="tag" data-i18n="stoneTag2">ヒーリング</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/stone-imi/" target="_blank" data-i18n="useTool">▶ ツールを使う</a>
+            </div>
+        </div>
+    <div class="card" data-cat="fortune">
+            <div class="card-thumb thumb-astro">
+                <span class="thumb-emoji">✨</span>
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="astroTitle">西洋占星術の意味</h2>
+                <p data-i18n="astroDesc">12星座・10惑星・12ハウス・5アスペクトの意味を即座に検索できるリファレンス。元素・区分の早見表、誕生日→太陽星座、相性ジャンプ機能つき。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="utilityTag">ツール</span>
+                    <span class="tag" data-i18n="astroTag1">占星術</span>
+                    <span class="tag" data-i18n="astroTag2">星座</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/astro-imi/" target="_blank" data-i18n="useTool">▶ ツールを使う</a>
+            </div>
+        </div>
+    <div class="grid-header" data-cat-header="tools" data-i18n="secGridTools">🛠️ くらしでつかう</div>
+    <div class="card" data-cat="tools">
+            <div class="card-thumb thumb-ehmate">
+                <span class="new-badge" data-i18n="newBadge">NEW</span>
+                <span class="thumb-emoji">🏠</span>
+                <img class="thumb-gif" src="assets/english-housemate.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="ehmateTitle">English Housemate</h2>
+                <p data-i18n="ehmateDesc">AIの同居人Alexが英語で話しかけてくる！マイクで返事するか、タイプしてもOK。日本語で答えても英語に直してくれる。自動で会話を始めてくれるから、気づいたら英語を話してる。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="ehmateTag1">英会話</span>
+                    <span class="tag" data-i18n="ehmateTag2">AI</span>
+                    <span class="tag" data-i18n="ehmateTag3">音声</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/english-housemate/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
+    <div class="card" data-cat="tools kids-play">
+            <div class="card-thumb thumb-timer">
+                <span class="thumb-emoji">⏰</span>
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="timerTitle">みえるタイマー</h2>
+                <p data-i18n="timerDesc">のこり時間が円で見える 子ども向けタイマー。お片付け・宿題・歯みがきに。プリセット8種+カスタム時間。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="kidsTag">子ども向け</span>
+                    <span class="tag" data-i18n="utilityTag">ツール</span>
+                    <span class="tag" data-i18n="timerTag1">タイマー</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/mieru-timer/" target="_blank" data-i18n="useTool">▶ ツールを使う</a>
+            </div>
+        </div>
+    <div class="card" data-cat="tools">
+            <div class="card-thumb thumb-shop">
+                <span class="thumb-emoji">🛒</span>
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="shopTitle">おかいものメモ</h2>
+                <p data-i18n="shopDesc">タップで追加・タップでチェック。シンプルな買い物リスト。よくかうものプリセット・リスト共有つき。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="utilityTag">ツール</span>
+                    <span class="tag" data-i18n="shopTag1">買い物</span>
+                    <span class="tag" data-i18n="shopTag2">リスト</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/okaimono-memo/" target="_blank" data-i18n="useTool">▶ ツールを使う</a>
+            </div>
+        </div>
+    <div class="card" data-cat="tools">
+            <div class="card-thumb thumb-draw">
+                <span class="thumb-emoji">✏️</span>
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="drawTitle">てがきメモ</h2>
+                <p data-i18n="drawDesc">指でもスタイラスでもサッと描けるお絵かき&手書きメモ。8色・4サイズ・けしごむ・元に戻す・PNG保存対応。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="utilityTag">ツール</span>
+                    <span class="tag" data-i18n="drawTag1">お絵かき</span>
+                    <span class="tag" data-i18n="drawTag2">手書き</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/tegaki-memo/" target="_blank" data-i18n="useTool">▶ ツールを使う</a>
+            </div>
+        </div>
+    <div class="card" data-cat="tools">
+            <div class="card-thumb thumb-dice">
+                <span class="thumb-emoji">🎲</span>
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="diceTitle">サイコロボックス</h2>
+                <p data-i18n="diceDesc">d4/d6/d8/d10/d12/d20を最大6個まで同時に振れる多機能サイコロ。ボードゲーム・TRPG・順番決めに。最大値・最小値ハイライトつき。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="utilityTag">ツール</span>
+                    <span class="tag" data-i18n="diceTag1">サイコロ</span>
+                    <span class="tag" data-i18n="diceTag2">ボードゲーム</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/dice-box/" target="_blank" data-i18n="useTool">▶ ツールを使う</a>
+            </div>
+        </div>
+    <div class="card" data-cat="tools">
+            <div class="card-thumb thumb-qr">
+                <span class="thumb-emoji">📱</span>
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="qrTitle">クイックQR</h2>
+                <p data-i18n="qrDesc">テキストやURLをQRコードに即変換!色変更・サイズ変更・PNG保存・画像コピー対応。WiFi/メール/電話のQRも作れる。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="qrTag1">QR</span>
+                    <span class="tag" data-i18n="utilityTag">ツール</span>
+                    <span class="tag" data-i18n="qrTag2">PNG保存</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/quick-qr/" target="_blank" data-i18n="useTool">▶ ツールを使う</a>
+            </div>
+        </div>
+    <div class="card" data-cat="tools">
+            <div class="card-thumb thumb-mercari">
+                <span class="thumb-emoji">📦</span>
+                <img class="thumb-gif" src="assets/mercari-sizer.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="merTitle">Mercari Sizer</h2>
+                <p data-i18n="merDesc">カメラで荷物のサイズを計測し、最適なメルカリ便のサイズを自動提案するツール。ブラウザでもiOSでも動作します。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="merTag1">メルカリ</span>
+                    <span class="tag" data-i18n="merTag2">サイズ計測</span>
+                    <span class="tag" data-i18n="merTag3">iOS / ブラウザ</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/merukari-sizer/" target="_blank" data-i18n="tryBrowser">▶ ブラウザで試す</a>
+            </div>
+        </div>
 </div>
 
 <!-- Footer -->
@@ -1084,6 +1191,18 @@ const I18N = {
         secEdu:   "📚 教育・知育",
         secFun:   "🎪 おもしろ",
         secTools: "🔧 ツール",
+        catAll: "すべて",
+        catKidsPlay: "🎈 こどもがあそぶ",
+        catKidsLearn: "📖 こどもがまなぶ",
+        catGames: "🎮 ゲーム",
+        catFortune: "🔮 うらない",
+        catTools: "🛠️ くらしでつかう",
+        secFeatured: "⭐ おすすめ",
+        secGridKidsPlay: "🎈 こどもがあそぶ",
+        secGridKidsLearn: "📖 こどもがまなぶ",
+        secGridGames: "🎮 ゲーム",
+        secGridFortune: "🔮 うらない",
+        secGridTools: "🛠️ くらしでつかう",
         dailyTag: "毎日",
         poopTitle: "うんち占い",
         poopDesc:  "きょうの うんち運を チェック!毎日かわる SS〜D ランクと、ラッキーフード・運勢メッセージ。",
@@ -1242,6 +1361,18 @@ const I18N = {
         secEdu:    "📚 Education",
         secFun:    "🎪 Fun",
         secTools:  "🔧 Tools",
+        catAll: "All",
+        catKidsPlay: "🎈 Kids Play",
+        catKidsLearn: "📖 Kids Learn",
+        catGames: "🎮 Games",
+        catFortune: "🔮 Fortune",
+        catTools: "🛠️ Life Tools",
+        secFeatured: "⭐ Featured",
+        secGridKidsPlay: "🎈 Kids Play",
+        secGridKidsLearn: "📖 Kids Learn",
+        secGridGames: "🎮 Games",
+        secGridFortune: "🔮 Fortune",
+        secGridTools: "🛠️ Life Tools",
         dailyTag:  "Daily",
         poopTitle: "Poop Fortune",
         poopDesc:  "Check today's poop fortune! Daily SS–D ranking with lucky food and fortune message.",
@@ -1416,6 +1547,45 @@ document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.addEventListener('click', () => applyLang(btn.dataset.lang));
 });
 
+
+// ── Category filter ──
+function filterCards(cat) {
+    const grid = document.getElementById('app-grid');
+    const cards = grid.querySelectorAll('.card');
+    const headers = grid.querySelectorAll('.grid-header');
+
+    cards.forEach(card => {
+        const cardCats = (card.getAttribute('data-cat') || '').split(' ');
+        const show = cat === 'all' || cardCats.includes(cat);
+        card.classList.toggle('cat-hidden', !show);
+    });
+
+    // Show/hide section sub-headers
+    headers.forEach(h => {
+        if (cat === 'all') {
+            h.style.display = '';
+        } else {
+            // Show header only if it matches the selected category
+            h.style.display = h.dataset.catHeader === cat ? '' : 'none';
+        }
+    });
+
+    // Update active button
+    document.querySelectorAll('.cat-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.cat === cat);
+    });
+
+    // Update URL
+    const url = new URL(window.location);
+    if (cat === 'all') url.searchParams.delete('cat');
+    else url.searchParams.set('cat', cat);
+    history.replaceState(null, '', url);
+}
+
+document.querySelectorAll('.cat-btn').forEach(btn => {
+    btn.addEventListener('click', () => filterCards(btn.dataset.cat));
+});
+
 (function init() {
     let lang = null;
     try { lang = localStorage.getItem('pl-lang'); } catch (e) {}
@@ -1424,6 +1594,10 @@ document.querySelectorAll('.lang-btn').forEach(btn => {
         lang = nav.startsWith('ja') ? 'ja' : 'en';
     }
     applyLang(lang);
+    // Init category filter from URL
+    const params = new URL(window.location).searchParams;
+    const cat = params.get('cat') || 'all';
+    if (cat !== 'all') filterCards(cat);
 })();
 </script>
 
