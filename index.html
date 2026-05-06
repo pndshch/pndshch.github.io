@@ -207,6 +207,7 @@ header p {
 .thumb-nihilist   { background: linear-gradient(135deg, #0a0e1a 0%, #141830 100%); }
 .thumb-doomscroll { background: linear-gradient(135deg, #2a0a14 0%, #1a0d2a 100%); }
 .thumb-ninth      { background: linear-gradient(135deg, #1a0e04 0%, #2a1608 50%, #0a0603 100%); }
+.thumb-ricecooker { background: linear-gradient(135deg, #2a1608 0%, #5a3818 50%, #1a0f04 100%); }
 
 .card-body {
     padding: 18px 20px 22px;
@@ -410,6 +411,14 @@ footer a:hover { color: #e6edf3; }
 <!-- Featured -->
 <div class="section-label" data-i18n="secFeatured">⭐ おすすめ</div>
 <div class="feat-row">
+        <a class="feat-card" href="https://pndshch.github.io/ricecooker-1946/" target="_blank">
+            <div class="card-thumb thumb-ricecooker">
+            <span class="new-badge" data-i18n="newBadge">NEW</span>
+            <span class="thumb-emoji">🍚</span>
+            <img class="thumb-gif" src="assets/ricecooker-1946.gif" alt="" onerror="this.remove()">
+        </div>
+            <span class="feat-title" data-i18n="ricecookerTitle">電気釜1946</span>
+        </a>
         <a class="feat-card" href="https://pndshch.github.io/ninth-1824/" target="_blank">
             <div class="card-thumb thumb-ninth">
             <span class="new-badge" data-i18n="newBadge">NEW</span>
@@ -866,6 +875,23 @@ footer a:hover { color: #e6edf3; }
             </div>
         </div>
     <div class="grid-header" data-cat-header="games" data-i18n="secGridGames">🎮 ゲーム</div>
+    <div class="card" data-cat="games">
+            <div class="card-thumb thumb-ricecooker">
+                <span class="new-badge" data-i18n="newBadge">NEW</span>
+                <span class="thumb-emoji">🍚</span>
+                <img class="thumb-gif" src="assets/ricecooker-1946.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="ricecookerTitle">電気釜1946</h2>
+                <p data-i18n="ricecookerDesc">1946年5月7日、ソニー（東京通信工業）が産声を上げた日。最初の製品は『米が炊けない電気釜』だった。配給米はバラバラ、電気は不安定、電極は腐食する——あなたも井深になり、失敗を重ねる。6回失敗すると現れる『ひらめく』ボタンは、この80年がそこから始まったことを教えてくれる、3分間のピボット体験。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="ricecookerTag1">歴史</span>
+                    <span class="tag" data-i18n="ricecookerTag2">ピボット</span>
+                    <span class="tag" data-i18n="ricecookerTag3">創業80周年</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/ricecooker-1946/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
     <div class="card" data-cat="games">
             <div class="card-thumb thumb-ninth">
                 <span class="new-badge" data-i18n="newBadge">NEW</span>
@@ -1638,6 +1664,9 @@ const I18N = {
         ninthTitle: "沈黙の第九",
         ninthDesc: "1824年5月7日、ベートーヴェンは聴覚を失ったまま交響曲第9番の初演を指揮した。最終楽章が終わってもなお気づかず指揮を続けた彼を、ソプラノが振り向かせた——。あなたも音のない世界で指揮を執り、最後の瞬間に初めて『歓喜の歌』を聴く、3分の追体験。",
         ninthTag1: "歴史", ninthTag2: "音楽", ninthTag3: "沈黙の体験",
+        ricecookerTitle: "電気釜1946",
+        ricecookerDesc:  "1946年5月7日、ソニー（東京通信工業）が産声を上げた日。最初の製品は『米が炊けない電気釜』だった。配給米はバラバラ、電気は不安定、電極は腐食する——あなたも井深になり、失敗を重ねる。6回失敗すると現れる『ひらめく』ボタンは、この80年がそこから始まったことを教えてくれる、3分間のピボット体験。",
+        ricecookerTag1: "歴史", ricecookerTag2: "ピボット", ricecookerTag3: "創業80周年",
     },
     en: {
         tagline:   "Games · Education · Tools — delivered via browser and apps",
@@ -1848,6 +1877,9 @@ const I18N = {
         ninthTitle: "The Silent Ninth",
         ninthDesc: "May 7, 1824. Beethoven, by then completely deaf, conducted the world premiere of his Ninth Symphony — and kept conducting after the music had stopped, unaware. The contralto Caroline Unger turned him around to face the silent ovation. You take the baton in his place: conduct without hearing, and only at the very end finally hear what you made.",
         ninthTag1: "History", ninthTag2: "Music", ninthTag3: "Silence",
+        ricecookerTitle: "Rice Cooker 1946",
+        ricecookerDesc:  "May 7, 1946. Sony was founded as Tokyo Tsushin Kogyo. Their very first product was a wooden tub with aluminum electrodes — a rice cooker that didn't cook rice. Ration rice varied wildly, electricity was unstable, electrodes corroded. You play Ibuka, fail prototype after prototype. After six failures, a 'PIVOT' button appears. The next 80 years started exactly there. A 3-minute pivot experience.",
+        ricecookerTag1: "History", ricecookerTag2: "Pivot", ricecookerTag3: "Sony @ 80",
     }
 };
 
