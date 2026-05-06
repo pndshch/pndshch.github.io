@@ -204,6 +204,7 @@ header p {
 .thumb-janets    { background: linear-gradient(135deg, #1a1040 0%, #0a0a1a 100%); }
 .thumb-mottainai { background: linear-gradient(135deg, #1a0a2e 0%, #0d0015 100%); }
 .thumb-danceplague { background: linear-gradient(135deg, #2a1a08 0%, #1a0e04 100%); }
+.thumb-nihilist   { background: linear-gradient(135deg, #0a0e1a 0%, #141830 100%); }
 
 .card-body {
     padding: 18px 20px 22px;
@@ -407,6 +408,13 @@ footer a:hover { color: #e6edf3; }
 <!-- Featured -->
 <div class="section-label" data-i18n="secFeatured">⭐ おすすめ</div>
 <div class="feat-row">
+        <a class="feat-card" href="https://pndshch.github.io/nihilist-penguin/" target="_blank">
+            <div class="card-thumb thumb-nihilist">
+            <span class="new-badge" data-i18n="newBadge">NEW</span>
+            <span class="thumb-emoji">🐧</span>
+        </div>
+            <span class="feat-title" data-i18n="nihilistTitle">虚無ペンギン</span>
+        </a>
         <a class="feat-card" href="https://pndshch.github.io/dancing-plague-1518/" target="_blank">
             <div class="card-thumb thumb-danceplague">
             <span class="new-badge" data-i18n="newBadge">NEW</span>
@@ -841,6 +849,22 @@ footer a:hover { color: #e6edf3; }
             </div>
         </div>
     <div class="grid-header" data-cat-header="games" data-i18n="secGridGames">🎮 ゲーム</div>
+    <div class="card" data-cat="games">
+            <div class="card-thumb thumb-nihilist">
+                <span class="new-badge" data-i18n="newBadge">NEW</span>
+                <span class="thumb-emoji">🐧</span>
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="nihilistTitle">虚無ペンギン</h2>
+                <p data-i18n="nihilistDesc">2026年最大のミーム「虚無ペンギン」。群れを離れ、ひとり山へ向かったペンギンとなり、哲学的な選択を重ねる瞑想的ジャーニーゲーム。群れから離れるのは勇気か、愚かさか——あなたが決める。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="nihilistTag1">ミーム</span>
+                    <span class="tag" data-i18n="nihilistTag2">哲学</span>
+                    <span class="tag" data-i18n="nihilistTag3">瞑想ゲーム</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/nihilist-penguin/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
     <div class="card" data-cat="games">
             <div class="card-thumb thumb-danceplague">
                 <span class="new-badge" data-i18n="newBadge">NEW</span>
@@ -1549,6 +1573,9 @@ const I18N = {
         janetsTitle: "ジャネーの法則",
         janetsDesc:  "80年の人生を数分で体感。光る記憶のかけらを集めながら、歳をとるほど時間が加速していく——1897年の心理学法則を体で知る。あなたの人生の「密度」はどこにある？",
         janetsTag1: "心理学", janetsTag2: "時間知覚", janetsTag3: "体感ゲーム",
+        nihilistTitle: "虚無ペンギン",
+        nihilistDesc: "2026年最大のミーム「虚無ペンギン」。群れを離れ、ひとり山へ向かったペンギンとなり、哲学的な選択を重ねる瞑想的ジャーニーゲーム。群れから離れるのは勇気か、愚かさか——あなたが決める。",
+        nihilistTag1: "ミーム", nihilistTag2: "哲学", nihilistTag3: "瞑想ゲーム",
         danceplagueTitle: "踊り病 1518",
         danceplagueDesc: "1518年ストラスブール。一人の女性が踊り始め、やがて400人に——。街の長として施策を打つが、「もっと踊らせれば治る」という当局の判断は事態を悪化させた。症状と根本原因の違いを体感する歴史戦略シミュレーション。",
         danceplagueTag1: "歴史", danceplagueTag2: "社会伝染", danceplagueTag3: "戦略",
@@ -1750,6 +1777,9 @@ const I18N = {
         janetsTitle: "Janet's Law",
         janetsDesc:  "Experience 80 years of life in minutes. Catch glowing memory fragments as time accelerates with age — a 1897 psychology law you feel in your bones. Where does the density of your life lie?",
         janetsTag1: "Psychology", janetsTag2: "Time Perception", janetsTag3: "Experiential",
+        nihilistTitle: "Nihilist Penguin",
+        nihilistDesc: "2026's biggest viral meme. Become the penguin that left its colony and walked alone toward the mountains. A meditative journey game of philosophical choices. Is leaving the flock courage or folly — you decide.",
+        nihilistTag1: "Meme", nihilistTag2: "Philosophy", nihilistTag3: "Meditative",
         danceplagueTitle: "The Dancing Plague 1518",
         danceplagueDesc: "Strasbourg, 1518. A woman begins to dance, and soon 400 follow. As the city elder, you enact policies — but the authorities' plan to 'let them dance it out' backfires catastrophically. A historical strategy sim about treating root causes vs. symptoms.",
         danceplagueTag1: "History", danceplagueTag2: "Social Contagion", danceplagueTag3: "Strategy",
