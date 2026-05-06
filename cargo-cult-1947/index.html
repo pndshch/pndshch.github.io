@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>貨物神1947 — Cargo Cult 1947</title>
+<meta name="description" content="戦後タンナ島の儀式長として、空からの贈り物を呼び戻そうとする思考実験ゲーム。Feynmanの「カーゴカルト科学」を体験する3分。">
+<meta property="og:title" content="貨物神1947 — Cargo Cult 1947">
+<meta property="og:description" content="儀式は本当に飛行機を呼んでいたのか? 戦後タンナ島の3分間の思考実験。">
+<meta property="og:type" content="website">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none}
+html,body{height:100%;overflow:hidden;font-family:'Hiragino Sans','Helvetica Neue',Arial,sans-serif;color:#f4e9d8}
+body{background:linear-gradient(180deg,#0e2a3e 0%,#1f5575 25%,#5a93b8 45%,#d4a574 60%,#b8854a 100%);position:relative}
+button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:none}
+
+/* ── Scene (top half) ── */
+#scene{position:absolute;top:0;left:0;right:0;height:48vh;overflow:hidden}
+#sky-light{position:absolute;top:5%;left:50%;transform:translateX(-50%);width:80px;height:80px;border-radius:50%;background:radial-gradient(circle,#fff8e0 30%,#ffd99a 60%,transparent 75%);filter:blur(2px);opacity:.8}
+.cloud{position:absolute;background:rgba(255,255,255,.4);border-radius:50%;filter:blur(6px)}
+.mountain{position:absolute;bottom:32%;width:100%;height:30%;background:linear-gradient(180deg,#3a5a6e 0%,#2a4555 100%);clip-path:polygon(0 100%,15% 60%,28% 80%,45% 35%,60% 70%,75% 45%,88% 75%,100% 50%,100% 100%);opacity:.7}
+.sea{position:absolute;bottom:25%;width:100%;height:14%;background:linear-gradient(180deg,#3a7090 0%,#5a93b8 100%)}
+.sea::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.5),transparent)}
+.beach{position:absolute;bottom:0;width:100%;height:25%;background:linear-gradient(180deg,#d4a574 0%,#b8854a 100%)}
+
+/* the airstrip — improves over time */
+.airstrip{position:absolute;bottom:6%;left:8%;right:8%;height:8px;background:#7a5530;border-radius:1px;transform:perspective(200px) rotateX(60deg);transform-origin:center bottom;transition:all .4s}
+.airstrip.lvl1{background:#8a6038;box-shadow:inset 0 -2px 0 rgba(0,0,0,.2)}
+.airstrip.lvl2{background:#9e7242;height:10px}
+.airstrip.lvl3{background:#b8854a;height:12px;box-shadow:0 0 8px rgba(255,220,150,.3)}
+
+/* control tower — grows with builds */
+.tower{position:absolute;bottom:18%;left:14%;width:14px;background:#8ba87f;border-radius:2px 2px 0 0;transition:height .4s,opacity .4s;border:1px solid #6a8460;height:0;opacity:0}
+.tower-top{position:absolute;top:-8px;left:-4px;right:-4px;height:8px;background:#6a8460;border-radius:2px;display:none}
+.tower.show .tower-top{display:block}
+
+/* fire pit */
+.fire{position:absolute;bottom:7%;right:18%;width:24px;height:0;transition:height .3s,opacity .3s;opacity:0}
+.fire-flame{position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:14px;height:100%;background:radial-gradient(ellipse at 50% 100%,#ffaa3a 0%,#ff6622 50%,#cc3311 80%,transparent 100%);border-radius:50% 50% 30% 30%;animation:flicker .4s ease-in-out infinite alternate}
+@keyframes flicker{from{transform:translateX(-50%) scale(.95,1)}to{transform:translateX(-50%) scale(1.05,1.05)}}
+.fire-pit{position:absolute;bottom:-2px;left:50%;transform:translateX(-50%);width:24px;height:4px;background:#3a2515;border-radius:50%}
+
+/* dancer figure */
+.dancer{position:absolute;bottom:8%;left:50%;transform:translateX(-50%);width:18px;height:32px;display:none}
+.dancer.show{display:block}
+.dancer-head{position:absolute;top:0;left:50%;transform:translateX(-50%);width:8px;height:8px;background:#3a2515;border-radius:50%}
+.dancer-body{position:absolute;top:7px;left:50%;transform:translateX(-50%);width:2px;height:14px;background:#3a2515}
+.dancer-arm{position:absolute;top:9px;left:50%;width:2px;height:10px;background:#3a2515;transform-origin:top center;animation:dance .6s ease-in-out infinite alternate}
+.dancer-arm.l{transform:translateX(-50%) rotate(-40deg)}
+.dancer-arm.r{transform:translateX(-50%) rotate(40deg)}
+.dancer-leg{position:absolute;top:21px;left:50%;width:2px;height:10px;background:#3a2515;transform-origin:top center}
+.dancer-leg.l{transform:translateX(-50%) rotate(-15deg);animation:legL .5s ease-in-out infinite alternate}
+.dancer-leg.r{transform:translateX(-50%) rotate(15deg);animation:legR .5s ease-in-out infinite alternate}
+@keyframes dance{from{transform:translateX(-50%) rotate(-50deg)}to{transform:translateX(-50%) rotate(50deg)}}
+@keyframes legL{from{transform:translateX(-50%) rotate(-25deg)}to{transform:translateX(-50%) rotate(-5deg)}}
+@keyframes legR{from{transform:translateX(-50%) rotate(5deg)}to{transform:translateX(-50%) rotate(25deg)}}
+
+/* falling cargo / ghost plane */
+.cargo-drop{position:absolute;font-size:32px;animation:dropFall 1.6s ease-out forwards;pointer-events:none;z-index:5}
+@keyframes dropFall{0%{transform:translateY(-200%) rotate(-10deg);opacity:0}15%{opacity:1}80%{opacity:1}100%{transform:translateY(100%) rotate(15deg);opacity:0}}
+
+.ghost-plane{position:absolute;top:18%;left:-20%;font-size:24px;opacity:.18;animation:planeAcross 8s linear forwards;pointer-events:none}
+@keyframes planeAcross{from{left:-20%}to{left:120%}}
+
+/* floating text (toasts in scene) */
+.toast{position:absolute;color:#fff8e0;font-size:13px;font-weight:600;text-shadow:0 1px 4px rgba(0,0,0,.6);pointer-events:none;animation:toastUp 1.8s ease-out forwards;white-space:nowrap;z-index:6}
+@keyframes toastUp{0%{transform:translateY(0);opacity:0}15%{opacity:1}100%{transform:translateY(-30px);opacity:0}}
+
+/* ── UI bottom panel ── */
+#ui{position:absolute;bottom:0;left:0;right:0;height:52vh;background:linear-gradient(180deg,rgba(20,15,10,.65) 0%,rgba(15,10,8,.92) 30%);padding:10px 12px 14px;display:flex;flex-direction:column;gap:8px;border-top:1px solid rgba(255,200,140,.2)}
+.bars{display:flex;gap:10px;font-size:11px}
+.bar-wrap{flex:1}
+.bar-label{display:flex;justify-content:space-between;color:#c8b89a;letter-spacing:.5px;margin-bottom:3px;font-weight:600}
+.bar-label .v{color:#f4e9d8}
+.bar-bg{height:8px;background:rgba(255,255,255,.08);border-radius:4px;overflow:hidden;border:1px solid rgba(255,255,255,.1)}
+.bar-fill{height:100%;border-radius:3px;transition:width .3s;width:100%}
+.bar-stamina{background:linear-gradient(90deg,#5a93b8,#8db8d4)}
+.bar-belief{background:linear-gradient(90deg,#e8956b,#ffd99a)}
+
+#log{flex:1;background:rgba(0,0,0,.3);border:1px solid rgba(255,200,140,.15);border-radius:6px;padding:8px 10px;font-size:12px;line-height:1.6;overflow-y:auto;color:#d4c8a8;letter-spacing:.2px;min-height:60px;max-height:140px}
+#log .entry{margin-bottom:3px;animation:logIn .25s}
+#log .entry.cargo{color:#ffd99a;font-weight:600}
+#log .entry.story{color:#a8d4c8;font-style:italic}
+@keyframes logIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+
+.actions{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.act{background:rgba(40,30,22,.75);border:1px solid rgba(255,200,140,.25);border-radius:8px;padding:10px 4px;font-size:12px;font-weight:600;color:#f4e9d8;text-align:center;line-height:1.3;letter-spacing:.3px;transition:all .15s;position:relative;min-height:54px}
+.act:active{transform:scale(.96);background:rgba(60,45,30,.9)}
+.act:disabled{opacity:.35;cursor:not-allowed}
+.act .ico{display:block;font-size:18px;margin-bottom:2px;line-height:1}
+.act .cost{position:absolute;top:3px;right:5px;font-size:9px;color:#c8b89a;font-weight:500}
+
+#choice-bar{display:none;background:linear-gradient(135deg,#7c3aed,#a855f7);border-radius:10px;padding:10px;text-align:center;font-size:13px;font-weight:700;letter-spacing:.5px;animation:pulse 1.6s ease-in-out infinite;cursor:pointer;border:none;color:#fff;box-shadow:0 4px 20px rgba(168,85,247,.4)}
+#choice-bar.show{display:block}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.02)}}
+
+/* ── Modal: intro ── */
+.overlay{position:fixed;inset:0;background:rgba(8,12,20,.94);z-index:50;display:flex;align-items:center;justify-content:center;padding:24px;backdrop-filter:blur(4px)}
+.overlay-inner{max-width:420px;width:100%;background:linear-gradient(180deg,#1a2535 0%,#0f1825 100%);border:1px solid rgba(255,200,140,.2);border-radius:14px;padding:24px 22px;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+.overlay h1{font-size:22px;font-weight:800;letter-spacing:1px;color:#f4e9d8;margin-bottom:4px}
+.overlay h1 .accent{color:#ffd99a}
+.overlay .sub{font-size:11px;color:#8ba0b8;letter-spacing:1.5px;margin-bottom:14px;text-transform:uppercase}
+.overlay p{font-size:13px;line-height:1.7;color:#c8d2dc;margin-bottom:11px}
+.overlay .small{font-size:11px;color:#7a8a9a;line-height:1.6;margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.08)}
+.overlay-btn{display:block;width:100%;background:linear-gradient(135deg,#e8956b,#ffd99a);color:#2a1a0f;font-weight:800;font-size:14px;letter-spacing:1px;padding:12px;border-radius:8px;margin-top:14px;border:none;cursor:pointer;transition:filter .15s}
+.overlay-btn:active{filter:brightness(.9)}
+.overlay-btn.dim{background:rgba(255,255,255,.08);color:#a8b8c8;font-weight:600;letter-spacing:.5px}
+
+/* ── Reveal modal ── */
+.reveal-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0}
+.stat{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:10px;text-align:center}
+.stat .k{font-size:10px;color:#8ba0b8;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
+.stat .v{font-size:20px;font-weight:800;color:#f4e9d8}
+.stat.full{grid-column:1/-1;background:linear-gradient(135deg,rgba(232,149,107,.15),rgba(255,217,154,.08));border-color:rgba(255,217,154,.3)}
+.stat.full .v{color:#ffd99a;font-size:22px}
+.corr-bar{margin:10px 0;background:rgba(255,255,255,.05);border-radius:6px;padding:8px;font-size:11px;color:#a8b8c8;line-height:1.6}
+.corr-bar .vis{height:6px;background:rgba(255,255,255,.08);border-radius:3px;margin-top:6px;position:relative;overflow:hidden}
+.corr-bar .vis::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:1px;background:rgba(255,255,255,.3)}
+.corr-bar .vis-fill{position:absolute;top:0;bottom:0;left:50%;background:linear-gradient(90deg,#ff6644,#ffd99a);border-radius:3px;transition:width .8s,left .8s}
+.feynman{margin:14px 0;padding:12px;background:rgba(255,217,154,.06);border-left:3px solid #ffd99a;border-radius:0 6px 6px 0;font-size:12px;line-height:1.7;color:#d8e0e8;font-style:italic}
+.feynman .src{display:block;font-size:10px;color:#8ba0b8;letter-spacing:.8px;margin-top:6px;font-style:normal}
+
+textarea{width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:10px;color:#f4e9d8;font-family:inherit;font-size:13px;line-height:1.5;resize:none;margin-top:6px}
+textarea:focus{outline:none;border-color:rgba(255,217,154,.4)}
+
+/* ── Top bar ── */
+#topbar{position:absolute;top:8px;left:0;right:0;display:flex;justify-content:space-between;padding:0 12px;z-index:4;font-size:10px;letter-spacing:1.2px;color:rgba(255,255,255,.55);font-weight:600;text-shadow:0 1px 2px rgba(0,0,0,.4)}
+#topbar .yr{color:#ffd99a}
+#help-btn{background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.2);border-radius:50%;width:22px;height:22px;font-size:11px;color:#fff;cursor:pointer;line-height:20px;text-align:center}
+
+/* ── Larger viewports ── */
+@media (min-height: 700px){
+  #scene{height:50vh}
+  #ui{height:50vh}
+  .actions{grid-template-columns:repeat(4,1fr)}
+}
+@media (min-width: 600px){
+  body{max-width:480px;margin:0 auto;border-left:1px solid rgba(0,0,0,.3);border-right:1px solid rgba(0,0,0,.3)}
+}
+
+.hidden{display:none !important}
+</style>
+</head>
+<body>
+
+<div id="topbar">
+  <span>タンナ島 · ヴァヌアツ <span class="yr">1947年</span></span>
+  <button id="help-btn" aria-label="help">?</button>
+</div>
+
+<div id="scene">
+  <div id="sky-light"></div>
+  <div class="cloud" style="top:8%;left:15%;width:60px;height:18px"></div>
+  <div class="cloud" style="top:14%;right:10%;width:80px;height:22px"></div>
+  <div class="mountain"></div>
+  <div class="sea"></div>
+  <div class="beach"></div>
+  <div class="airstrip" id="airstrip"></div>
+  <div class="tower" id="tower"><div class="tower-top"></div></div>
+  <div class="fire" id="fire"><div class="fire-pit"></div><div class="fire-flame"></div></div>
+  <div class="dancer" id="dancer">
+    <div class="dancer-head"></div>
+    <div class="dancer-body"></div>
+    <div class="dancer-arm l"></div>
+    <div class="dancer-arm r"></div>
+    <div class="dancer-leg l"></div>
+    <div class="dancer-leg r"></div>
+  </div>
+</div>
+
+<div id="ui">
+  <div class="bars">
+    <div class="bar-wrap">
+      <div class="bar-label"><span>体力</span><span class="v" id="v-stam">10/10</span></div>
+      <div class="bar-bg"><div class="bar-fill bar-stamina" id="bar-stam"></div></div>
+    </div>
+    <div class="bar-wrap">
+      <div class="bar-label"><span>信仰</span><span class="v" id="v-bel">0</span></div>
+      <div class="bar-bg"><div class="bar-fill bar-belief" id="bar-bel" style="width:0"></div></div>
+    </div>
+  </div>
+
+  <div id="log"></div>
+
+  <div class="actions" id="actions">
+    <button class="act" data-act="airstrip"><span class="cost">体2</span><span class="ico">🛬</span>滑走路<br>を整える</button>
+    <button class="act" data-act="tower"><span class="cost">体3</span><span class="ico">🗼</span>管制塔<br>を建てる</button>
+    <button class="act" data-act="fire"><span class="cost">体2</span><span class="ico">🔥</span>火を<br>焚く</button>
+    <button class="act" data-act="dance"><span class="cost">体2</span><span class="ico">💃</span>踊る</button>
+    <button class="act" data-act="pray"><span class="cost">体1</span><span class="ico">🙏</span>祈る</button>
+    <button class="act" data-act="headphone"><span class="cost">体2</span><span class="ico">🎧</span>木のヘッドホン<br>を彫る</button>
+  </div>
+
+  <button id="choice-bar">⛰️ 丘に登って海を見る</button>
+</div>
+
+<!-- Intro overlay -->
+<div class="overlay" id="intro">
+  <div class="overlay-inner">
+    <div class="sub">タンナ島 · 1947年</div>
+    <h1>貨物神<span class="accent">1947</span></h1>
+    <p>戦争中、空から白い人々の「贈り物」が降ってきた。米軍の輸送機だった。</p>
+    <p>しかし1945年に戦争は終わり、彼らは去った。<br>飛行機は来なくなった。</p>
+    <p>あなたは部族の儀式長。村人たちが見ている。<br>もう一度、空からの贈り物を呼び戻すのだ。</p>
+    <p style="color:#ffd99a;font-weight:600">滑走路を整え、木で管制塔を建て、ヘッドホンを彫れ。<br>儀式を尽くせば、きっと飛行機は戻ってくる。</p>
+    <button class="overlay-btn" id="start">儀式を始める</button>
+    <div class="small">3分の思考実験。リチャード・ファインマン「カーゴカルト科学」(1974) より着想。</div>
+  </div>
+</div>
+
+<!-- Help overlay -->
+<div class="overlay hidden" id="help-modal">
+  <div class="overlay-inner">
+    <div class="sub">ガイド</div>
+    <h1>遊びかた</h1>
+    <p>下のボタンから儀式を選び、信仰を高める。体力は時間とともに自然回復する。</p>
+    <p>儀式を続けると、空から「贈り物」が降ってくることがある。<br>どの儀式が効いているのか、よく観察すること。</p>
+    <p>体力切れにならないよう、休むのも大事だ。</p>
+    <button class="overlay-btn dim" id="help-close">島に戻る</button>
+  </div>
+</div>
+
+<!-- Reveal overlay -->
+<div class="overlay hidden" id="reveal">
+  <div class="overlay-inner">
+    <div class="sub">丘の上から</div>
+    <h1>飛行機は<span class="accent">来なかった</span></h1>
+    <p id="reveal-intro">あなたは丘の上から海を見下ろした。<br>水平線の向こうに、何もない。</p>
+
+    <div class="reveal-stats">
+      <div class="stat"><div class="k">儀式の総数</div><div class="v" id="r-rituals">0</div></div>
+      <div class="stat"><div class="k">降ってきた物</div><div class="v" id="r-cargo">0</div></div>
+      <div class="stat full"><div class="k">儀式と贈り物の相関係数</div><div class="v" id="r-corr">+0.00</div></div>
+    </div>
+
+    <div class="corr-bar">
+      <div>相関は統計的ノイズの範囲内 (≒ 無相関)。<br>儀式は飛行機を呼んでいなかった。</div>
+      <div class="vis"><div class="vis-fill" id="vis-fill"></div></div>
+      <div style="font-size:10px;margin-top:4px;color:#7a8a9a">−1.0 ←─── 0 ───→ +1.0</div>
+    </div>
+
+    <p>戦争中に飛行機が来たのは、<b style="color:#ffd99a">8000km離れた戦争</b>のせい。儀式とは無関係だった。<br>降ってきた「贈り物」は、たまたま漂着したヤムイモ・魚・椰子の実だった。</p>
+
+    <div class="feynman">
+      「彼らは形をすべて真似した。完璧に見えた。だが何かが欠けていた——飛行機は降りてこない。」
+      <span class="src">— Richard Feynman, "Cargo Cult Science", Caltech Commencement, 1974</span>
+    </div>
+
+    <p style="font-weight:600;color:#f4e9d8">あなたの人生で、<br>「効くと信じて続けているけれど、本当に効いているか分からない儀式」<br>は何ですか?</p>
+    <textarea id="reflect" rows="3" placeholder="ここに書いてみる (送信されません · このページの中だけ)"></textarea>
+
+    <button class="overlay-btn" id="reveal-restart">もう一度 (船を作って島を出る)</button>
+    <button class="overlay-btn dim" id="reveal-stay">島に戻って儀式を続ける</button>
+    <div class="small">📚 Wikipedia「カーゴ・カルト」「ジョン・フラム運動」/ R.Feynman "Surely You're Joking" 所収</div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const $ = (id) => document.getElementById(id);
+  const log = $('log');
+  const tower = $('tower');
+  const fire = $('fire');
+  const dancer = $('dancer');
+  const airstrip = $('airstrip');
+  const scene = $('scene');
+
+  const STAM_MAX = 10;
+  const RITUAL_GOAL = 25;
+  const CARGO_INTERVAL_MIN = 6500;   // ms — base wait before random cargo can spawn
+  const CARGO_INTERVAL_MAX = 15000;
+  const CARGO_PROB = 0.55;            // probability check at each scheduled tick
+
+  const state = {
+    stamina: STAM_MAX,
+    belief: 0,
+    rituals: 0,
+    cargo: 0,
+    towerLvl: 0,
+    airstripLvl: 0,
+    fireOn: false,
+    headphones: 0,
+    started: false,
+    revealed: false,
+    cargoTimer: null,
+    actionLog: [],   // {t,action} timestamps
+    cargoLog: [],    // {t} timestamps
+  };
+
+  // ── Log helpers
+  function addLog(text, cls){
+    const e = document.createElement('div');
+    e.className = 'entry' + (cls?' '+cls:'');
+    e.textContent = text;
+    log.appendChild(e);
+    log.scrollTop = log.scrollHeight;
+    while(log.children.length > 30) log.removeChild(log.firstChild);
+  }
+  function toast(text, x, y){
+    const t = document.createElement('div');
+    t.className = 'toast';
+    t.textContent = text;
+    t.style.left = x + 'px';
+    t.style.top = y + 'px';
+    scene.appendChild(t);
+    setTimeout(() => t.remove(), 1900);
+  }
+
+  // ── UI rendering
+  function render(){
+    $('v-stam').textContent = state.stamina + '/' + STAM_MAX;
+    $('bar-stam').style.width = (state.stamina/STAM_MAX*100) + '%';
+    $('v-bel').textContent = state.belief;
+    $('bar-bel').style.width = Math.min(100, state.belief/40*100) + '%';
+
+    // tower visual
+    if (state.towerLvl > 0){
+      tower.classList.add('show');
+      tower.style.height = (8 + state.towerLvl*8) + 'px';
+      tower.style.opacity = '1';
+    }
+    // airstrip visual
+    airstrip.className = 'airstrip' + (state.airstripLvl>0?' lvl'+Math.min(3,state.airstripLvl):'');
+    // fire
+    if (state.fireOn){ fire.style.height = '20px'; fire.style.opacity='1'; }
+    else { fire.style.height='0'; fire.style.opacity='0'; }
+
+    // disable buttons if not enough stam
+    document.querySelectorAll('.act').forEach(b => {
+      const cost = ACT_COST[b.dataset.act] || 1;
+      b.disabled = state.stamina < cost || state.revealed;
+    });
+
+    if (state.rituals >= RITUAL_GOAL && !state.revealed){
+      $('choice-bar').classList.add('show');
+    }
+  }
+
+  const ACT_COST = { airstrip:2, tower:3, fire:2, dance:2, pray:1, headphone:2 };
+  const ACT_BELIEF = { airstrip:1, tower:2, fire:1, dance:2, pray:1, headphone:1 };
+  const ACT_TEXT = {
+    airstrip: '滑走路の藪を払い、地面を平らにした。',
+    tower:    '竹を組み、管制塔を高くした。',
+    fire:     '焚き火を焚いて煙を上げた。',
+    dance:    '太鼓に合わせて踊った。村人も加わった。',
+    pray:     '空に向かって祈った。',
+    headphone:'木でヘッドホンを彫り、頭にかぶった。'
+  };
+
+  // story milestones
+  const STORIES = {
+    1:  '村人たちが集まってきた。「儀式長、飛行機は本当に戻るのか?」',
+    5:  '子供たちが滑走路の脇で見ている。',
+    9:  '部族長が訪れた。「我々の祖先は、確かに白人の鳥を見たのだ。」',
+    14: '隣の村も参加し始めた。信仰が広まっている。',
+    19: '老婆が言った。「もう一息だよ、儀式長。」',
+    24: 'この夜、空がやけに静かだ…',
+  };
+
+  // ── Action handling
+  function doAction(act){
+    const cost = ACT_COST[act];
+    if (state.stamina < cost) return;
+    state.stamina -= cost;
+    state.belief += ACT_BELIEF[act];
+    state.rituals += 1;
+    state.actionLog.push({t: Date.now(), action: act});
+
+    addLog(ACT_TEXT[act]);
+
+    // visuals
+    if (act === 'airstrip') state.airstripLvl = Math.min(3, state.airstripLvl + 1);
+    if (act === 'tower') state.towerLvl = Math.min(5, state.towerLvl + 1);
+    if (act === 'fire'){ state.fireOn = true; setTimeout(()=>{ state.fireOn=false; render(); }, 6000); }
+    if (act === 'dance'){
+      dancer.classList.add('show');
+      setTimeout(()=>dancer.classList.remove('show'), 2400);
+    }
+    if (act === 'headphone') state.headphones += 1;
+
+    // floating "+belief" text
+    const sceneRect = scene.getBoundingClientRect();
+    toast('+' + ACT_BELIEF[act] + ' 信仰', Math.random()*sceneRect.width*.6 + sceneRect.width*.2, sceneRect.height*.55);
+
+    // story
+    if (STORIES[state.rituals]) addLog(STORIES[state.rituals], 'story');
+
+    render();
+  }
+
+  // ── Cargo events (RANDOM, not correlated with rituals)
+  const CARGO_EVENTS = [
+    { txt: 'ヤムイモが流れ着いた! +1', emoji: '🍠' },
+    { txt: '魚が浜に打ち上がった! +1', emoji: '🐟' },
+    { txt: '椰子の実が落ちてきた! +1', emoji: '🥥' },
+    { txt: '雨が降り、水を満たした!', emoji: '💧' },
+    { txt: '渡り鳥の羽が落ちていた!', emoji: '🪶' },
+    { txt: '貝殻の山を見つけた!', emoji: '🐚' },
+  ];
+
+  function scheduleCargo(){
+    const wait = CARGO_INTERVAL_MIN + Math.random() * (CARGO_INTERVAL_MAX - CARGO_INTERVAL_MIN);
+    state.cargoTimer = setTimeout(() => {
+      if (state.revealed) return;
+      if (Math.random() < CARGO_PROB){
+        triggerCargo();
+      }
+      scheduleCargo();
+    }, wait);
+  }
+
+  function triggerCargo(){
+    state.cargo += 1;
+    state.cargoLog.push({ t: Date.now() });
+    const ev = CARGO_EVENTS[Math.floor(Math.random()*CARGO_EVENTS.length)];
+
+    // visual: ghost plane sometimes (illusion!)
+    if (Math.random() < 0.35){
+      const plane = document.createElement('div');
+      plane.className = 'ghost-plane';
+      plane.textContent = '✈';
+      scene.appendChild(plane);
+      setTimeout(() => plane.remove(), 8000);
+    }
+
+    // dropping emoji
+    const drop = document.createElement('div');
+    drop.className = 'cargo-drop';
+    drop.textContent = ev.emoji;
+    drop.style.left = (15 + Math.random()*65) + '%';
+    drop.style.top = '0';
+    scene.appendChild(drop);
+    setTimeout(() => drop.remove(), 1700);
+
+    addLog('☟ ' + ev.txt + ' 儀式が効いた!?', 'cargo');
+  }
+
+  // ── Stamina regen
+  setInterval(() => {
+    if (state.started && !state.revealed && state.stamina < STAM_MAX){
+      state.stamina = Math.min(STAM_MAX, state.stamina + 1);
+      render();
+    }
+  }, 1500);
+
+  // ── Reveal logic
+  function calcCorrelation(){
+    // bin time into 5-second windows; count rituals and cargo per window.
+    if (state.actionLog.length < 4 || state.cargoLog.length < 1){
+      // not enough samples — return small random near 0
+      return (Math.random()*0.3 - 0.15);
+    }
+    const start = state.actionLog[0].t;
+    const end = Date.now();
+    const W = 5000;
+    const nbins = Math.max(4, Math.ceil((end-start)/W));
+    const r = new Array(nbins).fill(0);
+    const c = new Array(nbins).fill(0);
+    state.actionLog.forEach(a => { const b = Math.min(nbins-1, Math.floor((a.t-start)/W)); r[b]++; });
+    state.cargoLog.forEach(a => { const b = Math.min(nbins-1, Math.floor((a.t-start)/W)); c[b]++; });
+    const mr = r.reduce((s,v)=>s+v,0)/nbins;
+    const mc = c.reduce((s,v)=>s+v,0)/nbins;
+    let num=0,dr=0,dc=0;
+    for (let i=0;i<nbins;i++){
+      num += (r[i]-mr)*(c[i]-mc);
+      dr  += (r[i]-mr)**2;
+      dc  += (c[i]-mc)**2;
+    }
+    const denom = Math.sqrt(dr*dc);
+    if (denom < 1e-9) return 0;
+    return num/denom;
+  }
+
+  function reveal(){
+    if (state.revealed) return;
+    state.revealed = true;
+    if (state.cargoTimer) clearTimeout(state.cargoTimer);
+    $('choice-bar').classList.remove('show');
+
+    $('r-rituals').textContent = state.rituals;
+    $('r-cargo').textContent = state.cargo;
+    let corr = calcCorrelation();
+    // clamp display to make small noise look like noise
+    if (Math.abs(corr) < 0.05) corr = (Math.random()*0.06 - 0.03);
+    const sign = corr >= 0 ? '+' : '−';
+    $('r-corr').textContent = sign + Math.abs(corr).toFixed(2);
+
+    // visualize on scale
+    const w = Math.abs(corr) * 50; // half-width %
+    const left = corr >= 0 ? 50 : (50 - w);
+    $('vis-fill').style.left = left + '%';
+    $('vis-fill').style.width = w + '%';
+
+    $('reveal').classList.remove('hidden');
+  }
+
+  // ── Buttons
+  document.querySelectorAll('.act').forEach(b => {
+    b.addEventListener('click', () => doAction(b.dataset.act));
+  });
+
+  $('start').addEventListener('click', () => {
+    $('intro').classList.add('hidden');
+    state.started = true;
+    addLog('儀式の朝が始まった。', 'story');
+    scheduleCargo();
+    render();
+  });
+
+  $('help-btn').addEventListener('click', () => $('help-modal').classList.remove('hidden'));
+  $('help-close').addEventListener('click', () => $('help-modal').classList.add('hidden'));
+
+  $('choice-bar').addEventListener('click', reveal);
+
+  $('reveal-restart').addEventListener('click', () => location.reload());
+  $('reveal-stay').addEventListener('click', () => {
+    // allow continuing — but keep reveal stats visible briefly then close
+    $('reveal').classList.add('hidden');
+    state.revealed = false;
+    addLog('あなたは島に戻った。儀式は続く。', 'story');
+    scheduleCargo();
+    render();
+  });
+
+  // Initial render (intro is showing)
+  render();
+})();
+</script>
+</body>
+</html>

@@ -209,6 +209,7 @@ header p {
 .thumb-ninth      { background: linear-gradient(135deg, #1a0e04 0%, #2a1608 50%, #0a0603 100%); }
 .thumb-ricecooker { background: linear-gradient(135deg, #2a1608 0%, #5a3818 50%, #1a0f04 100%); }
 .thumb-warmth     { background: linear-gradient(135deg, #2a1f3d 0%, #c9836b 50%, #16101f 100%); }
+.thumb-cargo      { background: linear-gradient(135deg, #0e2a3e 0%, #5a93b8 35%, #d4a574 75%, #1a0e04 100%); }
 
 .card-body {
     padding: 18px 20px 22px;
@@ -412,6 +413,14 @@ footer a:hover { color: #e6edf3; }
 <!-- Featured -->
 <div class="section-label" data-i18n="secFeatured">⭐ おすすめ</div>
 <div class="feat-row">
+        <a class="feat-card" href="https://pndshch.github.io/cargo-cult-1947/" target="_blank">
+            <div class="card-thumb thumb-cargo">
+            <span class="new-badge" data-i18n="newBadge">NEW</span>
+            <span class="thumb-emoji">🛬</span>
+            <img class="thumb-gif" src="assets/cargo-cult-1947.gif" alt="" onerror="this.remove()">
+        </div>
+            <span class="feat-title" data-i18n="cargoTitle">貨物神1947</span>
+        </a>
         <a class="feat-card" href="https://pndshch.github.io/warmth-1958/" target="_blank">
             <div class="card-thumb thumb-warmth">
             <span class="new-badge" data-i18n="newBadge">NEW</span>
@@ -884,6 +893,23 @@ footer a:hover { color: #e6edf3; }
             </div>
         </div>
     <div class="grid-header" data-cat-header="games" data-i18n="secGridGames">🎮 ゲーム</div>
+    <div class="card" data-cat="games">
+            <div class="card-thumb thumb-cargo">
+                <span class="new-badge" data-i18n="newBadge">NEW</span>
+                <span class="thumb-emoji">🛬</span>
+                <img class="thumb-gif" src="assets/cargo-cult-1947.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="cargoTitle">貨物神1947</h2>
+                <p data-i18n="cargoDesc">戦争中、空からの『贈り物』が降ってきた——米軍の輸送機だった。1945年、彼らは去り、飛行機は来なくなった。タンナ島の儀式長として、竹で管制塔を建て、滑走路を整え、木のヘッドホンを彫れ。儀式を尽くせば飛行機は戻る——本当に？ Feynman『カーゴカルト科学』(1974) を3分で体験する、相関と因果の思考実験。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="cargoTag1">思考実験</span>
+                    <span class="tag" data-i18n="cargoTag2">相関≠因果</span>
+                    <span class="tag" data-i18n="cargoTag3">Feynman</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/cargo-cult-1947/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
     <div class="card" data-cat="games">
             <div class="card-thumb thumb-warmth">
                 <span class="new-badge" data-i18n="newBadge">NEW</span>
@@ -1696,6 +1722,9 @@ const I18N = {
         warmthTitle: "ぬくもり1958",
         warmthDesc:  "2026年2月、市川市動植物園で生まれたパンチくんはぬいぐるみを離さなかった——70年前、ハーロウ博士が証明したこと。針金ママ（ミルク）と、ぬのママ（ふわふわ）。あなたはどちらに駆け寄りますか？ 接触安寧（contact comfort）を3分で体験する、心理学のミニ実験。",
         warmthTag1: "心理学", warmthTag2: "愛着理論", warmthTag3: "パンチくん",
+        cargoTitle: "貨物神1947",
+        cargoDesc:  "戦争中、空からの『贈り物』が降ってきた——米軍の輸送機だった。1945年、彼らは去り、飛行機は来なくなった。タンナ島の儀式長として、竹で管制塔を建て、滑走路を整え、木のヘッドホンを彫れ。儀式を尽くせば飛行機は戻る——本当に？ Feynman『カーゴカルト科学』(1974) を3分で体験する、相関と因果の思考実験。",
+        cargoTag1: "思考実験", cargoTag2: "相関≠因果", cargoTag3: "Feynman",
     },
     en: {
         tagline:   "Games · Education · Tools — delivered via browser and apps",
@@ -1912,6 +1941,9 @@ const I18N = {
         warmthTitle: "Warmth 1958",
         warmthDesc:  "February 2026, Ichikawa Zoo. A 5-month-old baby macaque called Punch-kun refused to let go of his plush — exactly what Harry Harlow proved 70 years earlier. Wire mom (milk) vs. cloth mom (warmth). Which do you run to? A 3-minute psychology mini-experiment on contact comfort.",
         warmthTag1: "Psychology", warmthTag2: "Attachment", warmthTag3: "Punch-kun",
+        cargoTitle: "Cargo Cult 1947",
+        cargoDesc:  "WWII brought 'gifts from the sky' — American cargo planes — to Tanna Island. Then in 1945 the planes stopped coming. As the tribal ritual leader, you build bamboo control towers, level the airstrip, carve wooden headphones. Surely if you do enough, the planes return — right? A 3-minute thought experiment on correlation vs. causation, inspired by Feynman's 'Cargo Cult Science' (1974).",
+        cargoTag1: "Thought Experiment", cargoTag2: "Correlation≠Causation", cargoTag3: "Feynman",
     }
 };
 
