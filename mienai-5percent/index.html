@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover">
+<title>みえない5% — 説明と経験のあいだ</title>
+<meta name="description" content="同じ選択肢でも、説明で選ぶか・経験で選ぶかで答えが変わる。Hertwig (2004) の description-experience gap を3分で体験する思考実験ゲーム。">
+<meta property="og:title" content="みえない5% — 説明と経験のあいだ">
+<meta property="og:description" content="あなたが鮮やかな数字に騙されているかもしれない3分間。">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0a1f2e">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none}
+html,body{height:100%;overflow:hidden;font-family:'Hiragino Sans','Helvetica Neue',Arial,sans-serif;color:#e8e2cf}
+body{background:radial-gradient(ellipse at 50% 25%,#1c3a52 0%,#0a1f2e 60%,#050d18 100%);position:relative;font-feature-settings:"palt"}
+button{font-family:inherit;color:inherit;cursor:pointer;border:none;background:none;font-size:inherit}
+
+#game{position:relative;width:100vw;height:100vh;overflow:hidden}
+
+/* ── Stars background ── */
+.star{position:absolute;width:2px;height:2px;background:#fff;border-radius:50%;opacity:.5;animation:twinkle 3s ease-in-out infinite alternate}
+@keyframes twinkle{from{opacity:.2}to{opacity:.8}}
+
+/* ── Screens ── */
+.screen{position:absolute;inset:0;display:none;flex-direction:column;align-items:center;justify-content:center;padding:5vw;text-align:center}
+.screen.active{display:flex;animation:fadein .5s ease}
+@keyframes fadein{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── Title ── */
+.title{font-size:14vw;font-weight:900;letter-spacing:-.02em;line-height:1;margin-bottom:2vw;color:#ffd34a;text-shadow:0 4px 24px rgba(255,140,60,.3),0 0 2px rgba(255,211,74,.5)}
+.title .pct{font-size:17vw;display:inline-block;transform:translateY(.6vw);margin-left:1vw;color:#ff8a3a;opacity:.55;filter:blur(.3px);transition:opacity .3s}
+.title:hover .pct{opacity:1;filter:none}
+.subtitle{font-size:3.6vw;color:#a8c5d6;margin-bottom:6vw;line-height:1.5;letter-spacing:.04em}
+.tagline{font-size:3vw;color:#7a99ad;margin-bottom:3vw;letter-spacing:.05em;font-weight:300}
+.year-tag{display:inline-block;border:1px solid #4a6478;border-radius:2px;padding:.6vw 2vw;font-size:2.6vw;color:#a8c5d6;margin-bottom:5vw;letter-spacing:.2em;font-weight:300}
+
+/* ── Buttons ── */
+.btn{padding:3.5vw 9vw;border-radius:8px;font-size:4.2vw;font-weight:700;cursor:pointer;transition:transform .15s,box-shadow .15s;letter-spacing:.05em}
+.btn-primary{background:linear-gradient(180deg,#ffd34a 0%,#f4a32a 100%);color:#3a2510;box-shadow:0 4px 0 #b87520,0 8px 16px rgba(0,0,0,.3)}
+.btn-primary:active{transform:translateY(2px);box-shadow:0 2px 0 #b87520,0 4px 8px rgba(0,0,0,.3)}
+.btn-secondary{background:#2a4a5e;color:#e8e2cf;border:1px solid #4a6478}
+.btn-secondary:active{transform:translateY(1px)}
+.btn-small{padding:2vw 5vw;font-size:3.4vw;border-radius:6px}
+
+/* ── Phase header ── */
+.phase-bar{position:absolute;top:0;left:0;right:0;padding:3vw 4vw;display:flex;justify-content:space-between;align-items:center;font-size:3vw;color:#7a99ad;background:linear-gradient(180deg,rgba(5,13,24,.9),rgba(5,13,24,0));z-index:5}
+.phase-label{font-weight:700;letter-spacing:.1em}
+.phase-mode{font-size:3.4vw;font-weight:900;letter-spacing:.05em}
+.phase-mode.desc{color:#ffd34a}
+.phase-mode.exp{color:#5dd3a8}
+.scenario-counter{display:flex;gap:1vw}
+.scenario-dot{width:3vw;height:3vw;border-radius:50%;background:#2a4a5e;transition:background .3s}
+.scenario-dot.active{background:#e8e2cf;box-shadow:0 0 8px rgba(232,226,207,.6)}
+.scenario-dot.done{background:#5dd3a8}
+
+/* ── Trial layout ── */
+.trial-prompt{font-size:4vw;color:#a8c5d6;margin-top:14vw;margin-bottom:3vw;letter-spacing:.05em;text-align:center;line-height:1.5;padding:0 4vw}
+.trial-prompt strong{color:#ffd34a;font-weight:900}
+
+/* ── Doors ── */
+.doors{display:flex;gap:4vw;margin:4vw 0;width:90vw;max-width:480px}
+.door{flex:1;background:linear-gradient(180deg,#2a4a5e 0%,#1c3142 100%);border-radius:12px;padding:5vw 3vw;border:2px solid #4a6478;cursor:pointer;transition:transform .2s,border-color .2s,box-shadow .2s;position:relative;overflow:hidden;min-height:48vw;display:flex;flex-direction:column;align-items:center;justify-content:space-between}
+.door:active{transform:scale(.97)}
+.door.A{border-color:#d4724a}
+.door.B{border-color:#5dd3a8}
+.door.A.selected{box-shadow:0 0 24px rgba(212,114,74,.5);border-color:#ff8a3a}
+.door.B.selected{box-shadow:0 0 24px rgba(93,211,168,.5);border-color:#7eedba}
+.door-label{font-size:6vw;font-weight:900;letter-spacing:.2em}
+.door.A .door-label{color:#ff8a3a}
+.door.B .door-label{color:#5dd3a8}
+.door-info{font-size:3.6vw;line-height:1.6;color:#e8e2cf;text-align:center;font-weight:700}
+.door-info .num{font-size:5vw;font-weight:900;color:#ffd34a;display:block;margin:1vw 0}
+.door-info .pct-num{color:#a8c5d6;font-size:2.8vw;font-weight:400;display:block;margin-top:1vw}
+.door-info .sure{color:#5dd3a8}
+.door-mystery{font-size:11vw;color:#4a6478;font-weight:900;text-align:center;margin-top:-2vw}
+.door-sample-out{position:absolute;bottom:3vw;left:0;right:0;display:flex;justify-content:center;gap:1.2vw;flex-wrap:wrap;padding:0 2vw;min-height:8vw}
+.sample-chip{display:inline-block;padding:1.2vw 2.2vw;background:#1c3142;border-radius:4px;font-size:3.4vw;font-weight:900;animation:popin .3s ease;line-height:1}
+.sample-chip.pos{color:#ffe07a;border:1px solid #ffd34a;background:rgba(255,211,74,.18)}
+.sample-chip.zero{color:#a8b8c4;border:1px solid #6a8499;background:rgba(120,150,180,.12)}
+.sample-chip.neg{color:#ff8080;border:1px solid #ff7070;background:rgba(255,112,112,.2)}
+@keyframes popin{from{opacity:0;transform:scale(.5)}to{opacity:1;transform:scale(1)}}
+
+/* ── Action bar ── */
+.action-bar{position:absolute;bottom:6vw;left:0;right:0;display:flex;flex-direction:column;align-items:center;gap:3vw;padding:0 5vw}
+.sample-row{display:flex;gap:2vw;width:100%;max-width:420px}
+.sample-row .btn{flex:1;padding:3vw 2vw;font-size:3.4vw}
+.sample-row .btn.A{background:linear-gradient(180deg,#d4724a 0%,#a85530 100%);color:#fff;box-shadow:0 3px 0 #6a3818}
+.sample-row .btn.B{background:linear-gradient(180deg,#5dd3a8 0%,#3a9e7a 100%);color:#0a1f2e;box-shadow:0 3px 0 #2a6a5a}
+.sample-counter{font-size:2.6vw;color:#7a99ad;letter-spacing:.05em}
+
+/* ── Outcome flash ── */
+.outcome-flash{position:fixed;inset:0;display:none;align-items:center;justify-content:center;z-index:30;pointer-events:none;background:rgba(0,0,0,.4)}
+.outcome-flash.show{display:flex;animation:flashin .4s ease}
+.flash-amount{font-size:18vw;font-weight:900;text-shadow:0 4px 24px rgba(0,0,0,.5);letter-spacing:-.02em}
+.flash-amount.pos{color:#ffd34a}
+.flash-amount.zero{color:#a8c5d6}
+.flash-amount.neg{color:#ff7070}
+@keyframes flashin{0%{opacity:0;transform:scale(.5)}40%{opacity:1;transform:scale(1.1)}60%{transform:scale(1)}100%{opacity:1;transform:scale(1)}}
+
+/* ── Coin display ── */
+.coin-bar{position:absolute;top:14vw;right:4vw;background:rgba(10,31,46,.8);padding:2vw 4vw;border-radius:20px;border:1px solid #4a6478;font-size:3.4vw;color:#ffd34a;font-weight:900;z-index:4}
+.coin-bar .coin-icon{display:inline-block;margin-right:1vw}
+
+/* ── Intro screen ── */
+.intro-card{max-width:90vw;background:rgba(10,31,46,.7);padding:6vw 5vw;border-radius:12px;border:1px solid #4a6478;margin-bottom:6vw}
+.intro-card h2{font-size:5vw;color:#ffd34a;margin-bottom:3vw;font-weight:900;letter-spacing:.05em}
+.intro-card p{font-size:3.6vw;line-height:1.7;color:#c8d8e0;margin-bottom:2vw}
+.intro-card p.hint{color:#7a99ad;font-size:3.2vw;font-style:italic}
+.intro-card .mode-tag{display:inline-block;padding:.5vw 2vw;border-radius:4px;font-size:3vw;font-weight:700;margin:0 .8vw;letter-spacing:.05em}
+.intro-card .mode-desc{background:#ffd34a;color:#3a2510}
+.intro-card .mode-exp{background:#5dd3a8;color:#0a1f2e}
+
+/* ── Phase intro ── */
+.phase-intro{max-width:90vw;text-align:center}
+.phase-intro h2{font-size:7vw;font-weight:900;margin-bottom:4vw;letter-spacing:.05em}
+.phase-intro h2.desc-color{color:#ffd34a}
+.phase-intro h2.exp-color{color:#5dd3a8}
+.phase-intro p{font-size:3.8vw;line-height:1.7;color:#c8d8e0;margin-bottom:3vw;padding:0 4vw}
+.phase-intro .key{font-size:3.4vw;color:#a8c5d6;background:rgba(255,255,255,.04);border-left:3px solid #ffd34a;padding:3vw;text-align:left;margin:4vw 4vw;border-radius:0 6px 6px 0;line-height:1.6}
+.phase-intro .key.exp{border-left-color:#5dd3a8}
+
+/* ── Result screen ── */
+.result-screen{justify-content:flex-start;padding-top:14vw;overflow-y:auto;height:100vh}
+.result-title{font-size:8vw;font-weight:900;color:#ffd34a;margin-bottom:3vw;letter-spacing:.05em;text-align:center}
+.result-subtitle{font-size:3.4vw;color:#a8c5d6;margin-bottom:5vw;text-align:center;line-height:1.5;padding:0 4vw}
+.gap-display{display:flex;align-items:center;justify-content:center;gap:3vw;width:90vw;max-width:480px;margin:3vw 0;padding:4vw 3vw;background:rgba(10,31,46,.8);border-radius:10px;border:1px solid #4a6478}
+.gap-side{flex:1;text-align:center}
+.gap-side h3{font-size:3.2vw;letter-spacing:.1em;font-weight:700;margin-bottom:2vw}
+.gap-side h3.desc{color:#ffd34a}
+.gap-side h3.exp{color:#5dd3a8}
+.gap-side .gap-choice{font-size:5vw;font-weight:900;line-height:1.2}
+.gap-side .gap-coins{font-size:3.4vw;color:#a8c5d6;margin-top:1vw}
+.gap-arrow{font-size:6vw;color:#4a6478}
+.scenario-result{width:90vw;max-width:480px;margin:1.5vw 0;padding:3vw 4vw;background:rgba(255,255,255,.03);border-radius:8px;border:1px solid rgba(255,255,255,.06)}
+.scenario-result .sr-row{display:flex;justify-content:space-between;align-items:center;font-size:3.2vw;line-height:1.5}
+.scenario-result .sr-num{font-weight:900;color:#a8c5d6;margin-bottom:1vw}
+.scenario-result .sr-pick{font-weight:900}
+.scenario-result .sr-pick.matchA{color:#ff8a3a}
+.scenario-result .sr-pick.matchB{color:#5dd3a8}
+.scenario-result .sr-pick.gap{color:#ff7070}
+.scenario-result .sr-tag{font-size:2.6vw;color:#7a99ad;margin-top:1vw;font-style:italic}
+.insight-box{width:90vw;max-width:480px;margin:5vw 0 3vw;padding:5vw 4vw;background:linear-gradient(180deg,rgba(255,211,74,.1),rgba(255,211,74,.04));border:1px solid rgba(255,211,74,.4);border-radius:10px}
+.insight-box h3{font-size:4.2vw;color:#ffd34a;margin-bottom:2vw;font-weight:900;letter-spacing:.05em}
+.insight-box p{font-size:3.4vw;color:#e8e2cf;line-height:1.7;margin-bottom:2vw}
+.insight-box p.example{font-size:3.2vw;color:#a8c5d6;background:rgba(0,0,0,.2);padding:2.5vw 3vw;border-radius:6px;margin-top:2.5vw;line-height:1.6}
+.credit{font-size:2.8vw;color:#7a99ad;text-align:center;line-height:1.6;margin:4vw 4vw 4vw;padding:0 4vw}
+.credit a{color:#a8c5d6;text-decoration:underline}
+.result-actions{display:flex;gap:3vw;margin-bottom:8vw;flex-wrap:wrap;justify-content:center}
+
+/* ── Reveal animation ── */
+.reveal-veil{position:fixed;inset:0;background:rgba(5,13,24,.85);display:none;align-items:center;justify-content:center;z-index:25;flex-direction:column}
+.reveal-veil.show{display:flex;animation:fadein .6s ease}
+.reveal-text{font-size:6vw;font-weight:900;color:#ffd34a;text-align:center;padding:0 6vw;line-height:1.5;letter-spacing:.05em}
+
+/* ── Hint pulse ── */
+@keyframes pulse-hint{0%,100%{transform:scale(1)}50%{transform:scale(1.04)}}
+.pulse{animation:pulse-hint 1.6s ease-in-out infinite}
+
+/* ── Larger viewports ── */
+@media(min-width:600px){
+  body{font-size:18px}
+  .title{font-size:84px}
+  .title .pct{font-size:108px}
+  .subtitle{font-size:22px}
+  .tagline{font-size:18px}
+  .year-tag{font-size:14px;padding:4px 14px}
+  .btn{padding:18px 50px;font-size:22px}
+  .btn-small{padding:10px 26px;font-size:17px}
+  .phase-bar{padding:18px 24px;font-size:16px}
+  .phase-mode{font-size:18px}
+  .scenario-dot{width:14px;height:14px}
+  .trial-prompt{font-size:22px;margin-top:80px;margin-bottom:18px;padding:0 24px}
+  .doors{gap:24px;width:520px;margin:24px 0}
+  .door{padding:30px 18px;min-height:280px}
+  .door-label{font-size:32px}
+  .door-info{font-size:20px}
+  .door-info .num{font-size:30px}
+  .door-info .pct-num{font-size:14px}
+  .door-mystery{font-size:64px;margin-top:-12px}
+  .sample-chip{font-size:16px;padding:5px 11px;font-weight:900}
+  .door-sample-out{bottom:18px;gap:7px}
+  .action-bar{bottom:36px;gap:18px}
+  .sample-row{gap:12px;max-width:520px}
+  .sample-row .btn{padding:18px 14px;font-size:18px}
+  .sample-counter{font-size:14px}
+  .flash-amount{font-size:120px}
+  .coin-bar{top:80px;right:24px;padding:10px 22px;font-size:18px;border-radius:24px}
+  .intro-card{padding:32px 28px;max-width:540px}
+  .intro-card h2{font-size:28px;margin-bottom:18px}
+  .intro-card p{font-size:18px;margin-bottom:12px}
+  .intro-card p.hint{font-size:16px}
+  .intro-card .mode-tag{font-size:15px;padding:3px 10px}
+  .phase-intro{max-width:540px}
+  .phase-intro h2{font-size:38px;margin-bottom:24px}
+  .phase-intro p{font-size:20px;margin-bottom:18px;padding:0 16px}
+  .phase-intro .key{font-size:17px;padding:18px 18px;margin:24px 24px}
+  .result-screen{padding-top:80px}
+  .result-title{font-size:42px;margin-bottom:18px}
+  .result-subtitle{font-size:17px;padding:0 24px;margin-bottom:24px}
+  .gap-display{padding:22px 18px;max-width:540px;gap:18px}
+  .gap-side h3{font-size:15px;margin-bottom:10px}
+  .gap-side .gap-choice{font-size:26px}
+  .gap-side .gap-coins{font-size:17px}
+  .gap-arrow{font-size:32px}
+  .scenario-result{padding:14px 22px;max-width:540px;margin:8px 0}
+  .scenario-result .sr-row{font-size:16px}
+  .scenario-result .sr-tag{font-size:13px}
+  .insight-box{padding:26px 22px;max-width:540px;margin:24px 0 18px}
+  .insight-box h3{font-size:22px;margin-bottom:12px}
+  .insight-box p{font-size:17px;margin-bottom:10px}
+  .insight-box p.example{font-size:15px;padding:14px 16px;margin-top:12px}
+  .credit{font-size:13px;padding:0 24px;margin:18px 24px}
+  .reveal-text{font-size:36px}
+}
+</style>
+</head>
+<body>
+
+<div id="game">
+
+  <!-- Star background -->
+  <div id="stars"></div>
+
+  <!-- ── Title screen ── -->
+  <div id="screen-title" class="screen active">
+    <div class="tagline">説明と経験のあいだ</div>
+    <h1 class="title">みえない<span class="pct">5%</span></h1>
+    <div class="subtitle">同じ選択肢でも、<br>あなたは違う答えを出す。</div>
+    <div class="year-tag">HERTWIG 2004</div>
+    <button class="btn btn-primary pulse" id="btn-start">はじめる</button>
+  </div>
+
+  <!-- ── Intro screen ── -->
+  <div id="screen-intro" class="screen">
+    <div class="intro-card">
+      <h2>3分の思考実験</h2>
+      <p>これから6回、2つの扉のどちらかを選びます。</p>
+      <p>前半3回は<span class="mode-tag mode-desc">説明</span>モード。<br>確率と金額が文字で書かれている。</p>
+      <p>後半3回は<span class="mode-tag mode-exp">経験</span>モード。<br>中身は隠されていて、何度か試してから決める。</p>
+      <p class="hint">本当の発見は、最後にあります。</p>
+    </div>
+    <button class="btn btn-primary" id="btn-intro-go">さあ、始めよう</button>
+  </div>
+
+  <!-- ── Phase intro: Description ── -->
+  <div id="screen-phase-desc" class="screen">
+    <div class="phase-intro">
+      <h2 class="desc-color">説明モード</h2>
+      <p>各扉の中身は、はっきり書かれています。<br>確率も金額もすべて見えます。</p>
+      <div class="key">読んで判断する。<br>テレビのニュース、保険の契約書、薬の副作用リスト —<br>世の中の多くの選択は、こうして説明から決められる。</div>
+    </div>
+    <button class="btn btn-primary" id="btn-phase-desc-go">3つの選択へ</button>
+  </div>
+
+  <!-- ── Phase intro: Experience ── -->
+  <div id="screen-phase-exp" class="screen">
+    <div class="phase-intro">
+      <h2 class="exp-color">経験モード</h2>
+      <p>同じ扉が、もう一度あらわれます。<br>でも今度は、中身は<strong>?</strong>。</p>
+      <p>「ためす」を押すと一回試行できる。何回か試した後、最終的に1枚を選んでください。</p>
+      <div class="key exp">経験から判断する。<br>友達の口コミ、自分が住んでみた街、何度か食べたお店 —<br>世の中の多くの選択は、こうして経験から決められる。</div>
+    </div>
+    <button class="btn btn-primary" id="btn-phase-exp-go">3つの選択へ</button>
+  </div>
+
+  <!-- ── Trial screen ── -->
+  <div id="screen-trial" class="screen">
+    <div class="phase-bar">
+      <div>
+        <span class="phase-label">FRAME</span>
+        <span class="phase-mode" id="phase-mode-text">—</span>
+      </div>
+      <div class="scenario-counter" id="scenario-counter"></div>
+    </div>
+    <div class="coin-bar"><span class="coin-icon">●</span><span id="coin-total">0</span></div>
+
+    <div class="trial-prompt" id="trial-prompt">どちらの扉を選びますか？</div>
+
+    <div class="doors">
+      <div class="door A" id="door-A">
+        <div class="door-label">A</div>
+        <div class="door-info" id="door-A-info">…</div>
+        <div class="door-sample-out" id="door-A-samples"></div>
+      </div>
+      <div class="door B" id="door-B">
+        <div class="door-label">B</div>
+        <div class="door-info" id="door-B-info">…</div>
+        <div class="door-sample-out" id="door-B-samples"></div>
+      </div>
+    </div>
+
+    <div class="action-bar">
+      <div class="sample-row" id="sample-row" style="display:none">
+        <button class="btn btn-small A" id="btn-sample-A">Aをためす</button>
+        <button class="btn btn-small B" id="btn-sample-B">Bをためす</button>
+      </div>
+      <div class="sample-counter" id="sample-counter" style="display:none">残りためし回数: 10</div>
+      <button class="btn btn-primary" id="btn-commit" style="display:none">決める</button>
+    </div>
+  </div>
+
+  <!-- ── Outcome flash ── -->
+  <div class="outcome-flash" id="outcome-flash">
+    <div class="flash-amount" id="flash-amount">+0</div>
+  </div>
+
+  <!-- ── Reveal veil ── -->
+  <div class="reveal-veil" id="reveal-veil">
+    <div class="reveal-text" id="reveal-text"></div>
+  </div>
+
+  <!-- ── Result screen ── -->
+  <div id="screen-result" class="screen result-screen">
+    <h2 class="result-title" id="result-title">あなたの「みえない5%」</h2>
+    <p class="result-subtitle">同じ3つの選択肢を、あなたは2つの違うやり方で選びました。</p>
+
+    <div class="gap-display">
+      <div class="gap-side">
+        <h3 class="desc">説明モード</h3>
+        <div class="gap-choice" id="result-desc-pattern">—</div>
+        <div class="gap-coins"><span id="result-desc-coins">0</span> コイン</div>
+      </div>
+      <div class="gap-arrow">↔</div>
+      <div class="gap-side">
+        <h3 class="exp">経験モード</h3>
+        <div class="gap-choice" id="result-exp-pattern">—</div>
+        <div class="gap-coins"><span id="result-exp-coins">0</span> コイン</div>
+      </div>
+    </div>
+
+    <div id="scenario-results"></div>
+
+    <div class="insight-box">
+      <h3>気づき: description-experience gap</h3>
+      <p id="insight-text">
+        Hertwig, Barron, Weber & Erev (2004) は、人間が同じ確率を「読む」場合と「経験する」場合で、まったく違う重みづけをすることを示しました。
+      </p>
+      <p class="example">📰 ニュースで「飛行機事故0.001%」を読むと、過剰に怖くなる。<br>一方で 🚗 毎日の車の運転 (経験から得るリスク) は、過小評価する。</p>
+      <p class="example">🎰 ロト6を買うのは、「1億円当たる人がいる」を読むから。<br>地震対策をしないのは、「自分は経験したことがない」から。</p>
+      <p class="example">💼 説明だけで決める投資家は珍しい大暴落を恐れすぎる。<br>経験だけの投資家は珍しい大暴落を見過ごしすぎる。</p>
+    </div>
+
+    <div class="credit">
+      Hertwig は2026年5月22日 Allais Memorial Prize for Behavioral Sciences 受賞予定。<br>
+      Reference: Hertwig, R., Barron, G., Weber, E. U., &amp; Erev, I. (2004). <em>Decisions from experience and the effect of rare events in risky choice</em>. Psychological Science, 15(8).
+    </div>
+
+    <div class="result-actions">
+      <button class="btn btn-secondary btn-small" id="btn-restart">もう一度</button>
+      <button class="btn btn-primary btn-small" id="btn-hub">他のゲームへ</button>
+    </div>
+  </div>
+
+</div>
+
+<script>
+"use strict";
+
+/* ── Setup star background ── */
+(function makeStars(){
+  const stars = document.getElementById('stars');
+  for(let i=0;i<60;i++){
+    const s = document.createElement('div');
+    s.className='star';
+    s.style.left = Math.random()*100+'%';
+    s.style.top = Math.random()*60+'%';
+    s.style.animationDelay = (Math.random()*3)+'s';
+    s.style.opacity = (.2+Math.random()*.6);
+    stars.appendChild(s);
+  }
+})();
+
+/* ── Game state ── */
+const SCENARIOS = [
+  // Each scenario: {A: outcomes [{v, p}], B: ..., descA: '...', descB: '...', label}
+  // S1: A=80% gain, 20% nothing. B=sure smaller gain. Same EV. 'sure thing trap'
+  { id:1,
+    A:[{v:10,p:.8},{v:0,p:.2}], B:[{v:8,p:1}],
+    descA:'10コイン<span class="pct-num">確率 80%</span>0コイン<span class="pct-num">確率 20%</span>',
+    descB:'<span class="sure">8コイン</span><span class="pct-num">必ず</span>',
+    label:'同じ平均値だが…',
+    truthA:'EV: 8.0', truthB:'EV: 8.0',
+    // In description: people pick B (loss aversion / reflection effect for sure gains)
+    // In experience: people often pick A (zero comes up rarely in 3-4 samples → 80% looks great)
+  },
+  // S2: A=5% catastrophic loss, 95% small gain. B=sure tiny loss. A has WORSE expected.
+  { id:2,
+    A:[{v:1,p:.95},{v:-25,p:.05}], B:[{v:-1,p:1}],
+    descA:'+1コイン<span class="pct-num">確率 95%</span>-25コイン<span class="pct-num">確率 5%</span>',
+    descB:'<span class="sure">-1コイン</span><span class="pct-num">必ず</span>',
+    label:'まれな大損は、本当にこわい?',
+    truthA:'EV: -0.3', truthB:'EV: -1.0',
+    // In description: people pick B (overweight rare -25)
+    // In experience: people often pick A (don't see -25 in samples → looks like just +1's)
+    // Truth: A is mathematically better (-0.3 > -1.0)
+  },
+  // S3: A=5% jackpot, 95% nothing. B=sure tiny gain. A has BETTER expected.
+  { id:3,
+    A:[{v:0,p:.95},{v:25,p:.05}], B:[{v:1,p:1}],
+    descA:'0コイン<span class="pct-num">確率 95%</span>+25コイン<span class="pct-num">確率 5%</span>',
+    descB:'<span class="sure">+1コイン</span><span class="pct-num">必ず</span>',
+    label:'まれな大当たりは、本当に魅力的?',
+    truthA:'EV: 1.25', truthB:'EV: 1.0',
+    // Description: people pick A (lottery effect, overweight rare +25)
+    // Experience: people pick B (don't see +25 in samples → A looks like all 0s)
+  }
+];
+const MAX_SAMPLES_TOTAL = 10; // per trial — shared across A/B
+
+const state = {
+  phase:null,   // 'desc' or 'exp'
+  scenarioIdx:0,
+  trialOrderDesc:[0,1,2],
+  trialOrderExp:[0,2,1], // shuffle a bit so it doesn't feel identical
+  results: { desc:[], exp:[] }, // each: {scenarioIdx, choice:'A'|'B', payoff, samples:{A:[],B:[]}}
+  totalCoins:0,
+  samplesUsed:0,
+  curSampleA:[],
+  curSampleB:[],
+  curScenario:null,
+  committable:false,
+};
+
+/* ── Helpers ── */
+function $(id){return document.getElementById(id);}
+function show(scrId){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  $(scrId).classList.add('active');
+}
+function sampleOutcome(box){
+  const r = Math.random(); let acc=0;
+  for(const o of box){ acc+=o.p; if(r<acc) return o.v; }
+  return box[box.length-1].v;
+}
+function payoffDelta(v){
+  if(v===0) return '0';
+  return (v>0?'+':'')+v;
+}
+function chipClass(v){ return v>0?'pos':v<0?'neg':'zero'; }
+
+/* ── Screen flow ── */
+$('btn-start').onclick = ()=> show('screen-intro');
+$('btn-intro-go').onclick = ()=> show('screen-phase-desc');
+$('btn-phase-desc-go').onclick = ()=> startPhase('desc');
+$('btn-phase-exp-go').onclick = ()=> startPhase('exp');
+$('btn-restart').onclick = ()=> location.reload();
+$('btn-hub').onclick = ()=> location.href = '../';
+
+function startPhase(phase){
+  state.phase = phase;
+  state.scenarioIdx = 0;
+  state.totalCoins = phase==='desc' ? 0 : state.totalCoins; // continue
+  loadTrial();
+  show('screen-trial');
+}
+
+function loadTrial(){
+  const order = state.phase==='desc' ? state.trialOrderDesc : state.trialOrderExp;
+  const sIdx = order[state.scenarioIdx];
+  const sc = SCENARIOS[sIdx];
+  state.curScenario = sc;
+  state.curSampleA = [];
+  state.curSampleB = [];
+  state.samplesUsed = 0;
+  state.committable = (state.phase==='desc');
+
+  // Phase bar
+  $('phase-mode-text').textContent = state.phase==='desc' ? '説明 / DESCRIPTION' : '経験 / EXPERIENCE';
+  $('phase-mode-text').className = 'phase-mode '+state.phase;
+
+  // Scenario dots
+  const dots = order.map((_,i)=>{
+    let cls='scenario-dot';
+    if(i<state.scenarioIdx) cls+=' done';
+    if(i===state.scenarioIdx) cls+=' active';
+    return `<div class="${cls}"></div>`;
+  }).join('');
+  $('scenario-counter').innerHTML = dots;
+
+  // Coin
+  $('coin-total').textContent = state.totalCoins;
+
+  // Door content
+  if(state.phase==='desc'){
+    $('door-A-info').innerHTML = sc.descA;
+    $('door-B-info').innerHTML = sc.descB;
+    $('trial-prompt').innerHTML = `<strong>${sc.label}</strong><br>どちらの扉を選びますか？`;
+    $('sample-row').style.display='none';
+    $('sample-counter').style.display='none';
+    $('btn-commit').style.display='none';
+  } else {
+    $('door-A-info').innerHTML = '<div class="door-mystery">?</div>';
+    $('door-B-info').innerHTML = '<div class="door-mystery">?</div>';
+    $('trial-prompt').innerHTML = `<strong>${sc.label}</strong><br>「ためす」を何度かして、決める。`;
+    $('sample-row').style.display='flex';
+    $('sample-counter').style.display='block';
+    $('sample-counter').textContent = `残りためし回数: ${MAX_SAMPLES_TOTAL}`;
+    $('btn-commit').style.display='inline-block';
+    $('btn-commit').textContent='まず試してね';
+    $('btn-commit').disabled = true;
+    $('btn-commit').style.opacity=0.4;
+  }
+  $('door-A-samples').innerHTML='';
+  $('door-B-samples').innerHTML='';
+  $('door-A').classList.remove('selected');
+  $('door-B').classList.remove('selected');
+  // Re-enable sample buttons (in case prior trial disabled them)
+  $('btn-sample-A').disabled = false;
+  $('btn-sample-B').disabled = false;
+  $('btn-sample-A').style.opacity = 1;
+  $('btn-sample-B').style.opacity = 1;
+}
+
+/* ── Door click for description ── */
+$('door-A').addEventListener('click', ()=>{ if(state.phase==='desc') commit('A'); });
+$('door-B').addEventListener('click', ()=>{ if(state.phase==='desc') commit('B'); });
+
+/* ── Sampling for experience ── */
+$('btn-sample-A').onclick = ()=> sample('A');
+$('btn-sample-B').onclick = ()=> sample('B');
+
+function sample(door){
+  if(state.samplesUsed>=MAX_SAMPLES_TOTAL) return;
+  const box = door==='A' ? state.curScenario.A : state.curScenario.B;
+  const v = sampleOutcome(box);
+  state.samplesUsed++;
+  if(door==='A') state.curSampleA.push(v); else state.curSampleB.push(v);
+  // Add chip
+  const chip = document.createElement('div');
+  chip.className = 'sample-chip '+chipClass(v);
+  chip.textContent = payoffDelta(v);
+  $('door-'+door+'-samples').appendChild(chip);
+  // Update counter
+  const remain = MAX_SAMPLES_TOTAL - state.samplesUsed;
+  $('sample-counter').textContent = `残りためし回数: ${remain}`;
+  // Enable commit after at least 2 samples on each side OR after 4 total
+  if(state.curSampleA.length>=1 && state.curSampleB.length>=1){
+    state.committable = true;
+    $('btn-commit').disabled = false;
+    $('btn-commit').style.opacity = 1;
+    $('btn-commit').textContent = '決める';
+  }
+  if(remain<=0){
+    $('btn-sample-A').disabled = true;
+    $('btn-sample-B').disabled = true;
+    $('btn-sample-A').style.opacity=0.4;
+    $('btn-sample-B').style.opacity=0.4;
+  }
+}
+
+$('btn-commit').onclick = ()=>{
+  if(!state.committable) return;
+  // In experience mode: which door? Prompt with selection on door click after sampling.
+  // Simpler: highlight last clicked.
+  // Actually we let user click door A or B.
+};
+
+/* In experience mode, clicks on door = commit (after committable) */
+$('door-A').addEventListener('click', ()=>{ if(state.phase==='exp' && state.committable) commit('A'); });
+$('door-B').addEventListener('click', ()=>{ if(state.phase==='exp' && state.committable) commit('B'); });
+
+function commit(choice){
+  // Highlight door
+  $('door-'+choice).classList.add('selected');
+  // Roll outcome
+  const box = choice==='A' ? state.curScenario.A : state.curScenario.B;
+  const v = sampleOutcome(box);
+  state.totalCoins += v;
+  // Record
+  state.results[state.phase].push({
+    scenarioIdx: state.curScenario.id-1,
+    choice, payoff:v,
+    samplesA:[...state.curSampleA],
+    samplesB:[...state.curSampleB]
+  });
+  // Show flash
+  showFlash(v, ()=>{
+    state.scenarioIdx++;
+    const order = state.phase==='desc'? state.trialOrderDesc : state.trialOrderExp;
+    if(state.scenarioIdx >= order.length){
+      // Phase end
+      if(state.phase==='desc'){
+        // Move to phase intro for experience
+        setTimeout(()=>show('screen-phase-exp'), 200);
+      } else {
+        // Done — to result
+        setTimeout(()=>buildResult(),200);
+      }
+    } else {
+      setTimeout(()=>loadTrial(),300);
+    }
+  });
+}
+
+function showFlash(v, cb){
+  const el = $('outcome-flash');
+  const a = $('flash-amount');
+  a.className = 'flash-amount '+chipClass(v);
+  a.textContent = payoffDelta(v)+(v===0?'':' コイン');
+  if(v===0) a.textContent = '±0 コイン';
+  el.classList.add('show');
+  setTimeout(()=>{
+    el.classList.remove('show');
+    cb && cb();
+  }, 1100);
+}
+
+/* ── Build result ── */
+function buildResult(){
+  // Compare per scenario
+  const descMap = {}; const expMap = {};
+  for(const r of state.results.desc) descMap[r.scenarioIdx]=r;
+  for(const r of state.results.exp) expMap[r.scenarioIdx]=r;
+
+  // Build per-scenario rows
+  const rowsHTML = SCENARIOS.map((sc,i)=>{
+    const d = descMap[i]; const e = expMap[i];
+    if(!d || !e) return '';
+    const same = d.choice===e.choice;
+    const tag = same ? '一貫' : '<strong>ギャップ</strong>';
+    const tagCls = same ? 'matchA' : 'gap';
+    const labels = {
+      0:'【同じ期待値】 確実な8 vs 80%で10',
+      1:'【まれな大損】 5%で-25 vs 確実に-1',
+      2:'【まれな大当】 5%で+25 vs 確実に+1'
+    };
+    const note = same
+      ? '読んでも、試しても、同じ判断'
+      : `説明 → 扉<strong>${d.choice}</strong> / 経験 → 扉<strong>${e.choice}</strong>`;
+    return `
+      <div class="scenario-result">
+        <div class="sr-row"><span class="sr-num">${labels[i]}</span><span class="sr-pick ${tagCls}">${tag}</span></div>
+        <div class="sr-tag">${note}</div>
+      </div>`;
+  }).join('');
+  $('scenario-results').innerHTML = rowsHTML;
+
+  // Patterns
+  const dPat = state.results.desc.map(r=>r.choice).join('');
+  const ePat = state.results.exp.map(r=>r.choice).join('');
+  // Reorder by scenario id for display
+  const dById = state.results.desc.slice().sort((a,b)=>a.scenarioIdx-b.scenarioIdx).map(r=>r.choice).join('');
+  const eById = state.results.exp.slice().sort((a,b)=>a.scenarioIdx-b.scenarioIdx).map(r=>r.choice).join('');
+  $('result-desc-pattern').textContent = dById;
+  $('result-exp-pattern').textContent = eById;
+  // Coins per phase
+  const dCoins = state.results.desc.reduce((s,r)=>s+r.payoff,0);
+  const eCoins = state.results.exp.reduce((s,r)=>s+r.payoff,0);
+  $('result-desc-coins').textContent = (dCoins>=0?'+':'')+dCoins;
+  $('result-exp-coins').textContent = (eCoins>=0?'+':'')+eCoins;
+
+  // Personalized insight
+  const gaps = [0,1,2].filter(i=>descMap[i] && expMap[i] && descMap[i].choice!==expMap[i].choice).length;
+  let insightTitle = 'あなたの「みえない5%」';
+  let insightExtra = '';
+  if(gaps===0){
+    insightTitle = '一貫した3問';
+    insightExtra = '<br><br>あなたは説明と経験どちらでも同じ判断でした。これはとてもめずらしい。多くの人にとって、両者は別の脳が動いているように違います。';
+  } else if(gaps>=2){
+    insightExtra = `<br><br>あなたは ${gaps}/3 で違う答えを出しました。これが <strong>description-experience gap</strong>。同じ確率なのに、伝わり方で重みづけが変わります。`;
+  } else {
+    insightExtra = `<br><br>あなたは 1/3 でギャップを示しました。多くの人と同じく、説明と経験は別の脳で処理されています。`;
+  }
+  $('result-title').textContent = insightTitle;
+  $('insight-text').innerHTML = `Hertwig, Barron, Weber & Erev (2004) は、人間が同じ確率を「読む」場合と「経験する」場合で、まったく違う重みづけをすることを示しました。${insightExtra}`;
+
+  show('screen-result');
+}
+</script>
+</body>
+</html>

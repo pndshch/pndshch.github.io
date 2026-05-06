@@ -210,6 +210,7 @@ header p {
 .thumb-ricecooker { background: linear-gradient(135deg, #2a1608 0%, #5a3818 50%, #1a0f04 100%); }
 .thumb-warmth     { background: linear-gradient(135deg, #2a1f3d 0%, #c9836b 50%, #16101f 100%); }
 .thumb-cargo      { background: linear-gradient(135deg, #0e2a3e 0%, #5a93b8 35%, #d4a574 75%, #1a0e04 100%); }
+.thumb-mienai     { background: radial-gradient(ellipse at 50% 30%, #1c3a52 0%, #0a1f2e 60%, #050d18 100%); }
 
 .card-body {
     padding: 18px 20px 22px;
@@ -413,6 +414,14 @@ footer a:hover { color: #e6edf3; }
 <!-- Featured -->
 <div class="section-label" data-i18n="secFeatured">⭐ おすすめ</div>
 <div class="feat-row">
+        <a class="feat-card" href="https://pndshch.github.io/mienai-5percent/" target="_blank">
+            <div class="card-thumb thumb-mienai">
+            <span class="new-badge" data-i18n="newBadge">NEW</span>
+            <span class="thumb-emoji">🚪</span>
+            <img class="thumb-gif" src="assets/mienai-5percent.gif" alt="" onerror="this.remove()">
+        </div>
+            <span class="feat-title" data-i18n="mienaiTitle">みえない5%</span>
+        </a>
         <a class="feat-card" href="https://pndshch.github.io/cargo-cult-1947/" target="_blank">
             <div class="card-thumb thumb-cargo">
             <span class="new-badge" data-i18n="newBadge">NEW</span>
@@ -893,6 +902,23 @@ footer a:hover { color: #e6edf3; }
             </div>
         </div>
     <div class="grid-header" data-cat-header="games" data-i18n="secGridGames">🎮 ゲーム</div>
+    <div class="card" data-cat="games">
+            <div class="card-thumb thumb-mienai">
+                <span class="new-badge" data-i18n="newBadge">NEW</span>
+                <span class="thumb-emoji">🚪</span>
+                <img class="thumb-gif" src="assets/mienai-5percent.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="mienaiTitle">みえない5%</h2>
+                <p data-i18n="mienaiDesc">同じ確率を「読む」と「経験する」で、あなたは違う答えを出す——Hertwig (2004) が見つけた description-experience gap。3つのシナリオを2つの脳で2回ずつ判断し、自分の中の「みえない5%」を発見する3分の思考実験。Allais Memorial Prize 2026 受賞研究。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="mienaiTag1">思考実験</span>
+                    <span class="tag" data-i18n="mienaiTag2">行動経済学</span>
+                    <span class="tag" data-i18n="mienaiTag3">Hertwig</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/mienai-5percent/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
     <div class="card" data-cat="games">
             <div class="card-thumb thumb-cargo">
                 <span class="new-badge" data-i18n="newBadge">NEW</span>
@@ -1725,6 +1751,9 @@ const I18N = {
         cargoTitle: "貨物神1947",
         cargoDesc:  "戦争中、空からの『贈り物』が降ってきた——米軍の輸送機だった。1945年、彼らは去り、飛行機は来なくなった。タンナ島の儀式長として、竹で管制塔を建て、滑走路を整え、木のヘッドホンを彫れ。儀式を尽くせば飛行機は戻る——本当に？ Feynman『カーゴカルト科学』(1974) を3分で体験する、相関と因果の思考実験。",
         cargoTag1: "思考実験", cargoTag2: "相関≠因果", cargoTag3: "Feynman",
+        mienaiTitle: "みえない5%",
+        mienaiDesc:  "同じ確率を「読む」と「経験する」で、あなたは違う答えを出す——Hertwig (2004) が見つけた description-experience gap。3つのシナリオを2つの脳で2回ずつ判断し、自分の中の「みえない5%」を発見する3分の思考実験。Allais Memorial Prize 2026 受賞研究を体験。",
+        mienaiTag1: "思考実験", mienaiTag2: "行動経済学", mienaiTag3: "Hertwig",
     },
     en: {
         tagline:   "Games · Education · Tools — delivered via browser and apps",
@@ -1944,6 +1973,9 @@ const I18N = {
         cargoTitle: "Cargo Cult 1947",
         cargoDesc:  "WWII brought 'gifts from the sky' — American cargo planes — to Tanna Island. Then in 1945 the planes stopped coming. As the tribal ritual leader, you build bamboo control towers, level the airstrip, carve wooden headphones. Surely if you do enough, the planes return — right? A 3-minute thought experiment on correlation vs. causation, inspired by Feynman's 'Cargo Cult Science' (1974).",
         cargoTag1: "Thought Experiment", cargoTag2: "Correlation≠Causation", cargoTag3: "Feynman",
+        mienaiTitle: "Invisible 5%",
+        mienaiDesc:  "The same probabilities, two answers — yours. When you READ a probability you overweight rare events; when you EXPERIENCE one through small samples you underweight them. Hertwig's 2004 description-experience gap, played out in three trials twice. A 3-minute thought experiment on the research that just won the 2026 Allais Memorial Prize.",
+        mienaiTag1: "Thought Experiment", mienaiTag2: "Behavioral Econ", mienaiTag3: "Hertwig",
     }
 };
 
