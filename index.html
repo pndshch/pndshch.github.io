@@ -206,6 +206,7 @@ header p {
 .thumb-danceplague { background: linear-gradient(135deg, #2a1a08 0%, #1a0e04 100%); }
 .thumb-nihilist   { background: linear-gradient(135deg, #0a0e1a 0%, #141830 100%); }
 .thumb-doomscroll { background: linear-gradient(135deg, #2a0a14 0%, #1a0d2a 100%); }
+.thumb-ninth      { background: linear-gradient(135deg, #1a0e04 0%, #2a1608 50%, #0a0603 100%); }
 
 .card-body {
     padding: 18px 20px 22px;
@@ -409,6 +410,14 @@ footer a:hover { color: #e6edf3; }
 <!-- Featured -->
 <div class="section-label" data-i18n="secFeatured">⭐ おすすめ</div>
 <div class="feat-row">
+        <a class="feat-card" href="https://pndshch.github.io/ninth-1824/" target="_blank">
+            <div class="card-thumb thumb-ninth">
+            <span class="new-badge" data-i18n="newBadge">NEW</span>
+            <span class="thumb-emoji">🕯️</span>
+            <img class="thumb-gif" src="assets/ninth-1824.gif" alt="" onerror="this.remove()">
+        </div>
+            <span class="feat-title" data-i18n="ninthTitle">沈黙の第九</span>
+        </a>
         <a class="feat-card" href="https://pndshch.github.io/doomscroll-lab/" target="_blank">
             <div class="card-thumb thumb-doomscroll">
             <span class="new-badge" data-i18n="newBadge">NEW</span>
@@ -857,6 +866,23 @@ footer a:hover { color: #e6edf3; }
             </div>
         </div>
     <div class="grid-header" data-cat-header="games" data-i18n="secGridGames">🎮 ゲーム</div>
+    <div class="card" data-cat="games">
+            <div class="card-thumb thumb-ninth">
+                <span class="new-badge" data-i18n="newBadge">NEW</span>
+                <span class="thumb-emoji">🕯️</span>
+                <img class="thumb-gif" src="assets/ninth-1824.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="ninthTitle">沈黙の第九</h2>
+                <p data-i18n="ninthDesc">1824年5月7日、ベートーヴェンは聴覚を失ったまま交響曲第9番の初演を指揮した。最終楽章が終わってもなお気づかず指揮を続けた彼を、ソプラノが振り向かせた——。あなたも音のない世界で指揮を執り、最後の瞬間に初めて『歓喜の歌』を聴く、3分の追体験。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="ninthTag1">歴史</span>
+                    <span class="tag" data-i18n="ninthTag2">音楽</span>
+                    <span class="tag" data-i18n="ninthTag3">沈黙の体験</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/ninth-1824/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
     <div class="card" data-cat="games">
             <div class="card-thumb thumb-doomscroll">
                 <span class="new-badge" data-i18n="newBadge">NEW</span>
@@ -1609,6 +1635,9 @@ const I18N = {
         doomscrollTitle: "ドゥームスクロール研究室",
         doomscrollDesc:  "SNSのフィードを3分だけ体験する認知実験。あなたの「いいね」を学習したアルゴリズムが、フィードをどれだけ早くあなた専用に絞り込むかを可視化する。終わると、止められないのは意志の弱さではなく設計の問題だと、自分のデータで気づく。",
         doomscrollTag1: "認知科学", doomscrollTag2: "SNS依存", doomscrollTag3: "3分実験",
+        ninthTitle: "沈黙の第九",
+        ninthDesc: "1824年5月7日、ベートーヴェンは聴覚を失ったまま交響曲第9番の初演を指揮した。最終楽章が終わってもなお気づかず指揮を続けた彼を、ソプラノが振り向かせた——。あなたも音のない世界で指揮を執り、最後の瞬間に初めて『歓喜の歌』を聴く、3分の追体験。",
+        ninthTag1: "歴史", ninthTag2: "音楽", ninthTag3: "沈黙の体験",
     },
     en: {
         tagline:   "Games · Education · Tools — delivered via browser and apps",
@@ -1816,6 +1845,9 @@ const I18N = {
         doomscrollTitle: "Doom Scroll Lab",
         doomscrollDesc:  "A 3-minute cognitive experiment with a fictional social feed. The algorithm learns from your taps and narrows the feed onto you in real time — then shows you the trajectory. The takeaway, backed by your own data: stopping isn't a willpower problem, the feed is engineered for this.",
         doomscrollTag1: "Cognitive Science", doomscrollTag2: "Social Media", doomscrollTag3: "3-min Experiment",
+        ninthTitle: "The Silent Ninth",
+        ninthDesc: "May 7, 1824. Beethoven, by then completely deaf, conducted the world premiere of his Ninth Symphony — and kept conducting after the music had stopped, unaware. The contralto Caroline Unger turned him around to face the silent ovation. You take the baton in his place: conduct without hearing, and only at the very end finally hear what you made.",
+        ninthTag1: "History", ninthTag2: "Music", ninthTag3: "Silence",
     }
 };
 
