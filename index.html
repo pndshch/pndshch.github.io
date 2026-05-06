@@ -202,6 +202,7 @@ header p {
 .thumb-yokonige  { background: linear-gradient(135deg, #0a1420 0%, #1a0810 100%); }
 .thumb-spore     { background: linear-gradient(135deg, #020a08 0%, #081a10 100%); }
 .thumb-janets    { background: linear-gradient(135deg, #1a1040 0%, #0a0a1a 100%); }
+.thumb-mottainai { background: linear-gradient(135deg, #1a0a2e 0%, #0d0015 100%); }
 
 .card-body {
     padding: 18px 20px 22px;
@@ -832,6 +833,22 @@ footer a:hover { color: #e6edf3; }
             </div>
         </div>
     <div class="grid-header" data-cat-header="games" data-i18n="secGridGames">🎮 ゲーム</div>
+    <div class="card" data-cat="games">
+            <div class="card-thumb thumb-mottainai">
+                <span class="new-badge" data-i18n="newBadge">NEW</span>
+                <span class="thumb-emoji">🏰</span>
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="mottainaiTitle">もったいないダンジョン</h2>
+                <p data-i18n="mottainaiDesc">「もったいない」が冒険者を破滅させる。ダンジョンの奥には伝説の財宝——でも進むほどリスクは増す。ゲーム自体があなたを心理的に操り、最後にその手口を全て暴露する。サンクコストの罠を体で知るローグライクRPG。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="mottainaiTag1">認知バイアス</span>
+                    <span class="tag" data-i18n="mottainaiTag2">サンクコスト</span>
+                    <span class="tag" data-i18n="mottainaiTag3">ローグライク</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/mottainai-dungeon/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
     <div class="card" data-cat="games">
             <div class="card-thumb thumb-janets">
                 <span class="new-badge" data-i18n="newBadge">NEW</span>
@@ -1508,6 +1525,9 @@ const I18N = {
         janetsTitle: "ジャネーの法則",
         janetsDesc:  "80年の人生を数分で体感。光る記憶のかけらを集めながら、歳をとるほど時間が加速していく——1897年の心理学法則を体で知る。あなたの人生の「密度」はどこにある？",
         janetsTag1: "心理学", janetsTag2: "時間知覚", janetsTag3: "体感ゲーム",
+        mottainaiTitle: "もったいないダンジョン",
+        mottainaiDesc:  "「もったいない」が冒険者を破滅させる。ダンジョンの奥には伝説の財宝——でも進むほどリスクは増す。ゲーム自体があなたを心理的に操り、最後にその手口を全て暴露する。サンクコストの罠を体で知るローグライクRPG。",
+        mottainaiTag1: "認知バイアス", mottainaiTag2: "サンクコスト", mottainaiTag3: "ローグライク",
     },
     en: {
         tagline:   "Games · Education · Tools — delivered via browser and apps",
@@ -1703,6 +1723,9 @@ const I18N = {
         janetsTitle: "Janet's Law",
         janetsDesc:  "Experience 80 years of life in minutes. Catch glowing memory fragments as time accelerates with age — a 1897 psychology law you feel in your bones. Where does the density of your life lie?",
         janetsTag1: "Psychology", janetsTag2: "Time Perception", janetsTag3: "Experiential",
+        mottainaiTitle: "Mottainai Dungeon",
+        mottainaiDesc:  "\"Mottainai\" (waste-aversion) destroys adventurers. Legendary treasure lies deep in the dungeon — but danger grows with each floor. The game itself psychologically manipulates you, then exposes every trick it used. A roguelike RPG that teaches the sunk cost fallacy.",
+        mottainaiTag1: "Cognitive Bias", mottainaiTag2: "Sunk Cost", mottainaiTag3: "Roguelike",
     }
 };
 
