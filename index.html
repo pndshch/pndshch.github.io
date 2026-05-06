@@ -201,6 +201,7 @@ header p {
 .thumb-kitkat     { background: linear-gradient(135deg, #2a0a0a 0%, #1a1010 100%); }
 .thumb-yokonige  { background: linear-gradient(135deg, #0a1420 0%, #1a0810 100%); }
 .thumb-spore     { background: linear-gradient(135deg, #020a08 0%, #081a10 100%); }
+.thumb-janets    { background: linear-gradient(135deg, #1a1040 0%, #0a0a1a 100%); }
 
 .card-body {
     padding: 18px 20px 22px;
@@ -404,6 +405,13 @@ footer a:hover { color: #e6edf3; }
 <!-- Featured -->
 <div class="section-label" data-i18n="secFeatured">⭐ おすすめ</div>
 <div class="feat-row">
+        <a class="feat-card" href="https://pndshch.github.io/janets-law/" target="_blank">
+            <div class="card-thumb thumb-janets">
+            <span class="new-badge" data-i18n="newBadge">NEW</span>
+            <span class="thumb-emoji">⏳</span>
+        </div>
+            <span class="feat-title" data-i18n="janetsTitle">ジャネーの法則</span>
+        </a>
         <a class="feat-card" href="https://pndshch.github.io/kitkat-highway/" target="_blank">
             <div class="card-thumb thumb-kitkat">
             <span class="new-badge" data-i18n="newBadge">NEW</span>
@@ -824,6 +832,22 @@ footer a:hover { color: #e6edf3; }
             </div>
         </div>
     <div class="grid-header" data-cat-header="games" data-i18n="secGridGames">🎮 ゲーム</div>
+    <div class="card" data-cat="games">
+            <div class="card-thumb thumb-janets">
+                <span class="new-badge" data-i18n="newBadge">NEW</span>
+                <span class="thumb-emoji">⏳</span>
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="janetsTitle">ジャネーの法則</h2>
+                <p data-i18n="janetsDesc">80年の人生を数分で体感。光る記憶のかけらを集めながら、歳をとるほど時間が加速していく——1897年の心理学法則を体で知る。あなたの人生の「密度」はどこにある？</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="janetsTag1">心理学</span>
+                    <span class="tag" data-i18n="janetsTag2">時間知覚</span>
+                    <span class="tag" data-i18n="janetsTag3">体感ゲーム</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/janets-law/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
     <div class="card" data-cat="games">
             <div class="card-thumb thumb-koi">
                 <span class="new-badge" data-i18n="newBadge">NEW</span>
@@ -1481,6 +1505,9 @@ const I18N = {
         koiTitle: "鯉の滝登り",
         koiDesc:  "5月5日こどもの日。鯉となって龍門の滝を登り切れば龍と化す——故事「登竜門」を題材にした縦スクロール。鯉のぼりの由来、その意味を遊びながら知る。",
         koiTag1: "こどもの日", koiTag2: "縦スクロール", koiTag3: "故事成語",
+        janetsTitle: "ジャネーの法則",
+        janetsDesc:  "80年の人生を数分で体感。光る記憶のかけらを集めながら、歳をとるほど時間が加速していく——1897年の心理学法則を体で知る。あなたの人生の「密度」はどこにある？",
+        janetsTag1: "心理学", janetsTag2: "時間知覚", janetsTag3: "体感ゲーム",
     },
     en: {
         tagline:   "Games · Education · Tools — delivered via browser and apps",
@@ -1673,6 +1700,9 @@ const I18N = {
         koiTitle: "Koi Falls — Dragon Gate",
         koiDesc:  "May 5 — Children's Day in Japan. Be the carp climbing the legendary Dragon Gate falls. Reach the top and you become a dragon — origin of the idiom \"tōryūmon\", the gateway to greatness behind every koinobori carp streamer.",
         koiTag1: "Children's Day", koiTag2: "Vertical scroller", koiTag3: "Folklore",
+        janetsTitle: "Janet's Law",
+        janetsDesc:  "Experience 80 years of life in minutes. Catch glowing memory fragments as time accelerates with age — a 1897 psychology law you feel in your bones. Where does the density of your life lie?",
+        janetsTag1: "Psychology", janetsTag2: "Time Perception", janetsTag3: "Experiential",
     }
 };
 
