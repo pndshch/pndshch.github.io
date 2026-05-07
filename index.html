@@ -240,6 +240,7 @@ header p {
 .thumb-kosuruto  { background: radial-gradient(ellipse at 50% 35%, #2b1a4d 0%, #1a1230 65%, #0c0820 100%); }
 .thumb-kiin      { background: radial-gradient(ellipse at 50% 28%, #08332e 0%, #0a1d1b 55%, #021816 100%); }
 .thumb-menotanken { background: radial-gradient(ellipse at 50% 80%, #6b5a44 0%, #2a3a55 35%, #101a30 70%, #050a18 100%); }
+.thumb-hitofudegaki { background: linear-gradient(180deg, #fff4d6 0%, #ffe6c8 100%); }
 .thumb-broadstreet { background: linear-gradient(180deg, #2a1f15 0%, #5a4a36 35%, #b09866 70%, #f0e3c2 100%); }
 .thumb-wegener   { background: linear-gradient(180deg, #2c2218 0%, #6b4f30 35%, #cca06f 70%, #efe4cb 100%); }
 .thumb-lo1969    { background: radial-gradient(ellipse at 50% 50%, #0e1810 0%, #050a05 60%, #020602 100%); }
@@ -628,6 +629,23 @@ footer a:hover { color: #e6edf3; }
 
 <!-- All apps -->
 <div class="grid" id="app-grid">
+    <div class="card" data-cat="kids" data-added="2026-05-08T22:00:00+09:00" data-slug="hitofudegaki">
+            <div class="card-thumb thumb-hitofudegaki">
+            <span class="new-badge">NEW</span>
+            <span class="thumb-emoji">✏️</span>
+                <img class="thumb-gif" src="assets/hitofudegaki.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="hitofudegakiTitle">ひとふでがき</h2>
+                <p data-i18n="hitofudegakiDesc"><strong>ペンを はなさず、ぜんぶの せんを とおれるかな？</strong>5〜10さい むけ、世界の こども アプリ では めずらしい <strong>「ひとふでがき」</strong>（オイラー路）パズル。さんかく → しかく → ほし → ちょうちょ → おうち → まど(日) → ふうとう、と かたちが だんだん むずかしく なる 7つの レベル。じぶんで トレースした せん は <strong>にじいろ</strong>に そまり、どこを とおったか ひと目で わかる。「おなじ せんは 2かい とおれない」「ペンを はなして べつの ふしから やりなおすのは ダメ」——この 2つの ルール だけで、ぐっと あたまを つかう。「<strong>きすうの せんが でてる ふし は スタートか ゴールに しないと ダメ</strong>」という、グラフ理論の 美しい 法則 を、ことばに する まえに <strong>ゆびで しる</strong>。<strong>そして さいごの ステージ ★8: ケーニヒスベルクの 7つの はし</strong>。何回 やっても できない——じつは これは <strong>1736ねん レオンハルト・オイラー が 「ぜったいに できない」と しょうめい した</strong> ほんものの 数学パズル。「すべての ふしから ぐうすう本 の せんが でているか、きすう本 が ちょうど 2かしょ なら できる。それいがいは ぜったい できない」——グラフ理論 という 数学 が 生まれた しゅんかん。こども に 「数学に は <strong>解けない問題</strong> が ある。それは 諦めじゃ なく <strong>証明</strong> なんだ」を、5分の あそび で つたえる。ヒント ボタン は きすう次数 の ふし を ぴかっと ハイライト。1枚 HTML、ライブラリ なし、SVG 描画。日本語と English の バイリンガル。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="hitofudegakiTag1">5〜10歳</span>
+                    <span class="tag" data-i18n="hitofudegakiTag2">オイラー路 1736</span>
+                    <span class="tag" data-i18n="hitofudegakiTag3">ケーニヒスベルクの橋</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/hitofudegaki/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
     <div class="card" data-cat="kids" data-added="2026-05-08T18:00:00+09:00" data-slug="me-no-tanken">
             <div class="card-thumb thumb-menotanken">
             <span class="thumb-emoji">🦉</span>
@@ -2448,6 +2466,9 @@ const I18N = {
         menotankenTitle: "めの たんけん",
         menotankenDesc:  "<strong>がめんから めを はなしたら ごほうび</strong>に なる、4〜9さい むけの anti-screen ゲーム。世界の キッズアプリの ほとんどは めを つかれさせる——でも これは ぎゃく。3分間、よる の もりで 6つの ステージ：①ふくろうと まばたき ②ホタルを めで おっかけ（スムーズ追視）③ぱっと ひかる ほしを タップ（サッカード）④ちょうちょの 大小で スマホを ちかく/とおく（ピント調節）⑤<strong>20-20-20 ルール</strong>を 体で：スマホを よこに かたむけたら 20びょう カウントダウン（うごきセンサーで 検知）⑥よあけ。アジアの こどもの 近視は 30年で 数倍に。タブレット時代の 目を まもる、世界でも まれな『めを やすめる』こども ゲーム。",
         menotankenTag1: "4〜9歳", menotankenTag2: "20-20-20", menotankenTag3: "めを やすめる",
+        hitofudegakiTitle: "ひとふでがき",
+        hitofudegakiDesc:  "<strong>ペンを はなさず、ぜんぶの せんを とおれるかな？</strong>5〜10さい むけの「ひとふでがき」（オイラー路）パズル 8レベル。さんかく → しかく → ほし → ちょうちょ → おうち → まど(日) → ふうとう。トレース した せんは にじいろ に そまる。さいごは ★ <strong>ケーニヒスベルクの 7つの はし</strong>——何回 やっても できない、じつは <strong>1736年 オイラー が「ぜったいに できない」と しょうめい した</strong> ほんものの 数学パズル。グラフ理論 が 生まれた しゅんかん。こども に「数学には <strong>解けない問題</strong> が ある。それは 諦めじゃ なく 証明 なんだ」を、5分の あそび で。ヒントは きすう次数 の ふし を ハイライト。",
+        hitofudegakiTag1: "5〜10歳", hitofudegakiTag2: "オイラー路 1736", hitofudegakiTag3: "ケーニヒスベルクの橋",
     },
     en: {
         tagline:   "Games · Education · Tools — delivered via browser and apps",
@@ -2770,6 +2791,9 @@ const I18N = {
         menotankenTitle: "Eye Expedition",
         menotankenDesc:  "An <strong>anti-screen</strong> game for ages 4-9: it rewards you for <strong>looking away from the screen</strong>. Most kids' apps strain the eyes — this one does the opposite. Six 3-minute stages in a night forest: ① owl blink-along (slows the kid's blink rate, which screens cut in half) ② firefly chase (smooth pursuit) ③ flashing stars (saccades) ④ near/far butterfly (lens accommodation) ⑤ <strong>20-20-20 break</strong>: tilt the phone sideways and a 20-second countdown begins, verified by the device-orientation sensor — embodying the AAO's standard rule ⑥ dawn finale. East Asian childhood myopia rates have multiplied over 30 years. A vanishingly rare 'rest your eyes' game for the tablet era. Bilingual JP/EN, single HTML, no libraries.",
         menotankenTag1: "Ages 4-9", menotankenTag2: "20-20-20", menotankenTag3: "Eye-friendly",
+        hitofudegakiTitle: "Hito-fude-gaki (One-Stroke)",
+        hitofudegakiDesc:  "<strong>Can you trace every line without lifting your pen?</strong> Eight Eulerian-path puzzles for ages 5-10 — Triangle → Square → Star → Bowtie → House → Window → Envelope, each line painting itself in rainbow as you go. The final stage ★8 is the real <strong>Seven Bridges of Königsberg</strong>: no matter how many times you try, you can't solve it — because in <strong>1736 Leonhard Euler proved it impossible</strong>. \"A one-stroke path exists only if every node has an even number of lines, OR exactly two nodes have odd. Otherwise — never.\" The moment graph theory was born, delivered to a kid in five minutes of play, with a quiet message: <em>some problems in math aren't unsolved — they're proven impossible</em>. Hint button highlights odd-degree nodes. Pure SVG, single HTML, no libraries. Bilingual JP/EN.",
+        hitofudegakiTag1: "Ages 5-10", hitofudegakiTag2: "Eulerian path 1736", hitofudegakiTag3: "Königsberg Bridges",
     }
 };
 
