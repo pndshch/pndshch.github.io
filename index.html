@@ -248,6 +248,7 @@ header p {
 .thumb-rosetta1822 { background: radial-gradient(ellipse at 50% 35%, #d4af37 0%, #6b4a26 45%, #1a0e07 100%); }
 .thumb-uchu      { background: radial-gradient(ellipse at 50% 30%, #1d3473 0%, #0a1535 55%, #050216 100%); }
 .thumb-sukima    { background: radial-gradient(circle at 30% 20%, #faf3df 0%, #f4ead5 38%, #ecdcb6 100%); }
+.thumb-ashiato   { background: linear-gradient(180deg, #0e1d33 0%, #2a3e6a 38%, #c5b3d4 65%, #e8eaf3 78%, #f6f7fb 100%); }
 
 .card-body {
     padding: 18px 20px 22px;
@@ -632,6 +633,23 @@ footer a:hover { color: #e6edf3; }
 
 <!-- All apps -->
 <div class="grid" id="app-grid">
+    <div class="card" data-cat="kids" data-added="2026-05-09T07:30:00+09:00" data-slug="ashiato-tantei">
+            <div class="card-thumb thumb-ashiato">
+            <span class="new-badge">NEW</span>
+            <span class="thumb-emoji">🐾</span>
+                <img class="thumb-gif" src="assets/ashiato-tantei.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="ashiatoTitle">あしあと たんてい</h2>
+                <p data-i18n="ashiatoDesc"><strong>ゆきの もりに のこされた あしあと。だれが あるいた？</strong>5〜9さい むけ、世界の キッズアプリ では めずらしい <strong>「ほんものの どうぶつトラッキング」</strong>を ブラウザで。8しゅるいの どうぶつ — <strong>すずめ・うさぎ・きつね・ねこ・いぬ・しか・くま・りす</strong> — それぞれの <strong>ほんとうの あるきかた</strong>で あしあとが ちらばる。<strong>うさぎは うしろあしが まえに くる</strong>（バウンド歩行 — とぶ ように はしるから 後足が 前足の そとがわに 着地する）、<strong>きつねは あしあとが いちれつ に ならぶ</strong>（ダイレクトレジスター — 後足を 前足と おなじ ばしょに おく）、<strong>ねこ は つめの あとが ない</strong>（あるく とき つめを しまっている）、<strong>しか は ハートを 二つに わった ような</strong> 偶蹄、<strong>くま は 5本ゆびで ヒトと おなじ 蹠行（しょこう）</strong>。ゆびで トレイルを なぞって すすみ、おわりで 4つの どうぶつから えらぶ。せいかい すると、その どうぶつが ゆきの うえを あるいて、なぜ そんな あしあと に なるか おしえて くれる。「あしあとずかん」に たまっていき、ぜんいん コンプリート で「<strong>こんど ゆきの ひに、おそとで さがしてみよう</strong>」。1まい HTML、ライブラリ なし、SVG しか つかわない。日本語と English の バイリンガル。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="ashiatoTag1">5〜9歳</span>
+                    <span class="tag" data-i18n="ashiatoTag2">どうぶつトラッキング</span>
+                    <span class="tag" data-i18n="ashiatoTag3">8しゅるい</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/ashiato-tantei/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
     <div class="card" data-cat="kids" data-added="2026-05-08T23:55:00+09:00" data-slug="sukima-no-kobito">
             <div class="card-thumb thumb-sukima">
             <span class="new-badge">NEW</span>
@@ -2531,6 +2549,9 @@ const I18N = {
         sukimaTitle: "すきまのこびと",
         sukimaDesc:  "がめんに はしる ぬいめの せん。その ところどころに、ちいさな こびと が かくれている。ゆびで そっと なでて 12にん さがそう。ちかい と かおだけ ちらっと のぞく ヒント。3〜8さい むけ、はやさを きそわない、ゆっくり した さがしものあそび。",
         sukimaTag1: "3〜8歳", sukimaTag2: "さがしもの", sukimaTag3: "12にん",
+        ashiatoTitle: "あしあと たんてい",
+        ashiatoDesc:  "ゆきの もりに のこされた あしあと。8しゅるいの どうぶつ それぞれの ほんとうの あるきかた で トラックが ちらばる — うさぎの バウンド、きつねの まっすぐ いちれつ、ねこの つめなし、しかの 偶蹄、くまの 5本ゆび。ゆびで トレイル を なぞって おわりで えらぶ。せいかい すると なぜ そう なるか まなべる。5〜9さい むけ、ほんものの どうぶつトラッキングを ブラウザで。",
+        ashiatoTag1: "5〜9歳", ashiatoTag2: "どうぶつトラッキング", ashiatoTag3: "8しゅるい",
     },
     en: {
         tagline:   "Games · Education · Tools — delivered via browser and apps",
@@ -2865,6 +2886,9 @@ const I18N = {
         sukimaTitle: "Tiny Folks in the Seams",
         sukimaDesc:  "Faint seams run across the screen. Tiny folks hide along them. Stroke gently with your finger to find all twelve. Tap close-but-off and only their face peeks for a moment — your only hint. Ages 3–8, a slow hide-and-seek that doesn't reward speed.",
         sukimaTag1: "Ages 3–8", sukimaTag2: "Find-and-keep", sukimaTag3: "12 friends",
+        ashiatoTitle: "Footprint Detective",
+        ashiatoDesc:  "Tracks left in a snowy forest. Drag to follow the trail, then guess the animal at the end. 8 species — sparrow, rabbit, fox, cat, dog, deer, bear, squirrel — each with its REAL gait pattern. Rabbits' bound (back paws land in front), foxes' direct register (a single line), no claws on cat tracks, deer's cloven hooves, bear's plantigrade 5-toed paws. Get it right and the animal walks across the snow showing why. Ages 5–9. Real animal-tracking, in a browser.",
+        ashiatoTag1: "Ages 5–9", ashiatoTag2: "Animal tracking", ashiatoTag3: "8 species",
     }
 };
 
