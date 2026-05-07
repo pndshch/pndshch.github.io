@@ -221,6 +221,7 @@ header p {
 .thumb-kiokurun   { background: linear-gradient(180deg, #3a1a6a 0%, #1a0a3a 50%, #0a0420 100%); }
 .thumb-ashioto    { background: radial-gradient(ellipse at 50% 35%, #2a1d6a 0%, #15102a 55%, #0a0717 100%); }
 .thumb-mimimeiro  { background: radial-gradient(ellipse at 50% 30%, #1a1438 0%, #0c0a20 60%, #050410 100%); }
+.thumb-kaokamo    { background: linear-gradient(160deg, #fef3c7 0%, #fde68a 60%, #fbbf24 100%); }
 
 .card-body {
     padding: 18px 20px 22px;
@@ -500,6 +501,22 @@ footer a:hover { color: #e6edf3; }
 
 <!-- All apps -->
 <div class="grid" id="app-grid">
+    <div class="card" data-cat="kids" data-added="2026-05-07T18:30:00+09:00" data-slug="kao-kamo">
+            <div class="card-thumb thumb-kaokamo">
+            <span class="thumb-emoji">👀</span>
+                <img class="thumb-gif" src="assets/kao-kamo.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="kaokamoTitle">かおかも</h2>
+                <p data-i18n="kaokamoDesc">もようを じっと みると、かおが かくれてる。3〜7さい向け、人間がもつ『パレイドリア（無生物に顔を見出す本能）』を、まるごと あそびにした、世界初級の no-fail かんさつ あそび。くも・しみ・きのめ・いし・ゆうぐれ・おちば・かべ・じょうき—8つの procedural patterns（ぜんぶ ランダム生成、同じ もようは ふたつと ない）から、タップした ところに かおが あらわれて、まばたきして、にっこり 笑う。「まちがい」が ない。タップした ところが かならず かおに なる、ぜったい うまくいく あそびだから、ことばを まだ よめない 3さいから あそべる。みつけた かおは ぜんぶ ずかんに たまっていく—『じぶんが 見つけた もの』が ふえていく ちいさな よろこび。スクリーン疲労時代に生まれた、勝ち負けの ない、観察と 想像の あそびば。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="kaokamoTag1">3〜7歳</span>
+                    <span class="tag" data-i18n="kaokamoTag2">パレイドリア</span>
+                    <span class="tag" data-i18n="kaokamoTag3">no-fail</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/kao-kamo/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
     <div class="card" data-cat="kids" data-added="2026-05-07T16:30:00+09:00" data-slug="mimi-no-meiro">
             <div class="card-thumb thumb-mimimeiro">
             <span class="thumb-emoji">🎧</span>
@@ -1866,6 +1883,9 @@ const I18N = {
         mimimeiroTitle: "みみのめいろ",
         mimimeiroDesc:  "きこえる おとだけを たよりに、ひかる ホタルを さがそう。6〜9さい向け、目では なく『みみで 見る』空間音響あそび。ホタルは ステレオパン（みぎ／ひだり）・おんりょう・たかさ（220〜880Hz）・なる はやさ の4つで じぶんの ばしょを 知らせる。あかるい→うすやみ→まっくら の3レベル スカフォールドで、6さいでも スタートでき、だんだん 音だけで さがせる ように なる。ヘッドホンが ベスト だけど、スピーカーでも わかる モノラル フォールバック つき。リズム ゲームでも 音あて ゲームでも ない、世界初級の キッズむけ 空間聴覚 トレーニング。",
         mimimeiroTag1: "6〜9歳", mimimeiroTag2: "空間音響", mimimeiroTag3: "耳で見る",
+        kaokamoTitle: "かおかも",
+        kaokamoDesc:  "もようを じっと みると、かおが かくれてる。3〜7さい向け、人間がもつ『パレイドリア（無生物に顔を見出す本能）』を、まるごと あそびにした、世界初級の no-fail かんさつ あそび。くも・しみ・きのめ・いし・ゆうぐれ・おちば・かべ・じょうき—8つの procedural patterns（ぜんぶ ランダム生成、同じ もようは ふたつと ない）から、タップした ところに かおが あらわれて、まばたきして、にっこり 笑う。「まちがい」が ない。タップした ところが かならず かおに なる、ぜったい うまくいく あそびだから、ことばを まだ よめない 3さいから あそべる。みつけた かおは ぜんぶ ずかんに たまっていく—『じぶんが 見つけた もの』が ふえていく ちいさな よろこび。スクリーン疲労時代に生まれた、勝ち負けの ない、観察と 想像の あそびば。",
+        kaokamoTag1: "3〜7歳", kaokamoTag2: "パレイドリア", kaokamoTag3: "no-fail",
     },
     en: {
         tagline:   "Games · Education · Tools — delivered via browser and apps",
@@ -2116,6 +2136,9 @@ const I18N = {
         mimimeiroTitle: "Mimi-no-Meiro (Ear Maze)",
         mimimeiroDesc:  "Find the firefly using only sound. A spatial-audio navigation game for ages 6–9 that grows the often-untrained sense of \"seeing with your ears.\" The firefly emits a continuous chime that maps four cues to its position: stereo pan (L/R direction), volume (distance), pitch from 220–880 Hz (closer = higher), and pulse rate (closer = faster). Three difficulty levels scaffold from Bright (full sight) to Dim (compass + warmth dots) to Pitch Dark (audio-dominant), so a 6-year-old can succeed and gradually graduate to ears-only navigation. Headphones are best, but a mono fallback (volume + pitch + pulse) keeps it playable on tablet speakers. Not a rhythm game, not a sound-matching quiz — a first-of-its-kind kids' spatial-hearing trainer.",
         mimimeiroTag1: "Ages 6–9", mimimeiroTag2: "Spatial Audio", mimimeiroTag3: "See with Ears",
+        kaokamoTitle: "Kao-Kamo (Maybe-a-Face)",
+        kaokamoDesc:  "Stare at the pattern — there's a face hiding in it. A first-of-its-kind no-fail observation toy for ages 3–7, built around pareidolia: the universal human instinct to see faces in clouds, ink stains, wood knots, and water marks. Eight procedurally-generated scenes — Cloud, Ink Stain, Wood Grain, Stone, Sunset, Leaf, Wall, Steam — every pattern is unique. Tap anywhere you can see eyes, and a face pops into being: blinking, blushing, smiling, saying hi. There's no \"wrong\" tap. Wherever you tap becomes a face — so a 3-year-old who can't read yet can succeed every time, and the game positions the child as the discoverer, not the test-taker. Found faces accumulate in a small ZUKAN strip — the quiet joy of a growing collection of \"things I noticed.\" An open-ended creative toy for the screen-fatigued generation, where there's no winning or losing — only observation, imagination, and the magic of seeing faces appear.",
+        kaokamoTag1: "Ages 3–7", kaokamoTag2: "Pareidolia", kaokamoTag3: "No-Fail",
     }
 };
 
