@@ -250,6 +250,7 @@ header p {
 .thumb-uchu      { background: radial-gradient(ellipse at 50% 30%, #1d3473 0%, #0a1535 55%, #050216 100%); }
 .thumb-sukima    { background: radial-gradient(circle at 30% 20%, #faf3df 0%, #f4ead5 38%, #ecdcb6 100%); }
 .thumb-ashiato   { background: linear-gradient(180deg, #0e1d33 0%, #2a3e6a 38%, #c5b3d4 65%, #e8eaf3 78%, #f6f7fb 100%); }
+.thumb-kage      { background: linear-gradient(180deg, #a9d8e8 0%, #f6c4a0 55%, #cba07a 78%, #6a8a4a 100%); }
 
 .card-body {
     padding: 18px 20px 22px;
@@ -634,6 +635,23 @@ footer a:hover { color: #e6edf3; }
 
 <!-- All apps -->
 <div class="grid" id="app-grid">
+    <div class="card" data-cat="kids" data-added="2026-05-09T08:30:00+09:00" data-slug="kage-asobi">
+            <div class="card-thumb thumb-kage">
+            <span class="new-badge">NEW</span>
+            <span class="thumb-emoji">☀️</span>
+                <img class="thumb-gif" src="assets/kage-asobi.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="kageTitle">かげあそび</h2>
+                <p data-i18n="kageDesc"><strong>おひさまを ゆびで うごかすと、すべての かげが いっぺんに のびたり ちぢんだり する。</strong>4〜8さい むけ、世界の キッズアプリ では めずらしい <strong>「リアルタイムの 影の 物理シミュレーション」</strong>を ブラウザで。きや いえや はな の シルエット が、おひさま の いち から ちょくせつ 計算 されて じめん に おちる。3つの モード — <strong>じゆうにあそぶ</strong>（おひさま を すきに うごかし、かげ の しくみ を じぶんで みつける）、<strong>かげあわせ</strong>（おてほん の うすむらさき の かげ に じぶん の かげ を ぴったり あわせる、4レベル）、<strong>かくれんぼ</strong>（もぐらさん は あかるい ところ が きらい — き の かげ で 3びょう かくして あげる、4レベル）。あそぶ うちに、<strong>「おひさま が ひくい と かげは ながい」「まうえに あれば かげは みじかい」「ひだり に おひさま → かげは みぎ へ」</strong>と いった 日時計（ひどけい）の 直感 が しぜんに そだつ。空 の いろ も おひさま の たかさ で 朝 → 真昼 → 夕焼け に かわる。1まい HTML、ライブラリ なし、データ は ローカル のみ。日本語と English の バイリンガル。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="kageTag1">4〜8歳</span>
+                    <span class="tag" data-i18n="kageTag2">影の物理</span>
+                    <span class="tag" data-i18n="kageTag3">3モード</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/kage-asobi/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
     <div class="card" data-cat="kids" data-added="2026-05-09T07:30:00+09:00" data-slug="ashiato-tantei">
             <div class="card-thumb thumb-ashiato">
             <span class="new-badge">NEW</span>
@@ -2572,6 +2590,9 @@ const I18N = {
         sukimaTag1: "3〜8歳", sukimaTag2: "さがしもの", sukimaTag3: "12にん",
         ashiatoTitle: "あしあと たんてい",
         ashiatoDesc:  "ゆきの もりに のこされた あしあと。8しゅるいの どうぶつ それぞれの ほんとうの あるきかた で トラックが ちらばる — うさぎの バウンド、きつねの まっすぐ いちれつ、ねこの つめなし、しかの 偶蹄、くまの 5本ゆび。ゆびで トレイル を なぞって おわりで えらぶ。せいかい すると なぜ そう なるか まなべる。5〜9さい むけ、ほんものの どうぶつトラッキングを ブラウザで。",
+        kageTitle: "かげあそび",
+        kageDesc:  "おひさまを ゆびで うごかすと、すべての かげが いっぺんに のびたり ちぢんだり する。きや いえや はな の シルエット が、おひさま の いち から ちょくせつ 計算 されて じめん に おちる。3つの モード — じゆうにあそぶ、かげあわせ（おてほん の むらさき の かげ に ぴったり あわせる）、かくれんぼ（もぐらさんを き の かげで 3びょう かくす）。「ひくい おひさまは かげを ながく する」「ひだりに おひさま → かげは みぎへ」と いった 日時計の 直感が しぜんに そだつ。4〜8さい むけ、リアルタイムの 影の物理シミュレーション を ブラウザで。",
+        kageTag1: "4〜8歳", kageTag2: "影の物理", kageTag3: "3モード",
         ashiatoTag1: "5〜9歳", ashiatoTag2: "どうぶつトラッキング", ashiatoTag3: "8しゅるい",
     },
     en: {
@@ -2913,6 +2934,9 @@ const I18N = {
         ashiatoTitle: "Footprint Detective",
         ashiatoDesc:  "Tracks left in a snowy forest. Drag to follow the trail, then guess the animal at the end. 8 species — sparrow, rabbit, fox, cat, dog, deer, bear, squirrel — each with its REAL gait pattern. Rabbits' bound (back paws land in front), foxes' direct register (a single line), no claws on cat tracks, deer's cloven hooves, bear's plantigrade 5-toed paws. Get it right and the animal walks across the snow showing why. Ages 5–9. Real animal-tracking, in a browser.",
         ashiatoTag1: "Ages 5–9", ashiatoTag2: "Animal tracking", ashiatoTag3: "8 species",
+        kageTitle: "Shadow Play",
+        kageDesc:  "Drag the sun with your finger and every shadow stretches and shrinks at once. Trees, houses, flowers — each silhouette is projected onto the ground in real time from the sun's position. Three modes: Free Play, Match the Shadow (line up your shadow with a faint purple target across 4 levels), and Hide and Seek (keep the mole in shade for 3 seconds, 4 levels). Through play, kids absorb sundial intuition: low sun → long shadows, sun on the left → shadow on the right, sun overhead → shadows shortest. The sky color shifts with sun height — morning, noon, sunset. Ages 4–8. Real-time shadow physics, in a browser.",
+        kageTag1: "Ages 4–8", kageTag2: "Shadow physics", kageTag3: "3 modes",
     }
 };
 
