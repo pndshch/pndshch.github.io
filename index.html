@@ -212,6 +212,7 @@ header p {
 .thumb-cargo      { background: linear-gradient(135deg, #0e2a3e 0%, #5a93b8 35%, #d4a574 75%, #1a0e04 100%); }
 .thumb-mienai     { background: radial-gradient(ellipse at 50% 30%, #1c3a52 0%, #0a1f2e 60%, #050d18 100%); }
 .thumb-heron      { background: linear-gradient(180deg, #f4ede0 0%, #d6c8a8 60%, #8d9bab 100%); }
+.thumb-akubi      { background: linear-gradient(180deg, #ffe9b5 0%, #ffd9c0 55%, #f9c6d6 100%); }
 
 .card-body {
     padding: 18px 20px 22px;
@@ -415,6 +416,14 @@ footer a:hover { color: #e6edf3; }
 <!-- Featured -->
 <div class="section-label" data-i18n="secFeatured">⭐ おすすめ</div>
 <div class="feat-row">
+        <a class="feat-card" href="https://pndshch.github.io/akubi-utsushi/" target="_blank">
+            <div class="card-thumb thumb-akubi">
+            <span class="new-badge" data-i18n="newBadge">NEW</span>
+            <span class="thumb-emoji">😴</span>
+            <img class="thumb-gif" src="assets/akubi-utsushi.gif" alt="" onerror="this.remove()">
+        </div>
+            <span class="feat-title" data-i18n="akubiTitle">あくびうつし</span>
+        </a>
         <a class="feat-card" href="https://pndshch.github.io/heron-oyster/" target="_blank">
             <div class="card-thumb thumb-heron">
             <span class="new-badge" data-i18n="newBadge">NEW</span>
@@ -541,6 +550,23 @@ footer a:hover { color: #e6edf3; }
 <!-- All apps -->
 <div class="grid" id="app-grid">
     <div class="grid-header" data-cat-header="kids-play" data-i18n="secGridKidsPlay">🎈 こどもがあそぶ</div>
+    <div class="card" data-cat="kids-play">
+            <div class="card-thumb thumb-akubi">
+                <span class="new-badge" data-i18n="newBadge">NEW</span>
+                <span class="thumb-emoji">😴</span>
+                <img class="thumb-gif" src="assets/akubi-utsushi.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="akubiTitle">あくびうつし</h2>
+                <p data-i18n="akubiDesc">ひとりがあくびすると、まわりにもうつる！キャラクターをタップすると、あくびがじゅんばんに広がっていく。みんなねむったらクリア。3〜7歳むけ、伝染現象を遊びにした連鎖パズル。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="akubiTag1">3〜7歳</span>
+                    <span class="tag" data-i18n="akubiTag2">連鎖</span>
+                    <span class="tag" data-i18n="akubiTag3">あくび</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/akubi-utsushi/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
     <div class="card" data-cat="kids-play">
             <div class="card-thumb thumb-choco">
                 <span class="new-badge" data-i18n="newBadge">NEW</span>
@@ -1783,6 +1809,9 @@ const I18N = {
         heronTitle: "鷸蚌 — 漁夫の利",
         heronDesc:  "2026年5月3日、バンクーバーのアオサギが18cmの巨大牡蠣に爪を挟まれて救出されたニュースは、2300年前の故事『鷸蚌相争・漁夫の利』そのままだった。あなたはサギ。打ち寄せる小さな牡蠣を啄み、大きな牡蠣には触れない——挟まれた瞬間「離す」勇気が要る。墨絵の浜で90秒、執着が罠を作るという2300年来の智慧を体で知る。",
         heronTag1: "時事×故事", heronTag2: "執着の代償", heronTag3: "90秒",
+        akubiTitle: "あくびうつし",
+        akubiDesc:  "ひとりがあくびすると、まわりにもうつる！キャラクターをタップすると、あくびがじゅんばんに広がっていく。みんなねむったらクリア。3〜7歳むけ、伝染現象を遊びにした連鎖パズル。コーヒーを飲んでいる目ざめた子は2回タップが必要。5ステージ、夜の街まで。",
+        akubiTag1: "3〜7歳", akubiTag2: "連鎖", akubiTag3: "あくび",
     },
     en: {
         tagline:   "Games · Education · Tools — delivered via browser and apps",
@@ -2008,6 +2037,9 @@ const I18N = {
         heronTitle: "Heron & Clam — The Fisher's Gain",
         heronDesc:  "May 3, 2026 — a blue heron in Stanley Park, Vancouver was rescued after its talon got clamped inside an 18-cm giant oyster. The story is identical to a 2300-year-old Chinese fable: 'Snipe and Clam — The Fisher's Gain'. You are the heron. Peck the small oysters, avoid the giants — and when trapped, find the courage to LET GO. 90 seconds of sumi-e shore that teaches a 2300-year-old truth: clinging builds the trap.",
         heronTag1: "News × Fable", heronTag2: "Letting Go", heronTag3: "90 sec",
+        akubiTitle: "Yawn Spreader",
+        akubiDesc:  "One yawn, and it spreads to everyone! Tap any character to make them yawn — the yawn ripples outward in delayed waves to nearby characters. Put the whole scene to sleep. A chain-reaction puzzle for ages 3–7 that turns the real psychology of contagious yawning into joyful play. Coffee-drinking characters resist once. 5 stages, all the way to midnight.",
+        akubiTag1: "Ages 3–7", akubiTag2: "Chain Reaction", akubiTag3: "Yawn",
     }
 };
 

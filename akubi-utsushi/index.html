@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#fff4d6">
+<title>あくびうつし — Yawn Spreader</title>
+<meta name="description" content="ひとりがあくびをすると、まわりにうつる。みんなをねむらせる、3〜7さい向けのあそび。">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+html, body { width:100%; height:100%; overflow:hidden; touch-action:manipulation; user-select:none; -webkit-user-select:none; }
+body {
+    font-family: -apple-system, "Hiragino Maru Gothic ProN", "Yu Gothic UI", "Segoe UI", sans-serif;
+    background: linear-gradient(180deg, #ffe9b5 0%, #ffd9c0 60%, #f9c6d6 100%);
+    color:#3a2230;
+    min-height:100vh;
+    position:relative;
+}
+
+/* === Sky & ground === */
+#sky {
+    position:fixed; inset:0;
+    background: linear-gradient(180deg, #ffe9b5 0%, #ffd9c0 55%, #f9c6d6 100%);
+    transition: background 1.2s ease;
+    z-index: 0;
+}
+body.dim #sky {
+    background: linear-gradient(180deg, #6b4a8a 0%, #4f3970 55%, #2c2046 100%);
+}
+#ground {
+    position:fixed; left:0; right:0; bottom:0; height:18%;
+    background: linear-gradient(180deg, rgba(140,200,120,0.55) 0%, rgba(100,170,90,0.85) 100%);
+    border-top: 3px dashed rgba(255,255,255,0.4);
+    z-index: 1;
+    transition: filter 1.2s ease;
+}
+body.dim #ground { filter: brightness(0.55) hue-rotate(-15deg); }
+
+/* === HUD === */
+#hud {
+    position:fixed; top:0; left:0; right:0;
+    padding:12px 14px;
+    display:flex; justify-content:space-between; align-items:center;
+    z-index: 50;
+    pointer-events:none;
+}
+.hud-pill {
+    background: rgba(255,255,255,0.88);
+    border-radius: 20px;
+    padding: 7px 14px;
+    font-weight: 800;
+    font-size: 14px;
+    color:#5d3850;
+    box-shadow: 0 3px 0 rgba(0,0,0,0.08);
+    pointer-events:auto;
+}
+.hud-pill small { font-weight:600; opacity:0.7; font-size:11px; margin-right:4px;}
+.hud-icon { font-size:18px; margin-right:3px; }
+
+#muteBtn {
+    background: rgba(255,255,255,0.88);
+    border:none; border-radius:50%; width:38px; height:38px;
+    font-size:20px; cursor:pointer;
+    box-shadow: 0 3px 0 rgba(0,0,0,0.08);
+    pointer-events:auto;
+}
+
+/* === Stage === */
+#stage {
+    position:fixed; inset:0;
+    z-index: 10;
+    overflow:hidden;
+}
+
+.char {
+    position:absolute;
+    width: 80px;
+    height: 100px;
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    pointer-events: auto;
+    transition: filter 0.4s ease;
+}
+#stage .char { z-index: auto; }
+.char svg { width:100%; height:100%; overflow: visible; display:block; }
+
+/* idle bob */
+.char .bob {
+    transform-origin: 50% 90%;
+    animation: bob 2.4s ease-in-out infinite;
+}
+@keyframes bob {
+    0%,100% { transform: translateY(0) rotate(-1.5deg); }
+    50%     { transform: translateY(-4px) rotate(1.5deg); }
+}
+
+/* states */
+.char .eyes-closed, .char .mouth-yawn { display:none; }
+.char[data-state="yawning"] .eyes-open { display:none; }
+.char[data-state="yawning"] .eyes-closed { display:inline; }
+.char[data-state="yawning"] .mouth-small { display:none; }
+.char[data-state="yawning"] .mouth-yawn { display:inline; }
+
+.char[data-state="sleeping"] .eyes-open { display:none; }
+.char[data-state="sleeping"] .eyes-closed { display:inline; }
+.char[data-state="sleeping"] .mouth-small { display:inline; }
+.char[data-state="sleeping"] .mouth-yawn { display:none; }
+.char[data-state="sleeping"] .bob {
+    animation: snore 3.2s ease-in-out infinite;
+}
+@keyframes snore {
+    0%,100% { transform: translateY(0) scale(1, 1); }
+    50%     { transform: translateY(2px) scale(1.04, 0.96); }
+}
+
+/* wide-awake (caffeinated) */
+.char[data-awake="hyper"] .bob {
+    animation: jitter 0.45s ease-in-out infinite;
+}
+@keyframes jitter {
+    0%,100% { transform: translate(0,0) rotate(-3deg); }
+    25%     { transform: translate(-1px,-1px) rotate(2deg); }
+    50%     { transform: translate(0,0) rotate(-1deg); }
+    75%     { transform: translate(1px,1px) rotate(3deg); }
+}
+.coffee {
+    position:absolute; right:-10px; top:-2px; font-size:18px;
+    pointer-events:none;
+    animation: steam 1.8s ease-in-out infinite;
+}
+@keyframes steam {
+    0%,100% { opacity:0.85; transform: translateY(0); }
+    50%     { opacity:1; transform: translateY(-2px); }
+}
+
+/* yawn text */
+.yawn-text {
+    position:absolute; left:50%; top:-22px;
+    transform: translate(-50%, 0) scale(0.5);
+    font-weight: 900;
+    font-size: 18px;
+    color: #d6477e;
+    text-shadow: 0 2px 0 #fff, 0 0 8px #fff;
+    opacity: 0;
+    pointer-events:none;
+    white-space: nowrap;
+}
+.char[data-state="yawning"] .yawn-text {
+    animation: yawnPop 1.3s ease-out forwards;
+}
+@keyframes yawnPop {
+    0%   { opacity:0; transform: translate(-50%, 4px) scale(0.4); }
+    25%  { opacity:1; transform: translate(-50%, -8px) scale(1.1); }
+    100% { opacity:0; transform: translate(-50%, -28px) scale(0.95); }
+}
+
+/* sleep Z */
+.zzz-layer {
+    position:absolute; left:50%; top:-10px;
+    width: 0; height: 0;
+    pointer-events:none;
+}
+.zzz {
+    position:absolute;
+    font-weight:900;
+    font-size: 16px;
+    color:#5b8de0;
+    text-shadow: 0 2px 0 #fff;
+    opacity:0;
+    animation: zfloat 2.8s ease-out infinite;
+}
+@keyframes zfloat {
+    0%   { opacity:0; transform: translate(-50%, 0) scale(0.6) rotate(-10deg); }
+    20%  { opacity:1; }
+    100% { opacity:0; transform: translate(calc(-50% + 22px), -50px) scale(1.2) rotate(15deg); }
+}
+
+/* yawn shockwave */
+.wave {
+    position:absolute;
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    border: 4px solid rgba(255, 220, 130, 0.85);
+    transform: translate(-50%,-50%) scale(0.4);
+    opacity: 0.9;
+    pointer-events:none;
+    z-index: 11;
+    animation: wave 1.4s ease-out forwards;
+}
+@keyframes wave {
+    0%   { transform: translate(-50%,-50%) scale(0.4); opacity:1; border-width:6px; }
+    100% { transform: translate(-50%,-50%) scale(8); opacity:0; border-width:1px; }
+}
+
+/* === Title screen === */
+#title {
+    position:fixed; inset:0;
+    z-index: 200;
+    background: linear-gradient(180deg, #ffe9b5 0%, #ffd9c0 60%, #f9c6d6 100%);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    padding:20px;
+    text-align:center;
+    transition: opacity 0.4s ease;
+}
+#title.hidden { opacity:0; pointer-events:none; }
+#title h1 {
+    font-size: clamp(36px, 11vw, 64px);
+    color:#d6477e;
+    text-shadow: 0 4px 0 #fff, 0 7px 0 rgba(0,0,0,0.08);
+    margin-bottom:6px;
+    letter-spacing: 2px;
+}
+#title .sub {
+    font-size: clamp(14px, 4vw, 18px);
+    color:#5d3850;
+    margin-bottom:18px;
+    font-weight:700;
+}
+#title .demo {
+    width: 280px; max-width:80vw;
+    height: 140px;
+    margin: 14px auto 22px;
+    position:relative;
+}
+#title .demo .char { width:55px; height:70px; transition: transform .6s; }
+.btn-big {
+    background:#d6477e; color:#fff; border:none;
+    border-radius: 28px;
+    padding: 16px 40px;
+    font-size: 22px;
+    font-weight: 900;
+    box-shadow: 0 5px 0 #a02e60;
+    cursor:pointer;
+    letter-spacing:2px;
+    margin-top: 6px;
+}
+.btn-big:active { transform: translateY(3px); box-shadow: 0 2px 0 #a02e60; }
+#title .hint {
+    margin-top: 18px;
+    color:#7a5a6a;
+    font-size: 13px;
+    line-height: 1.6;
+    max-width: 320px;
+}
+#title .lang {
+    position:absolute; top:14px; right:14px;
+    background:rgba(255,255,255,0.7); border:none;
+    border-radius:14px; padding:4px 10px;
+    font-weight:800; font-size:11px; color:#5d3850; cursor:pointer;
+}
+
+/* === Stage clear overlay === */
+#stageEnd {
+    position:fixed; inset:0;
+    z-index:150;
+    background: rgba(40, 25, 60, 0.78);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    display:none;
+    flex-direction:column; align-items:center; justify-content:center;
+    text-align:center;
+    color:#fff;
+    padding: 20px;
+}
+#stageEnd .stars { color: #ffd866; text-shadow: 0 2px 0 rgba(0,0,0,0.4); }
+#stageEnd.show { display:flex; animation: fadeIn 0.5s ease; }
+@keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+#stageEnd h2 {
+    font-size: clamp(28px, 8vw, 48px);
+    text-shadow: 0 3px 0 rgba(0,0,0,0.3);
+    margin-bottom: 6px;
+}
+#stageEnd .stats {
+    background: rgba(255,255,255,0.94);
+    border-radius: 18px;
+    padding: 14px 22px;
+    color:#5d3850;
+    font-weight: 800;
+    font-size: 16px;
+    margin: 14px 0 18px;
+    line-height: 1.7;
+}
+#stageEnd .stars { font-size: 36px; letter-spacing:6px; }
+
+/* tap feedback */
+.tap-fx {
+    position:absolute;
+    width:60px; height:60px; border-radius:50%;
+    border:3px solid rgba(255,255,255,0.9);
+    transform: translate(-50%,-50%) scale(0.3);
+    pointer-events:none;
+    animation: tapfx 0.5s ease-out forwards;
+    z-index: 30;
+}
+@keyframes tapfx {
+    0%   { opacity:1; transform: translate(-50%,-50%) scale(0.3); }
+    100% { opacity:0; transform: translate(-50%,-50%) scale(2); }
+}
+
+/* About link */
+.about {
+    position:absolute; bottom:8px; left:0; right:0;
+    text-align:center; font-size:11px; color:#7a5a6a;
+}
+.about a { color:#a02e60; text-decoration:none; font-weight:700; }
+</style>
+</head>
+<body>
+
+<div id="sky"></div>
+<div id="ground"></div>
+
+<div id="hud">
+    <div class="hud-pill"><span class="hud-icon">😴</span><small id="lblStage">ばめん</small><span id="stageNum">1</span> / <span id="stageMax">5</span></div>
+    <div class="hud-pill"><span class="hud-icon">👆</span><span id="taps">0</span></div>
+    <button id="muteBtn" aria-label="mute">🔊</button>
+</div>
+
+<div id="stage"></div>
+
+<div id="title">
+    <button class="lang" id="langBtn">EN</button>
+    <h1 id="ttl">あくびうつし</h1>
+    <div class="sub" id="sub">ひとりがあくびすると、みんなにうつる</div>
+    <div class="demo" id="demo"></div>
+    <button class="btn-big" id="startBtn">あそぶ</button>
+    <div class="hint" id="hint">
+        ① だれかひとりをタップ → あくび！<br>
+        ② となりの子にうつっていく<br>
+        ③ みんなねむったらクリア
+    </div>
+    <div class="about">
+        <a href="../">← もどる</a>
+    </div>
+</div>
+
+<div id="stageEnd">
+    <h2 id="endTitle">みんな ねちゃった！</h2>
+    <div class="stars" id="stars">★★★</div>
+    <div class="stats" id="endStats"></div>
+    <button class="btn-big" id="nextBtn">つぎへ</button>
+</div>
+
+<script>
+// ============================================================
+// あくびうつし — Yawn Spreader
+// Tap one character; the yawn spreads in delayed waves to
+// nearby characters. Goal: put everyone to sleep.
+// ============================================================
+
+const W = () => window.innerWidth;
+const H = () => window.innerHeight;
+
+// ---------- I18N ----------
+const I18N = {
+    ja: {
+        title: "あくびうつし",
+        sub: "ひとりがあくびすると、みんなにうつる",
+        play: "あそぶ",
+        next: "つぎへ",
+        retry: "もういちど",
+        clear: "みんな ねちゃった！",
+        almost: "もうちょっと！",
+        stage: "ばめん",
+        hint: "① だれかひとりをタップ → あくび！<br>② となりの子にうつっていく<br>③ みんなねむったらクリア",
+        statsTaps: "タップ",
+        statsTime: "じかん",
+        statsSec: "びょう",
+        complete: "ぜんぶクリア！おめでとう！",
+    },
+    en: {
+        title: "Yawn Spreader",
+        sub: "One yawn, and it spreads to everyone",
+        play: "PLAY",
+        next: "NEXT",
+        retry: "RETRY",
+        clear: "Everyone's asleep!",
+        almost: "Almost there!",
+        stage: "Stage",
+        hint: "① Tap any character → yawn!<br>② It spreads to those nearby<br>③ Put everyone to sleep",
+        statsTaps: "Taps",
+        statsTime: "Time",
+        statsSec: "s",
+        complete: "All stages cleared! Yay!",
+    },
+};
+let lang = (navigator.language || "ja").startsWith("ja") ? "ja" : "en";
+
+function applyLang() {
+    const t = I18N[lang];
+    document.getElementById("ttl").textContent = t.title;
+    document.getElementById("sub").textContent = t.sub;
+    document.getElementById("startBtn").textContent = t.play;
+    document.getElementById("nextBtn").textContent = t.next;
+    document.getElementById("hint").innerHTML = t.hint;
+    document.getElementById("lblStage").textContent = t.stage;
+    document.getElementById("langBtn").textContent = lang === "ja" ? "EN" : "JA";
+    document.title = t.title + " — Yawn Spreader";
+}
+document.getElementById("langBtn").addEventListener("click", () => {
+    lang = (lang === "ja") ? "en" : "ja";
+    applyLang();
+});
+
+// ---------- AUDIO (web-audio synth) ----------
+let audioCtx = null;
+let muted = false;
+function ensureAudio() {
+    if (!audioCtx) {
+        try { audioCtx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e) {}
+    }
+    if (audioCtx && audioCtx.state === "suspended") audioCtx.resume();
+}
+function yawnSound(pitch=1) {
+    if (muted || !audioCtx) return;
+    const t0 = audioCtx.currentTime;
+    const o = audioCtx.createOscillator();
+    const g = audioCtx.createGain();
+    const f = audioCtx.createBiquadFilter();
+    f.type = "lowpass"; f.frequency.value = 900;
+    o.type = "sawtooth";
+    o.frequency.setValueAtTime(220 * pitch, t0);
+    o.frequency.exponentialRampToValueAtTime(110 * pitch, t0 + 0.6);
+    o.frequency.exponentialRampToValueAtTime(140 * pitch, t0 + 0.9);
+    g.gain.setValueAtTime(0, t0);
+    g.gain.linearRampToValueAtTime(0.18, t0 + 0.1);
+    g.gain.linearRampToValueAtTime(0.14, t0 + 0.6);
+    g.gain.exponentialRampToValueAtTime(0.0001, t0 + 1.0);
+    o.connect(f); f.connect(g); g.connect(audioCtx.destination);
+    o.start(t0); o.stop(t0 + 1.05);
+}
+function sleepSound() {
+    if (muted || !audioCtx) return;
+    const t0 = audioCtx.currentTime;
+    const o = audioCtx.createOscillator();
+    const g = audioCtx.createGain();
+    o.type = "sine";
+    o.frequency.setValueAtTime(880, t0);
+    o.frequency.exponentialRampToValueAtTime(1320, t0 + 0.18);
+    g.gain.setValueAtTime(0, t0);
+    g.gain.linearRampToValueAtTime(0.10, t0 + 0.04);
+    g.gain.exponentialRampToValueAtTime(0.0001, t0 + 0.30);
+    o.connect(g); g.connect(audioCtx.destination);
+    o.start(t0); o.stop(t0 + 0.32);
+}
+function clearJingle() {
+    if (muted || !audioCtx) return;
+    [0, 0.12, 0.24].forEach((d, i) => {
+        const t0 = audioCtx.currentTime + d;
+        const o = audioCtx.createOscillator();
+        const g = audioCtx.createGain();
+        o.type = "triangle";
+        o.frequency.value = [523.25, 659.25, 783.99][i];
+        g.gain.setValueAtTime(0, t0);
+        g.gain.linearRampToValueAtTime(0.18, t0 + 0.04);
+        g.gain.exponentialRampToValueAtTime(0.0001, t0 + 0.45);
+        o.connect(g); g.connect(audioCtx.destination);
+        o.start(t0); o.stop(t0 + 0.5);
+    });
+}
+document.getElementById("muteBtn").addEventListener("click", e => {
+    muted = !muted;
+    e.currentTarget.textContent = muted ? "🔈" : "🔊";
+});
+
+// ---------- CHARACTER ART ----------
+// 6 archetypes × variable colors. SVG generated procedurally.
+const PALETTE = [
+    { body:"#ffd1dc", face:"#ffe7ee", line:"#5d3850" }, // pink
+    { body:"#c9e7f7", face:"#e6f4fb", line:"#264a6b" }, // sky
+    { body:"#fff1b3", face:"#fff8d6", line:"#7a5a1a" }, // butter
+    { body:"#cae8c2", face:"#e6f5e1", line:"#2f5a3f" }, // mint
+    { body:"#e0d0f5", face:"#efe5fa", line:"#473365" }, // lilac
+    { body:"#ffd2b3", face:"#ffe6cf", line:"#7a4523" }, // peach
+    { body:"#f5b7b1", face:"#fadbd8", line:"#7a2d2d" }, // coral
+    { body:"#b3e0d4", face:"#d9efe9", line:"#1f5e54" }, // teal
+];
+
+function ear(type, side, p) {
+    const x = side === "L" ? 22 : 78;
+    const flip = side === "L" ? 1 : -1;
+    if (type === "round")  return `<circle cx="${x}" cy="22" r="9" fill="${p.body}" stroke="${p.line}" stroke-width="3"/>
+                                    <circle cx="${x}" cy="22" r="4" fill="${p.face}"/>`;
+    if (type === "tall")   return `<ellipse cx="${x}" cy="14" rx="6" ry="14" fill="${p.body}" stroke="${p.line}" stroke-width="3"/>
+                                    <ellipse cx="${x}" cy="14" rx="2.5" ry="9" fill="${p.face}"/>`;
+    if (type === "tri")    return `<path d="M${x - 7*flip} 28 L${x} 6 L${x + 6*flip} 26 Z" fill="${p.body}" stroke="${p.line}" stroke-width="3" stroke-linejoin="round"/>`;
+    if (type === "flop")   return `<path d="M${x} 22 Q${x + 12*flip} 32 ${x + 8*flip} 44" stroke="${p.line}" stroke-width="3" fill="${p.body}" stroke-linejoin="round"/>`;
+    if (type === "horn")   return `<circle cx="${x}" cy="22" r="6" fill="${p.body}" stroke="${p.line}" stroke-width="3"/>`;
+    return "";
+}
+
+function makeCharSVG(seed, opts={}) {
+    const p = PALETTE[seed % PALETTE.length];
+    const earTypes = ["round", "tall", "tri", "flop", "horn"];
+    const earType = earTypes[(seed * 7) % earTypes.length];
+    const cheek = (seed % 3) === 0 ? `<circle cx="32" cy="56" r="4" fill="#f99eb1" opacity="0.7"/><circle cx="68" cy="56" r="4" fill="#f99eb1" opacity="0.7"/>` : "";
+    const nose = `<path d="M48 52 L52 52 L50 56 Z" fill="${p.line}"/>`;
+    const blush = "";
+    return `
+    <svg viewBox="0 0 100 110" preserveAspectRatio="xMidYMax meet">
+        <g class="bob">
+            <ellipse cx="50" cy="100" rx="28" ry="6" fill="rgba(0,0,0,0.18)"/>
+            <ellipse cx="50" cy="78" rx="30" ry="22" fill="${p.body}" stroke="${p.line}" stroke-width="3"/>
+            ${ear(earType, "L", p)}
+            ${ear(earType, "R", p)}
+            <circle cx="50" cy="48" r="28" fill="${p.face}" stroke="${p.line}" stroke-width="3"/>
+            ${cheek}
+            <g class="eyes-open">
+                <circle cx="40" cy="46" r="3.5" fill="${p.line}"/>
+                <circle cx="60" cy="46" r="3.5" fill="${p.line}"/>
+                <circle cx="41" cy="45" r="1.2" fill="#fff"/>
+                <circle cx="61" cy="45" r="1.2" fill="#fff"/>
+            </g>
+            <g class="eyes-closed">
+                <path d="M35 47 Q40 42 45 47" stroke="${p.line}" fill="none" stroke-width="2.6" stroke-linecap="round"/>
+                <path d="M55 47 Q60 42 65 47" stroke="${p.line}" fill="none" stroke-width="2.6" stroke-linecap="round"/>
+            </g>
+            ${nose}
+            <path class="mouth-small" d="M44 60 Q50 65 56 60" stroke="${p.line}" fill="none" stroke-width="2.6" stroke-linecap="round"/>
+            <ellipse class="mouth-yawn" cx="50" cy="63" rx="9" ry="11" fill="#e85a7a" stroke="${p.line}" stroke-width="2.4"/>
+            <ellipse class="mouth-yawn" cx="50" cy="66" rx="3.5" ry="3" fill="#ffb3c1" opacity="0.8"/>
+        </g>
+    </svg>`;
+}
+
+// ---------- STAGES ----------
+// Each stage is described by clusters of characters. Within a cluster
+// they are guaranteed to be within yawn radius of each other (so the
+// chain always chains). Between clusters there is a gap > radius so
+// the player needs to start near the edge to bridge them.
+function stageSpec(idx) {
+    const cfgs = [
+        // Stage 1: 1 cluster, 6 chars — first chain
+        { clusters: [{ count: 6, weight: 1 }], hyper: 0, label_ja:"はじめの こうえん", label_en:"First Park" },
+        // Stage 2: 2 clusters — need to pick an edge char
+        { clusters: [{ count: 5 }, { count: 5 }], hyper: 0, label_ja:"ふたつの しま", label_en:"Two Islands" },
+        // Stage 3: 2 clusters + 1 hyper
+        { clusters: [{ count: 6 }, { count: 5 }], hyper: 1, label_ja:"カフェに ねむけ", label_en:"Sleepy Cafe" },
+        // Stage 4: 3 clusters + 2 hyper
+        { clusters: [{ count: 5 }, { count: 5 }, { count: 4 }], hyper: 2, label_ja:"きょうしつの こきゅう", label_en:"Quiet Classroom" },
+        // Stage 5: 4 clusters scattered + 3 hyper, dim
+        { clusters: [{ count: 4 }, { count: 4 }, { count: 4 }, { count: 4 }], hyper: 3, dim: true, label_ja:"よなかの まち", label_en:"Midnight Town" },
+    ];
+    return cfgs[idx] || cfgs[cfgs.length-1];
+}
+
+// ---------- GAME STATE ----------
+let chars = [];           // {el, x, y, state, hyper, hyperHits}
+let stageIdx = 0;
+let taps = 0;
+let stageStartTime = 0;
+let stageActive = false;
+const TOTAL_STAGES = 5;
+
+document.getElementById("stageMax").textContent = TOTAL_STAGES;
+
+// ---------- LAYOUT ----------
+function radius() {
+    // Yawn spread radius — designed so an in-cluster char always reaches its
+    // neighbours, but cluster-to-cluster needs a deliberate edge tap.
+    return Math.max(135, Math.min(W(), H()) * 0.30);
+}
+
+function placeCharacters(spec) {
+    const stageEl = document.getElementById("stage");
+    stageEl.innerHTML = "";
+    chars = [];
+    const margin = 50;
+    const topMargin = 75;
+    const bottomMargin = 110;
+    const w = W() - margin*2;
+    const h = H() - topMargin - bottomMargin;
+    if (w < 150 || h < 200) return;
+
+    const r = radius();
+    const minSep = 65;                      // visual min separation
+    // Cluster spans: scales with count so the chain can reach via neighbors
+    const maxCount = Math.max(...spec.clusters.map(c => c.count));
+    const inClusterMax = Math.max(95, Math.min(160, 38 * Math.sqrt(maxCount + 2)));
+
+    // Layout cluster centers across the play area
+    const clusterCount = spec.clusters.length;
+    const clusterCenters = [];
+    if (clusterCount === 1) {
+        clusterCenters.push([margin + w/2, topMargin + h/2]);
+    } else if (clusterCount === 2) {
+        // Stack vertically on portrait, side-by-side on landscape
+        if (h >= w) {
+            clusterCenters.push([margin + w/2, topMargin + h*0.28]);
+            clusterCenters.push([margin + w/2, topMargin + h*0.72]);
+        } else {
+            clusterCenters.push([margin + w*0.28, topMargin + h/2]);
+            clusterCenters.push([margin + w*0.72, topMargin + h/2]);
+        }
+    } else {
+        const cols = (h >= w) ? Math.min(2, clusterCount) : Math.ceil(Math.sqrt(clusterCount));
+        const rows = Math.ceil(clusterCount / cols);
+        for (let i = 0; i < clusterCount; i++) {
+            const cx = margin + w * ((i % cols) + 0.5) / cols;
+            const cy = topMargin + h * (Math.floor(i / cols) + 0.5) / rows;
+            clusterCenters.push([
+                cx + (Math.random()-0.5) * 24,
+                cy + (Math.random()-0.5) * 24,
+            ]);
+        }
+    }
+
+    const allPositions = []; // {x,y,clusterIdx}
+    spec.clusters.forEach((cl, ci) => {
+        const [cx, cy] = clusterCenters[ci];
+        // Anchor at center of the cluster
+        const placed = [[cx, cy]];
+        const target = cl.count;
+        let tries = 0;
+        while (placed.length < target && tries < 1200) {
+            tries++;
+            const a = Math.random() * Math.PI * 2;
+            // distance must exceed minSep (so we don't overlap the anchor / others)
+            const d = minSep * 1.05 + Math.random() * Math.max(20, inClusterMax - minSep * 1.05);
+            const x = cx + Math.cos(a) * d;
+            const y = cy + Math.sin(a) * d;
+            if (x < margin || x > W()-margin) continue;
+            if (y < topMargin || y > H()-bottomMargin) continue;
+            let ok = true;
+            for (const pl of placed) {
+                if ((pl[0]-x)**2 + (pl[1]-y)**2 < minSep*minSep) { ok=false; break; }
+            }
+            if (ok) for (const p of allPositions) {
+                if ((p.x-x)**2 + (p.y-y)**2 < minSep*minSep) { ok=false; break; }
+            }
+            if (ok) placed.push([x,y]);
+        }
+        // Fallback: if still under target, expand cluster outward.
+        // We grow a bigger ring (inClusterMax * 1.5) and try again, biased
+        // to be near at least one already-placed char so chains don't break.
+        let ring = inClusterMax;
+        while (placed.length < target) {
+            ring *= 1.25;
+            let added = false;
+            for (let t = 0; t < 400 && placed.length < target; t++) {
+                const a = Math.random() * Math.PI * 2;
+                const d = minSep * 1.05 + Math.random() * (ring - minSep * 1.05);
+                const x = cx + Math.cos(a) * d;
+                const y = cy + Math.sin(a) * d;
+                if (x < margin || x > W()-margin) continue;
+                if (y < topMargin || y > H()-bottomMargin) continue;
+                let ok = true;
+                for (const pl of placed) {
+                    if ((pl[0]-x)**2 + (pl[1]-y)**2 < minSep*minSep) { ok=false; break; }
+                }
+                if (ok) for (const p of allPositions) {
+                    if ((p.x-x)**2 + (p.y-y)**2 < minSep*minSep) { ok=false; break; }
+                }
+                if (ok) { placed.push([x,y]); added = true; }
+            }
+            if (!added && ring > 600) break; // give up
+        }
+        placed.forEach(([x,y]) => allPositions.push({x, y, clusterIdx: ci}));
+    });
+
+    // Sort top-to-bottom for nicer z-stacking
+    allPositions.sort((a,b)=>a.y-b.y);
+
+    // Designate hyper characters: pick from clusters at random
+    const hyperCount = spec.hyper || 0;
+    const hyperIdxs = new Set();
+    if (hyperCount > 0) {
+        const indices = [...allPositions.keys()];
+        // shuffle
+        for (let i = indices.length-1; i>0; i--) {
+            const j = Math.floor(Math.random()*(i+1));
+            [indices[i], indices[j]] = [indices[j], indices[i]];
+        }
+        for (let i = 0; i < hyperCount && i < indices.length; i++) hyperIdxs.add(indices[i]);
+    }
+
+    allPositions.forEach((pos, i) => {
+        const seed = (i * 13 + stageIdx * 5 + Math.floor(Math.random()*99)) % 99;
+        const isHyper = hyperIdxs.has(i);
+        const el = document.createElement("div");
+        el.className = "char";
+        el.dataset.state = "awake";
+        if (isHyper) el.dataset.awake = "hyper";
+        el.style.left = pos.x + "px";
+        el.style.top  = pos.y + "px";
+        // Stay below stage-end modal (z=150), HUD (50), title (200)
+        el.style.zIndex = 12 + Math.min(120, Math.floor(pos.y / 8));
+        el.innerHTML = makeCharSVG(seed)
+            + `<div class="yawn-text">${lang==='ja'?'ふぁぁ〜':'yaaawn'}</div>`
+            + `<div class="zzz-layer"></div>`
+            + (isHyper ? `<div class="coffee">☕</div>` : "");
+        stageEl.appendChild(el);
+
+        const ch = { el, x:pos.x, y:pos.y, state:"awake", hyper:isHyper, hyperHits:0 };
+        el.addEventListener("pointerdown", (e) => {
+            e.preventDefault();
+            ensureAudio();
+            onTap(ch, e);
+        });
+        chars.push(ch);
+    });
+}
+
+// ---------- INTERACTION ----------
+function tapFx(x, y) {
+    const fx = document.createElement("div");
+    fx.className = "tap-fx";
+    fx.style.left = x + "px";
+    fx.style.top = y + "px";
+    document.getElementById("stage").appendChild(fx);
+    setTimeout(()=>fx.remove(), 500);
+}
+
+function onTap(ch, e) {
+    if (!stageActive) return;
+    const rect = ch.el.getBoundingClientRect();
+    const cx = rect.left + rect.width/2;
+    const cy = rect.top + rect.height/2;
+    tapFx(cx, cy);
+
+    if (ch.state === "yawning" || ch.state === "sleeping") return;
+
+    if (ch.hyper) {
+        ch.hyperHits++;
+        // Pop the coffee on first hit; second hit triggers yawn
+        if (ch.hyperHits === 1) {
+            const cof = ch.el.querySelector(".coffee");
+            if (cof) {
+                cof.style.transition = "transform 0.5s, opacity 0.5s";
+                cof.style.transform = "translate(20px,-30px) rotate(60deg)";
+                cof.style.opacity = "0";
+                setTimeout(()=>cof.remove(), 500);
+            }
+            ch.el.removeAttribute("data-awake");
+            // jolt sound
+            if (audioCtx && !muted) {
+                const t0 = audioCtx.currentTime;
+                const o = audioCtx.createOscillator();
+                const g = audioCtx.createGain();
+                o.type = "square";
+                o.frequency.setValueAtTime(180, t0);
+                o.frequency.exponentialRampToValueAtTime(80, t0+0.15);
+                g.gain.setValueAtTime(0.15, t0);
+                g.gain.exponentialRampToValueAtTime(0.0001, t0+0.18);
+                o.connect(g); g.connect(audioCtx.destination);
+                o.start(t0); o.stop(t0+0.2);
+            }
+            taps++;
+            updateHud();
+            return;
+        }
+    }
+    taps++;
+    updateHud();
+    triggerYawn(ch, true);
+}
+
+const YAWN_DELAY_MIN = 350;
+const YAWN_DELAY_MAX = 1300;
+const YAWN_DURATION = 1500;        // mouth open
+const SLEEP_GRACE = 350;            // pause before sleeping
+
+function spawnWave(ch) {
+    const w = document.createElement("div");
+    w.className = "wave";
+    w.style.left = ch.x + "px";
+    w.style.top  = ch.y + "px";
+    document.getElementById("stage").appendChild(w);
+    setTimeout(()=>w.remove(), 1500);
+}
+
+function triggerYawn(ch, fromTap=false) {
+    if (ch.state !== "awake") return;
+    ch.state = "yawning";
+    ch.el.dataset.state = "yawning";
+    ch.el.removeAttribute("data-awake");
+    spawnWave(ch);
+    yawnSound(0.85 + Math.random()*0.4);
+
+    // Schedule spread to neighbors
+    const r = radius();
+    chars.forEach(other => {
+        if (other === ch) return;
+        if (other.state !== "awake") return;
+        const dx = other.x - ch.x, dy = other.y - ch.y;
+        const d = Math.hypot(dx, dy);
+        if (d <= r) {
+            const baseDelay = YAWN_DELAY_MIN + (d / r) * (YAWN_DELAY_MAX - YAWN_DELAY_MIN);
+            const jitter = (Math.random()*0.7 - 0.2) * 400;
+            const delay = baseDelay + jitter;
+            // Hyper resists once: pop their coffee, then yawn after a beat.
+            if (other.hyper && other.hyperHits === 0) {
+                setTimeout(() => {
+                    if (other.state !== "awake") return;
+                    other.hyperHits = 1;
+                    const cof = other.el.querySelector(".coffee");
+                    if (cof) {
+                        cof.style.transition = "transform 0.5s, opacity 0.5s";
+                        cof.style.transform = "translate(15px,-25px) rotate(45deg)";
+                        cof.style.opacity = "0";
+                        setTimeout(()=>cof.remove(), 500);
+                    }
+                    other.el.removeAttribute("data-awake");
+                    spawnWave(other);
+                    // Sleepiness wins — yawn after a delayed beat.
+                    setTimeout(() => triggerYawn(other, false), 1400);
+                }, Math.max(180, delay));
+                return;
+            }
+            setTimeout(() => triggerYawn(other, false), Math.max(180, delay));
+        }
+    });
+
+    // After yawn, fall asleep
+    setTimeout(() => {
+        if (ch.state !== "yawning") return;
+        ch.state = "sleeping";
+        ch.el.dataset.state = "sleeping";
+        sleepSound();
+        startZParticles(ch);
+        checkClear();
+    }, YAWN_DURATION + SLEEP_GRACE);
+}
+
+function startZParticles(ch) {
+    const layer = ch.el.querySelector(".zzz-layer");
+    if (!layer) return;
+    let count = 0;
+    const spawnZ = () => {
+        if (ch.state !== "sleeping") return;
+        const z = document.createElement("div");
+        z.className = "zzz";
+        z.textContent = count % 2 === 0 ? "Z" : "z";
+        z.style.fontSize = (12 + Math.random()*8) + "px";
+        z.style.animationDelay = "0s";
+        layer.appendChild(z);
+        setTimeout(()=>z.remove(), 2900);
+        count++;
+        setTimeout(spawnZ, 700 + Math.random()*600);
+    };
+    spawnZ();
+}
+
+// ---------- HUD ----------
+function updateHud() {
+    document.getElementById("taps").textContent = taps;
+}
+function setStageNum(n) {
+    document.getElementById("stageNum").textContent = n;
+}
+
+// ---------- STAGE FLOW ----------
+function startStage(idx) {
+    stageIdx = idx;
+    setStageNum(idx + 1);
+    const spec = stageSpec(idx);
+    document.body.classList.toggle("dim", !!spec.dim);
+    placeCharacters(spec);
+    taps = 0;
+    updateHud();
+    stageStartTime = performance.now();
+    stageActive = true;
+}
+
+function checkClear() {
+    if (!stageActive) return;
+    if (chars.every(c => c.state === "sleeping")) {
+        stageActive = false;
+        const elapsed = (performance.now() - stageStartTime) / 1000;
+        // Stars: 3 stars if taps <= ceil(count*0.3), 2 if <=count*0.6, else 1
+        const need = chars.length;
+        let stars = 1;
+        if (taps <= Math.ceil(need * 0.30)) stars = 3;
+        else if (taps <= Math.ceil(need * 0.55)) stars = 2;
+        setTimeout(() => showStageEnd(stars, elapsed), 700);
+        clearJingle();
+    }
+}
+
+function showStageEnd(stars, elapsed) {
+    const t = I18N[lang];
+    const isLast = stageIdx >= TOTAL_STAGES - 1;
+    document.getElementById("endTitle").textContent = isLast ? t.complete : t.clear;
+    document.getElementById("stars").textContent = "★".repeat(stars) + "☆".repeat(3-stars);
+    document.getElementById("endStats").innerHTML =
+        `${t.statsTaps}: <b>${taps}</b> &nbsp;·&nbsp; ${t.statsTime}: <b>${elapsed.toFixed(1)}${t.statsSec}</b>`;
+    document.getElementById("nextBtn").textContent = isLast ? (lang==='ja'?'もういちど':'PLAY AGAIN') : t.next;
+    document.getElementById("stageEnd").classList.add("show");
+}
+
+document.getElementById("nextBtn").addEventListener("click", () => {
+    document.getElementById("stageEnd").classList.remove("show");
+    const next = (stageIdx + 1) % TOTAL_STAGES;
+    setTimeout(() => startStage(next), 250);
+});
+
+// ---------- TITLE / DEMO ----------
+function buildDemo() {
+    const demo = document.getElementById("demo");
+    demo.innerHTML = "";
+    const positions = [[40,60],[110,40],[180,60],[245,40],[80,100],[170,100]];
+    const els = [];
+    positions.forEach((pos, i) => {
+        const el = document.createElement("div");
+        el.className = "char";
+        el.style.left = pos[0] + "px";
+        el.style.top = pos[1] + "px";
+        el.dataset.state = "awake";
+        el.innerHTML = makeCharSVG(i*3+1) + `<div class="yawn-text">${lang==='ja'?'ふぁぁ〜':'yaaawn'}</div>`;
+        demo.appendChild(el);
+        els.push(el);
+    });
+    let idx = 0;
+    const tick = () => {
+        if (document.getElementById("title").classList.contains("hidden")) return;
+        // reset
+        els.forEach(e => { e.dataset.state = "awake"; });
+        // Wave: yawn from leftmost outward
+        idx = (idx + 1) % els.length;
+        els.forEach((e, i) => {
+            setTimeout(()=>{ e.dataset.state = "yawning"; }, i*300);
+            setTimeout(()=>{ e.dataset.state = "sleeping"; }, i*300 + 1400);
+        });
+        setTimeout(tick, els.length*300 + 2400);
+    };
+    setTimeout(tick, 600);
+}
+
+document.getElementById("startBtn").addEventListener("click", () => {
+    ensureAudio();
+    document.getElementById("title").classList.add("hidden");
+    setTimeout(() => startStage(0), 350);
+});
+
+window.addEventListener("resize", () => {
+    if (stageActive) {
+        // Re-flow positions proportionally
+        const oldW = chars._oldW || W(), oldH = chars._oldH || H();
+        // Simpler: just keep existing positions if window resizes a little
+    }
+});
+
+// ---------- BOOT ----------
+applyLang();
+buildDemo();
+
+// ---------- E2E HOOKS (for headless testing) ----------
+window.__game = {
+    state: () => ({ stageIdx, taps, chars: chars.map(c => ({x:c.x, y:c.y, state:c.state, hyper:c.hyper})) }),
+    tapAt: (x,y) => {
+        const el = document.elementFromPoint(x,y);
+        if (el) {
+            const ev = new PointerEvent("pointerdown", {clientX:x,clientY:y, bubbles:true});
+            el.dispatchEvent(ev);
+        }
+    },
+    tapChar: (i) => {
+        const ch = chars[i];
+        if (!ch) return false;
+        ensureAudio();
+        onTap(ch, {});
+        return true;
+    },
+    startStage,
+};
+</script>
+</body>
+</html>
