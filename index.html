@@ -237,6 +237,7 @@ header p {
 .thumb-eratosthenes { background: linear-gradient(180deg, #1f3a5a 0%, #4a6a8a 38%, #c9a572 70%, #8a6234 100%); }
 .thumb-carrington { background: linear-gradient(180deg, #050308 0%, #1a0a28 35%, #5a1a4a 65%, #08200a 100%); }
 .thumb-fleming    { background: radial-gradient(ellipse at 50% 38%, #3a2a18 0%, #1f1610 55%, #0d0805 100%); }
+.thumb-kosuruto  { background: radial-gradient(ellipse at 50% 35%, #2b1a4d 0%, #1a1230 65%, #0c0820 100%); }
 .thumb-broadstreet { background: linear-gradient(180deg, #2a1f15 0%, #5a4a36 35%, #b09866 70%, #f0e3c2 100%); }
 .thumb-uchu      { background: radial-gradient(ellipse at 50% 30%, #1d3473 0%, #0a1535 55%, #050216 100%); }
 
@@ -623,6 +624,22 @@ footer a:hover { color: #e6edf3; }
 
 <!-- All apps -->
 <div class="grid" id="app-grid">
+    <div class="card" data-cat="kids" data-added="2026-05-08T05:00:00+09:00" data-slug="kosuruto">
+            <div class="card-thumb thumb-kosuruto">
+            <span class="thumb-emoji">✋</span>
+                <img class="thumb-gif" src="assets/kosuruto.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="kosurutoTitle">こすると…</h2>
+                <p data-i18n="kosurutoDesc"><strong>ゆびで がめんを こすってみよう。</strong>2〜5さいの まだ ことばを おぼえている さいちゅうの こども むけ、<strong>「ふわふわ」「つぶつぶ」「ぱりぱり」「ぬるぬる」「ちくちく」「つるつる」「もこもこ」</strong>の <strong>7つの しょっかん</strong> を、ゆびで さわって しる おもちゃ。日本語の「擬態語（ぎたいご）」は 世界の 言語のなかでも とびぬけて 多くて、こども が ことばを おぼえる さいしょの 入口に なる——でも ふつうの えほん では「絵を 見る」だけ。これは ちがう。<strong>ゆびで こすると、本当に そう 動く・そう 鳴る・（スマホでは）そう ふるえる</strong>。「ふわふわ」 を こすれば けが しなって ねこの 顔が でてくる。「つぶつぶ」を こすれば シャボンが ぱちんと はじける。「ぱりぱり」を こすると 枯れ葉が ぱらぱら くだける。「ぬるぬる」の ゼリーは ぐにゃっと 変形する。「ちくちく」は サボトゲ が ぴり、こすり つづければ 花が 咲く。「つるつる」は 氷の 下を 魚が すべる。「もこもこ」の くもを どかせば 太陽が さしてくる。Web Audio で その場 合成 した 音、Vibration API（対応 端末）の ハプティクス、Canvas の 流体的な 反応——ぜんぶ ライブラリなし の 一枚 HTML。せいかいも しっぱいも ない、ボタン式の おもちゃでも 本式の ゲームでも ない、<strong>「擬態語を 指で 学ぶ」</strong> ための 純粋な センサリー トイ。読み書き の まえの 子に。日本語と English の バイリンガル。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="kosurutoTag1">2〜5歳</span>
+                    <span class="tag" data-i18n="kosurutoTag2">擬態語</span>
+                    <span class="tag" data-i18n="kosurutoTag3">触感あそび</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/kosuruto/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
     <div class="card" data-cat="learn" data-added="2026-05-08T03:00:00+09:00" data-slug="uchu-elevator">
             <div class="card-thumb thumb-uchu">
             <span class="thumb-emoji">🚀</span>
@@ -2348,6 +2365,9 @@ const I18N = {
         uchuTitle: "うちゅうエレベーター",
         uchuDesc:  "ちじょう→スカイツリー(634m)→ふじさん(3,776m)→ジェットき(11km)→オゾン(25km)→ながれぼし(80km)→カーマン(100km・ここから うちゅう)→ISS(408km)→せいし(3万6千km)→つき(38万km)。「のぼる」を おすだけ で 8けた のたかさ を たいすうスケール で 体験。5〜9さいに、地球のスケール感を おやゆびひとつで。",
         uchuTag1: "5〜9歳", uchuTag2: "対数スケール", uchuTag3: "大気圏→月",
+        kosurutoTitle: "こすると…",
+        kosurutoDesc:  "ゆびで がめんを こすると、「ふわふわ」「つぶつぶ」「ぱりぱり」「ぬるぬる」「ちくちく」「つるつる」「もこもこ」の 7つの しょっかんが あらわれる。日本語の 擬態語を ゆびで 学ぶ センサリー トイ。Web Audio の 合成音 と Vibration API の ハプティクス で 「本当に そう 動く・そう 鳴る・そう ふるえる」。読み書きの まえの 2〜5さい 向け。",
+        kosurutoTag1: "2〜5歳", kosurutoTag2: "擬態語", kosurutoTag3: "触感あそび",
     },
     en: {
         tagline:   "Games · Education · Tools — delivered via browser and apps",
@@ -2655,6 +2675,9 @@ const I18N = {
         uchuTitle: "Uchū Elevator (Space Elevator)",
         uchuDesc:  "Ground → Skytree (634m) → Mt. Fuji (3,776m) → jet (11km) → ozone (25km) → meteors (80km) → Kármán line (100km, space starts) → ISS (408km) → geostationary (35,786km) → Moon (384,400km). Hold one button to ride 8 orders of magnitude on a log scale. For ages 5-9: feel the scale of Earth and beyond with a single thumb.",
         uchuTag1: "Ages 5-9", uchuTag2: "Log scale", uchuTag3: "Atmosphere → Moon",
+        kosurutoTitle: "Kosuruto (When you rub…)",
+        kosurutoDesc:  "Rub the screen with your finger and seven distinct textures appear: fluffy fur, popping bubbles, crunchy leaves, slimy jelly, prickly cactus, slippery ice, and parting clouds. A sensory toy for ages 2-5 that teaches Japanese onomatopoeia (ふわふわ・つぶつぶ・ぱりぱり…) through real motion: synthesized sound via Web Audio, haptic feedback via the Vibration API, and fluid canvas reactions. No reading required. Bilingual JP/EN.",
+        kosurutoTag1: "Ages 2-5", kosurutoTag2: "Onomatopoeia", kosurutoTag3: "Tactile play",
     }
 };
 
