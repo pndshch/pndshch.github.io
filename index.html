@@ -216,6 +216,7 @@ header p {
 .thumb-iromaze    { background: radial-gradient(ellipse at 50% 35%, #2a1f4d 0%, #15102a 60%, #0a0717 100%); }
 .thumb-enooto     { background: radial-gradient(ellipse at 50% 35%, #1a1248 0%, #0a0820 60%, #04020f 100%); }
 .thumb-koemon     { background: radial-gradient(ellipse at 30% 25%, #2a1860 0%, #150a35 50%, #060214 100%); }
+.thumb-pikopiko   { background: radial-gradient(ellipse at 50% 45%, #10103a 0%, #08081f 55%, #04030d 100%); }
 
 .card-body {
     padding: 18px 20px 22px;
@@ -419,6 +420,14 @@ footer a:hover { color: #e6edf3; }
 <!-- Featured -->
 <div class="section-label" data-i18n="secFeatured">⭐ おすすめ</div>
 <div class="feat-row">
+        <a class="feat-card" href="https://pndshch.github.io/pikopiko-sonar/" target="_blank">
+            <div class="card-thumb thumb-pikopiko">
+            <span class="new-badge" data-i18n="newBadge">NEW</span>
+            <span class="thumb-emoji">🦇</span>
+            <img class="thumb-gif" src="assets/pikopiko-sonar.gif" alt="" onerror="this.remove()">
+        </div>
+            <span class="feat-title" data-i18n="pikopikoTitle">ぴこぴこソナー</span>
+        </a>
         <a class="feat-card" href="https://pndshch.github.io/koe-monster/" target="_blank">
             <div class="card-thumb thumb-koemon">
             <span class="new-badge" data-i18n="newBadge">NEW</span>
@@ -577,6 +586,23 @@ footer a:hover { color: #e6edf3; }
 <!-- All apps -->
 <div class="grid" id="app-grid">
     <div class="grid-header" data-cat-header="kids-play" data-i18n="secGridKidsPlay">🎈 こどもがあそぶ</div>
+    <div class="card" data-cat="kids-play">
+            <div class="card-thumb thumb-pikopiko">
+                <span class="new-badge" data-i18n="newBadge">NEW</span>
+                <span class="thumb-emoji">🦇</span>
+                <img class="thumb-gif" src="assets/pikopiko-sonar.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="pikopikoTitle">ぴこぴこソナー</h2>
+                <p data-i18n="pikopikoDesc">コウモリは おみみで ものを みているんだって！4〜8さい向けの エコーロケーション あそび。まっくらやみの どうくつで がめんを タッチすると、おとの なみが ひろがって いく。なみが あたると、いわや ホタルが 一しゅん ひかるよ。ひかった ホタルを すかさず タッチで たすけよう。なみ・じかんで★3つを ねらえる3レベル。コウモリと イルカが 音波（おんぱ）で せかいを みている しくみを、いっしゅんの ひらめきで 体験できる、世界初のキッズむけ ソナー パズル。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="pikopikoTag1">4〜8歳</span>
+                    <span class="tag" data-i18n="pikopikoTag2">エコーロケーション</span>
+                    <span class="tag" data-i18n="pikopikoTag3">音×光</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/pikopiko-sonar/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
     <div class="card" data-cat="kids-play">
             <div class="card-thumb thumb-koemon">
                 <span class="new-badge" data-i18n="newBadge">NEW</span>
@@ -1893,6 +1919,9 @@ const I18N = {
         koemonTitle: "こえモンスター",
         koemonDesc:  "こえを ふきこむと、せかいで ひとつだけの モンスターが うまれる！3〜7さい向け、自分の声から生まれる生きもの図鑑。マイクに「あー」「いー」と声を出すと、声の高さ・大きさ・かがやき・ゆれ・長さの5つを音響解析。それぞれにぴったりの色・形・もよう・足の数のモンスターを生成して、自分だけの「こえずかん」を増やしていく、世界初の声→生きもの ジェネレーティブ図鑑。同じ声からは同じ子が生まれる、内気な子の発声練習にも。",
         koemonTag1: "3〜7歳", koemonTag2: "声→生きもの", koemonTag3: "ずかん",
+        pikopikoTitle: "ぴこぴこソナー",
+        pikopikoDesc:  "コウモリは おみみで ものを みているんだって！4〜8さいむけ エコーロケーション あそび。まっくらやみの どうくつで、がめんを タッチすると 音の なみが ひろがる。なみが いわや ホタルに あたると 一しゅん ひかるから、ひかった ホタルを すかさず タッチで たすけよう。なみの数・じかんで★3つを ねらえる3レベル。コウモリと イルカが『おんぱ』で せかいを みている しくみを、ひらめきの 一しゅんで 体験できる、世界初のキッズむけ ソナー パズル。",
+        pikopikoTag1: "4〜8歳", pikopikoTag2: "エコーロケーション", pikopikoTag3: "音×光",
         iromazeTitle: "いろまぜ",
         iromazeDesc:  "2つの色を ぎゅっとくっつけると、あたらしい色が うまれる！4〜8歳むけ、日本の伝統色（和色）を 25色集める色あそび実験室。あか＋しろ＝桃色（ももいろ）、桃色＋しろ＝桜色（さくらいろ）。「やまぶき」「あさぎ」「うぐいす」など、まぜないと出会えない色がある。読みかなつき、保存対応。",
         iromazeTag1: "4〜8歳", iromazeTag2: "和色25", iromazeTag3: "混色",
@@ -2130,6 +2159,9 @@ const I18N = {
         koemonTitle: "Koe-Monster",
         koemonDesc:  "Make a sound — and a one-of-a-kind monster is born! For ages 3–7, a generative creature encyclopedia driven by your own voice. Just say \"aaa\" or \"iii\" into the mic: the app analyses 5 acoustic features (pitch, volume, brightness, wobble, duration) and procedurally generates a matching creature with unique color, shape, pattern, spike count, and number of legs. The same voice produces the same monster, every time — explore your vocal range to fill your personal ZUKAN. The world's first voice-to-creature generative collection, also great for shy kids practicing their voice.",
         koemonTag1: "Ages 3–7", koemonTag2: "Voice→Creature", koemonTag3: "Generative",
+        pikopikoTitle: "Piko-Piko Sonar",
+        pikopikoDesc:  "Bats see the world with their ears! An echolocation puzzle for ages 4–8. The cave is pitch black — tap to send a sound wave that ripples outward. When the wave hits a rock or a firefly, the object glows for a moment. Tap a glowing firefly during its reveal to rescue it. Three escalating levels with ★1–3 ratings based on waves used and time. A first-of-its-kind kids' sonar puzzle that lets children feel — in a flash of insight — how bats and dolphins use sound waves to see.",
+        pikopikoTag1: "Ages 4–8", pikopikoTag2: "Echolocation", pikopikoTag3: "Sound×Light",
         iromazeTitle: "Iro-maze (Color Lab)",
         iromazeDesc:  "Press two color blobs together — a new color is born! For ages 4–8, a discovery lab of 25 traditional Japanese colors (和色). Red + white = momo-iro (peach); peach + white = sakura-iro (cherry blossom). Yamabuki, asagi, uguisu — colors you only meet by mixing. Hiragana readings, progress saved.",
         iromazeTag1: "Ages 4–8", iromazeTag2: "25 Wa-iro", iromazeTag3: "Mixing",
