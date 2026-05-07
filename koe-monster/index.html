@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0b0820">
+<title>こえモンスター — Voice Monsters</title>
+<meta name="description" content="こえを ふきこむと、せかいでひとつのモンスターが うまれる！3〜7さい向け、自分の声から生まれる生きもの図鑑。">
+<meta property="og:title" content="こえモンスター — Voice Monsters">
+<meta property="og:description" content="こえから生まれる、せかいでひとつだけの生きもの図鑑。3〜7歳向け。">
+<meta property="og:type" content="website">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+html, body {
+    width:100%; min-height:100%;
+    overscroll-behavior:none;
+    user-select:none; -webkit-user-select:none;
+}
+body {
+    font-family: -apple-system, "Hiragino Maru Gothic ProN", "Yu Gothic UI", "Segoe UI", "Helvetica Neue", sans-serif;
+    background:
+        radial-gradient(ellipse at 30% 10%, #2a1860 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 80%, #4a1a6a 0%, transparent 60%),
+        linear-gradient(180deg, #0e0825 0%, #0a0420 60%, #060214 100%);
+    color: #fff;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+/* twinkles */
+.stars {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background-image:
+        radial-gradient(1px 1px at 20% 30%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 70% 60%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 40% 80%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 90% 20%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 50% 50%, #fff 0%, transparent 100%),
+        radial-gradient(2px 2px at 15% 70%, #ffd166 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 85% 40%, #ec4899 0%, transparent 100%);
+    opacity: 0.5;
+    animation: twinkle 4s ease-in-out infinite;
+}
+@keyframes twinkle { 0%,100%{opacity:0.4} 50%{opacity:0.7} }
+
+/* ───── Top bar ───── */
+.topbar {
+    position: sticky; top: 0; z-index: 50;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 14px 10px;
+    background: linear-gradient(to bottom, rgba(10,4,32,0.85) 0%, rgba(10,4,32,0) 100%);
+    backdrop-filter: blur(8px);
+}
+.title-block { display:flex; align-items:center; gap:10px; }
+.title-mark {
+    width: 38px; height: 38px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #ff6b9d 0%, #ffd166 50%, #06d6a0 100%);
+    display:flex; align-items:center; justify-content:center;
+    font-size: 20px;
+    box-shadow: 0 4px 14px rgba(255,107,157,0.4);
+}
+.title-text { font-weight: 800; font-size: 18px; letter-spacing: -0.2px; }
+.title-sub { font-size: 9px; color: #c9bfee; letter-spacing: 1.2px; text-transform: uppercase; }
+.topbtns { display: flex; gap: 6px; }
+.icon-btn {
+    width: 40px; height: 40px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.14);
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    font-size: 18px;
+    transition: transform 0.12s, background 0.15s;
+}
+.icon-btn:active { transform: scale(0.92); background: rgba(255,255,255,0.18); }
+.lang-pill {
+    width: auto; padding: 0 12px; font-size: 11px; font-weight: 700; letter-spacing: 0.5px;
+}
+
+/* ───── Screens ───── */
+.screen { display: none; padding: 12px 18px 80px; max-width: 480px; margin: 0 auto; position: relative; z-index: 1; }
+.screen.active { display: block; animation: fadein 0.3s ease; }
+@keyframes fadein { from {opacity:0; transform: translateY(8px);} to {opacity:1; transform:none;} }
+
+/* ───── Home (record) ───── */
+#home { text-align: center; padding-top: 6px; }
+.hero {
+    margin: 6px 0 14px;
+    font-size: 22px; font-weight: 800; line-height: 1.45;
+    letter-spacing: -0.3px;
+}
+.hero .accent { color: #ffd166; }
+.subhero {
+    color: #b9b3e8; font-size: 13px; line-height: 1.7;
+    margin-bottom: 26px;
+}
+
+.mic-stage {
+    position: relative;
+    width: 250px; height: 250px;
+    margin: 8px auto 18px;
+}
+.mic-rings { position: absolute; inset: 0; }
+.mic-ring {
+    position: absolute; inset: 0;
+    border-radius: 50%;
+    border: 2px solid rgba(255,209,102,0.4);
+    opacity: 0;
+}
+.recording .mic-ring {
+    animation: ring 1.4s ease-out infinite;
+}
+.recording .mic-ring:nth-child(2) { animation-delay: 0.45s; }
+.recording .mic-ring:nth-child(3) { animation-delay: 0.9s; }
+@keyframes ring {
+    0% { transform: scale(0.6); opacity: 0.9; border-color: #ffd166; }
+    100% { transform: scale(1.5); opacity: 0; border-color: #ec4899; }
+}
+
+.mic-btn {
+    position: absolute; inset: 0;
+    border-radius: 50%;
+    border: none;
+    background:
+        radial-gradient(circle at 35% 30%, #ffe9b5 0%, #ffd166 30%, #f97316 80%);
+    box-shadow:
+        0 0 60px rgba(255,209,102,0.45),
+        0 12px 30px rgba(249,115,22,0.4),
+        inset 0 -12px 30px rgba(180,60,0,0.4),
+        inset 0 12px 24px rgba(255,255,255,0.5);
+    cursor: pointer;
+    transition: transform 0.12s ease;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+}
+.mic-btn:active { transform: scale(0.94); }
+.recording .mic-btn {
+    background:
+        radial-gradient(circle at 35% 30%, #ffd9e9 0%, #ec4899 30%, #be185d 80%);
+    box-shadow:
+        0 0 80px rgba(236,72,153,0.6),
+        0 12px 30px rgba(190,24,93,0.5),
+        inset 0 -12px 30px rgba(120,10,50,0.4),
+        inset 0 12px 24px rgba(255,255,255,0.5);
+    animation: pulse 0.9s ease-in-out infinite;
+}
+@keyframes pulse {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+.mic-icon { font-size: 90px; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3)); pointer-events: none; }
+
+/* live waveform overlay */
+#wavecanvas {
+    position: absolute; inset: 14px;
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.mic-hint {
+    margin-top: 4px;
+    font-size: 14px; font-weight: 700; color: #ffd166;
+}
+.mic-hint-sub { font-size: 12px; color: #b9b3e8; margin-top: 4px; }
+
+/* ───── Birth animation ───── */
+#birth {
+    text-align: center;
+    padding-top: 32px;
+}
+.cocoon-stage {
+    width: 280px; height: 280px;
+    margin: 10px auto 12px;
+    position: relative;
+}
+.cocoon-stage svg { width: 100%; height: 100%; }
+.birth-name {
+    font-size: 26px; font-weight: 800;
+    letter-spacing: -0.4px;
+    margin-top: 6px;
+    background: linear-gradient(135deg, #ffd166, #ff6b9d, #06d6a0);
+    -webkit-background-clip: text; background-clip: text;
+    color: transparent;
+}
+.birth-tag {
+    color: #b9b3e8; font-size: 13px; margin-top: 6px;
+}
+.stat-row {
+    display: flex; flex-wrap: wrap; gap: 6px;
+    justify-content: center;
+    margin: 14px 0 8px;
+}
+.stat {
+    font-size: 11px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.16);
+    color: #e8e3ff;
+    padding: 4px 10px;
+    border-radius: 30px;
+    font-weight: 600;
+}
+
+.action-row {
+    display: flex; gap: 10px; margin-top: 18px;
+    flex-direction: column;
+}
+.btn {
+    padding: 14px;
+    border-radius: 14px;
+    border: none;
+    font-size: 15px; font-weight: 800;
+    color: #fff; cursor: pointer;
+    letter-spacing: 0.2px;
+    transition: transform 0.12s, filter 0.15s;
+}
+.btn:active { transform: scale(0.97); }
+.btn-primary {
+    background: linear-gradient(135deg, #06d6a0 0%, #0aa67e 100%);
+    box-shadow: 0 6px 18px rgba(6,214,160,0.36);
+}
+.btn-secondary {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.18);
+    color: #e8e3ff;
+}
+.btn-danger {
+    background: rgba(239,68,68,0.18);
+    border: 1px solid rgba(239,68,68,0.4);
+    color: #fca5a5;
+}
+
+/* ───── Encyclopedia (zukan) ───── */
+#zukan-head {
+    padding: 6px 18px 0;
+    max-width: 480px; margin: 0 auto;
+    position: relative; z-index: 1;
+}
+.zukan-title {
+    font-size: 22px; font-weight: 800;
+    letter-spacing: -0.3px;
+    margin-bottom: 4px;
+}
+.zukan-meta {
+    color: #b9b3e8; font-size: 12px; margin-bottom: 14px;
+}
+.zukan-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    padding: 0 18px 30px;
+    max-width: 480px;
+    margin: 0 auto;
+    position: relative; z-index: 1;
+}
+.zukan-cell {
+    aspect-ratio: 1;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.12s, border-color 0.15s;
+}
+.zukan-cell:hover, .zukan-cell:active {
+    transform: scale(0.96);
+    border-color: rgba(255,209,102,0.5);
+}
+.zukan-cell svg { width: 90%; height: 90%; }
+.zukan-cell .cell-name {
+    position: absolute; bottom: 4px; left: 4px; right: 4px;
+    font-size: 9px; font-weight: 700; text-align: center;
+    color: #c9bfee;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.empty-msg {
+    grid-column: 1 / -1;
+    text-align: center; padding: 40px 20px;
+    color: #8b86b8; font-size: 13px; line-height: 1.7;
+}
+.empty-msg .big { font-size: 50px; margin-bottom: 10px; opacity: 0.6; }
+
+/* ───── Detail ───── */
+#detail .cocoon-stage {
+    width: 220px; height: 220px;
+}
+.detail-stats {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px;
+    padding: 14px 16px;
+    margin-top: 14px;
+}
+.detail-stats .row {
+    display: flex; justify-content: space-between;
+    padding: 6px 0;
+    font-size: 13px;
+    border-bottom: 1px dashed rgba(255,255,255,0.08);
+}
+.detail-stats .row:last-child { border-bottom: none; }
+.detail-stats .label { color: #b9b3e8; font-weight: 600; }
+.detail-stats .val { color: #fff; font-weight: 700; }
+
+/* ───── Footer nav ───── */
+.bottom-pad { height: 30px; }
+
+@media (min-width: 520px) {
+    .zukan-grid { grid-template-columns: repeat(4, 1fr); }
+}
+</style>
+</head>
+<body>
+<div class="stars"></div>
+
+<header class="topbar">
+    <div class="title-block">
+        <div class="title-mark">🎙️</div>
+        <div>
+            <div class="title-text" data-i18n="title">こえモンスター</div>
+            <div class="title-sub" data-i18n="sub">VOICE MONSTERS</div>
+        </div>
+    </div>
+    <div class="topbtns">
+        <button class="icon-btn lang-pill" id="langBtn">JP / EN</button>
+        <button class="icon-btn" id="zukanBtn" title="ずかん" aria-label="ずかん">📖</button>
+    </div>
+</header>
+
+<!-- Home / Record -->
+<section id="home" class="screen active">
+    <div class="hero" data-i18n="heroLine">
+        こえを <span class="accent">ふきこむ</span> と<br>モンスターが うまれる
+    </div>
+    <div class="subhero" data-i18n="subLine">
+        おおきいこえ・ちいさいこえ・たかいこえ・ひくいこえ。<br>
+        どんなこえでも、せかいで ひとつの モンスターになるよ！
+    </div>
+
+    <div id="micStage" class="mic-stage">
+        <div class="mic-rings">
+            <div class="mic-ring"></div>
+            <div class="mic-ring"></div>
+            <div class="mic-ring"></div>
+        </div>
+        <button class="mic-btn" id="micBtn" aria-label="record">
+            <span class="mic-icon" id="micIcon">🎤</span>
+            <canvas id="wavecanvas"></canvas>
+        </button>
+    </div>
+
+    <div class="mic-hint" id="micHint" data-i18n="hintTap">ここを ぎゅっと おしてね</div>
+    <div class="mic-hint-sub" id="micHintSub" data-i18n="hintSub">「あー」「いー」「うー」など、すきなこえで！</div>
+</section>
+
+<!-- Birth -->
+<section id="birth" class="screen">
+    <div class="cocoon-stage" id="birthStage"></div>
+    <div class="birth-name" id="birthName">—</div>
+    <div class="birth-tag" id="birthTag">—</div>
+    <div class="stat-row" id="birthStats"></div>
+
+    <div class="action-row">
+        <button class="btn btn-primary" id="saveBtn" data-i18n="saveBtn">📖 ずかんに しまう</button>
+        <button class="btn btn-secondary" id="redoBtn" data-i18n="redoBtn">🎤 もういちど</button>
+    </div>
+</section>
+
+<!-- Encyclopedia -->
+<section id="zukan" class="screen" style="padding-left:0;padding-right:0;">
+    <div id="zukan-head">
+        <div class="zukan-title" data-i18n="zukanTitle">こえずかん</div>
+        <div class="zukan-meta" id="zukanMeta">—</div>
+    </div>
+    <div class="zukan-grid" id="zukanGrid"></div>
+</section>
+
+<!-- Detail -->
+<section id="detail" class="screen">
+    <div class="cocoon-stage" id="detailStage"></div>
+    <div class="birth-name" id="detailName">—</div>
+    <div class="birth-tag" id="detailTag">—</div>
+
+    <div class="detail-stats">
+        <div class="row"><span class="label" data-i18n="dPitch">こえのたかさ</span><span class="val" id="dPitch">—</span></div>
+        <div class="row"><span class="label" data-i18n="dVol">おおきさ</span><span class="val" id="dVol">—</span></div>
+        <div class="row"><span class="label" data-i18n="dBright">あかるさ</span><span class="val" id="dBright">—</span></div>
+        <div class="row"><span class="label" data-i18n="dWobble">ゆれ</span><span class="val" id="dWobble">—</span></div>
+        <div class="row"><span class="label" data-i18n="dDur">ながさ</span><span class="val" id="dDur">—</span></div>
+        <div class="row"><span class="label" data-i18n="dDate">たんじょうび</span><span class="val" id="dDate">—</span></div>
+    </div>
+
+    <div class="action-row">
+        <button class="btn btn-secondary" id="backToZukan" data-i18n="backBtn">← ずかんに もどる</button>
+        <button class="btn btn-danger" id="releaseBtn" data-i18n="releaseBtn">🐾 にがす</button>
+    </div>
+</section>
+
+<div class="bottom-pad"></div>
+
+<script>
+// ──────────────────────────────────────────────────
+//  i18n
+// ──────────────────────────────────────────────────
+const i18n = {
+  ja: {
+    title: "こえモンスター", sub: "VOICE MONSTERS",
+    heroLine: 'こえを <span class="accent">ふきこむ</span> と<br>モンスターが うまれる',
+    subLine: 'おおきいこえ・ちいさいこえ・たかいこえ・ひくいこえ。<br>どんなこえでも、せかいで ひとつの モンスターになるよ！',
+    hintTap: "ここを ぎゅっと おしてね",
+    hintSub: "「あー」「いー」「うー」など、すきなこえで！",
+    hintRec: "こえを きかせて…",
+    hintRecSub: "もういちど おすと とまるよ",
+    hintTooShort: "もうすこし ながく こえを だしてね",
+    hintNoMic: "マイクを つかえなかった。きょかしてね 🙏",
+    saveBtn: "📖 ずかんに しまう",
+    redoBtn: "🎤 もういちど",
+    zukanTitle: "こえずかん",
+    zukanMeta0: "まだ いないよ。こえを きかせよう！",
+    zukanMetaN: "%n ひきの モンスター",
+    backBtn: "← ずかんに もどる",
+    releaseBtn: "🐾 にがす",
+    dPitch: "こえのたかさ", dVol: "おおきさ", dBright: "あかるさ",
+    dWobble: "ゆれ", dDur: "ながさ", dDate: "たんじょうび",
+    confirmRelease: "このモンスターを にがすよ。いい？",
+    high: "たかい", mid: "まんなか", low: "ひくい",
+    big: "おおきい", small: "ちいさい", normal: "ふつう",
+    bright: "きらきら", warm: "ふわふわ", rough: "ざらざら",
+    steady: "まっすぐ", little: "ちょっとゆれる", lots: "ぐらぐら",
+    long: "ながい", short_: "みじかい",
+    tag: "うまれた じかん：%t",
+    sec: "びょう"
+  },
+  en: {
+    title: "KOE-Monster", sub: "VOICE MONSTERS",
+    heroLine: 'Make a <span class="accent">sound</span><br>and a monster is born',
+    subLine: 'Loud, soft, high, low — every voice creates a one-of-a-kind monster.',
+    hintTap: "Tap and hold to start",
+    hintSub: 'Try "aaa", "iii", "ooo" — anything!',
+    hintRec: "Listening…",
+    hintRecSub: "Tap again to stop",
+    hintTooShort: "A little longer please!",
+    hintNoMic: "Couldn't access mic. Please allow it 🙏",
+    saveBtn: "📖 Save to ZUKAN",
+    redoBtn: "🎤 Try again",
+    zukanTitle: "Voice ZUKAN",
+    zukanMeta0: "Empty! Make some monsters.",
+    zukanMetaN: "%n monsters collected",
+    backBtn: "← Back to ZUKAN",
+    releaseBtn: "🐾 Release",
+    dPitch: "Pitch", dVol: "Volume", dBright: "Brightness",
+    dWobble: "Wobble", dDur: "Length", dDate: "Born on",
+    confirmRelease: "Release this monster. Are you sure?",
+    high: "high", mid: "mid", low: "low",
+    big: "big", small: "small", normal: "med",
+    bright: "bright", warm: "warm", rough: "rough",
+    steady: "steady", little: "wavy", lots: "wobbly",
+    long: "long", short_: "short",
+    tag: "Born: %t",
+    sec: "s"
+  }
+};
+let LANG = (navigator.language || "ja").startsWith("ja") ? "ja" : "en";
+function t(k){ return i18n[LANG][k] ?? i18n.ja[k] ?? k; }
+function applyI18n(){
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const k = el.dataset.i18n;
+    if(i18n[LANG][k]) el.innerHTML = i18n[LANG][k];
+  });
+  if(currentZukan) renderZukan();
+  if(currentDetail !== null) renderDetail(currentDetail);
+}
+
+// ──────────────────────────────────────────────────
+//  Storage
+// ──────────────────────────────────────────────────
+const KEY = "koe-monster.v1";
+function loadAll(){
+  try { return JSON.parse(localStorage.getItem(KEY) || "[]"); } catch(e) { return []; }
+}
+function saveAll(arr){
+  localStorage.setItem(KEY, JSON.stringify(arr));
+}
+
+// ──────────────────────────────────────────────────
+//  Voice Analysis
+// ──────────────────────────────────────────────────
+let audioCtx = null, mediaStream = null, analyser = null, srcNode = null;
+let recording = false, recStart = 0, recFrames = [];
+let waveCanvas, waveCtx;
+
+async function startRec() {
+  try {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === "suspended") await audioCtx.resume();
+    mediaStream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: false, noiseSuppression: false, autoGainControl: false } });
+    srcNode = audioCtx.createMediaStreamSource(mediaStream);
+    analyser = audioCtx.createAnalyser();
+    analyser.fftSize = 2048;
+    analyser.smoothingTimeConstant = 0.4;
+    srcNode.connect(analyser);
+    recording = true;
+    recStart = performance.now();
+    recFrames = [];
+    document.getElementById("micStage").classList.add("recording");
+    document.getElementById("micIcon").textContent = "🎙️";
+    document.getElementById("micHint").textContent = t("hintRec");
+    document.getElementById("micHintSub").textContent = t("hintRecSub");
+    sampleLoop();
+  } catch(e) {
+    console.error(e);
+    document.getElementById("micHint").textContent = t("hintNoMic");
+  }
+}
+
+function stopRec(autoBirth = true) {
+  if (!recording) return;
+  recording = false;
+  document.getElementById("micStage").classList.remove("recording");
+  document.getElementById("micIcon").textContent = "🎤";
+  document.getElementById("micHint").textContent = t("hintTap");
+  document.getElementById("micHintSub").textContent = t("hintSub");
+  if (mediaStream) { mediaStream.getTracks().forEach(t=>t.stop()); mediaStream=null; }
+  // clear waveform
+  if (waveCtx) waveCtx.clearRect(0,0,waveCanvas.width,waveCanvas.height);
+  if (autoBirth) finalizeBirth();
+}
+
+const tdBuf = new Float32Array(2048);
+const fdBuf = new Uint8Array(1024);
+
+function sampleLoop(){
+  if(!recording) return;
+  analyser.getFloatTimeDomainData(tdBuf);
+  analyser.getByteFrequencyData(fdBuf);
+  // RMS
+  let sum=0;
+  for(let i=0;i<tdBuf.length;i++) sum += tdBuf[i]*tdBuf[i];
+  const rms = Math.sqrt(sum/tdBuf.length);
+  // pitch via autocorrelation (only if RMS > threshold)
+  let pitch = 0;
+  if (rms > 0.012) pitch = autocorrelate(tdBuf, audioCtx.sampleRate);
+  // spectral centroid
+  let scNum=0, scDen=0;
+  for(let i=0;i<fdBuf.length;i++){
+    const v = fdBuf[i];
+    const f = i * audioCtx.sampleRate / (analyser.fftSize);
+    scNum += v * f;
+    scDen += v;
+  }
+  const centroid = scDen > 0 ? scNum/scDen : 0;
+  recFrames.push({ t: performance.now()-recStart, rms, pitch, centroid });
+
+  // draw live waveform
+  drawWave(tdBuf, rms);
+
+  // auto-stop at 5s
+  if (performance.now() - recStart > 5000) {
+    stopRec(true);
+    return;
+  }
+  requestAnimationFrame(sampleLoop);
+}
+
+function autocorrelate(buf, sampleRate){
+  // YIN-lite autocorrelation pitch detector
+  const SIZE = buf.length;
+  let bestOffset = -1, bestCorr = 0;
+  let lastCorr = 1;
+  let foundGood = false;
+  const minPeriod = Math.floor(sampleRate / 800); // 800Hz max
+  const maxPeriod = Math.floor(sampleRate / 60);  // 60Hz min
+  for (let offset = minPeriod; offset <= maxPeriod; offset++){
+    let corr = 0;
+    for (let i = 0; i < SIZE - offset; i++){
+      corr += buf[i] * buf[i+offset];
+    }
+    corr = corr / (SIZE - offset);
+    if (corr > 0.9 && corr > lastCorr) foundGood = true;
+    else if (foundGood) {
+      const shift = (corr - lastCorr) / lastCorr;
+      bestOffset = offset - 1 + shift;
+      bestCorr = lastCorr;
+      return sampleRate / bestOffset;
+    }
+    if (corr > bestCorr) { bestCorr = corr; bestOffset = offset; }
+    lastCorr = corr;
+  }
+  if (bestCorr > 0.5) return sampleRate / bestOffset;
+  return 0;
+}
+
+function drawWave(buf, rms){
+  if(!waveCanvas){
+    waveCanvas = document.getElementById("wavecanvas");
+    const dpr = window.devicePixelRatio || 1;
+    const r = waveCanvas.getBoundingClientRect();
+    waveCanvas.width = r.width * dpr;
+    waveCanvas.height = r.height * dpr;
+    waveCtx = waveCanvas.getContext("2d");
+    waveCtx.scale(dpr, dpr);
+  }
+  const W = waveCanvas.clientWidth, H = waveCanvas.clientHeight;
+  waveCtx.clearRect(0,0,W,H);
+  waveCtx.lineWidth = 2;
+  waveCtx.strokeStyle = "rgba(255,255,255,0.85)";
+  waveCtx.beginPath();
+  const cx = W/2, cy = H/2;
+  const baseR = Math.min(W,H)*0.34;
+  const amp = baseR * 0.22 * (1 + rms*4);
+  for(let i=0;i<128;i++){
+    const a = (i/128) * Math.PI*2;
+    const idx = Math.floor(i / 128 * buf.length);
+    const r = baseR + buf[idx] * amp;
+    const x = cx + Math.cos(a)*r, y = cy + Math.sin(a)*r;
+    if (i===0) waveCtx.moveTo(x,y); else waveCtx.lineTo(x,y);
+  }
+  waveCtx.closePath();
+  waveCtx.stroke();
+}
+
+// ──────────────────────────────────────────────────
+//  Birth: extract features → name & build creature
+// ──────────────────────────────────────────────────
+function finalizeBirth(){
+  // Filter to voiced frames (non-trivial RMS)
+  const voiced = recFrames.filter(f => f.rms > 0.012);
+  const dur = recFrames.length ? (recFrames[recFrames.length-1].t / 1000) : 0;
+  if (voiced.length < 5 || dur < 0.4) {
+    document.getElementById("micHint").textContent = t("hintTooShort");
+    document.getElementById("micHintSub").textContent = t("hintSub");
+    return;
+  }
+  // pitch: median of frames where pitch > 0
+  const pitches = voiced.map(f=>f.pitch).filter(p=>p>40 && p<1200).sort((a,b)=>a-b);
+  const medPitch = pitches.length ? pitches[Math.floor(pitches.length/2)] : 200;
+  // pitch wobble: stddev of pitches
+  let pStd = 0;
+  if (pitches.length > 2){
+    const mean = pitches.reduce((a,b)=>a+b,0)/pitches.length;
+    pStd = Math.sqrt(pitches.reduce((a,b)=>a+(b-mean)*(b-mean),0)/pitches.length);
+  }
+  // volume: mean rms
+  const meanRms = voiced.reduce((a,b)=>a+b.rms,0)/voiced.length;
+  // brightness: mean centroid Hz
+  const meanCent = voiced.reduce((a,b)=>a+b.centroid,0)/voiced.length;
+  // duration of voiced portion
+  const tStart = voiced[0].t, tEnd = voiced[voiced.length-1].t;
+  const voicedDur = (tEnd - tStart) / 1000;
+
+  const features = {
+    pitch: medPitch,
+    wobble: pStd / Math.max(medPitch, 60), // normalised
+    volume: meanRms,
+    brightness: meanCent,
+    duration: voicedDur,
+    when: Date.now()
+  };
+
+  showBirth(features);
+}
+
+// ──────────────────────────────────────────────────
+//  Procedural creature generator
+// ──────────────────────────────────────────────────
+// Mapping:
+//   pitch (60-800 Hz)        → hue (-30 → 320; warm-low to cool-high then magenta)
+//   volume (0.005-0.25)      → size (0.6 → 1.4)
+//   brightness (300-3500 Hz) → spike count (0-10), pointiness
+//   wobble (0 - 0.18)        → pattern (none, dots, stripes, zigzag)
+//   duration (0.4-4 s)       → leg count (0-6)
+function makeCreature(f){
+  const pitchN = clamp((f.pitch - 80) / (700 - 80), 0, 1);
+  const hue = Math.round(20 + (1 - pitchN) * -60 + pitchN * 300); // map low→warm orange/red, high→violet
+  const hue2 = (hue + 330) % 360;
+  const volN = clamp((f.volume - 0.01) / (0.20 - 0.01), 0, 1);
+  const size = 0.7 + volN * 0.6; // 0.7..1.3
+  const brightN = clamp((f.brightness - 350) / (3200 - 350), 0, 1);
+  const spikeCount = Math.round(brightN * 10);
+  const wobbleN = clamp(f.wobble * 6, 0, 1);
+  const pattern = wobbleN < 0.2 ? "none" : wobbleN < 0.5 ? "dots" : wobbleN < 0.8 ? "stripes" : "zigzag";
+  const durN = clamp((f.duration - 0.4) / (3.5 - 0.4), 0, 1);
+  const legCount = Math.round(durN * 6);
+  // eye style: pitch stability (low wobble = round eyes, high = squinty / sparkles)
+  const eyeStyle = wobbleN < 0.3 ? "round" : wobbleN < 0.7 ? "happy" : "sparkle";
+  // mouth: combination of pitch and volume
+  const mouth = volN > 0.7 ? "open" : pitchN > 0.7 ? "smile" : pitchN < 0.25 ? "smirk" : "tiny";
+
+  return { hue, hue2, size, spikeCount, pattern, legCount, eyeStyle, mouth, brightN, volN, pitchN };
+}
+
+function clamp(v, lo, hi){ return Math.max(lo, Math.min(hi, v)); }
+
+function creatureSVG(c, opt = {}){
+  const W = 260, H = 260;
+  const cx = W/2, cy = H/2 + 8;
+  const baseR = 70 * c.size;
+  const stroke = `hsl(${c.hue}, 70%, 22%)`;
+  const fill = `hsl(${c.hue}, 78%, 60%)`;
+  const fill2 = `hsl(${c.hue2}, 78%, 65%)`;
+  let svg = `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg">`;
+  svg += `<defs>
+    <radialGradient id="g${opt.id||'x'}" cx="40%" cy="35%" r="70%">
+      <stop offset="0%" stop-color="${fill2}"/>
+      <stop offset="60%" stop-color="${fill}"/>
+      <stop offset="100%" stop-color="hsl(${c.hue},65%,45%)"/>
+    </radialGradient>
+    <pattern id="dots${opt.id||'x'}" patternUnits="userSpaceOnUse" width="14" height="14">
+      <rect width="14" height="14" fill="${fill}"/>
+      <circle cx="7" cy="7" r="2.6" fill="hsl(${c.hue}, 80%, 80%)"/>
+    </pattern>
+    <pattern id="stripes${opt.id||'x'}" patternUnits="userSpaceOnUse" width="10" height="10" patternTransform="rotate(35)">
+      <rect width="10" height="10" fill="${fill}"/>
+      <rect x="0" y="0" width="5" height="10" fill="hsl(${c.hue2}, 80%, 70%)"/>
+    </pattern>
+    <pattern id="zigzag${opt.id||'x'}" patternUnits="userSpaceOnUse" width="16" height="10">
+      <rect width="16" height="10" fill="${fill}"/>
+      <path d="M0 8 L4 2 L8 8 L12 2 L16 8" stroke="hsl(${c.hue2}, 90%, 75%)" stroke-width="2" fill="none"/>
+    </pattern>
+  </defs>`;
+
+  // legs (under body)
+  if (c.legCount > 0){
+    const legColor = `hsl(${c.hue}, 65%, 45%)`;
+    const span = baseR * 1.4;
+    for (let i=0;i<c.legCount;i++){
+      const t = c.legCount === 1 ? 0.5 : i/(c.legCount-1);
+      const lx = cx - span/2 + span*t;
+      const ly = cy + baseR*0.6;
+      svg += `<rect x="${lx-5}" y="${ly}" width="10" height="${22 + 4*c.size}" rx="5" fill="${legColor}" stroke="${stroke}" stroke-width="2"/>`;
+      svg += `<ellipse cx="${lx}" cy="${ly + 22 + 4*c.size + 2}" rx="9" ry="4" fill="hsl(${c.hue},75%,72%)" stroke="${stroke}" stroke-width="2"/>`;
+    }
+  }
+
+  // spikes (behind body)
+  if (c.spikeCount > 0){
+    const spikeFill = `hsl(${c.hue2}, 80%, 70%)`;
+    for (let i=0;i<c.spikeCount;i++){
+      const a = -Math.PI/2 + (i - (c.spikeCount-1)/2) * 0.42;
+      const x1 = cx + Math.cos(a)*baseR*0.95;
+      const y1 = cy + Math.sin(a)*baseR*0.95;
+      const x2 = cx + Math.cos(a)*(baseR + 14 + c.brightN*16);
+      const y2 = cy + Math.sin(a)*(baseR + 14 + c.brightN*16);
+      const ax = cx + Math.cos(a + 0.10)*baseR;
+      const ay = cy + Math.sin(a + 0.10)*baseR;
+      const bx = cx + Math.cos(a - 0.10)*baseR;
+      const by = cy + Math.sin(a - 0.10)*baseR;
+      svg += `<path d="M${ax} ${ay} L${x2} ${y2} L${bx} ${by} Z" fill="${spikeFill}" stroke="${stroke}" stroke-width="2" stroke-linejoin="round"/>`;
+    }
+  }
+
+  // body (with pattern)
+  let bodyFill = `url(#g${opt.id||'x'})`;
+  if (c.pattern === "dots") bodyFill = `url(#dots${opt.id||'x'})`;
+  else if (c.pattern === "stripes") bodyFill = `url(#stripes${opt.id||'x'})`;
+  else if (c.pattern === "zigzag") bodyFill = `url(#zigzag${opt.id||'x'})`;
+
+  const ry = baseR * (c.volN > 0.6 ? 1.05 : 0.95);
+  svg += `<ellipse cx="${cx}" cy="${cy}" rx="${baseR}" ry="${ry}" fill="${bodyFill}" stroke="${stroke}" stroke-width="3"/>`;
+
+  // belly highlight
+  svg += `<ellipse cx="${cx}" cy="${cy + baseR*0.18}" rx="${baseR*0.55}" ry="${baseR*0.4}" fill="hsl(${c.hue}, 80%, 92%)" opacity="0.5"/>`;
+
+  // eyes
+  const eyeOff = baseR * 0.32;
+  const eyeY = cy - baseR*0.18;
+  if (c.eyeStyle === "round"){
+    for (const sx of [-1,1]){
+      svg += `<circle cx="${cx + sx*eyeOff}" cy="${eyeY}" r="${10 + 3*c.size}" fill="#fff"/>`;
+      svg += `<circle cx="${cx + sx*eyeOff + sx*1.5}" cy="${eyeY+1}" r="${5 + 2*c.size}" fill="#1a1030"/>`;
+      svg += `<circle cx="${cx + sx*eyeOff + sx*3}" cy="${eyeY-2}" r="${1.5+c.size}" fill="#fff"/>`;
+    }
+  } else if (c.eyeStyle === "happy"){
+    for (const sx of [-1,1]){
+      svg += `<path d="M${cx + sx*eyeOff - 9} ${eyeY+2} Q ${cx + sx*eyeOff} ${eyeY-8} ${cx + sx*eyeOff + 9} ${eyeY+2}" stroke="${stroke}" stroke-width="3.5" fill="none" stroke-linecap="round"/>`;
+    }
+  } else { // sparkle
+    for (const sx of [-1,1]){
+      svg += `<g transform="translate(${cx + sx*eyeOff}, ${eyeY})">
+        <path d="M0 -10 L2 -2 L10 0 L2 2 L0 10 L-2 2 L-10 0 L-2 -2 Z" fill="#fff" stroke="${stroke}" stroke-width="1.5"/>
+        <circle r="2" fill="#1a1030"/>
+      </g>`;
+    }
+  }
+
+  // cheeks
+  for (const sx of [-1,1]){
+    svg += `<ellipse cx="${cx + sx*eyeOff*1.05}" cy="${eyeY+18}" rx="8" ry="5" fill="hsl(0,90%,70%)" opacity="0.55"/>`;
+  }
+
+  // mouth
+  if (c.mouth === "smile"){
+    svg += `<path d="M${cx-14} ${cy+6} Q ${cx} ${cy+22} ${cx+14} ${cy+6}" stroke="${stroke}" stroke-width="3.5" fill="none" stroke-linecap="round"/>`;
+  } else if (c.mouth === "open"){
+    svg += `<ellipse cx="${cx}" cy="${cy+12}" rx="14" ry="10" fill="hsl(0,70%,30%)" stroke="${stroke}" stroke-width="2.5"/>`;
+    svg += `<path d="M${cx-8} ${cy+14} Q ${cx} ${cy+22} ${cx+8} ${cy+14}" fill="hsl(340,80%,55%)"/>`;
+  } else if (c.mouth === "smirk"){
+    svg += `<path d="M${cx-12} ${cy+8} Q ${cx-2} ${cy+12} ${cx+12} ${cy+5}" stroke="${stroke}" stroke-width="3" fill="none" stroke-linecap="round"/>`;
+  } else { // tiny
+    svg += `<path d="M${cx-6} ${cy+8} Q ${cx} ${cy+13} ${cx+6} ${cy+8}" stroke="${stroke}" stroke-width="3" fill="none" stroke-linecap="round"/>`;
+  }
+
+  // antenna for very high pitch
+  if (c.pitchN > 0.75){
+    svg += `<line x1="${cx}" y1="${cy-baseR*0.95}" x2="${cx}" y2="${cy-baseR*1.35}" stroke="${stroke}" stroke-width="3" stroke-linecap="round"/>`;
+    svg += `<circle cx="${cx}" cy="${cy-baseR*1.4}" r="6" fill="hsl(${c.hue2},90%,75%)" stroke="${stroke}" stroke-width="2"/>`;
+  }
+
+  svg += `</svg>`;
+  return svg;
+}
+
+// ──────────────────────────────────────────────────
+//  Naming (Japanese onomatopoeic, 2 parts)
+// ──────────────────────────────────────────────────
+function nameOf(c, lang){
+  const adjJP = (() => {
+    const parts = [];
+    if (c.pitchN > 0.7) parts.push(["きら","ちゅん","ぴゅい","ぴこ"]);
+    else if (c.pitchN < 0.3) parts.push(["どん","ごろ","ぼん","ずん"]);
+    else parts.push(["ふわ","もこ","ぽよ","ぷに"]);
+    if (c.volN > 0.6) parts.push(["ぱー","どか","ばん","ぐわ"]);
+    else if (c.volN < 0.25) parts.push(["こそ","ぼそ","しー","ふっ"]);
+    else parts.push(["ころ","ぽん","とん","ぴと"]);
+    return parts;
+  })();
+  const adjEN = (() => {
+    const parts = [];
+    if (c.pitchN > 0.7) parts.push(["sparkle","squeak","ping","whistle"]);
+    else if (c.pitchN < 0.3) parts.push(["thud","rumble","grumble","boom"]);
+    else parts.push(["fluffy","wobble","bounce","squish"]);
+    if (c.volN > 0.6) parts.push(["roar","blast","bam","wham"]);
+    else if (c.volN < 0.25) parts.push(["whisp","mumble","shh","peep"]);
+    else parts.push(["pop","tap","plop","tup"]);
+    return parts;
+  })();
+  const seedR = mulberry32(seedFromCreature(c));
+  const pick = (arr) => arr[Math.floor(seedR() * arr.length)];
+  const suffJP = ["ぴ","もこ","ぽん","りん","きち","つん","にゃん","ぴょん","ぱー","ちー","くー","のすけ"];
+  const suffEN = ["po","mo","kin","tan","loo","mi","ko","na","fi","ru","li"];
+  if (lang === "en") {
+    return pick(adjEN[0]) + pick(adjEN[1]) + "-" + pick(suffEN);
+  }
+  return pick(adjJP[0]) + pick(adjJP[1]) + pick(suffJP);
+}
+
+function seedFromCreature(c){
+  // make a stable integer seed from features
+  const s = Math.round((c.pitchN*1e4)) ^ Math.round((c.volN*1e4)<<7) ^ (c.spikeCount*131) ^ (c.legCount*7919) ^ (c.eyeStyle.length*31) ^ (c.pattern.length*17);
+  return Math.abs(s) || 1;
+}
+function mulberry32(seed){
+  return function(){
+    let t = seed += 0x6D2B79F5;
+    t = Math.imul(t ^ t >>> 15, t | 1);
+    t ^= t + Math.imul(t ^ t >>> 7, t | 61);
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+}
+
+// ──────────────────────────────────────────────────
+//  UI: birth, save, zukan, detail
+// ──────────────────────────────────────────────────
+let pending = null;
+let currentZukan = false;
+let currentDetail = null;
+
+function showBirth(features){
+  const c = makeCreature(features);
+  const name = nameOf(c, LANG);
+  pending = { features, creature: c, name };
+  switchScreen("birth");
+  const stage = document.getElementById("birthStage");
+  stage.innerHTML = creatureSVG(c, {id:"b"});
+  // play hop animation
+  const svg = stage.querySelector("svg");
+  if (svg) {
+    svg.style.transformOrigin = "center 70%";
+    svg.animate([
+      { transform: "scale(0.2) translateY(40px)", opacity: 0 },
+      { transform: "scale(1.15) translateY(-12px)", opacity: 1, offset: 0.55 },
+      { transform: "scale(0.95) translateY(4px)", opacity: 1, offset: 0.78 },
+      { transform: "scale(1) translateY(0)", opacity: 1 }
+    ], { duration: 900, easing: "cubic-bezier(.2,.8,.3,1)" });
+  }
+  document.getElementById("birthName").textContent = name;
+  document.getElementById("birthTag").textContent = describe(c);
+  document.getElementById("birthStats").innerHTML = statBadges(c);
+  // play "voice replay" tone
+  playTone(features);
+}
+
+function describe(c){
+  const p = c.pitchN > 0.7 ? t("high") : c.pitchN < 0.3 ? t("low") : t("mid");
+  const v = c.volN > 0.7 ? t("big") : c.volN < 0.25 ? t("small") : t("normal");
+  if (LANG === "ja") return `${p}くて ${v} こえ から うまれたよ`;
+  return `Born from a ${p}, ${v} voice.`;
+}
+
+function statBadges(c){
+  const b = [];
+  b.push(`${t(c.pitchN > 0.7 ? "high" : c.pitchN < 0.3 ? "low" : "mid")}🎵`);
+  b.push(`${t(c.volN > 0.6 ? "big" : c.volN < 0.25 ? "small" : "normal")}🔊`);
+  b.push(`${t(c.brightN > 0.6 ? "bright" : c.brightN < 0.25 ? "warm" : "rough")}✨`);
+  const w = c.spikeCount > 5 ? c.spikeCount : c.spikeCount;
+  return b.map(x=>`<span class="stat">${x}</span>`).join("");
+}
+
+function playTone(f){
+  if(!audioCtx) audioCtx = new (window.AudioContext||window.webkitAudioContext)();
+  if(audioCtx.state === "suspended") audioCtx.resume();
+  const dur = clamp(f.duration, 0.4, 1.6);
+  const baseFreq = clamp(f.pitch, 80, 800);
+  const o = audioCtx.createOscillator();
+  const g = audioCtx.createGain();
+  const wobble = clamp(f.wobble * 6, 0, 0.5);
+  o.type = "sawtooth";
+  o.frequency.value = baseFreq;
+  // simple LFO for wobble
+  if (wobble > 0.1){
+    const lfo = audioCtx.createOscillator();
+    const lfoG = audioCtx.createGain();
+    lfo.frequency.value = 5;
+    lfoG.gain.value = baseFreq * wobble * 0.3;
+    lfo.connect(lfoG).connect(o.frequency);
+    lfo.start();
+    lfo.stop(audioCtx.currentTime + dur);
+  }
+  // low-pass for smoother feel
+  const lp = audioCtx.createBiquadFilter();
+  lp.type = "lowpass";
+  lp.frequency.value = clamp(800 + f.brightness * 1.5, 800, 4000);
+  o.connect(lp).connect(g).connect(audioCtx.destination);
+  const vol = clamp(f.volume * 4, 0.05, 0.35);
+  g.gain.setValueAtTime(0, audioCtx.currentTime);
+  g.gain.linearRampToValueAtTime(vol, audioCtx.currentTime + 0.06);
+  g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + dur);
+  o.start();
+  o.stop(audioCtx.currentTime + dur + 0.1);
+}
+
+function switchScreen(id){
+  ["home","birth","zukan","detail"].forEach(s=>{
+    document.getElementById(s).classList.toggle("active", s===id);
+  });
+  currentZukan = (id === "zukan");
+  if (id !== "detail") currentDetail = null;
+  window.scrollTo(0, 0);
+}
+
+function renderZukan(){
+  const arr = loadAll();
+  const grid = document.getElementById("zukanGrid");
+  const meta = document.getElementById("zukanMeta");
+  if (arr.length === 0){
+    meta.textContent = t("zukanMeta0");
+    grid.innerHTML = `<div class="empty-msg"><div class="big">📖</div>${t("zukanMeta0")}</div>`;
+    return;
+  }
+  meta.textContent = t("zukanMetaN").replace("%n", arr.length);
+  grid.innerHTML = arr.map((m, idx) =>
+    `<div class="zukan-cell" data-idx="${idx}">
+       ${creatureSVG(m.creature, {id:"z"+idx})}
+       <div class="cell-name">${escapeHTML(m.name)}</div>
+     </div>`
+  ).join("");
+  grid.querySelectorAll(".zukan-cell").forEach(el=>{
+    el.addEventListener("click", ()=>{
+      const idx = parseInt(el.dataset.idx,10);
+      openDetail(idx);
+    });
+  });
+}
+
+function openDetail(idx){
+  const arr = loadAll();
+  const m = arr[idx];
+  if (!m) return;
+  currentDetail = idx;
+  switchScreen("detail");
+  renderDetail(idx);
+}
+
+function renderDetail(idx){
+  const arr = loadAll();
+  const m = arr[idx]; if(!m) return;
+  document.getElementById("detailStage").innerHTML = creatureSVG(m.creature, {id:"d"+idx});
+  document.getElementById("detailName").textContent = m.name;
+  document.getElementById("detailTag").textContent = describe(m.creature);
+  const f = m.features;
+  document.getElementById("dPitch").textContent = `${Math.round(f.pitch)} Hz (${t(m.creature.pitchN > 0.7 ? "high" : m.creature.pitchN < 0.3 ? "low" : "mid")})`;
+  document.getElementById("dVol").textContent = t(m.creature.volN > 0.6 ? "big" : m.creature.volN < 0.25 ? "small" : "normal");
+  document.getElementById("dBright").textContent = t(m.creature.brightN > 0.6 ? "bright" : m.creature.brightN < 0.25 ? "warm" : "rough");
+  document.getElementById("dWobble").textContent = (m.creature.pattern === "none") ? t("steady") : (m.creature.pattern === "dots") ? t("little") : t("lots");
+  document.getElementById("dDur").textContent = f.duration.toFixed(1) + " " + t("sec");
+  const d = new Date(f.when);
+  const dateStr = d.toLocaleDateString(LANG==="ja"?"ja-JP":"en-US", {year:"numeric", month:"short", day:"numeric"});
+  document.getElementById("dDate").textContent = dateStr;
+  // replay tone on tap
+  document.getElementById("detailStage").onclick = () => playTone(f);
+}
+
+function escapeHTML(s){
+  return s.replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[c]);
+}
+
+// ──────────────────────────────────────────────────
+//  Wire up
+// ──────────────────────────────────────────────────
+const micBtn = document.getElementById("micBtn");
+let pressTimer = null;
+micBtn.addEventListener("click", () => {
+  if (recording) stopRec(true);
+  else startRec();
+});
+
+document.getElementById("saveBtn").addEventListener("click", () => {
+  if (!pending) return;
+  const arr = loadAll();
+  arr.unshift(pending);
+  saveAll(arr);
+  pending = null;
+  switchScreen("zukan");
+  renderZukan();
+});
+
+document.getElementById("redoBtn").addEventListener("click", () => {
+  pending = null;
+  switchScreen("home");
+});
+
+document.getElementById("zukanBtn").addEventListener("click", () => {
+  if (recording) stopRec(false);
+  switchScreen("zukan");
+  renderZukan();
+});
+
+document.getElementById("backToZukan").addEventListener("click", () => {
+  switchScreen("zukan");
+  renderZukan();
+});
+
+document.getElementById("releaseBtn").addEventListener("click", () => {
+  if (currentDetail === null) return;
+  if (!confirm(t("confirmRelease"))) return;
+  const arr = loadAll();
+  arr.splice(currentDetail, 1);
+  saveAll(arr);
+  switchScreen("zukan");
+  renderZukan();
+});
+
+document.getElementById("langBtn").addEventListener("click", () => {
+  LANG = LANG === "ja" ? "en" : "ja";
+  document.getElementById("langBtn").textContent = LANG === "ja" ? "JP / EN" : "EN / JP";
+  applyI18n();
+});
+
+// initial language pill state
+document.getElementById("langBtn").textContent = LANG === "ja" ? "JP / EN" : "EN / JP";
+applyI18n();
+
+// allow tapping anywhere on the home button stage
+document.getElementById("micStage").addEventListener("click", (e) => {
+  if (e.target === micBtn || micBtn.contains(e.target)) return;
+  if (recording) stopRec(true);
+  else startRec();
+});
+
+// safety: prevent pinch zoom on iOS
+document.addEventListener("gesturestart", e => e.preventDefault());
+</script>
+</body>
+</html>
