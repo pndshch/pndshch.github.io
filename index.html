@@ -228,6 +228,7 @@ header p {
 .thumb-mongiri   { background: radial-gradient(ellipse at 50% 40%, #1a2c47 0%, #0f1c2e 55%, #060c18 100%); }
 .thumb-torishima { background: linear-gradient(180deg, #3a4a5e 0%, #1c2434 55%, #0a0e1a 100%); }
 .thumb-wald      { background: radial-gradient(ellipse at 50% 35%, #2c2a20 0%, #1a1812 55%, #0d0c08 100%); }
+.thumb-itoko     { background: radial-gradient(ellipse at 50% 30%, #4a1c5e 0%, #261447 55%, #07050f 100%); }
 
 .card-body {
     padding: 18px 20px 22px;
@@ -1073,6 +1074,22 @@ footer a:hover { color: #e6edf3; }
                     <span class="tag" data-i18n="kiokuizTag3">自己問答</span>
                 </div>
                 <a class="card-btn btn-play" href="https://pndshch.github.io/kiokuiz/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
+    <div class="card" data-cat="learn" data-added="2026-05-07T21:00:00+09:00" data-slug="itoko-aeons">
+            <div class="card-thumb thumb-itoko">
+            <span class="thumb-emoji">🐳🦛</span>
+                <img class="thumb-gif" src="assets/itoko-aeons.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="itokoTitle">イトコ何億年</h2>
+                <p data-i18n="itokoDesc"><strong>クジラの一番近い親戚は、海の中にはいない</strong>——<strong>カバ</strong>だ。<strong>キノコ</strong>は植物よりあなたに近い。動物と菌類は11億年前に同じ枝から分かれた。ふたつの生き物の<strong>「最後の共通祖先」</strong>がいたのは何年前？ 1百万年前から40億年前までの対数スケールを指でなぞる、5ラウンドのディープタイム推定ゲーム。歩いている犬も、皿のトマトも、靴の中の足も——全員、いとこ。距離が違うだけ。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="itokoTag1">気づき</span>
+                    <span class="tag" data-i18n="itokoTag2">進化生物学</span>
+                    <span class="tag" data-i18n="itokoTag3">3分</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/itoko-aeons/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
     <div class="card" data-cat="world-history" data-added="2026-05-07T20:05:00+09:00" data-slug="wald-1943">
@@ -1989,6 +2006,9 @@ const I18N = {
         waldTitle: "弾痕の地図",
         waldDesc:  "1945年5月7日ドイツ降伏記念日。1943年、統計学者アブラハム・ワルドの解いた爆撃機の装甲問題。「装甲は、弾痕の少ない場所に貼れ」——3分で生存者バイアスを体で知る。",
         waldTag1: "史実体験", waldTag2: "生存者バイアス", waldTag3: "5月7日",
+        itokoTitle: "イトコ何億年",
+        itokoDesc:  "クジラの一番近い親戚は海ではなくカバ。キノコは植物よりあなたに近い。ふたつの生き物の「最後の共通祖先」はいつ？対数スケールの時間軸を指でなぞる、5ラウンドのディープタイム推定。全員、いとこ。",
+        itokoTag1: "気づき", itokoTag2: "進化生物学", itokoTag3: "3分",
         ashiotoTitle: "あしおと",
         ashiotoDesc:  "スマホをもって、はねる・あるく・ゆれる——画面はタップしない。うごきが音楽になる『からだ＝楽器』あそび。3〜7さい。",
         ashiotoTag1: "3〜7歳", ashiotoTag2: "うごき×音", ashiotoTag3: "タップなし",
@@ -2262,6 +2282,9 @@ const I18N = {
         waldTitle: "The Map of Bullet Holes",
         waldDesc:  "May 7, 1945 — Germany signed unconditional surrender, 81 years ago. In 1943, statistician Abraham Wald solved the bomber-armor problem: 'Armor where the bullet holes are <em>not</em>.' Why? The data you see is only the survivors. A 3-min experience of survivorship bias.",
         waldTag1: "History·Felt", waldTag2: "Survivorship Bias", waldTag3: "May 7",
+        itokoTitle: "Cousin Aeons",
+        itokoDesc:  "A whale's closest relative isn't in the ocean — it's the <strong>hippo</strong>. A mushroom is closer to you than to a plant; animals and fungi split off together ~1.1 billion years ago. When did two species last share an ancestor? Drag a logarithmic timeline through 4 billion years across 5 rounds of deep-time guessing. The dog you walked, the tomato on your plate — <strong>all cousins</strong>. Just at different distances.",
+        itokoTag1: "Takeaway", itokoTag2: "Evolution", itokoTag3: "3 min",
         ashiotoTitle: "Ashi-oto (Footsteps Music)",
         ashiotoDesc:  "Hop, walk, sway — don't tap. Your motion becomes music. A body-as-instrument toy for ages 3–7.",
         ashiotoTag1: "Ages 3–7", ashiotoTag2: "Motion × Music", ashiotoTag3: "No Tapping",
