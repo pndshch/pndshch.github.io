@@ -1,0 +1,1466 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0d0a26">
+<title>あしおと — からだでつくるおんがく（3〜7歳）</title>
+<meta name="description" content="スマホをもって、はねたり、あるいたり、ゆれたり——うごきが おんがくに なる！3〜7歳むけ、画面タップなしの「からだ＝楽器」あそび。うさぎ・ぞう・ちょうちょ・へびの動きを真似する『どうぶつのリズム図鑑』モードつき。">
+<meta property="og:title" content="あしおと — からだでつくるおんがく">
+<meta property="og:description" content="スマホを持って、ジャンプ・あるき・ゆれ・スピン——うごきが音になる、画面タップなしの音楽あそび。3〜7歳。">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+html, body { width:100%; height:100%; overflow:hidden; }
+body {
+  background:
+    radial-gradient(ellipse 100% 60% at 50% 0%, #2a1d6a 0%, transparent 60%),
+    radial-gradient(ellipse 70% 50% at 50% 100%, #4a1a6a 0%, transparent 55%),
+    linear-gradient(180deg, #0d0a26 0%, #15102a 50%, #0a0717 100%);
+  font-family: 'Hiragino Maru Gothic ProN', 'Yu Gothic', 'Helvetica Neue', sans-serif;
+  color: #f4f0ff;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Header ── */
+header {
+  flex: 0 0 auto;
+  padding: 10px 14px 4px;
+  text-align: center;
+  position: relative;
+  z-index: 20;
+}
+header h1 {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 4px;
+  background: linear-gradient(120deg, #ffd96a 0%, #ff8fb1 35%, #c4a3ff 70%, #8ad8ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 32px rgba(255,200,160,0.25);
+}
+header .sub {
+  font-size: 10px;
+  color: #b6a8d6;
+  margin-top: 2px;
+  letter-spacing: 1.5px;
+}
+@media (max-width: 420px) {
+  header h1 { font-size: 20px; letter-spacing: 2px; }
+  header .sub { font-size: 9.5px; letter-spacing: 0.8px; }
+}
+.hud {
+  position: absolute;
+  top: 10px;
+  display: flex;
+  align-items: center;
+  height: 28px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  background: rgba(40,28,72,0.75);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 16px;
+  padding: 0 10px;
+  color: #f4f0ff;
+  cursor: pointer;
+  z-index: 30;
+  text-decoration: none;
+}
+.hud:active { transform: scale(0.94); }
+.zukan-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #ff8fb1, #c4a3ff);
+  color: #1a0a2a;
+  border-radius: 10px;
+  padding: 1px 7px;
+  font-size: 10px;
+  margin-left: 6px;
+  font-weight: 800;
+}
+
+/* ── Main canvas/stage ── */
+.stage {
+  flex: 1 1 auto;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+canvas#viz {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+/* ── Mode tabs ── */
+.modes {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  padding: 0 10px;
+  z-index: 10;
+  pointer-events: none;
+}
+.mode-btn {
+  pointer-events: auto;
+  flex: 1 1 0;
+  max-width: 130px;
+  background: rgba(40,28,72,0.75);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 14px;
+  padding: 8px 6px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #d8cdf2;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.18s;
+  font-family: inherit;
+  text-align: center;
+  line-height: 1.2;
+}
+.mode-btn .ico { font-size: 18px; display: block; margin-bottom: 2px; }
+.mode-btn.active {
+  background: linear-gradient(135deg, #ff8fb1 0%, #c4a3ff 50%, #8ad8ff 100%);
+  color: #15102a;
+  border-color: rgba(255,255,255,0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(196,163,255,0.4);
+}
+.mode-btn:active { transform: scale(0.95); }
+
+/* ── Center prompt (shows current task) ── */
+.prompt-card {
+  position: relative;
+  z-index: 5;
+  background: rgba(20,12,40,0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 22px;
+  padding: 18px 22px;
+  max-width: 84%;
+  text-align: center;
+  pointer-events: none;
+  transition: opacity 0.4s;
+}
+.prompt-card .creature {
+  font-size: 64px;
+  line-height: 1;
+  filter: drop-shadow(0 0 22px rgba(255,200,160,0.5));
+  animation: bounce 1.6s ease-in-out infinite;
+}
+@keyframes bounce {
+  0%,100% { transform: translateY(0); }
+  50%     { transform: translateY(-8px); }
+}
+.prompt-card h2 {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  margin: 6px 0 4px;
+  color: #fff;
+}
+.prompt-card .hint {
+  font-size: 12.5px;
+  color: #d8cdf2;
+  letter-spacing: 0.8px;
+  line-height: 1.5;
+}
+.prompt-card.success {
+  background: linear-gradient(135deg, rgba(140,255,200,0.25), rgba(196,163,255,0.25));
+  border-color: rgba(140,255,200,0.5);
+}
+.prompt-card.dim { opacity: 0.45; }
+
+/* ── Free-mode info bubble ── */
+.info-bubble {
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 13px;
+  color: #d8cdf2;
+  background: rgba(20,12,40,0.6);
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.1);
+  z-index: 6;
+  pointer-events: none;
+}
+
+/* ── Welcome modal (also iOS permission gate) ── */
+.modal-bg {
+  position: fixed;
+  inset: 0;
+  background: rgba(8,4,20,0.86);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 16px;
+}
+.modal {
+  background: linear-gradient(160deg, #2a1d6a 0%, #15102a 100%);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 24px;
+  padding: 26px 22px 22px;
+  max-width: 360px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+.modal .badge {
+  display: inline-block;
+  font-size: 10.5px;
+  letter-spacing: 2px;
+  color: #1a0a2a;
+  background: linear-gradient(135deg, #ffd96a, #ff8fb1);
+  padding: 3px 12px;
+  border-radius: 12px;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+.modal h2 {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 5px;
+  margin-bottom: 10px;
+  background: linear-gradient(120deg, #ffd96a, #ff8fb1, #c4a3ff, #8ad8ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.modal p {
+  font-size: 13.5px;
+  color: #d8cdf2;
+  line-height: 1.65;
+  margin-bottom: 8px;
+  letter-spacing: 0.6px;
+}
+.modal p.small { font-size: 11.5px; color: #a89bc8; }
+.modal .creatures {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  font-size: 36px;
+  margin: 14px 0 12px;
+}
+.modal .creatures span {
+  filter: drop-shadow(0 4px 12px rgba(255,180,200,0.3));
+}
+.btn-primary {
+  display: block;
+  width: 100%;
+  margin-top: 14px;
+  background: linear-gradient(135deg, #ff8fb1 0%, #c4a3ff 50%, #8ad8ff 100%);
+  color: #15102a;
+  border: none;
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: 4px;
+  padding: 14px;
+  border-radius: 16px;
+  cursor: pointer;
+  font-family: inherit;
+  box-shadow: 0 6px 18px rgba(196,163,255,0.4);
+  transition: transform 0.15s;
+}
+.btn-primary:active { transform: scale(0.96); }
+.btn-secondary {
+  display: block;
+  width: 100%;
+  margin-top: 8px;
+  background: transparent;
+  color: #b6a8d6;
+  border: 1px solid rgba(255,255,255,0.18);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  padding: 9px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* ── Zukan modal ── */
+.zukan-modal { max-width: 420px; max-height: 88vh; overflow-y: auto; padding-bottom: 18px; text-align: left; }
+.zukan-modal h3 {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 4px;
+  margin-bottom: 12px;
+  color: #fff;
+}
+.zukan-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.zukan-cell {
+  aspect-ratio: 1;
+  background: rgba(40,28,72,0.6);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  position: relative;
+}
+.zukan-cell.locked { opacity: 0.3; font-size: 22px; }
+.zukan-cell .name {
+  position: absolute;
+  bottom: 4px;
+  font-size: 10px;
+  color: #d8cdf2;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+.zukan-cell.locked .name { color: #6b5d8c; }
+
+/* ── Confetti / sparks layer ── */
+canvas#fx {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 8;
+}
+
+/* Hidden helper */
+.hidden { display: none !important; }
+
+/* Desktop hint */
+.desktop-hint {
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  background: rgba(40,28,72,0.8);
+  padding: 7px 14px;
+  border-radius: 16px;
+  color: #d8cdf2;
+  border: 1px dashed rgba(196,163,255,0.4);
+  z-index: 7;
+  pointer-events: none;
+  letter-spacing: 0.5px;
+}
+
+/* Lang switcher — sits next to zukan badge */
+#hud-lang {
+  right: 90px;
+  padding: 0 8px;
+  font-size: 10px;
+  letter-spacing: 1px;
+  height: 28px;
+}
+#hud-zukan { right: 8px; padding: 0 10px; height: 28px; font-size: 10.5px; }
+#hud-back  { left: 8px; padding: 0 10px; height: 28px; font-size: 14px; }
+@media (max-width: 420px) {
+  #hud-lang { right: 76px; padding: 0 6px; font-size: 9.5px; }
+  #hud-zukan { padding: 0 8px; font-size: 10px; }
+  .count-badge, .zukan-badge { font-size: 9px; padding: 1px 5px; margin-left: 4px; }
+}
+
+/* Tiny Footer */
+.tiny-foot {
+  position: absolute;
+  bottom: 4px;
+  right: 8px;
+  font-size: 9px;
+  color: #564672;
+  z-index: 4;
+  letter-spacing: 0.5px;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a id="hud-back" class="hud" href="https://pndshch.github.io/" aria-label="back">←</a>
+  <button id="hud-lang" class="hud" aria-label="language">JA / EN</button>
+  <button id="hud-zukan" class="hud" aria-label="zukan">
+    <span data-i18n="zukan">図鑑</span><span id="zukan-count" class="zukan-badge">0</span>
+  </button>
+  <h1 data-i18n="title">あしおと</h1>
+  <div class="sub" data-i18n="sub">からだで つくる おんがく ・ 3〜7さい</div>
+</header>
+
+<div class="stage" id="stage">
+  <canvas id="viz"></canvas>
+  <canvas id="fx"></canvas>
+
+  <div class="prompt-card" id="prompt">
+    <div class="creature" id="creature">🐰</div>
+    <h2 id="prompt-title" data-i18n="freeTitle">じゆうあそび</h2>
+    <div class="hint" id="prompt-hint" data-i18n="freeHint">スマホを ふったり<br>あるいたり ジャンプ してみてね</div>
+  </div>
+
+  <div class="desktop-hint hidden" id="desktop-hint" data-i18n="desktopHint">
+    PCの方は: スペース=ジャンプ ・ ←→=あるき ・ ↑=スピン
+  </div>
+
+  <div class="modes">
+    <button class="mode-btn active" data-mode="free">
+      <span class="ico">🎵</span><span data-i18n="modeFree">じゆう</span>
+    </button>
+    <button class="mode-btn" data-mode="zoo">
+      <span class="ico">🐰</span><span data-i18n="modeZoo">どうぶつ</span>
+    </button>
+    <button class="mode-btn" data-mode="song">
+      <span class="ico">🎶</span><span data-i18n="modeSong">おんがく</span>
+    </button>
+  </div>
+</div>
+
+<!-- Welcome / Permission Modal -->
+<div class="modal-bg" id="modal-welcome">
+  <div class="modal">
+    <span class="badge" data-i18n="welcomeBadge">あたらしい あそび</span>
+    <h2 data-i18n="title">あしおと</h2>
+    <div class="creatures">
+      <span>🐰</span><span>🐘</span><span>🦋</span><span>🐍</span>
+    </div>
+    <p data-i18n="welcome1">スマホを <b>もって</b>、はねたり、あるいたり、ゆれたり…</p>
+    <p data-i18n="welcome2">うごきが <b>おんがく</b>に なる、あたらしい あそび。</p>
+    <p class="small" data-i18n="welcome3">画面はタップしないよ。からだぜんぶで あそぼう！</p>
+    <button class="btn-primary" id="btn-start" data-i18n="welcomeBtn">▶ はじめる</button>
+    <p class="small" id="permission-note" style="margin-top:10px;display:none;" data-i18n="permNote">
+      ※ うごきセンサーをつかう きょかが ひつようです
+    </p>
+  </div>
+</div>
+
+<!-- Zukan Modal -->
+<div class="modal-bg hidden" id="modal-zukan">
+  <div class="modal zukan-modal">
+    <h3 data-i18n="zukanTitle">どうぶつのリズム図鑑</h3>
+    <div class="zukan-grid" id="zukan-grid"></div>
+    <p class="small" data-i18n="zukanHint" style="text-align:center;">どうぶつモードで まねっこ 成功すると<br>図鑑が あつまるよ！</p>
+    <button class="btn-secondary" id="btn-close-zukan" data-i18n="close">とじる</button>
+    <button class="btn-secondary" id="btn-reset-zukan" data-i18n="resetZukan" style="margin-top:6px;">図鑑をリセット</button>
+  </div>
+</div>
+
+<div class="tiny-foot">pndshch · ashi-oto</div>
+
+<script>
+/* ============================================================
+   AUDIO ENGINE — synthesized via Web Audio API (no audio files)
+   ============================================================ */
+class AudioEngine {
+  constructor() {
+    this.ctx = null;
+    this.master = null;
+    this.lastTrigger = 0;
+  }
+  ensure() {
+    if (this.ctx) return;
+    const Ctx = window.AudioContext || window.webkitAudioContext;
+    this.ctx = new Ctx();
+    this.master = this.ctx.createGain();
+    this.master.gain.value = 0.32;
+    this.master.connect(this.ctx.destination);
+    // Soft reverb-ish using delay
+    this.delay = this.ctx.createDelay(0.3);
+    this.delay.delayTime.value = 0.18;
+    this.delayGain = this.ctx.createGain();
+    this.delayGain.gain.value = 0.18;
+    this.delay.connect(this.delayGain).connect(this.master);
+  }
+  resume() {
+    this.ensure();
+    if (this.ctx.state === 'suspended') this.ctx.resume();
+  }
+  // Pentatonic scale C major: C D E G A
+  noteToFreq(midi) { return 440 * Math.pow(2, (midi - 69) / 12); }
+  pentaScale(idx) {
+    // 5-note scale offsets (major pentatonic)
+    const scale = [0, 2, 4, 7, 9];
+    const oct = Math.floor(idx / 5);
+    return 60 + oct * 12 + scale[((idx % 5) + 5) % 5];
+  }
+  // Different timbres for different motions
+  playNote({ midi, type = 'piano', dur = 0.4, vol = 0.5, pan = 0 }) {
+    this.ensure();
+    const t = this.ctx.currentTime;
+    const freq = this.noteToFreq(midi);
+    const out = this.ctx.createGain();
+    out.gain.value = 0;
+    const panner = this.ctx.createStereoPanner ? this.ctx.createStereoPanner() : null;
+    if (panner) {
+      panner.pan.value = Math.max(-1, Math.min(1, pan));
+      out.connect(panner);
+      panner.connect(this.master);
+      panner.connect(this.delay);
+    } else {
+      out.connect(this.master);
+      out.connect(this.delay);
+    }
+    if (type === 'piano') {
+      const osc1 = this.ctx.createOscillator();
+      osc1.type = 'triangle';
+      osc1.frequency.value = freq;
+      const osc2 = this.ctx.createOscillator();
+      osc2.type = 'sine';
+      osc2.frequency.value = freq * 2;
+      const g2 = this.ctx.createGain();
+      g2.gain.value = 0.18;
+      osc1.connect(out); osc2.connect(g2); g2.connect(out);
+      osc1.start(t); osc2.start(t);
+      osc1.stop(t + dur + 0.05); osc2.stop(t + dur + 0.05);
+    } else if (type === 'bell') {
+      // FM-ish bell
+      const car = this.ctx.createOscillator();
+      car.type = 'sine'; car.frequency.value = freq;
+      const mod = this.ctx.createOscillator();
+      mod.type = 'sine'; mod.frequency.value = freq * 3.7;
+      const modGain = this.ctx.createGain();
+      modGain.gain.value = freq * 1.2;
+      mod.connect(modGain).connect(car.frequency);
+      car.connect(out);
+      mod.start(t); car.start(t);
+      mod.stop(t + dur + 0.05); car.stop(t + dur + 0.05);
+    } else if (type === 'drum') {
+      // Kick: short sine sweep + noise click
+      const osc = this.ctx.createOscillator();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq * 1.6, t);
+      osc.frequency.exponentialRampToValueAtTime(Math.max(40, freq * 0.4), t + 0.18);
+      osc.connect(out);
+      osc.start(t); osc.stop(t + 0.22);
+      // Noise click
+      const noise = this.ctx.createBufferSource();
+      const buf = this.ctx.createBuffer(1, 1024, this.ctx.sampleRate);
+      const data = buf.getChannelData(0);
+      for (let i = 0; i < 1024; i++) data[i] = (Math.random() * 2 - 1) * Math.pow(1 - i/1024, 3);
+      noise.buffer = buf;
+      const ng = this.ctx.createGain();
+      ng.gain.value = 0.4;
+      noise.connect(ng).connect(out);
+      noise.start(t);
+    } else if (type === 'pad') {
+      // Soft sustained pad
+      const osc1 = this.ctx.createOscillator();
+      osc1.type = 'sawtooth'; osc1.frequency.value = freq;
+      const osc2 = this.ctx.createOscillator();
+      osc2.type = 'sawtooth'; osc2.frequency.value = freq * 1.005;
+      const flt = this.ctx.createBiquadFilter();
+      flt.type = 'lowpass';
+      flt.frequency.value = 1200;
+      osc1.connect(flt); osc2.connect(flt); flt.connect(out);
+      osc1.start(t); osc2.start(t);
+      osc1.stop(t + dur + 0.05); osc2.stop(t + dur + 0.05);
+    } else if (type === 'chime') {
+      // Sparkly
+      const o = this.ctx.createOscillator();
+      o.type = 'sine';
+      o.frequency.value = freq * 2;
+      o.connect(out);
+      o.start(t); o.stop(t + dur + 0.05);
+      const o2 = this.ctx.createOscillator();
+      o2.type = 'triangle';
+      o2.frequency.value = freq * 3;
+      const g3 = this.ctx.createGain(); g3.gain.value = 0.25;
+      o2.connect(g3).connect(out);
+      o2.start(t); o2.stop(t + dur + 0.05);
+    }
+    // Envelope
+    out.gain.setValueAtTime(0, t);
+    out.gain.linearRampToValueAtTime(vol, t + 0.012);
+    out.gain.exponentialRampToValueAtTime(0.001, t + dur);
+  }
+  // Higher-level "movement events"
+  playStep(intensity = 1) {
+    this.ensure();
+    const t = this.ctx.currentTime;
+    if (t - this.lastTrigger < 0.06) return;
+    this.lastTrigger = t;
+    const idx = Math.floor(Math.random() * 7);
+    const midi = this.pentaScale(idx);
+    this.playNote({ midi, type: 'piano', dur: 0.35, vol: 0.32 + intensity * 0.18, pan: (Math.random() - 0.5) * 0.5 });
+  }
+  playJump(intensity = 1) {
+    this.ensure();
+    const idx = 2 + Math.floor(Math.random() * 4);
+    const midi = this.pentaScale(idx + 5);
+    this.playNote({ midi, type: 'chime', dur: 0.6, vol: 0.4 + intensity * 0.2 });
+    this.playNote({ midi: midi + 7, type: 'chime', dur: 0.5, vol: 0.3 });
+  }
+  playStomp(intensity = 1) {
+    this.ensure();
+    const midi = 36 + Math.floor(Math.random() * 5);
+    this.playNote({ midi, type: 'drum', dur: 0.3, vol: 0.5 + intensity * 0.2 });
+  }
+  playFlutter(intensity = 1) {
+    this.ensure();
+    const idx = 4 + Math.floor(Math.random() * 5);
+    const midi = this.pentaScale(idx + 10);
+    this.playNote({ midi, type: 'bell', dur: 0.5, vol: 0.25 + intensity * 0.15, pan: (Math.random() - 0.5) * 0.8 });
+  }
+  playSpin(intensity = 1) {
+    this.ensure();
+    const baseMidi = this.pentaScale(Math.floor(Math.random() * 5));
+    for (let i = 0; i < 4; i++) {
+      setTimeout(() => this.playNote({ midi: baseMidi + i * 2, type: 'piano', dur: 0.3, vol: 0.3 }), i * 60);
+    }
+  }
+  playStillPad() {
+    this.ensure();
+    const midi = this.pentaScale(0);
+    this.playNote({ midi, type: 'pad', dur: 1.6, vol: 0.18 });
+    this.playNote({ midi: midi + 7, type: 'pad', dur: 1.6, vol: 0.14 });
+  }
+  playSuccess() {
+    this.ensure();
+    const seq = [60, 64, 67, 72];
+    seq.forEach((m, i) => setTimeout(() => this.playNote({ midi: m, type: 'chime', dur: 0.6, vol: 0.4 }), i * 110));
+  }
+}
+
+const audio = new AudioEngine();
+
+/* ============================================================
+   MOTION DETECTION — DeviceMotion + Keyboard fallback
+   ============================================================ */
+class MotionEngine {
+  constructor() {
+    this.enabled = false;
+    this.history = [];   // {t, ax, ay, az, mag}
+    this.gyro = { a: 0, b: 0, g: 0 };
+    this.lastEvents = []; // {t, type, intensity}
+    this.callbacks = new Set();
+    this.lastEventTime = { jump: 0, step: 0, stomp: 0, flutter: 0, spin: 0, still: 0, shake: 0 };
+    this.minIntervalMs = { jump: 280, step: 130, stomp: 360, flutter: 200, spin: 700, shake: 200 };
+    this.permissionState = 'unknown'; // unknown | granted | denied
+  }
+  emit(type, intensity = 1, raw = {}) {
+    const now = performance.now();
+    if (now - (this.lastEventTime[type] || 0) < (this.minIntervalMs[type] || 200)) return;
+    this.lastEventTime[type] = now;
+    const evt = { t: now, type, intensity, raw };
+    this.lastEvents.push(evt);
+    if (this.lastEvents.length > 80) this.lastEvents.shift();
+    this.callbacks.forEach(cb => cb(evt));
+  }
+  on(cb) { this.callbacks.add(cb); }
+
+  async requestPermission() {
+    // iOS 13+ Safari
+    if (typeof DeviceMotionEvent !== 'undefined' &&
+        typeof DeviceMotionEvent.requestPermission === 'function') {
+      try {
+        const p = await DeviceMotionEvent.requestPermission();
+        if (p === 'granted') {
+          this.permissionState = 'granted';
+          this.attach();
+          // Also try gyro permission
+          if (typeof DeviceOrientationEvent !== 'undefined' &&
+              typeof DeviceOrientationEvent.requestPermission === 'function') {
+            try { await DeviceOrientationEvent.requestPermission(); } catch(e) {}
+          }
+          return true;
+        } else {
+          this.permissionState = 'denied';
+          return false;
+        }
+      } catch (e) {
+        this.permissionState = 'denied';
+        return false;
+      }
+    } else {
+      // Android / desktop — just attach
+      this.permissionState = 'granted';
+      this.attach();
+      return true;
+    }
+  }
+  attach() {
+    if (this.enabled) return;
+    this.enabled = true;
+    window.addEventListener('devicemotion', (e) => this.onMotion(e), true);
+    window.addEventListener('deviceorientation', (e) => this.onOrient(e), true);
+  }
+  onOrient(e) {
+    this.gyro.a = e.alpha || 0;
+    this.gyro.b = e.beta || 0;
+    this.gyro.g = e.gamma || 0;
+  }
+  onMotion(e) {
+    const a = e.accelerationIncludingGravity || e.acceleration || {};
+    const ax = a.x || 0, ay = a.y || 0, az = a.z || 0;
+    const mag = Math.sqrt(ax*ax + ay*ay + az*az);
+    const t = performance.now();
+    this.history.push({ t, ax, ay, az, mag });
+    if (this.history.length > 120) this.history.shift();
+    this.classify();
+  }
+  classify() {
+    const h = this.history;
+    if (h.length < 8) return;
+    const now = h[h.length-1].t;
+    // Look at recent 800ms
+    let recent = h.filter(p => now - p.t < 800);
+    if (recent.length < 4) return;
+    let mags = recent.map(p => p.mag);
+    let max = Math.max(...mags), min = Math.min(...mags);
+    let mean = mags.reduce((s,x) => s+x, 0) / mags.length;
+    let variance = mags.reduce((s,x) => s+(x-mean)*(x-mean), 0) / mags.length;
+    let amplitude = max - min;
+    // Big sudden spike → jump or stomp (Y axis vs general)
+    let lastP = recent[recent.length - 1];
+    let prevP = recent[Math.max(0, recent.length - 4)];
+    let dMag = lastP.mag - prevP.mag;
+
+    // Detect a spike (jump)
+    if (dMag > 7 && lastP.mag > 18) {
+      // Vertical-dominant movement → jump
+      const isVert = Math.abs(lastP.ay) > Math.abs(lastP.ax) + Math.abs(lastP.az) * 0.7;
+      if (isVert) {
+        this.emit('jump', Math.min(2, dMag / 8));
+      } else {
+        this.emit('stomp', Math.min(2, dMag / 8));
+      }
+      return;
+    }
+    // Walking-like rhythm: sustained moderate variance
+    if (variance > 4 && variance < 30 && amplitude > 3 && amplitude < 14) {
+      this.emit('step', Math.min(1.5, amplitude / 8));
+      return;
+    }
+    // Gentle flutter / sway
+    if (variance > 0.6 && variance <= 4 && amplitude < 4) {
+      this.emit('flutter', Math.min(1.2, amplitude / 3));
+      return;
+    }
+    // Stillness
+    if (variance < 0.3 && amplitude < 1.2) {
+      this.emit('still', 0.5);
+      return;
+    }
+    // Spin: device rotates rapidly via rotation sensor
+    if (e && e.rotationRate) {
+      const r = e.rotationRate;
+      const total = Math.abs(r.alpha||0) + Math.abs(r.beta||0) + Math.abs(r.gamma||0);
+      if (total > 200) {
+        this.emit('spin', Math.min(2, total / 400));
+        return;
+      }
+    }
+  }
+  // For keyboard fallback / synthetic events
+  inject(type, intensity = 1) {
+    this.emit(type, intensity);
+  }
+  // Window over last N ms — for animal pattern detection
+  recentEvents(windowMs = 3000) {
+    const now = performance.now();
+    return this.lastEvents.filter(e => now - e.t < windowMs);
+  }
+  recentHistory(windowMs = 3000) {
+    const now = performance.now();
+    return this.history.filter(p => now - p.t < windowMs);
+  }
+}
+const motion = new MotionEngine();
+
+/* ============================================================
+   VISUAL ENGINE — particles, footprints, ripples, animations
+   ============================================================ */
+class Visualizer {
+  constructor(canvas, fxCanvas) {
+    this.canvas = canvas;
+    this.fx = fxCanvas;
+    this.ctx = canvas.getContext('2d');
+    this.fxCtx = fxCanvas.getContext('2d');
+    this.particles = [];
+    this.footprints = [];
+    this.ripples = [];
+    this.sparks = [];
+    this.shapes = [];
+    this.creatures = [];
+    this.dpr = Math.max(1, Math.min(3, window.devicePixelRatio || 1));
+    this.resize();
+    window.addEventListener('resize', () => this.resize());
+    this.lastFrame = performance.now();
+    requestAnimationFrame(() => this.frame());
+  }
+  resize() {
+    const W = this.canvas.parentElement.clientWidth;
+    const H = this.canvas.parentElement.clientHeight;
+    [this.canvas, this.fx].forEach(c => {
+      c.width = W * this.dpr;
+      c.height = H * this.dpr;
+      c.style.width = W + 'px';
+      c.style.height = H + 'px';
+      c.getContext('2d').setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
+    });
+    this.W = W; this.H = H;
+  }
+  addEvent(type, intensity = 1) {
+    const W = this.W, H = this.H;
+    const cx = W / 2;
+    const topY = H * 0.22;        // upper area (above prompt card)
+    const botY = H * 0.78;        // lower area (below prompt card)
+    if (type === 'jump') {
+      // Big bright burst at TOP — like fireworks
+      const ox = cx + (Math.random() - 0.5) * W * 0.5;
+      const oy = topY + (Math.random() - 0.5) * 40;
+      const hue = 30 + Math.random() * 60;
+      for (let i = 0; i < 26; i++) {
+        const a = (i / 26) * Math.PI * 2;
+        this.sparks.push({
+          x: ox, y: oy,
+          vx: Math.cos(a) * (3 + intensity * 2),
+          vy: Math.sin(a) * (3 + intensity * 2) - 1,
+          life: 1, ttl: 1.4, size: 5 + Math.random() * 5,
+          color: `hsl(${hue + Math.random() * 30}, 90%, 72%)`
+        });
+      }
+      this.ripples.push({ x: ox, y: oy, r: 20, maxR: 220, life: 1, color: 'rgba(255,210,150,0.55)' });
+    }
+    if (type === 'step') {
+      // Footprint near bottom — alternating sides
+      const side = (this.footprints.length % 2 === 0) ? -1 : 1;
+      const x = cx + side * (40 + Math.random() * 60);
+      const y = botY - Math.random() * 50;
+      this.footprints.push({ x, y, life: 1.4, hue: 280 + Math.random() * 60, side });
+      this.particles.push({ x, y, vx: 0, vy: -0.6, life: 1.2, size: 3.5, color: `hsl(${300 + Math.random()*40}, 85%, 78%)` });
+    }
+    if (type === 'stomp') {
+      // Heavy ground pulse at BOTTOM
+      this.ripples.push({ x: cx, y: botY + 30, r: 30, maxR: W * 1.0, life: 1, color: 'rgba(255,140,90,0.45)', heavy: true });
+      for (let i = 0; i < 22; i++) {
+        const a = Math.random() * Math.PI - Math.PI; // upper hemisphere
+        this.sparks.push({
+          x: cx + (Math.random() - 0.5) * 100, y: botY + 30,
+          vx: Math.cos(a) * (2 + intensity * 1.5), vy: Math.sin(a) * (1.5 + intensity) - 2.5,
+          life: 1, ttl: 1.1, size: 5 + Math.random() * 5,
+          color: `hsl(${20 + Math.random() * 30}, 85%, 65%)`,
+          gravity: 0.1
+        });
+      }
+    }
+    if (type === 'flutter') {
+      // Soft sparkle scattered across whole screen but avoiding center band
+      for (let i = 0; i < 6; i++) {
+        const inUpper = Math.random() < 0.5;
+        const y = inUpper ? Math.random() * topY * 1.4 : (botY - 30) + Math.random() * (H - botY);
+        this.particles.push({
+          x: Math.random() * W,
+          y: y,
+          vx: (Math.random() - 0.5) * 0.9,
+          vy: -0.3 + (Math.random() - 0.5) * 0.5,
+          life: 1.6, size: 2 + Math.random() * 4,
+          color: `hsl(${180 + Math.random() * 100}, 90%, 78%)`,
+          twinkle: true
+        });
+      }
+    }
+    if (type === 'spin') {
+      // Rainbow spiral from center but expand outward
+      for (let i = 0; i < 32; i++) {
+        const a = (i / 32) * Math.PI * 2 + Math.random() * 0.4;
+        this.sparks.push({
+          x: cx, y: H * 0.5,
+          vx: Math.cos(a) * 2.8,
+          vy: Math.sin(a) * 2.8,
+          life: 1, ttl: 1.5, size: 5 + Math.random() * 3,
+          color: `hsl(${(i / 32) * 360}, 90%, 68%)`,
+          gravity: 0.005
+        });
+      }
+    }
+    if (type === 'still') {
+      // Calm flower in upper or lower band
+      const inUpper = Math.random() < 0.5;
+      this.shapes.push({
+        type: 'flower',
+        x: cx + (Math.random() - 0.5) * W * 0.7,
+        y: inUpper ? (topY * 0.7 + Math.random() * 30) : (botY + 10 + Math.random() * 30),
+        size: 0, maxSize: 32 + Math.random() * 18, life: 1.6, hue: 280 + Math.random() * 60
+      });
+    }
+  }
+  showCreature(emoji, label = '') {
+    this.creatures.push({
+      emoji, label,
+      x: this.W / 2, y: this.H / 2,
+      vy: -2,
+      life: 1, size: 80
+    });
+  }
+  showSuccess() {
+    // Big confetti burst
+    for (let i = 0; i < 50; i++) {
+      const a = Math.random() * Math.PI * 2;
+      const v = 4 + Math.random() * 4;
+      this.sparks.push({
+        x: this.W / 2, y: this.H / 2,
+        vx: Math.cos(a) * v, vy: Math.sin(a) * v - 2,
+        life: 1, ttl: 1.6, size: 5 + Math.random() * 6,
+        color: `hsl(${Math.random() * 360}, 90%, 65%)`,
+        gravity: 0.08
+      });
+    }
+  }
+  frame() {
+    const now = performance.now();
+    const dt = Math.min(3, (now - this.lastFrame) / 16.67);  // clamp to avoid huge jumps after tab idle
+    this.lastFrame = now;
+
+    // Background: gentle moving gradient
+    const ctx = this.ctx;
+    ctx.clearRect(0, 0, this.W, this.H);
+    // Faint stars
+    if (!this.stars) {
+      this.stars = [];
+      for (let i = 0; i < 60; i++) this.stars.push({
+        x: Math.random() * this.W, y: Math.random() * this.H,
+        s: Math.random() * 1.4 + 0.3, ph: Math.random() * Math.PI * 2
+      });
+    }
+    ctx.save();
+    this.stars.forEach(st => {
+      const a = 0.3 + 0.5 * Math.abs(Math.sin(now * 0.001 + st.ph));
+      ctx.globalAlpha = a * 0.6;
+      ctx.fillStyle = '#fff8d8';
+      ctx.beginPath();
+      ctx.arc(st.x, st.y, st.s, 0, Math.PI * 2);
+      ctx.fill();
+    });
+    ctx.restore();
+
+    // Footprints (fade)
+    this.footprints = this.footprints.filter(fp => {
+      fp.life -= 0.005 * dt;
+      if (fp.life <= 0) return false;
+      ctx.save();
+      ctx.globalAlpha = fp.life;
+      ctx.fillStyle = `hsla(${fp.hue}, 85%, 70%, ${fp.life})`;
+      ctx.beginPath();
+      ctx.ellipse(fp.x, fp.y, 12, 18, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.beginPath();
+      ctx.ellipse(fp.x + fp.side * 4, fp.y - 22, 4, 6, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.beginPath();
+      ctx.ellipse(fp.x + fp.side * 11, fp.y - 14, 4, 6, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.beginPath();
+      ctx.ellipse(fp.x + fp.side * 13, fp.y - 4, 4, 6, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+      return true;
+    });
+
+    // Ripples
+    this.ripples = this.ripples.filter(rp => {
+      rp.r += (rp.maxR - rp.r) * 0.04 * dt;
+      rp.life -= 0.013 * dt;
+      if (rp.life <= 0) return false;
+      ctx.save();
+      ctx.globalAlpha = rp.life;
+      ctx.strokeStyle = rp.color;
+      ctx.lineWidth = rp.heavy ? 5 : 2.5;
+      ctx.beginPath();
+      ctx.arc(rp.x, rp.y, rp.r, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.restore();
+      return true;
+    });
+
+    // Shapes (calm flowers)
+    this.shapes = this.shapes.filter(sh => {
+      sh.size += (sh.maxSize - sh.size) * 0.06 * dt;
+      sh.life -= 0.005 * dt;
+      if (sh.life <= 0) return false;
+      ctx.save();
+      ctx.globalAlpha = sh.life;
+      ctx.translate(sh.x, sh.y);
+      const petals = 8;
+      for (let i = 0; i < petals; i++) {
+        ctx.save();
+        ctx.rotate((i / petals) * Math.PI * 2);
+        ctx.fillStyle = `hsla(${sh.hue}, 85%, 75%, 0.7)`;
+        ctx.beginPath();
+        ctx.ellipse(sh.size * 0.5, 0, sh.size * 0.5, sh.size * 0.2, 0, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+      ctx.fillStyle = `hsla(${sh.hue + 20}, 90%, 80%, 0.95)`;
+      ctx.beginPath(); ctx.arc(0, 0, sh.size * 0.18, 0, Math.PI * 2); ctx.fill();
+      ctx.restore();
+      return true;
+    });
+
+    // Particles
+    this.particles = this.particles.filter(p => {
+      p.x += p.vx * dt; p.y += p.vy * dt;
+      p.vy += 0.02 * dt;
+      p.life -= 0.012 * dt;
+      if (p.life <= 0) return false;
+      ctx.save();
+      const a = Math.max(0, Math.min(1, p.life));
+      const tw = p.twinkle ? (0.5 + 0.5 * Math.sin(now * 0.01)) : 1;
+      ctx.globalAlpha = a * tw;
+      ctx.fillStyle = p.color;
+      ctx.shadowBlur = 10;
+      ctx.shadowColor = p.color;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+      return true;
+    });
+
+    // Sparks (FX layer)
+    const fxCtx = this.fxCtx;
+    fxCtx.clearRect(0, 0, this.W, this.H);
+    this.sparks = this.sparks.filter(s => {
+      s.x += s.vx * dt; s.y += s.vy * dt;
+      s.vy += (s.gravity || 0.04) * dt;
+      s.life -= dt / (s.ttl * 60);
+      if (s.life <= 0) return false;
+      fxCtx.save();
+      fxCtx.globalAlpha = Math.max(0, s.life);
+      fxCtx.fillStyle = s.color;
+      fxCtx.shadowBlur = 12;
+      fxCtx.shadowColor = s.color;
+      fxCtx.beginPath();
+      fxCtx.arc(s.x, s.y, s.size * Math.max(0, s.life), 0, Math.PI * 2);
+      fxCtx.fill();
+      fxCtx.restore();
+      return true;
+    });
+
+    // Floating creatures (success animation)
+    this.creatures = this.creatures.filter(c => {
+      c.y += c.vy * dt;
+      c.vy += 0.04 * dt;
+      c.life -= 0.01 * dt;
+      if (c.life <= 0) return false;
+      fxCtx.save();
+      fxCtx.globalAlpha = Math.max(0, Math.min(1, c.life * 1.4));
+      fxCtx.font = `${c.size}px serif`;
+      fxCtx.textAlign = 'center';
+      fxCtx.textBaseline = 'middle';
+      fxCtx.fillText(c.emoji, c.x, c.y);
+      if (c.label) {
+        fxCtx.font = 'bold 18px sans-serif';
+        fxCtx.fillStyle = '#fff';
+        fxCtx.shadowColor = '#000'; fxCtx.shadowBlur = 8;
+        fxCtx.fillText(c.label, c.x, c.y + c.size / 2 + 18);
+      }
+      fxCtx.restore();
+      return true;
+    });
+
+    requestAnimationFrame(() => this.frame());
+  }
+}
+const viz = new Visualizer(document.getElementById('viz'), document.getElementById('fx'));
+
+/* ============================================================
+   ANIMAL ZOO MODE — Pattern matching
+   ============================================================ */
+const ANIMALS = [
+  { id: 'usagi',    emoji: '🐰', name_ja: 'うさぎ',     name_en: 'Bunny',
+    hint_ja: 'ぴょんぴょん ジャンプ してみよう！', hint_en: 'Hop! Hop! Try jumping!',
+    pattern: 'jumps' },
+  { id: 'zou',      emoji: '🐘', name_ja: 'ぞう',       name_en: 'Elephant',
+    hint_ja: 'おもーく ドシン ドシン あるこう', hint_en: 'Walk heavy: stomp, stomp!',
+    pattern: 'stomps' },
+  { id: 'chou',     emoji: '🦋', name_ja: 'ちょうちょ', name_en: 'Butterfly',
+    hint_ja: 'ふわっと そっと ゆれてみて', hint_en: 'Sway gently, like flying!',
+    pattern: 'flutter' },
+  { id: 'hebi',     emoji: '🐍', name_ja: 'へび',       name_en: 'Snake',
+    hint_ja: 'うごかないで… じーっと しずかに', hint_en: 'Be very still… ssshhhh',
+    pattern: 'still' },
+  { id: 'uma',      emoji: '🐴', name_ja: 'うま',       name_en: 'Horse',
+    hint_ja: 'はやく あしぶみ してみよう！', hint_en: 'Quick steps! Trot, trot!',
+    pattern: 'fast_steps' },
+  { id: 'kaeru',    emoji: '🐸', name_ja: 'かえる',     name_en: 'Frog',
+    hint_ja: 'たまに ぴょん！ ながく まって またぴょん', hint_en: 'Wait… then JUMP! Wait… JUMP!',
+    pattern: 'sparse_jumps' },
+  { id: 'inu',      emoji: '🐶', name_ja: 'いぬ',       name_en: 'Doggy',
+    hint_ja: 'ぶるぶる！ スマホをふってみよう', hint_en: 'Shake the phone like a wet doggy!',
+    pattern: 'shake' },
+  { id: 'fukurou',  emoji: '🦉', name_ja: 'ふくろう',   name_en: 'Owl',
+    hint_ja: 'ぐるーっと まわってみて', hint_en: 'Spin around like an owl!',
+    pattern: 'spin' },
+  { id: 'kani',     emoji: '🦀', name_ja: 'かに',       name_en: 'Crab',
+    hint_ja: 'よこに よこに あるこう', hint_en: 'Sidestep! Side to side!',
+    pattern: 'side_steps' }
+];
+function patternCheck(animal, events) {
+  // events: list of {t, type, intensity}
+  const types = events.map(e => e.type);
+  const counts = types.reduce((a,b) => (a[b] = (a[b]||0)+1, a), {});
+  const total = events.length;
+  const dur = events.length ? (events[events.length-1].t - events[0].t) : 0;
+
+  switch (animal.pattern) {
+    case 'jumps':
+      // 3+ jumps in window, mostly jumps
+      return (counts.jump || 0) >= 3 && (counts.jump || 0) / Math.max(1,total) > 0.45;
+    case 'stomps':
+      return (counts.stomp || 0) >= 3;
+    case 'flutter':
+      // mostly flutter / step low intensity, no jump/stomp big
+      return (counts.flutter || 0) >= 5 && !(counts.jump > 0) && !(counts.stomp > 1);
+    case 'still':
+      // Lots of still events, very few of anything else
+      return (counts.still || 0) >= 4 && total - (counts.still||0) <= 2;
+    case 'fast_steps':
+      // Many step events in short window
+      return (counts.step || 0) >= 7 && (counts.jump || 0) <= 2;
+    case 'sparse_jumps':
+      // 2+ jumps with stillness/flutter between
+      return (counts.jump || 0) >= 2 && (counts.still || 0) >= 1;
+    case 'shake':
+      // High variance, many step+stomp+flutter mixed
+      return ((counts.step||0) + (counts.flutter||0) + (counts.stomp||0)) >= 8 && (counts.jump||0) <= 1;
+    case 'spin':
+      return (counts.spin || 0) >= 2;
+    case 'side_steps':
+      return (counts.step || 0) >= 4 && (counts.flutter || 0) >= 2 && (counts.jump||0) === 0;
+  }
+  return false;
+}
+
+/* ============================================================
+   STATE — Modes + Zukan persistence
+   ============================================================ */
+const STORAGE = 'ashi-oto:zukan:v1';
+const state = {
+  mode: 'free',
+  currentAnimal: null,
+  zukan: new Set(),
+  detecting: false,
+  lang: 'ja',
+};
+function loadZukan() {
+  try {
+    const raw = localStorage.getItem(STORAGE);
+    if (raw) state.zukan = new Set(JSON.parse(raw));
+  } catch(e) {}
+}
+function saveZukan() {
+  try {
+    localStorage.setItem(STORAGE, JSON.stringify([...state.zukan]));
+  } catch(e) {}
+}
+function updateZukanCount() {
+  document.getElementById('zukan-count').textContent = state.zukan.size + '/' + ANIMALS.length;
+}
+
+/* ============================================================
+   I18N
+   ============================================================ */
+const I18N = {
+  ja: {
+    title: 'あしおと', sub: 'からだで つくる おんがく ・ 3〜7さい',
+    zukan: '図鑑', close: 'とじる', resetZukan: '図鑑をリセット',
+    welcomeBadge: 'あたらしい あそび',
+    welcome1: 'スマホを <b>もって</b>、はねたり、あるいたり、ゆれたり…',
+    welcome2: 'うごきが <b>おんがく</b>に なる、あたらしい あそび。',
+    welcome3: '画面はタップしないよ。からだぜんぶで あそぼう！',
+    welcomeBtn: '▶ はじめる',
+    permNote: '※ うごきセンサーをつかう きょかが ひつようです',
+    modeFree: 'じゆう', modeZoo: 'どうぶつ', modeSong: 'おんがく',
+    freeTitle: 'じゆうあそび', freeHint: 'スマホを ふったり<br>あるいたり ジャンプ してみてね',
+    songTitle: 'おんがくづくり', songHint: 'リズムよく うごくと<br>メロディが できるよ！',
+    zooStart: 'うごきで まねっこ！', zooHint: 'どうぶつカードが でるから<br>そのうごきを 3びょう やってみて！',
+    success: 'できた！', successHint: '図鑑に なかまが ふえたよ',
+    desktopHint: 'PCの方は: スペース=ジャンプ ・ ←→=あるき ・ ↑=スピン ・ S=ゆれ',
+    zukanTitle: 'どうぶつのリズム図鑑',
+    zukanHint: 'どうぶつモードで まねっこ 成功すると<br>図鑑が あつまるよ！',
+  },
+  en: {
+    title: 'Ashi-oto', sub: 'Music made by your body · ages 3–7',
+    zukan: 'Zoo', close: 'Close', resetZukan: 'Reset Zoo',
+    welcomeBadge: 'A NEW WAY TO PLAY',
+    welcome1: '<b>Hold</b> your phone — and hop, walk, sway, spin…',
+    welcome2: 'Every motion makes <b>music</b>.',
+    welcome3: 'No screen tapping. Play with your whole body!',
+    welcomeBtn: '▶ Start',
+    permNote: '* Motion sensor permission needed',
+    modeFree: 'Free', modeZoo: 'Zoo', modeSong: 'Music',
+    freeTitle: 'Free Play', freeHint: 'Move the phone any way you like!<br>Walk, jump, sway, spin…',
+    songTitle: 'Make a Song', songHint: 'Move with rhythm —<br>and a melody appears!',
+    zooStart: 'Mimic the animal!', zooHint: 'A card appears — copy<br>that movement for 3 seconds!',
+    success: 'You did it!', successHint: 'Added to your zoo!',
+    desktopHint: 'Desktop: Space=jump · ←→=walk · ↑=spin · S=shake',
+    zukanTitle: 'Animal Rhythm Zoo',
+    zukanHint: 'Mimic animals correctly to<br>collect them in your zoo!',
+  }
+};
+function applyI18n(lang) {
+  state.lang = lang;
+  document.documentElement.lang = lang;
+  const dict = I18N[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (dict[key] !== undefined) el.innerHTML = dict[key];
+  });
+  // Re-render zukan if open
+  renderZukan();
+  // Re-render current prompt for current mode
+  refreshPrompt();
+}
+
+/* ============================================================
+   MODES
+   ============================================================ */
+function setMode(mode) {
+  state.mode = mode;
+  state.currentAnimal = null;
+  document.querySelectorAll('.mode-btn').forEach(b => b.classList.toggle('active', b.dataset.mode === mode));
+  refreshPrompt();
+  if (mode === 'zoo') {
+    setTimeout(() => pickRandomAnimal(), 500);
+  } else if (mode === 'song') {
+    state.songNotes = [];
+    state.songStart = performance.now();
+  }
+}
+function refreshPrompt() {
+  const dict = I18N[state.lang];
+  const c = document.getElementById('creature');
+  const t = document.getElementById('prompt-title');
+  const h = document.getElementById('prompt-hint');
+  const card = document.getElementById('prompt');
+  card.classList.remove('success', 'dim');
+  if (state.mode === 'free') {
+    c.textContent = '🎵';
+    t.textContent = dict.freeTitle;
+    h.innerHTML = dict.freeHint;
+  } else if (state.mode === 'song') {
+    c.textContent = '🎶';
+    t.textContent = dict.songTitle;
+    h.innerHTML = dict.songHint;
+  } else if (state.mode === 'zoo') {
+    if (state.currentAnimal) {
+      c.textContent = state.currentAnimal.emoji;
+      t.textContent = state.lang === 'ja' ? state.currentAnimal.name_ja : state.currentAnimal.name_en;
+      h.innerHTML = state.lang === 'ja' ? state.currentAnimal.hint_ja : state.currentAnimal.hint_en;
+    } else {
+      c.textContent = '🐰';
+      t.textContent = dict.zooStart;
+      h.innerHTML = dict.zooHint;
+    }
+  }
+}
+
+let zooTimer = null;
+let zooDeadline = 0;
+function pickRandomAnimal() {
+  // Prefer animals not yet in zukan
+  const remaining = ANIMALS.filter(a => !state.zukan.has(a.id));
+  const pool = remaining.length > 0 ? remaining : ANIMALS;
+  const a = pool[Math.floor(Math.random() * pool.length)];
+  state.currentAnimal = a;
+  refreshPrompt();
+  state.detecting = true;
+  zooDeadline = performance.now() + 6000; // 6s window
+  if (zooTimer) clearInterval(zooTimer);
+  zooTimer = setInterval(checkAnimalProgress, 250);
+}
+function checkAnimalProgress() {
+  if (state.mode !== 'zoo' || !state.currentAnimal) {
+    clearInterval(zooTimer); zooTimer = null; return;
+  }
+  const events = motion.recentEvents(3000);
+  if (patternCheck(state.currentAnimal, events)) {
+    succeedAnimal();
+  } else if (performance.now() > zooDeadline) {
+    // Timed out — try a hint, extend
+    zooDeadline = performance.now() + 5000;
+    // Visual nudge: dim card briefly
+    const card = document.getElementById('prompt');
+    card.classList.add('dim');
+    setTimeout(() => card.classList.remove('dim'), 500);
+  }
+}
+function succeedAnimal() {
+  if (!state.currentAnimal) return;
+  state.zukan.add(state.currentAnimal.id);
+  saveZukan();
+  updateZukanCount();
+  audio.playSuccess();
+  viz.showSuccess();
+  viz.showCreature(state.currentAnimal.emoji, state.lang === 'ja' ? state.currentAnimal.name_ja : state.currentAnimal.name_en);
+  // Show success
+  const card = document.getElementById('prompt');
+  card.classList.add('success');
+  document.getElementById('creature').textContent = '✨' + state.currentAnimal.emoji + '✨';
+  document.getElementById('prompt-title').textContent = I18N[state.lang].success;
+  document.getElementById('prompt-hint').innerHTML = I18N[state.lang].successHint;
+  state.detecting = false;
+  clearInterval(zooTimer); zooTimer = null;
+  // Next animal after delay
+  setTimeout(() => {
+    if (state.mode === 'zoo') pickRandomAnimal();
+  }, 2400);
+}
+
+/* ============================================================
+   EVENT HANDLING — connect motion → sound + viz
+   ============================================================ */
+motion.on(evt => {
+  // Always sound + visual
+  switch (evt.type) {
+    case 'jump':    audio.playJump(evt.intensity);    viz.addEvent('jump', evt.intensity);    break;
+    case 'step':    audio.playStep(evt.intensity);    viz.addEvent('step', evt.intensity);    break;
+    case 'stomp':   audio.playStomp(evt.intensity);   viz.addEvent('stomp', evt.intensity);   break;
+    case 'flutter': audio.playFlutter(evt.intensity); viz.addEvent('flutter', evt.intensity); break;
+    case 'spin':    audio.playSpin(evt.intensity);    viz.addEvent('spin', evt.intensity);    break;
+    case 'still':
+      // Only trigger pad / flower occasionally so it's not constant
+      if (Math.random() < 0.07) {
+        audio.playStillPad();
+        viz.addEvent('still', 0.5);
+      }
+      break;
+  }
+});
+
+/* ============================================================
+   KEYBOARD + CLICK FALLBACK (desktop testing)
+   ============================================================ */
+// Desktop = no touch primary input (the (pointer:fine) check alone fails because some mobile devices report fine pointer too)
+let isDesktop = !('ontouchstart' in window) && !navigator.maxTouchPoints;
+window.addEventListener('keydown', e => {
+  if (e.repeat) return;
+  if (e.code === 'Space') { motion.inject('jump', 1.4); audio.resume(); }
+  else if (e.code === 'ArrowLeft' || e.code === 'ArrowRight') motion.inject('step', 1);
+  else if (e.code === 'ArrowDown') motion.inject('stomp', 1.2);
+  else if (e.code === 'ArrowUp')   motion.inject('spin', 1.2);
+  else if (e.key === 's' || e.key === 'S') motion.inject('flutter', 1);
+  else if (e.key === 'q' || e.key === 'Q') motion.inject('still', 0.5);
+});
+
+// Mouse / touch motion fallback (rough): use mouse-shake on stage
+let lastMouseT = 0, lastMouseX = 0, lastMouseY = 0, mouseSpeedSamples = [];
+document.getElementById('stage').addEventListener('pointermove', e => {
+  const now = performance.now();
+  if (lastMouseT) {
+    const dt = (now - lastMouseT) || 1;
+    const dx = e.clientX - lastMouseX, dy = e.clientY - lastMouseY;
+    const sp = Math.sqrt(dx*dx + dy*dy) / dt;
+    mouseSpeedSamples.push({ t: now, sp });
+    mouseSpeedSamples = mouseSpeedSamples.filter(s => now - s.t < 400);
+    const recent = mouseSpeedSamples;
+    const avg = recent.reduce((a,b) => a+b.sp, 0) / Math.max(1, recent.length);
+    if (avg > 1.5) {
+      motion.inject('flutter', Math.min(1.5, avg / 2));
+    }
+  }
+  lastMouseT = now; lastMouseX = e.clientX; lastMouseY = e.clientY;
+});
+// Click on stage = step (only when not in zoo waiting state)
+document.getElementById('stage').addEventListener('click', e => {
+  audio.resume();
+  motion.inject('step', 1);
+});
+
+/* ============================================================
+   ZUKAN UI
+   ============================================================ */
+function renderZukan() {
+  const grid = document.getElementById('zukan-grid');
+  grid.innerHTML = '';
+  ANIMALS.forEach(a => {
+    const cell = document.createElement('div');
+    const have = state.zukan.has(a.id);
+    cell.className = 'zukan-cell' + (have ? '' : ' locked');
+    cell.innerHTML = `
+      <span>${have ? a.emoji : '?'}</span>
+      <span class="name">${have ? (state.lang === 'ja' ? a.name_ja : a.name_en) : '...'}</span>
+    `;
+    grid.appendChild(cell);
+  });
+}
+
+document.getElementById('hud-zukan').addEventListener('click', () => {
+  renderZukan();
+  document.getElementById('modal-zukan').classList.remove('hidden');
+});
+document.getElementById('btn-close-zukan').addEventListener('click', () => {
+  document.getElementById('modal-zukan').classList.add('hidden');
+});
+document.getElementById('btn-reset-zukan').addEventListener('click', () => {
+  state.zukan.clear();
+  saveZukan();
+  updateZukanCount();
+  renderZukan();
+});
+
+/* ============================================================
+   STARTUP — Welcome + permission
+   ============================================================ */
+document.getElementById('btn-start').addEventListener('click', async () => {
+  audio.resume();
+  // Try motion permission
+  const granted = await motion.requestPermission();
+  // Hide welcome
+  document.getElementById('modal-welcome').classList.add('hidden');
+  // If desktop or no motion, show keyboard hint
+  if (!granted || isDesktop) {
+    document.getElementById('desktop-hint').classList.remove('hidden');
+    setTimeout(() => document.getElementById('desktop-hint').classList.add('hidden'), 8000);
+  }
+  // Show note about permission denial if so
+  if (!granted && !isDesktop) {
+    document.getElementById('permission-note').style.display = 'block';
+  }
+});
+
+// Show permission note on iOS only
+if (typeof DeviceMotionEvent !== 'undefined' && typeof DeviceMotionEvent.requestPermission === 'function') {
+  document.getElementById('permission-note').style.display = 'block';
+}
+
+document.querySelectorAll('.mode-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    audio.resume();
+    setMode(btn.dataset.mode);
+  });
+});
+
+document.getElementById('hud-lang').addEventListener('click', () => {
+  applyI18n(state.lang === 'ja' ? 'en' : 'ja');
+});
+
+// Init
+loadZukan();
+updateZukanCount();
+const initialLang = (navigator.language || 'ja').toLowerCase().startsWith('ja') ? 'ja' : 'en';
+applyI18n(initialLang);
+refreshPrompt();
+</script>
+</body>
+</html>

@@ -218,6 +218,7 @@ header p {
 .thumb-koemon     { background: radial-gradient(ellipse at 30% 25%, #2a1860 0%, #150a35 50%, #060214 100%); }
 .thumb-pikopiko   { background: radial-gradient(ellipse at 50% 45%, #10103a 0%, #08081f 55%, #04030d 100%); }
 .thumb-kiokuiz    { background: radial-gradient(ellipse at 30% 30%, #4a1a6a 0%, #2a1860 45%, #0a0420 100%); }
+.thumb-ashioto    { background: radial-gradient(ellipse at 50% 35%, #2a1d6a 0%, #15102a 55%, #0a0717 100%); }
 
 .card-body {
     padding: 18px 20px 22px;
@@ -421,6 +422,14 @@ footer a:hover { color: #e6edf3; }
 <!-- Featured -->
 <div class="section-label" data-i18n="secFeatured">⭐ おすすめ</div>
 <div class="feat-row">
+        <a class="feat-card" href="https://pndshch.github.io/ashi-oto/" target="_blank">
+            <div class="card-thumb thumb-ashioto">
+            <span class="new-badge" data-i18n="newBadge">NEW</span>
+            <span class="thumb-emoji">👣</span>
+            <img class="thumb-gif" src="assets/ashi-oto.gif" alt="" onerror="this.remove()">
+        </div>
+            <span class="feat-title" data-i18n="ashiotoTitle">あしおと</span>
+        </a>
         <a class="feat-card" href="https://pndshch.github.io/pikopiko-sonar/" target="_blank">
             <div class="card-thumb thumb-pikopiko">
             <span class="new-badge" data-i18n="newBadge">NEW</span>
@@ -595,6 +604,23 @@ footer a:hover { color: #e6edf3; }
 <!-- All apps -->
 <div class="grid" id="app-grid">
     <div class="grid-header" data-cat-header="kids-play" data-i18n="secGridKidsPlay">🎈 こどもがあそぶ</div>
+    <div class="card" data-cat="kids-play">
+            <div class="card-thumb thumb-ashioto">
+                <span class="new-badge" data-i18n="newBadge">NEW</span>
+                <span class="thumb-emoji">👣</span>
+                <img class="thumb-gif" src="assets/ashi-oto.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="ashiotoTitle">あしおと</h2>
+                <p data-i18n="ashiotoDesc">スマホをもって、はねたり、あるいたり、ゆれたり——画面はタップしない。うごきがおんがくになる、3〜7さい向けの『からだ＝楽器』あそび。うさぎはぴょんぴょん、ぞうはドシン、ちょうちょはふわっと、へびはじっと…9種類のどうぶつのリズムを自分のからだで再現するとクリア＝図鑑に集まる『どうぶつのリズム図鑑』モード搭載。加速度センサーが「ジャンプ」「あしおと」「ゆれ」「スピン」「停止」を聞き分けて、それぞれちがう音色（ピアノ・ベル・ドラム・パッド）と光（花火・足あと・きらめき・虹のスパイラル・蓮の花）に変換。受動的なタップではなく、からだぜんぶで遊ぶ──スクリーン疲労時代に生まれた、運動センサーで遊ぶキッズ音楽図鑑。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="ashiotoTag1">3〜7歳</span>
+                    <span class="tag" data-i18n="ashiotoTag2">うごき×音</span>
+                    <span class="tag" data-i18n="ashiotoTag3">タップなし</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/ashi-oto/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
     <div class="card" data-cat="kids-play">
             <div class="card-thumb thumb-pikopiko">
                 <span class="new-badge" data-i18n="newBadge">NEW</span>
@@ -1957,6 +1983,9 @@ const I18N = {
         kiokuizTitle: "キオクイズ",
         kiokuizDesc:  "最初は「朝ごはんは？」「コーヒーは？」と、4択であなたの好みをただ答えるだけ。でも気づくと、過去の自分の答えを思い出すクイズフェーズが交ざりはじめる。「あれ、自分はサーモン派だっけ？マグロ派だっけ？」——間違えたら終了。続けるほど抱える「好み」が増え、自分が誰だか分からなくなっていく、4択メモリーゲーム。",
         kiokuizTag1: "記憶", kiokuizTag2: "4択", kiokuizTag3: "自己問答",
+        ashiotoTitle: "あしおと",
+        ashiotoDesc:  "スマホをもって、はねたり、あるいたり、ゆれたり——画面はタップしない。うごきがおんがくになる、3〜7さい向けの『からだ＝楽器』あそび。うさぎはぴょんぴょん、ぞうはドシン、ちょうちょはふわっと、へびはじっと…9種類のどうぶつのリズムを自分のからだで再現するとクリア＝図鑑に集まる『どうぶつのリズム図鑑』モード搭載。加速度センサーが「ジャンプ」「あしおと」「ゆれ」「スピン」「停止」を聞き分けて、それぞれちがう音色（ピアノ・ベル・ドラム・パッド）と光（花火・足あと・きらめき・虹のスパイラル・蓮の花）に変換。受動的なタップではなく、からだぜんぶで遊ぶ──スクリーン疲労時代に生まれた、運動センサーで遊ぶキッズ音楽図鑑。",
+        ashiotoTag1: "3〜7歳", ashiotoTag2: "うごき×音", ashiotoTag3: "タップなし",
     },
     en: {
         tagline:   "Games · Education · Tools — delivered via browser and apps",
@@ -2200,6 +2229,9 @@ const I18N = {
         kiokuizTitle: "Kiokuiz",
         kiokuizDesc:  "Round 1: \"breakfast?\" — pick what you actually like, from 4 options. Round 2: \"tea?\" — pick again. Then a quiz round slips in: \"what did past-you choose for breakfast?\" Get it wrong, game over. The longer you survive, the bigger your stack of preferences to remember — until you can't tell who you even are anymore. A 4-choice memory game where your own taste becomes the test.",
         kiokuizTag1: "Memory", kiokuizTag2: "4-choice", kiokuizTag3: "Self-quiz",
+        ashiotoTitle: "Ashi-oto (Footsteps Music)",
+        ashiotoDesc:  "Hold the phone — and hop, walk, sway, spin. Don't tap the screen. Your movement becomes music, in this body-as-instrument toy for ages 3–7. The accelerometer tells \"jump\" from \"step\" from \"sway\" from \"spin\" from \"still\" — and each motion paints a different sound (piano / bell / drum / pad) and a different light (fireworks / footprints / sparkles / rainbow spiral / lotus). 'Animal Rhythm Zoo' mode challenges kids to copy 9 animals with their body: bunny hops, elephant stomps, butterfly sways, snake stays still, horse trots, frog jumps-and-waits… Mimic correctly and the animal joins your zoo. A first-of-its-kind kids music encyclopedia played with motion sensors — for the screen-fatigued generation, where the body is the controller.",
+        ashiotoTag1: "Ages 3–7", ashiotoTag2: "Motion × Music", ashiotoTag3: "No Tapping",
     }
 };
 
