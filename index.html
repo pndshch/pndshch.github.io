@@ -285,6 +285,72 @@ footer a:hover { color: #e6edf3; }
     .feat-card .card-thumb { height: 75px; }
 }
 
+/* ── Search bar ── */
+.search-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 720px;
+    margin: 0 0 12px;
+}
+.search-wrap input[type="search"] {
+    width: 100%;
+    padding: 12px 38px 12px 38px;
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 12px;
+    color: #e6edf3;
+    font-size: 14px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    -webkit-appearance: none;
+    appearance: none;
+}
+.search-wrap input[type="search"]::-webkit-search-decoration,
+.search-wrap input[type="search"]::-webkit-search-cancel-button { -webkit-appearance: none; }
+.search-wrap input[type="search"]:focus {
+    border-color: #7c3aed;
+    box-shadow: 0 0 0 3px rgba(124,58,237,0.18);
+}
+.search-wrap input[type="search"]::placeholder { color: #6c757a; }
+.search-icon {
+    position: absolute;
+    left: 12px; top: 50%;
+    transform: translateY(-50%);
+    font-size: 14px;
+    pointer-events: none;
+    opacity: 0.7;
+}
+#searchClear {
+    position: absolute;
+    right: 6px; top: 50%;
+    transform: translateY(-50%);
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: #30363d;
+    border: none;
+    color: #c9d1d9;
+    font-size: 16px;
+    cursor: pointer;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+#searchClear.show { display: flex; }
+.search-empty {
+    grid-column: 1 / -1;
+    padding: 60px 20px 40px;
+    text-align: center;
+    color: #6c757a;
+    font-size: 14px;
+}
+
+
+/* Hide cards filtered out */
+.card.cat-hidden, .card.search-hidden { display: none !important; }
+.feat-card.cat-hidden { display: none !important; }
+
 /* ── Category filter ── */
 .cat-filter {
     display: flex;
@@ -354,7 +420,7 @@ footer a:hover { color: #e6edf3; }
     transition: border-color 0.2s;
 }
 .feat-card:hover .card-thumb { border-color: #7c3aed; }
-.feat-card .new-badge { display: none; }
+.feat-card .new-badge { z-index: 3; }
 .feat-card .thumb-emoji { font-size: 36px; }
 .feat-title {
     display: block;
@@ -409,205 +475,32 @@ footer a:hover { color: #e6edf3; }
     </a>
 </header>
 
+<!-- Search bar -->
+<div class="search-wrap">
+    <span class="search-icon">🔍</span>
+    <input id="searchInput" type="search" autocomplete="off" placeholder="検索…">
+    <button id="searchClear" type="button" aria-label="clear">×</button>
+</div>
+
 <!-- Category filter -->
 <div class="cat-filter">
     <button class="cat-btn active" data-cat="all" data-i18n="catAll">すべて</button>
-    <button class="cat-btn" data-cat="kids-play" data-i18n="catKidsPlay">🎈 こどもがあそぶ</button>
-    <button class="cat-btn" data-cat="kids-learn" data-i18n="catKidsLearn">📖 こどもがまなぶ</button>
+    <button class="cat-btn" data-cat="kids" data-i18n="catKids">🎈 こども</button>
     <button class="cat-btn" data-cat="games" data-i18n="catGames">🎮 ゲーム</button>
+    <button class="cat-btn" data-cat="learn" data-i18n="catLearn">🧠 まなぶゲーム</button>
     <button class="cat-btn" data-cat="fortune" data-i18n="catFortune">🔮 うらない</button>
-    <button class="cat-btn" data-cat="tools" data-i18n="catTools">🛠️ くらしでつかう</button>
+    <button class="cat-btn" data-cat="tools" data-i18n="catTools">🛠️ ツール</button>
 </div>
 
-<!-- Featured -->
-<div class="section-label" data-i18n="secFeatured">⭐ おすすめ</div>
-<div class="feat-row">
-        <a class="feat-card" href="https://pndshch.github.io/ashi-oto/" target="_blank">
-            <div class="card-thumb thumb-ashioto">
-            <span class="new-badge" data-i18n="newBadge">NEW</span>
-            <span class="thumb-emoji">👣</span>
-            <img class="thumb-gif" src="assets/ashi-oto.gif" alt="" onerror="this.remove()">
-        </div>
-            <span class="feat-title" data-i18n="ashiotoTitle">あしおと</span>
-        </a>
-        <a class="feat-card" href="https://pndshch.github.io/pikopiko-sonar/" target="_blank">
-            <div class="card-thumb thumb-pikopiko">
-            <span class="new-badge" data-i18n="newBadge">NEW</span>
-            <span class="thumb-emoji">🦇</span>
-            <img class="thumb-gif" src="assets/pikopiko-sonar.gif" alt="" onerror="this.remove()">
-        </div>
-            <span class="feat-title" data-i18n="pikopikoTitle">ぴこぴこソナー</span>
-        </a>
-        <a class="feat-card" href="https://pndshch.github.io/kiokuiz/" target="_blank">
-            <div class="card-thumb thumb-kiokuiz">
-            <span class="new-badge" data-i18n="newBadge">NEW</span>
-            <span class="thumb-emoji">🧠</span>
-            <img class="thumb-gif" src="assets/kiokuiz.gif" alt="" onerror="this.remove()">
-        </div>
-            <span class="feat-title" data-i18n="kiokuizTitle">キオクイズ</span>
-        </a>
-        <a class="feat-card" href="https://pndshch.github.io/koe-monster/" target="_blank">
-            <div class="card-thumb thumb-koemon">
-            <span class="new-badge" data-i18n="newBadge">NEW</span>
-            <span class="thumb-emoji">🎙️</span>
-            <img class="thumb-gif" src="assets/koe-monster.gif" alt="" onerror="this.remove()">
-        </div>
-            <span class="feat-title" data-i18n="koemonTitle">こえモンスター</span>
-        </a>
-        <a class="feat-card" href="https://pndshch.github.io/e-no-oto/" target="_blank">
-            <div class="card-thumb thumb-enooto">
-            <span class="new-badge" data-i18n="newBadge">NEW</span>
-            <span class="thumb-emoji">🎨</span>
-            <img class="thumb-gif" src="assets/e-no-oto.gif" alt="" onerror="this.remove()">
-        </div>
-            <span class="feat-title" data-i18n="enootoTitle">えのおと</span>
-        </a>
-        <a class="feat-card" href="https://pndshch.github.io/iro-maze/" target="_blank">
-            <div class="card-thumb thumb-iromaze">
-            <span class="new-badge" data-i18n="newBadge">NEW</span>
-            <span class="thumb-emoji">🎨</span>
-            <img class="thumb-gif" src="assets/iro-maze.gif" alt="" onerror="this.remove()">
-        </div>
-            <span class="feat-title" data-i18n="iromazeTitle">いろまぜ</span>
-        </a>
-        <a class="feat-card" href="https://pndshch.github.io/akubi-utsushi/" target="_blank">
-            <div class="card-thumb thumb-akubi">
-            <span class="new-badge" data-i18n="newBadge">NEW</span>
-            <span class="thumb-emoji">😴</span>
-            <img class="thumb-gif" src="assets/akubi-utsushi.gif" alt="" onerror="this.remove()">
-        </div>
-            <span class="feat-title" data-i18n="akubiTitle">あくびうつし</span>
-        </a>
-        <a class="feat-card" href="https://pndshch.github.io/heron-oyster/" target="_blank">
-            <div class="card-thumb thumb-heron">
-            <span class="new-badge" data-i18n="newBadge">NEW</span>
-            <span class="thumb-emoji">🪶</span>
-            <img class="thumb-gif" src="assets/heron-oyster.gif" alt="" onerror="this.remove()">
-        </div>
-            <span class="feat-title" data-i18n="heronTitle">鷸蚌</span>
-        </a>
-        <a class="feat-card" href="https://pndshch.github.io/mienai-5percent/" target="_blank">
-            <div class="card-thumb thumb-mienai">
-            <span class="new-badge" data-i18n="newBadge">NEW</span>
-            <span class="thumb-emoji">🚪</span>
-            <img class="thumb-gif" src="assets/mienai-5percent.gif" alt="" onerror="this.remove()">
-        </div>
-            <span class="feat-title" data-i18n="mienaiTitle">みえない5%</span>
-        </a>
-        <a class="feat-card" href="https://pndshch.github.io/cargo-cult-1947/" target="_blank">
-            <div class="card-thumb thumb-cargo">
-            <span class="new-badge" data-i18n="newBadge">NEW</span>
-            <span class="thumb-emoji">🛬</span>
-            <img class="thumb-gif" src="assets/cargo-cult-1947.gif" alt="" onerror="this.remove()">
-        </div>
-            <span class="feat-title" data-i18n="cargoTitle">貨物神1947</span>
-        </a>
-        <a class="feat-card" href="https://pndshch.github.io/warmth-1958/" target="_blank">
-            <div class="card-thumb thumb-warmth">
-            <span class="new-badge" data-i18n="newBadge">NEW</span>
-            <span class="thumb-emoji">🧸</span>
-            <img class="thumb-gif" src="assets/warmth-1958.gif" alt="" onerror="this.remove()">
-        </div>
-            <span class="feat-title" data-i18n="warmthTitle">ぬくもり1958</span>
-        </a>
-        <a class="feat-card" href="https://pndshch.github.io/ricecooker-1946/" target="_blank">
-            <div class="card-thumb thumb-ricecooker">
-            <span class="new-badge" data-i18n="newBadge">NEW</span>
-            <span class="thumb-emoji">🍚</span>
-            <img class="thumb-gif" src="assets/ricecooker-1946.gif" alt="" onerror="this.remove()">
-        </div>
-            <span class="feat-title" data-i18n="ricecookerTitle">電気釜1946</span>
-        </a>
-        <a class="feat-card" href="https://pndshch.github.io/ninth-1824/" target="_blank">
-            <div class="card-thumb thumb-ninth">
-            <span class="new-badge" data-i18n="newBadge">NEW</span>
-            <span class="thumb-emoji">🕯️</span>
-            <img class="thumb-gif" src="assets/ninth-1824.gif" alt="" onerror="this.remove()">
-        </div>
-            <span class="feat-title" data-i18n="ninthTitle">沈黙の第九</span>
-        </a>
-        <a class="feat-card" href="https://pndshch.github.io/doomscroll-lab/" target="_blank">
-            <div class="card-thumb thumb-doomscroll">
-            <span class="new-badge" data-i18n="newBadge">NEW</span>
-            <span class="thumb-emoji">📱</span>
-        </div>
-            <span class="feat-title" data-i18n="doomscrollTitle">ドゥームスクロール研究室</span>
-        </a>
-        <a class="feat-card" href="https://pndshch.github.io/nihilist-penguin/" target="_blank">
-            <div class="card-thumb thumb-nihilist">
-            <span class="new-badge" data-i18n="newBadge">NEW</span>
-            <span class="thumb-emoji">🐧</span>
-        </div>
-            <span class="feat-title" data-i18n="nihilistTitle">虚無ペンギン</span>
-        </a>
-        <a class="feat-card" href="https://pndshch.github.io/dancing-plague-1518/" target="_blank">
-            <div class="card-thumb thumb-danceplague">
-            <span class="new-badge" data-i18n="newBadge">NEW</span>
-            <span class="thumb-emoji">💃</span>
-        </div>
-            <span class="feat-title" data-i18n="danceplagueTitle">踊り病 1518</span>
-        </a>
-        <a class="feat-card" href="https://pndshch.github.io/janets-law/" target="_blank">
-            <div class="card-thumb thumb-janets">
-            <span class="new-badge" data-i18n="newBadge">NEW</span>
-            <span class="thumb-emoji">⏳</span>
-        </div>
-            <span class="feat-title" data-i18n="janetsTitle">ジャネーの法則</span>
-        </a>
-        <a class="feat-card" href="https://pndshch.github.io/kitkat-highway/" target="_blank">
-            <div class="card-thumb thumb-kitkat">
-            <span class="new-badge" data-i18n="newBadge">NEW</span>
-            <span class="thumb-emoji">🍫</span>
-        </div>
-            <span class="feat-title" data-i18n="kitkatTitle">キットカット・ハイウェイ</span>
-        </a>
-        <a class="feat-card" href="https://pndshch.github.io/city-drive/" target="_blank">
-            <div class="card-thumb thumb-city">
-            <span class="new-badge" data-i18n="newBadge">NEW</span>
-            <span class="thumb-emoji">🏙️</span>
-            <img class="thumb-gif" src="assets/city-drive.gif" alt="" onerror="this.remove()">
-        </div>
-            <span class="feat-title" data-i18n="cityTitle">City Drive</span>
-        </a>
-        <a class="feat-card" href="https://pndshch.github.io/choco-bomber/" target="_blank">
-            <div class="card-thumb thumb-choco">
-            <span class="new-badge" data-i18n="newBadge">NEW</span>
-            <span class="thumb-emoji">🍫</span>
-            <img class="thumb-gif" src="assets/choco-bomber.gif" alt="" onerror="this.remove()">
-        </div>
-            <span class="feat-title" data-i18n="chocoTitle">チョコボンバー</span>
-        </a>
-        <a class="feat-card" href="https://pndshch.github.io/hiragana-game/" target="_blank">
-            <div class="card-thumb thumb-hiragana">
-            <span class="thumb-emoji">🌸</span>
-            <img class="thumb-gif" src="assets/hiragana-game.gif" alt="" onerror="this.remove()">
-        </div>
-            <span class="feat-title" data-i18n="hiraTitle">ひらがな あそび</span>
-        </a>
-        <a class="feat-card" href="https://pndshch.github.io/health-td/" target="_blank">
-            <div class="card-thumb thumb-healthtd">
-            <span class="new-badge" data-i18n="newBadge">NEW</span>
-            <span class="thumb-emoji">🛡️</span>
-            <img class="thumb-gif" src="assets/health-td.gif" alt="" onerror="this.remove()">
-        </div>
-            <span class="feat-title" data-i18n="healthtdTitle">免疫タワーディフェンス</span>
-        </a>
-        <a class="feat-card" href="https://pndshch.github.io/merukari-sizer/" target="_blank">
-            <div class="card-thumb thumb-mercari">
-            <span class="thumb-emoji">📦</span>
-            <img class="thumb-gif" src="assets/mercari-sizer.gif" alt="" onerror="this.remove()">
-        </div>
-            <span class="feat-title" data-i18n="merTitle">Mercari Sizer</span>
-        </a>
-</div>
+<!-- Featured (JS-populated) -->
+<div class="section-label" id="featuredLabel" data-i18n="secFeatured" hidden>⭐ おすすめ</div>
+<div class="feat-row" id="featRow"></div>
 
 <!-- All apps -->
 <div class="grid" id="app-grid">
-    <div class="grid-header" data-cat-header="kids-play" data-i18n="secGridKidsPlay">🎈 こどもがあそぶ</div>
-    <div class="card" data-cat="kids-play">
+    <div class="card" data-cat="kids" data-added="2026-05-07" data-slug="ashi-oto">
             <div class="card-thumb thumb-ashioto">
-                <span class="new-badge" data-i18n="newBadge">NEW</span>
-                <span class="thumb-emoji">👣</span>
+            <span class="thumb-emoji">👣</span>
                 <img class="thumb-gif" src="assets/ashi-oto.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
@@ -621,10 +514,9 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/ashi-oto/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="kids-play">
+    <div class="card" data-cat="kids" data-added="2026-05-07" data-slug="pikopiko-sonar">
             <div class="card-thumb thumb-pikopiko">
-                <span class="new-badge" data-i18n="newBadge">NEW</span>
-                <span class="thumb-emoji">🦇</span>
+            <span class="thumb-emoji">🦇</span>
                 <img class="thumb-gif" src="assets/pikopiko-sonar.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
@@ -638,10 +530,9 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/pikopiko-sonar/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="kids-play">
+    <div class="card" data-cat="kids" data-added="2026-05-07" data-slug="koe-monster">
             <div class="card-thumb thumb-koemon">
-                <span class="new-badge" data-i18n="newBadge">NEW</span>
-                <span class="thumb-emoji">🎙️</span>
+            <span class="thumb-emoji">🎙️</span>
                 <img class="thumb-gif" src="assets/koe-monster.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
@@ -655,10 +546,9 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/koe-monster/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="kids-play">
+    <div class="card" data-cat="kids" data-added="2026-05-07" data-slug="e-no-oto">
             <div class="card-thumb thumb-enooto">
-                <span class="new-badge" data-i18n="newBadge">NEW</span>
-                <span class="thumb-emoji">🎨</span>
+            <span class="thumb-emoji">🎨</span>
                 <img class="thumb-gif" src="assets/e-no-oto.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
@@ -672,10 +562,9 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/e-no-oto/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="kids-play">
+    <div class="card" data-cat="kids" data-added="2026-05-07" data-slug="iro-maze">
             <div class="card-thumb thumb-iromaze">
-                <span class="new-badge" data-i18n="newBadge">NEW</span>
-                <span class="thumb-emoji">🎨</span>
+            <span class="thumb-emoji">🎨</span>
                 <img class="thumb-gif" src="assets/iro-maze.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
@@ -689,10 +578,9 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/iro-maze/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="kids-play">
+    <div class="card" data-cat="kids" data-added="2026-05-07" data-slug="akubi-utsushi">
             <div class="card-thumb thumb-akubi">
-                <span class="new-badge" data-i18n="newBadge">NEW</span>
-                <span class="thumb-emoji">😴</span>
+            <span class="thumb-emoji">😴</span>
                 <img class="thumb-gif" src="assets/akubi-utsushi.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
@@ -706,10 +594,9 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/akubi-utsushi/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="kids-play">
+    <div class="card" data-cat="kids" data-added="2026-05-04" data-slug="choco-bomber">
             <div class="card-thumb thumb-choco">
-                <span class="new-badge" data-i18n="newBadge">NEW</span>
-                <span class="thumb-emoji">🍫</span>
+            <span class="thumb-emoji">🍫</span>
                 <img class="thumb-gif" src="assets/choco-bomber.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
@@ -723,10 +610,9 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/choco-bomber/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="kids-play">
+    <div class="card" data-cat="kids" data-added="2026-05-04" data-slug="shuriken-master">
             <div class="card-thumb thumb-shuriken">
-                <span class="new-badge" data-i18n="newBadge">NEW</span>
-                <span class="thumb-emoji">🥷</span>
+            <span class="thumb-emoji">🥷</span>
                 <img class="thumb-gif" src="assets/shuriken-master.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
@@ -740,10 +626,9 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/shuriken-master/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="kids-play">
+    <div class="card" data-cat="kids" data-added="2026-05-04" data-slug="melon-garden">
             <div class="card-thumb thumb-melon">
-                <span class="new-badge" data-i18n="newBadge">NEW</span>
-                <span class="thumb-emoji">🍈</span>
+            <span class="thumb-emoji">🍈</span>
                 <img class="thumb-gif" src="assets/melon-garden.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
@@ -757,10 +642,9 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/melon-garden/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="kids-play">
+    <div class="card" data-cat="kids" data-added="2026-05-03" data-slug="strep-buster">
             <div class="card-thumb thumb-strep">
-                <span class="new-badge" data-i18n="newBadge">NEW</span>
-                <span class="thumb-emoji">🦠</span>
+            <span class="thumb-emoji">🦠</span>
                 <img class="thumb-gif" src="assets/strep-buster.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
@@ -774,10 +658,9 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/strep-buster/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="kids-play">
+    <div class="card" data-cat="kids" data-added="2026-05-03" data-slug="okuri-mukae">
             <div class="card-thumb thumb-okuri">
-                <span class="new-badge" data-i18n="newBadge">NEW</span>
-                <span class="thumb-emoji">🚗</span>
+            <span class="thumb-emoji">🚗</span>
                 <img class="thumb-gif" src="assets/okuri-mukae.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
@@ -791,10 +674,9 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/okuri-mukae/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="kids-play">
+    <div class="card" data-cat="kids" data-added="2026-05-03" data-slug="pocket-panpan">
             <div class="card-thumb thumb-panpan">
-                <span class="new-badge" data-i18n="newBadge">NEW</span>
-                <span class="thumb-emoji">👖</span>
+            <span class="thumb-emoji">👖</span>
                 <img class="thumb-gif" src="assets/pocket-panpan.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
@@ -808,10 +690,9 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/pocket-panpan/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="kids-play">
+    <div class="card" data-cat="kids" data-added="2026-05-04" data-slug="birthday-33">
             <div class="card-thumb thumb-birthday">
-                <span class="new-badge" data-i18n="newBadge">NEW</span>
-                <span class="thumb-emoji">🎂</span>
+            <span class="thumb-emoji">🎂</span>
                 <img class="thumb-gif" src="assets/birthday-33.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
@@ -825,10 +706,9 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/birthday-33/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="kids-play fortune">
+    <div class="card" data-cat="kids fortune" data-added="2026-05-03" data-slug="fortune-mom">
             <div class="card-thumb thumb-fortune">
-                <span class="new-badge" data-i18n="newBadge">NEW</span>
-                <span class="thumb-emoji">🔮</span>
+            <span class="thumb-emoji">🔮</span>
                 <img class="thumb-gif" src="assets/fortune-mom.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
@@ -842,10 +722,9 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/fortune-mom/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="kids-play">
+    <div class="card" data-cat="kids" data-added="2026-05-01" data-slug="dino-egg">
             <div class="card-thumb thumb-egg">
-                <span class="new-badge" data-i18n="newBadge">NEW</span>
-                <span class="thumb-emoji">🥚</span>
+            <span class="thumb-emoji">🥚</span>
             </div>
             <div class="card-body">
                 <h2 data-i18n="eggTitle">きょうりゅうたまご</h2>
@@ -858,7 +737,7 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/dino-egg/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="kids-play">
+    <div class="card" data-cat="kids" data-added="2026-05-01" data-slug="neko-sui">
             <div class="card-thumb thumb-cat">
                 <span class="thumb-emoji">🐱</span>
             </div>
@@ -873,7 +752,7 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/neko-sui/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="kids-play">
+    <div class="card" data-cat="kids" data-added="2026-05-01" data-slug="yubi-ouja">
             <div class="card-thumb thumb-finger">
                 <span class="thumb-emoji">👑</span>
             </div>
@@ -888,7 +767,7 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/yubi-ouja/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="kids-play">
+    <div class="card" data-cat="kids" data-added="2026-05-01" data-slug="fushigi-button">
             <div class="card-thumb thumb-button">
                 <span class="thumb-emoji">🔘</span>
             </div>
@@ -903,7 +782,7 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/fushigi-button/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="kids-play">
+    <div class="card" data-cat="kids" data-added="2026-05-01" data-slug="pyon-tree">
             <div class="card-thumb thumb-tree">
                 <span class="thumb-emoji">🌳</span>
             </div>
@@ -918,7 +797,7 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/pyon-tree/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="kids-play">
+    <div class="card" data-cat="kids" data-added="2026-05-01" data-slug="hengao-lab">
             <div class="card-thumb thumb-face">
                 <span class="thumb-emoji">🤡</span>
             </div>
@@ -933,7 +812,7 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/hengao-lab/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="kids-play fortune">
+    <div class="card" data-cat="kids fortune" data-added="2026-05-01" data-slug="unchi-uranai">
             <div class="card-thumb thumb-poop">
                 <span class="thumb-emoji">💩</span>
             </div>
@@ -948,8 +827,7 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/unchi-uranai/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="grid-header" data-cat-header="kids-learn" data-i18n="secGridKidsLearn">📖 こどもがまなぶ</div>
-    <div class="card" data-cat="kids-learn">
+    <div class="card" data-cat="kids" data-added="2026-05-01" data-slug="hiragana-game">
             <div class="card-thumb thumb-hiragana">
                 <span class="thumb-emoji">🌸</span>
                 <img class="thumb-gif" src="assets/hiragana-game.gif" alt="" onerror="this.remove()">
@@ -965,10 +843,9 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/hiragana-game/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="kids-learn">
+    <div class="card" data-cat="kids" data-added="2026-05-01" data-slug="1pun-keisan">
             <div class="card-thumb thumb-keisan">
-                <span class="new-badge" data-i18n="newBadge">NEW</span>
-                <span class="thumb-emoji">🐼</span>
+            <span class="thumb-emoji">🐼</span>
                 <img class="thumb-gif" src="assets/1pun-keisan.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
@@ -982,7 +859,7 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/1pun-keisan/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="kids-learn">
+    <div class="card" data-cat="kids" data-added="2026-05-01" data-slug="hiragana-maze">
             <div class="card-thumb thumb-hiragana">
                 <span class="thumb-emoji">🌀</span>
                 <img class="thumb-gif" src="assets/hiragana-maze.gif" alt="" onerror="this.remove()">
@@ -998,7 +875,7 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/hiragana-maze/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="kids-learn">
+    <div class="card" data-cat="kids" data-added="2026-05-01" data-slug="hiragana-shooter">
             <div class="card-thumb thumb-hiragana">
                 <span class="thumb-emoji">🚀</span>
                 <img class="thumb-gif" src="assets/hiragana-shooter.gif" alt="" onerror="this.remove()">
@@ -1014,7 +891,7 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/hiragana-shooter/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="kids-learn">
+    <div class="card" data-cat="kids" data-added="2026-04-30" data-slug="tentsunagi">
             <div class="card-thumb thumb-dots">
                 <span class="thumb-emoji">✏️</span>
                 <img class="thumb-gif" src="assets/tentsunagi.gif" alt="" onerror="this.remove()">
@@ -1030,7 +907,7 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/tentsunagi/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="kids-learn kids-play">
+    <div class="card" data-cat="kids" data-added="2026-05-01" data-slug="shiritori-san">
             <div class="card-thumb thumb-shiri">
                 <span class="thumb-emoji">🐼</span>
             </div>
@@ -1045,7 +922,7 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/shiritori-san/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="kids-learn kids-play">
+    <div class="card" data-cat="kids" data-added="2026-05-01" data-slug="dino-roar">
             <div class="card-thumb thumb-dino">
                 <span class="thumb-emoji">🦖</span>
             </div>
@@ -1060,7 +937,7 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/dino-roar/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="kids-learn kids-play">
+    <div class="card" data-cat="kids" data-added="2026-05-01" data-slug="gorila-go">
             <div class="card-thumb thumb-gorilla">
                 <span class="thumb-emoji">🦍</span>
             </div>
@@ -1075,11 +952,9 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/gorila-go/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="grid-header" data-cat-header="games" data-i18n="secGridGames">🎮 ゲーム</div>
-    <div class="card" data-cat="games">
+    <div class="card" data-cat="learn" data-added="2026-05-07" data-slug="kiokuiz">
             <div class="card-thumb thumb-kiokuiz">
-                <span class="new-badge" data-i18n="newBadge">NEW</span>
-                <span class="thumb-emoji">🧠</span>
+            <span class="thumb-emoji">🧠</span>
                 <img class="thumb-gif" src="assets/kiokuiz.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
@@ -1093,10 +968,9 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/kiokuiz/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="games">
+    <div class="card" data-cat="learn" data-added="2026-05-07" data-slug="heron-oyster">
             <div class="card-thumb thumb-heron">
-                <span class="new-badge" data-i18n="newBadge">NEW</span>
-                <span class="thumb-emoji">🪶</span>
+            <span class="thumb-emoji">🪶</span>
                 <img class="thumb-gif" src="assets/heron-oyster.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
@@ -1110,10 +984,9 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/heron-oyster/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="games">
+    <div class="card" data-cat="learn" data-added="2026-05-07" data-slug="mienai-5percent">
             <div class="card-thumb thumb-mienai">
-                <span class="new-badge" data-i18n="newBadge">NEW</span>
-                <span class="thumb-emoji">🚪</span>
+            <span class="thumb-emoji">🚪</span>
                 <img class="thumb-gif" src="assets/mienai-5percent.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
@@ -1127,10 +1000,9 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/mienai-5percent/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="games">
+    <div class="card" data-cat="learn" data-added="2026-05-07" data-slug="cargo-cult-1947">
             <div class="card-thumb thumb-cargo">
-                <span class="new-badge" data-i18n="newBadge">NEW</span>
-                <span class="thumb-emoji">🛬</span>
+            <span class="thumb-emoji">🛬</span>
                 <img class="thumb-gif" src="assets/cargo-cult-1947.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
@@ -1144,10 +1016,9 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/cargo-cult-1947/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="games">
+    <div class="card" data-cat="learn" data-added="2026-05-07" data-slug="warmth-1958">
             <div class="card-thumb thumb-warmth">
-                <span class="new-badge" data-i18n="newBadge">NEW</span>
-                <span class="thumb-emoji">🧸</span>
+            <span class="thumb-emoji">🧸</span>
                 <img class="thumb-gif" src="assets/warmth-1958.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
@@ -1161,10 +1032,9 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/warmth-1958/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="games">
+    <div class="card" data-cat="learn" data-added="2026-05-07" data-slug="ricecooker-1946">
             <div class="card-thumb thumb-ricecooker">
-                <span class="new-badge" data-i18n="newBadge">NEW</span>
-                <span class="thumb-emoji">🍚</span>
+            <span class="thumb-emoji">🍚</span>
                 <img class="thumb-gif" src="assets/ricecooker-1946.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
@@ -1178,10 +1048,9 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/ricecooker-1946/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="games">
+    <div class="card" data-cat="learn" data-added="2026-05-07" data-slug="ninth-1824">
             <div class="card-thumb thumb-ninth">
-                <span class="new-badge" data-i18n="newBadge">NEW</span>
-                <span class="thumb-emoji">🕯️</span>
+            <span class="thumb-emoji">🕯️</span>
                 <img class="thumb-gif" src="assets/ninth-1824.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
@@ -1195,10 +1064,9 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/ninth-1824/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="games">
+    <div class="card" data-cat="learn" data-added="2026-05-07" data-slug="doomscroll-lab">
             <div class="card-thumb thumb-doomscroll">
-                <span class="new-badge" data-i18n="newBadge">NEW</span>
-                <span class="thumb-emoji">📱</span>
+            <span class="thumb-emoji">📱</span>
             </div>
             <div class="card-body">
                 <h2 data-i18n="doomscrollTitle">ドゥームスクロール研究室</h2>
@@ -1211,10 +1079,9 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/doomscroll-lab/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="games">
+    <div class="card" data-cat="learn" data-added="2026-05-07" data-slug="nihilist-penguin">
             <div class="card-thumb thumb-nihilist">
-                <span class="new-badge" data-i18n="newBadge">NEW</span>
-                <span class="thumb-emoji">🐧</span>
+            <span class="thumb-emoji">🐧</span>
             </div>
             <div class="card-body">
                 <h2 data-i18n="nihilistTitle">虚無ペンギン</h2>
@@ -1227,10 +1094,9 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/nihilist-penguin/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="games">
+    <div class="card" data-cat="learn" data-added="2026-05-06" data-slug="dancing-plague-1518">
             <div class="card-thumb thumb-danceplague">
-                <span class="new-badge" data-i18n="newBadge">NEW</span>
-                <span class="thumb-emoji">💃</span>
+            <span class="thumb-emoji">💃</span>
             </div>
             <div class="card-body">
                 <h2 data-i18n="danceplagueTitle">踊り病 1518</h2>
@@ -1243,10 +1109,9 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/dancing-plague-1518/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="games">
+    <div class="card" data-cat="learn" data-added="2026-05-06" data-slug="mottainai-dungeon">
             <div class="card-thumb thumb-mottainai">
-                <span class="new-badge" data-i18n="newBadge">NEW</span>
-                <span class="thumb-emoji">🏰</span>
+            <span class="thumb-emoji">🏰</span>
             </div>
             <div class="card-body">
                 <h2 data-i18n="mottainaiTitle">もったいないダンジョン</h2>
@@ -1259,10 +1124,9 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/mottainai-dungeon/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="games">
+    <div class="card" data-cat="learn" data-added="2026-05-06" data-slug="janets-law">
             <div class="card-thumb thumb-janets">
-                <span class="new-badge" data-i18n="newBadge">NEW</span>
-                <span class="thumb-emoji">⏳</span>
+            <span class="thumb-emoji">⏳</span>
             </div>
             <div class="card-body">
                 <h2 data-i18n="janetsTitle">ジャネーの法則</h2>
@@ -1275,10 +1139,9 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/janets-law/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="games">
+    <div class="card" data-cat="games" data-added="2026-05-06" data-slug="koi-no-taki">
             <div class="card-thumb thumb-koi">
-                <span class="new-badge" data-i18n="newBadge">NEW</span>
-                <span class="thumb-emoji">🐉</span>
+            <span class="thumb-emoji">🐉</span>
                 <img class="thumb-gif" src="assets/koi-no-taki.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
@@ -1292,10 +1155,9 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/koi-no-taki/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="games">
+    <div class="card" data-cat="learn" data-added="2026-05-06" data-slug="spore-voyage">
             <div class="card-thumb thumb-spore">
-                <span class="new-badge" data-i18n="newBadge">NEW</span>
-                <span class="thumb-emoji">🌿</span>
+            <span class="thumb-emoji">🌿</span>
             </div>
             <div class="card-body">
                 <h2 data-i18n="sporeTitle">胞子航海</h2>
@@ -1308,10 +1170,9 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/spore-voyage/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="games">
+    <div class="card" data-cat="learn" data-added="2026-05-06" data-slug="kitkat-highway">
             <div class="card-thumb thumb-kitkat">
-                <span class="new-badge" data-i18n="newBadge">NEW</span>
-                <span class="thumb-emoji">🍫</span>
+            <span class="thumb-emoji">🍫</span>
             </div>
             <div class="card-body">
                 <h2 data-i18n="kitkatTitle">キットカット・ハイウェイ</h2>
@@ -1324,10 +1185,9 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/kitkat-highway/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="games">
+    <div class="card" data-cat="learn" data-added="2026-05-06" data-slug="yokonige">
             <div class="card-thumb thumb-yokonige">
-                <span class="new-badge" data-i18n="newBadge">NEW</span>
-                <span class="thumb-emoji">🦀</span>
+            <span class="thumb-emoji">🦀</span>
             </div>
             <div class="card-body">
                 <h2 data-i18n="yokonigeTitle">よこにげ</h2>
@@ -1340,10 +1200,9 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/yokonige/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="games">
+    <div class="card" data-cat="learn" data-added="2026-05-06" data-slug="4min-wall">
             <div class="card-thumb thumb-4minwall">
-                <span class="new-badge" data-i18n="newBadge">NEW</span>
-                <span class="thumb-emoji">🏃</span>
+            <span class="thumb-emoji">🏃</span>
                 <img class="thumb-gif" src="assets/4min-wall.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
@@ -1357,10 +1216,9 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/4min-wall/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="games">
+    <div class="card" data-cat="games" data-added="2026-05-03" data-slug="city-drive">
             <div class="card-thumb thumb-city">
-                <span class="new-badge" data-i18n="newBadge">NEW</span>
-                <span class="thumb-emoji">🏙️</span>
+            <span class="thumb-emoji">🏙️</span>
                 <img class="thumb-gif" src="assets/city-drive.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
@@ -1374,7 +1232,7 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/city-drive/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="games">
+    <div class="card" data-cat="games" data-added="2026-04-30" data-slug="fruit-drop-ai">
             <div class="card-thumb thumb-fruit">
                 <span class="thumb-emoji">🍓</span>
                 <img class="thumb-gif" src="assets/fruit-drop-ai.gif" alt="" onerror="this.remove()">
@@ -1390,10 +1248,9 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/fruit-drop-ai/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="games">
+    <div class="card" data-cat="games" data-added="2026-05-03" data-slug="rugby-try">
             <div class="card-thumb thumb-rugby">
-                <span class="new-badge" data-i18n="newBadge">NEW</span>
-                <span class="thumb-emoji">🏉</span>
+            <span class="thumb-emoji">🏉</span>
                 <img class="thumb-gif" src="assets/rugby-try.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
@@ -1407,10 +1264,9 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/rugby-try/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="games">
+    <div class="card" data-cat="games" data-added="2026-05-03" data-slug="health-td">
             <div class="card-thumb thumb-healthtd">
-                <span class="new-badge" data-i18n="newBadge">NEW</span>
-                <span class="thumb-emoji">🛡️</span>
+            <span class="thumb-emoji">🛡️</span>
                 <img class="thumb-gif" src="assets/health-td.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
@@ -1424,10 +1280,9 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/health-td/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="games">
+    <div class="card" data-cat="learn" data-added="2026-05-03" data-slug="ai-vs-todai">
             <div class="card-thumb thumb-aitodai">
-                <span class="new-badge" data-i18n="newBadge">NEW</span>
-                <span class="thumb-emoji">🧠</span>
+            <span class="thumb-emoji">🧠</span>
                 <img class="thumb-gif" src="assets/ai-vs-todai.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
@@ -1441,10 +1296,9 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/ai-vs-todai/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="games">
+    <div class="card" data-cat="games" data-added="2026-05-03" data-slug="yen-defender">
             <div class="card-thumb thumb-yen">
-                <span class="new-badge" data-i18n="newBadge">NEW</span>
-                <span class="thumb-emoji">💴</span>
+            <span class="thumb-emoji">💴</span>
                 <img class="thumb-gif" src="assets/yen-defender.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
@@ -1458,10 +1312,9 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/yen-defender/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="games">
+    <div class="card" data-cat="games" data-added="2026-05-03" data-slug="gw-rain-runner">
             <div class="card-thumb thumb-gwrain">
-                <span class="new-badge" data-i18n="newBadge">NEW</span>
-                <span class="thumb-emoji">🌧️</span>
+            <span class="thumb-emoji">🌧️</span>
                 <img class="thumb-gif" src="assets/gw-rain-runner.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
@@ -1475,10 +1328,9 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/gw-rain-runner/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="games">
+    <div class="card" data-cat="learn" data-added="2026-05-04" data-slug="yamiichi">
             <div class="card-thumb thumb-yamiichi">
-                <span class="new-badge" data-i18n="newBadge">NEW</span>
-                <span class="thumb-emoji">🏪</span>
+            <span class="thumb-emoji">🏪</span>
                 <img class="thumb-gif" src="assets/yamiichi.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
@@ -1492,10 +1344,9 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/yamiichi/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="games">
+    <div class="card" data-cat="learn" data-added="2026-05-04" data-slug="capitalism-sim">
             <div class="card-thumb thumb-capitalism">
-                <span class="new-badge" data-i18n="newBadge">NEW</span>
-                <span class="thumb-emoji">💰</span>
+            <span class="thumb-emoji">💰</span>
                 <img class="thumb-gif" src="assets/capitalism-sim.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
@@ -1509,10 +1360,9 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/capitalism-sim/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="games">
+    <div class="card" data-cat="games" data-added="2026-05-04" data-slug="quantum-jump">
             <div class="card-thumb thumb-quantum">
-                <span class="new-badge" data-i18n="newBadge">NEW</span>
-                <span class="thumb-emoji">⚛️</span>
+            <span class="thumb-emoji">⚛️</span>
                 <img class="thumb-gif" src="assets/quantum-jump.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
@@ -1526,10 +1376,9 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/quantum-jump/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="games">
+    <div class="card" data-cat="learn" data-added="2026-05-04" data-slug="fast-and-slow">
             <div class="card-thumb thumb-fastslow">
-                <span class="new-badge" data-i18n="newBadge">NEW</span>
-                <span class="thumb-emoji">🧠</span>
+            <span class="thumb-emoji">🧠</span>
                 <img class="thumb-gif" src="assets/fast-and-slow.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
@@ -1543,10 +1392,9 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/fast-and-slow/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="games">
+    <div class="card" data-cat="learn" data-added="2026-05-06" data-slug="crowd-wisdom">
             <div class="card-thumb thumb-crowdwisdom">
-                <span class="new-badge" data-i18n="newBadge">NEW</span>
-                <span class="thumb-emoji">👁️</span>
+            <span class="thumb-emoji">👁️</span>
             </div>
             <div class="card-body">
                 <h2 data-i18n="crowdwisdomTitle">群衆の目</h2>
@@ -1559,11 +1407,9 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/crowd-wisdom/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="grid-header" data-cat-header="fortune" data-i18n="secGridFortune">🔮 うらない</div>
-    <div class="card" data-cat="fortune">
+    <div class="card" data-cat="fortune" data-added="2026-05-02" data-slug="tarot-imi">
             <div class="card-thumb thumb-tarot">
-                <span class="new-badge" data-i18n="newBadge">NEW</span>
-                <span class="thumb-emoji">🔮</span>
+            <span class="thumb-emoji">🔮</span>
             </div>
             <div class="card-body">
                 <h2 data-i18n="tarotTitle">タロットの意味</h2>
@@ -1576,10 +1422,9 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/tarot-imi/" target="_blank" data-i18n="useTool">▶ ツールを使う</a>
             </div>
         </div>
-    <div class="card" data-cat="fortune">
+    <div class="card" data-cat="fortune" data-added="2026-05-02" data-slug="numerology">
             <div class="card-thumb thumb-numero">
-                <span class="new-badge" data-i18n="newBadge">NEW</span>
-                <span class="thumb-emoji">🌙</span>
+            <span class="thumb-emoji">🌙</span>
             </div>
             <div class="card-body">
                 <h2 data-i18n="numeroTitle">数秘術 占い</h2>
@@ -1592,10 +1437,9 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/numerology/" target="_blank" data-i18n="useTool">▶ ツールを使う</a>
             </div>
         </div>
-    <div class="card" data-cat="fortune">
+    <div class="card" data-cat="fortune" data-added="2026-05-02" data-slug="stone-imi">
             <div class="card-thumb thumb-stone">
-                <span class="new-badge" data-i18n="newBadge">NEW</span>
-                <span class="thumb-emoji">💎</span>
+            <span class="thumb-emoji">💎</span>
             </div>
             <div class="card-body">
                 <h2 data-i18n="stoneTitle">パワーストーンの意味</h2>
@@ -1608,7 +1452,7 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/stone-imi/" target="_blank" data-i18n="useTool">▶ ツールを使う</a>
             </div>
         </div>
-    <div class="card" data-cat="fortune">
+    <div class="card" data-cat="fortune" data-added="2026-05-02" data-slug="astro-imi">
             <div class="card-thumb thumb-astro">
                 <span class="thumb-emoji">✨</span>
             </div>
@@ -1623,11 +1467,9 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/astro-imi/" target="_blank" data-i18n="useTool">▶ ツールを使う</a>
             </div>
         </div>
-    <div class="grid-header" data-cat-header="tools" data-i18n="secGridTools">🛠️ くらしでつかう</div>
-    <div class="card" data-cat="tools">
+    <div class="card" data-cat="tools" data-added="2026-05-05" data-slug="english-housemate">
             <div class="card-thumb thumb-ehmate">
-                <span class="new-badge" data-i18n="newBadge">NEW</span>
-                <span class="thumb-emoji">🏠</span>
+            <span class="thumb-emoji">🏠</span>
                 <img class="thumb-gif" src="assets/english-housemate.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
@@ -1641,7 +1483,7 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/english-housemate/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="tools kids-play">
+    <div class="card" data-cat="tools kids" data-added="2026-05-01" data-slug="mieru-timer">
             <div class="card-thumb thumb-timer">
                 <span class="thumb-emoji">⏰</span>
             </div>
@@ -1656,7 +1498,7 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/mieru-timer/" target="_blank" data-i18n="useTool">▶ ツールを使う</a>
             </div>
         </div>
-    <div class="card" data-cat="tools">
+    <div class="card" data-cat="tools" data-added="2026-05-01" data-slug="okaimono-memo">
             <div class="card-thumb thumb-shop">
                 <span class="thumb-emoji">🛒</span>
             </div>
@@ -1671,7 +1513,7 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/okaimono-memo/" target="_blank" data-i18n="useTool">▶ ツールを使う</a>
             </div>
         </div>
-    <div class="card" data-cat="tools">
+    <div class="card" data-cat="tools" data-added="2026-05-01" data-slug="tegaki-memo">
             <div class="card-thumb thumb-draw">
                 <span class="thumb-emoji">✏️</span>
             </div>
@@ -1686,7 +1528,7 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/tegaki-memo/" target="_blank" data-i18n="useTool">▶ ツールを使う</a>
             </div>
         </div>
-    <div class="card" data-cat="tools">
+    <div class="card" data-cat="tools" data-added="2026-05-01" data-slug="dice-box">
             <div class="card-thumb thumb-dice">
                 <span class="thumb-emoji">🎲</span>
             </div>
@@ -1701,7 +1543,7 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/dice-box/" target="_blank" data-i18n="useTool">▶ ツールを使う</a>
             </div>
         </div>
-    <div class="card" data-cat="tools">
+    <div class="card" data-cat="tools" data-added="2026-05-01" data-slug="quick-qr">
             <div class="card-thumb thumb-qr">
                 <span class="thumb-emoji">📱</span>
             </div>
@@ -1716,7 +1558,7 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/quick-qr/" target="_blank" data-i18n="useTool">▶ ツールを使う</a>
             </div>
         </div>
-    <div class="card" data-cat="tools">
+    <div class="card" data-cat="tools" data-added="2026-05-01" data-slug="merukari-sizer">
             <div class="card-thumb thumb-mercari">
                 <span class="thumb-emoji">📦</span>
                 <img class="thumb-gif" src="assets/mercari-sizer.gif" alt="" onerror="this.remove()">
@@ -1753,17 +1595,15 @@ const I18N = {
         secFun:   "🎪 おもしろ",
         secTools: "🔧 ツール",
         catAll: "すべて",
-        catKidsPlay: "🎈 こどもがあそぶ",
-        catKidsLearn: "📖 こどもがまなぶ",
+        catKids: "🎈 こども",
         catGames: "🎮 ゲーム",
+        catLearn: "🧠 まなぶゲーム",
         catFortune: "🔮 うらない",
-        catTools: "🛠️ くらしでつかう",
-        secFeatured: "⭐ おすすめ",
-        secGridKidsPlay: "🎈 こどもがあそぶ",
-        secGridKidsLearn: "📖 こどもがまなぶ",
-        secGridGames: "🎮 ゲーム",
-        secGridFortune: "🔮 うらない",
-        secGridTools: "🛠️ くらしでつかう",
+        catTools: "🛠️ ツール",
+        secFeatured: "⭐ NEW (3日以内の新作)",
+        searchPlaceholder: "アプリを検索…",
+        newBadge: "NEW",
+        searchEmpty: "見つかりませんでした",
         dailyTag: "毎日",
         poopTitle: "うんち占い",
         poopDesc:  "きょうの うんち運を チェック!毎日かわる SS〜D ランクと、ラッキーフード・運勢メッセージ。",
@@ -1995,17 +1835,15 @@ const I18N = {
         secFun:    "🎪 Fun",
         secTools:  "🔧 Tools",
         catAll: "All",
-        catKidsPlay: "🎈 Kids Play",
-        catKidsLearn: "📖 Kids Learn",
+        catKids: "🎈 Kids",
         catGames: "🎮 Games",
+        catLearn: "🧠 Learn-by-play",
         catFortune: "🔮 Fortune",
-        catTools: "🛠️ Life Tools",
-        secFeatured: "⭐ Featured",
-        secGridKidsPlay: "🎈 Kids Play",
-        secGridKidsLearn: "📖 Kids Learn",
-        secGridGames: "🎮 Games",
-        secGridFortune: "🔮 Fortune",
-        secGridTools: "🛠️ Life Tools",
+        catTools: "🛠️ Tools",
+        secFeatured: "⭐ NEW (last 3 days)",
+        searchPlaceholder: "Search apps…",
+        newBadge: "NEW",
+        searchEmpty: "No matches.",
         dailyTag:  "Daily",
         poopTitle: "Poop Fortune",
         poopDesc:  "Check today's poop fortune! Daily SS–D ranking with lucky food and fortune message.",
@@ -2235,6 +2073,22 @@ const I18N = {
     }
 };
 
+// ════════════════════════════════════════════
+//   NEW = added within this window (days)
+// ════════════════════════════════════════════
+const NEW_WINDOW_DAYS = 3;
+const FEATURED_MAX = 8;
+
+function daysSince(iso) {
+    if (!iso) return Infinity;
+    const d = new Date(iso + 'T00:00:00Z');
+    if (isNaN(d)) return Infinity;
+    return (Date.now() - d.getTime()) / (1000 * 60 * 60 * 24);
+}
+function isNew(card) {
+    return daysSince(card.dataset.added) <= NEW_WINDOW_DAYS;
+}
+
 function applyLang(lang) {
     const dict = I18N[lang] || I18N.ja;
     document.documentElement.lang = lang;
@@ -2245,50 +2099,164 @@ function applyLang(lang) {
     document.querySelectorAll('.lang-btn').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.lang === lang);
     });
+    // search placeholder + dynamic strings
+    const si = document.getElementById('searchInput');
+    if (si && dict.searchPlaceholder) si.placeholder = dict.searchPlaceholder;
+    refreshNewBadgeText(dict.newBadge || 'NEW');
+    const ee = document.getElementById('searchEmpty');
+    if (ee && dict.searchEmpty) ee.textContent = dict.searchEmpty;
     try { localStorage.setItem('pl-lang', lang); } catch (e) {}
+}
+
+function refreshNewBadgeText(text) {
+    document.querySelectorAll('.new-badge').forEach(b => b.textContent = text);
+}
+
+// ════════════════════════════════════════════
+//   Tag NEW + sort cards by added desc
+// ════════════════════════════════════════════
+function decorateCards() {
+    const grid = document.getElementById('app-grid');
+    const cards = Array.from(grid.querySelectorAll('.card'));
+    // sort by added desc, then by slug for stability
+    cards.sort((a, b) => {
+        const da = a.dataset.added || '0', db = b.dataset.added || '0';
+        if (da !== db) return da > db ? -1 : 1;
+        return (a.dataset.slug || '').localeCompare(b.dataset.slug || '');
+    });
+    cards.forEach(c => grid.appendChild(c));
+    // tag NEW
+    cards.forEach(c => {
+        const thumb = c.querySelector('.card-thumb');
+        if (!thumb || c.querySelector(':scope > .card-thumb > .new-badge')) return;
+        if (isNew(c)) {
+            const badge = document.createElement('span');
+            badge.className = 'new-badge';
+            badge.textContent = 'NEW';
+            thumb.insertBefore(badge, thumb.firstChild);
+        }
+    });
+    // empty-state node
+    if (!document.getElementById('searchEmpty')) {
+        const empty = document.createElement('div');
+        empty.id = 'searchEmpty';
+        empty.className = 'search-empty';
+        empty.textContent = '見つかりませんでした';
+        empty.hidden = true;
+        grid.appendChild(empty);
+    }
+}
+
+// ════════════════════════════════════════════
+//   Featured row (newest within window)
+// ════════════════════════════════════════════
+function buildFeatured() {
+    const row = document.getElementById('featRow');
+    const label = document.getElementById('featuredLabel');
+    if (!row) return;
+    const grid = document.getElementById('app-grid');
+    const cards = Array.from(grid.querySelectorAll('.card'))
+        .filter(isNew)
+        .sort((a, b) => (b.dataset.added || '').localeCompare(a.dataset.added || ''))
+        .slice(0, FEATURED_MAX);
+    row.innerHTML = '';
+    cards.forEach(card => {
+        const slug = card.dataset.slug;
+        const titleEl = card.querySelector('h2');
+        const thumb = card.querySelector('.card-thumb');
+        const a = document.createElement('a');
+        a.className = 'feat-card';
+        a.href = `https://pndshch.github.io/${slug}/`;
+        a.target = '_blank';
+        a.dataset.slug = slug;
+        a.dataset.added = card.dataset.added || '';
+        // clone thumb visuals
+        if (thumb) {
+            const newThumb = thumb.cloneNode(true);
+            // ensure NEW badge present
+            if (!newThumb.querySelector('.new-badge')) {
+                const b = document.createElement('span');
+                b.className = 'new-badge';
+                b.textContent = 'NEW';
+                newThumb.insertBefore(b, newThumb.firstChild);
+            }
+            a.appendChild(newThumb);
+        }
+        const ft = document.createElement('span');
+        ft.className = 'feat-title';
+        ft.textContent = titleEl ? titleEl.textContent : slug;
+        // also bind to i18n key so language switch updates it
+        if (titleEl && titleEl.dataset.i18n) {
+            ft.dataset.i18n = titleEl.dataset.i18n;
+        }
+        a.appendChild(ft);
+        row.appendChild(a);
+    });
+    if (label) label.hidden = cards.length === 0;
+    row.style.display = cards.length === 0 ? 'none' : '';
+}
+
+// ════════════════════════════════════════════
+//   Filter (category + search combined)
+// ════════════════════════════════════════════
+let currentCat = 'all';
+let currentQuery = '';
+
+function normalizeText(s) {
+    return (s || '').toLowerCase().trim();
+}
+
+function applyFilters() {
+    const grid = document.getElementById('app-grid');
+    const cards = grid.querySelectorAll('.card');
+    const q = normalizeText(currentQuery);
+    let visible = 0;
+    cards.forEach(card => {
+        const cardCats = (card.getAttribute('data-cat') || '').split(' ');
+        const catOk = currentCat === 'all' || cardCats.includes(currentCat);
+        let textOk = true;
+        if (q) {
+            const haystack = normalizeText(
+                (card.querySelector('h2')?.textContent || '') + ' ' +
+                (card.querySelector('p')?.textContent || '') + ' ' +
+                Array.from(card.querySelectorAll('.tag'))
+                    .map(t => t.textContent).join(' ') + ' ' +
+                (card.dataset.slug || '')
+            );
+            textOk = haystack.includes(q);
+        }
+        const show = catOk && textOk;
+        card.classList.toggle('cat-hidden', !show);
+        if (show) visible++;
+    });
+    document.querySelectorAll('.cat-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.cat === currentCat);
+    });
+    const empty = document.getElementById('searchEmpty');
+    if (empty) empty.hidden = visible > 0;
+    // hide featured when searching or filtering by category
+    const featuredVisible = currentCat === 'all' && q === '';
+    document.getElementById('featRow').style.display =
+        featuredVisible ? '' : 'none';
+    const lbl = document.getElementById('featuredLabel');
+    if (lbl) lbl.hidden = !featuredVisible || lbl.dataset.empty === '1';
+    // URL sync
+    const url = new URL(window.location);
+    if (currentCat === 'all') url.searchParams.delete('cat');
+    else url.searchParams.set('cat', currentCat);
+    if (q) url.searchParams.set('q', currentQuery);
+    else url.searchParams.delete('q');
+    history.replaceState(null, '', url);
 }
 
 document.querySelectorAll('.lang-btn').forEach(btn => {
     btn.addEventListener('click', () => applyLang(btn.dataset.lang));
 });
-
-
-// ── Category filter ──
-function filterCards(cat) {
-    const grid = document.getElementById('app-grid');
-    const cards = grid.querySelectorAll('.card');
-    const headers = grid.querySelectorAll('.grid-header');
-
-    cards.forEach(card => {
-        const cardCats = (card.getAttribute('data-cat') || '').split(' ');
-        const show = cat === 'all' || cardCats.includes(cat);
-        card.classList.toggle('cat-hidden', !show);
-    });
-
-    // Show/hide section sub-headers
-    headers.forEach(h => {
-        if (cat === 'all') {
-            h.style.display = '';
-        } else {
-            // Show header only if it matches the selected category
-            h.style.display = h.dataset.catHeader === cat ? '' : 'none';
-        }
-    });
-
-    // Update active button
-    document.querySelectorAll('.cat-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.cat === cat);
-    });
-
-    // Update URL
-    const url = new URL(window.location);
-    if (cat === 'all') url.searchParams.delete('cat');
-    else url.searchParams.set('cat', cat);
-    history.replaceState(null, '', url);
-}
-
 document.querySelectorAll('.cat-btn').forEach(btn => {
-    btn.addEventListener('click', () => filterCards(btn.dataset.cat));
+    btn.addEventListener('click', () => {
+        currentCat = btn.dataset.cat;
+        applyFilters();
+    });
 });
 
 (function init() {
@@ -2298,11 +2266,39 @@ document.querySelectorAll('.cat-btn').forEach(btn => {
         const nav = (navigator.language || 'ja').toLowerCase();
         lang = nav.startsWith('ja') ? 'ja' : 'en';
     }
+    decorateCards();
+    buildFeatured();
     applyLang(lang);
-    // Init category filter from URL
+
+    // Hook up search
+    const si = document.getElementById('searchInput');
+    const sc = document.getElementById('searchClear');
+    if (si) {
+        si.addEventListener('input', () => {
+            currentQuery = si.value;
+            sc.classList.toggle('show', !!currentQuery);
+            applyFilters();
+        });
+    }
+    if (sc) {
+        sc.addEventListener('click', () => {
+            si.value = '';
+            currentQuery = '';
+            sc.classList.remove('show');
+            si.focus();
+            applyFilters();
+        });
+    }
+
+    // init from URL
     const params = new URL(window.location).searchParams;
-    const cat = params.get('cat') || 'all';
-    if (cat !== 'all') filterCards(cat);
+    currentCat = params.get('cat') || 'all';
+    currentQuery = params.get('q') || '';
+    if (si && currentQuery) {
+        si.value = currentQuery;
+        sc.classList.add('show');
+    }
+    applyFilters();
 })();
 </script>
 
