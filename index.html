@@ -361,6 +361,78 @@ footer a:hover { color: #e6edf3; }
 .card.cat-hidden, .card.search-hidden { display: none !important; }
 .feat-card.cat-hidden { display: none !important; }
 
+/* ── Year badge (always shown when card has data-year) ── */
+.year-badge {
+    position: absolute;
+    top: 10px; left: 10px;
+    background: linear-gradient(135deg, #d4a574 0%, #b8865a 100%);
+    color: #1a1010;
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    padding: 4px 10px;
+    border-radius: 8px;
+    z-index: 3;
+    font-family: 'Georgia', 'Hiragino Mincho ProN', serif;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    border: 1px solid rgba(255,255,255,0.15);
+}
+
+/* ── Timeline mode (active on history-cat filters) ── */
+.timeline-mode #app-grid {
+    padding-left: 24px;
+}
+.timeline-mode .card[data-year] {
+    position: relative;
+}
+.timeline-mode .card[data-year]::before {
+    content: '';
+    position: absolute;
+    left: -16px;
+    top: -16px;
+    bottom: -16px;
+    width: 2px;
+    background: linear-gradient(to bottom,
+        transparent, rgba(212,165,116,0.5) 10%,
+        rgba(212,165,116,0.5) 90%, transparent);
+    z-index: 0;
+    pointer-events: none;
+}
+.timeline-mode .card[data-year]::after {
+    content: '';
+    position: absolute;
+    left: -22px;
+    top: 22px;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: #d4a574;
+    box-shadow: 0 0 0 3px #0d1117, 0 0 10px rgba(212,165,116,0.7);
+    z-index: 2;
+    pointer-events: none;
+}
+.timeline-decade-marker {
+    grid-column: 1 / -1;
+    color: #c89866;
+    font-family: 'Georgia', 'Hiragino Mincho ProN', serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    margin: 18px 0 -2px -8px;
+    font-weight: 700;
+    text-transform: uppercase;
+    position: relative;
+    padding-left: 4px;
+}
+.timeline-decade-marker::before {
+    content: '';
+    position: absolute;
+    left: -19px; top: 50%;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #d4a574;
+    transform: translateY(-50%);
+    box-shadow: 0 0 0 3px #0d1117;
+}
+
 /* ── Category filter ── */
 .cat-filter {
     display: flex;
@@ -1092,7 +1164,7 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/itoko-aeons/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="world-history" data-added="2026-05-07T20:05:00+09:00" data-slug="wald-1943">
+    <div class="card" data-cat="world-history" data-added="2026-05-07T20:05:00+09:00" data-slug="wald-1943" data-year="1943">
             <div class="card-thumb thumb-wald">
             <span class="thumb-emoji">✈️</span>
                 <img class="thumb-gif" src="assets/wald-1943.gif" alt="" onerror="this.remove()">
@@ -1108,7 +1180,7 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/wald-1943/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="japan-history" data-added="2026-05-07T19:30:00+09:00" data-slug="torishima-1841">
+    <div class="card" data-cat="japan-history" data-added="2026-05-07T19:30:00+09:00" data-slug="torishima-1841" data-year="1841">
             <div class="card-thumb thumb-torishima">
             <span class="thumb-emoji">🪨</span>
                 <img class="thumb-gif" src="assets/torishima-1841.gif" alt="" onerror="this.remove()">
@@ -1140,7 +1212,7 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/kioku-run/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="world-history" data-added="2026-05-07T08:28:20+09:00" data-slug="heron-oyster">
+    <div class="card" data-cat="world-history" data-added="2026-05-07T08:28:20+09:00" data-slug="heron-oyster" data-year="2026">
             <div class="card-thumb thumb-heron">
             <span class="thumb-emoji">🪶</span>
                 <img class="thumb-gif" src="assets/heron-oyster.gif" alt="" onerror="this.remove()">
@@ -1172,7 +1244,7 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/mienai-5percent/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="world-history" data-added="2026-05-07T06:23:06+09:00" data-slug="cargo-cult-1947">
+    <div class="card" data-cat="world-history" data-added="2026-05-07T06:23:06+09:00" data-slug="cargo-cult-1947" data-year="1947">
             <div class="card-thumb thumb-cargo">
             <span class="thumb-emoji">🛬</span>
                 <img class="thumb-gif" src="assets/cargo-cult-1947.gif" alt="" onerror="this.remove()">
@@ -1188,7 +1260,7 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/cargo-cult-1947/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="world-history" data-added="2026-05-07T05:21:13+09:00" data-slug="warmth-1958">
+    <div class="card" data-cat="world-history" data-added="2026-05-07T05:21:13+09:00" data-slug="warmth-1958" data-year="1958">
             <div class="card-thumb thumb-warmth">
             <span class="thumb-emoji">🧸</span>
                 <img class="thumb-gif" src="assets/warmth-1958.gif" alt="" onerror="this.remove()">
@@ -1204,7 +1276,7 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/warmth-1958/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="japan-history" data-added="2026-05-07T04:20:11+09:00" data-slug="ricecooker-1946">
+    <div class="card" data-cat="japan-history" data-added="2026-05-07T04:20:11+09:00" data-slug="ricecooker-1946" data-year="1946">
             <div class="card-thumb thumb-ricecooker">
             <span class="thumb-emoji">🍚</span>
                 <img class="thumb-gif" src="assets/ricecooker-1946.gif" alt="" onerror="this.remove()">
@@ -1220,7 +1292,7 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/ricecooker-1946/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="world-history" data-added="2026-05-07T03:25:10+09:00" data-slug="ninth-1824">
+    <div class="card" data-cat="world-history" data-added="2026-05-07T03:25:10+09:00" data-slug="ninth-1824" data-year="1824">
             <div class="card-thumb thumb-ninth">
             <span class="thumb-emoji">🕯️</span>
                 <img class="thumb-gif" src="assets/ninth-1824.gif" alt="" onerror="this.remove()">
@@ -1251,7 +1323,7 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/doomscroll-lab/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="world-history" data-added="2026-05-07T00:18:30+09:00" data-slug="nihilist-penguin">
+    <div class="card" data-cat="world-history" data-added="2026-05-07T00:18:30+09:00" data-slug="nihilist-penguin" data-year="2026">
             <div class="card-thumb thumb-nihilist">
             <span class="thumb-emoji">🐧</span>
             </div>
@@ -1266,7 +1338,7 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/nihilist-penguin/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="world-history" data-added="2026-05-06T23:14:03+09:00" data-slug="dancing-plague-1518">
+    <div class="card" data-cat="world-history" data-added="2026-05-06T23:14:03+09:00" data-slug="dancing-plague-1518" data-year="1518">
             <div class="card-thumb thumb-danceplague">
             <span class="thumb-emoji">💃</span>
             </div>
@@ -1281,7 +1353,7 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/dancing-plague-1518/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="japan-history" data-added="2026-05-06T22:46:29+09:00" data-slug="mottainai-dungeon">
+    <div class="card" data-cat="learn" data-added="2026-05-06T22:46:29+09:00" data-slug="mottainai-dungeon">
             <div class="card-thumb thumb-mottainai">
             <span class="thumb-emoji">🏰</span>
             </div>
@@ -1296,7 +1368,7 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/mottainai-dungeon/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="world-history" data-added="2026-05-06T22:11:54+09:00" data-slug="janets-law">
+    <div class="card" data-cat="learn" data-added="2026-05-06T22:11:54+09:00" data-slug="janets-law">
             <div class="card-thumb thumb-janets">
             <span class="thumb-emoji">⏳</span>
             </div>
@@ -1342,7 +1414,7 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/spore-voyage/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="world-history" data-added="2026-05-06T07:19:19+09:00" data-slug="kitkat-highway">
+    <div class="card" data-cat="world-history" data-added="2026-05-06T07:19:19+09:00" data-slug="kitkat-highway" data-year="2026">
             <div class="card-thumb thumb-kitkat">
             <span class="thumb-emoji">🍫</span>
             </div>
@@ -1372,7 +1444,7 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/yokonige/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="world-history" data-added="2026-05-06T04:24:30+09:00" data-slug="4min-wall">
+    <div class="card" data-cat="world-history" data-added="2026-05-06T04:24:30+09:00" data-slug="4min-wall" data-year="1954">
             <div class="card-thumb thumb-4minwall">
             <span class="thumb-emoji">🏃</span>
                 <img class="thumb-gif" src="assets/4min-wall.gif" alt="" onerror="this.remove()">
@@ -1452,7 +1524,7 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/health-td/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="japan-history" data-added="2026-05-03T17:26:27+09:00" data-slug="ai-vs-todai">
+    <div class="card" data-cat="japan-history" data-added="2026-05-03T17:26:27+09:00" data-slug="ai-vs-todai" data-year="2024">
             <div class="card-thumb thumb-aitodai">
             <span class="thumb-emoji">🧠</span>
                 <img class="thumb-gif" src="assets/ai-vs-todai.gif" alt="" onerror="this.remove()">
@@ -1500,7 +1572,7 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/gw-rain-runner/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="japan-history" data-added="2026-05-04T07:49:11+09:00" data-slug="yamiichi">
+    <div class="card" data-cat="japan-history" data-added="2026-05-04T07:49:11+09:00" data-slug="yamiichi" data-year="1946">
             <div class="card-thumb thumb-yamiichi">
             <span class="thumb-emoji">🏪</span>
                 <img class="thumb-gif" src="assets/yamiichi.gif" alt="" onerror="this.remove()">
@@ -1564,7 +1636,7 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/fast-and-slow/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="world-history" data-added="2026-05-06T06:29:03+09:00" data-slug="crowd-wisdom">
+    <div class="card" data-cat="learn" data-added="2026-05-06T06:29:03+09:00" data-slug="crowd-wisdom">
             <div class="card-thumb thumb-crowdwisdom">
             <span class="thumb-emoji">👁️</span>
             </div>
@@ -2356,22 +2428,28 @@ function refreshNewBadgeText(text) {
 function decorateCards() {
     const grid = document.getElementById('app-grid');
     const cards = Array.from(grid.querySelectorAll('.card'));
-    // sort by added desc, then by slug for stability
+    // default sort by added desc; timeline reorder happens in applyFilters
     cards.sort((a, b) => {
         const da = a.dataset.added || '0', db = b.dataset.added || '0';
         if (da !== db) return da > db ? -1 : 1;
         return (a.dataset.slug || '').localeCompare(b.dataset.slug || '');
     });
     cards.forEach(c => grid.appendChild(c));
-    // tag NEW
+    // tag NEW + year
     cards.forEach(c => {
         const thumb = c.querySelector('.card-thumb');
-        if (!thumb || c.querySelector(':scope > .card-thumb > .new-badge')) return;
-        if (isNew(c)) {
+        if (!thumb) return;
+        if (isNew(c) && !thumb.querySelector('.new-badge')) {
             const badge = document.createElement('span');
             badge.className = 'new-badge';
             badge.textContent = 'NEW';
             thumb.insertBefore(badge, thumb.firstChild);
+        }
+        if (c.dataset.year && !thumb.querySelector('.year-badge')) {
+            const yb = document.createElement('span');
+            yb.className = 'year-badge';
+            yb.textContent = c.dataset.year;
+            thumb.insertBefore(yb, thumb.firstChild);
         }
     });
     // empty-state node
@@ -2383,6 +2461,61 @@ function decorateCards() {
         empty.hidden = true;
         grid.appendChild(empty);
     }
+}
+
+const HISTORY_CATS = new Set(['world-history', 'japan-history']);
+
+function applyTimelineLayout(cat) {
+    const grid = document.getElementById('app-grid');
+    const isHistory = HISTORY_CATS.has(cat);
+    document.body.classList.toggle('timeline-mode', isHistory);
+
+    // remove any existing decade markers
+    grid.querySelectorAll('.timeline-decade-marker').forEach(m => m.remove());
+
+    if (!isHistory) {
+        // restore default order: by added desc
+        const cards = Array.from(grid.querySelectorAll('.card'));
+        cards.sort((a, b) => {
+            const da = a.dataset.added || '0', db = b.dataset.added || '0';
+            if (da !== db) return da > db ? -1 : 1;
+            return (a.dataset.slug || '').localeCompare(b.dataset.slug || '');
+        });
+        cards.forEach(c => grid.appendChild(c));
+        return;
+    }
+
+    // history mode: sort by year asc, then by added asc
+    const cards = Array.from(grid.querySelectorAll('.card'));
+    cards.sort((a, b) => {
+        const ya = parseInt(a.dataset.year || '99999', 10);
+        const yb = parseInt(b.dataset.year || '99999', 10);
+        if (ya !== yb) return ya - yb;
+        return (a.dataset.added || '').localeCompare(b.dataset.added || '');
+    });
+    cards.forEach(c => grid.appendChild(c));
+
+    // insert century markers before each card whose century differs from the previous
+    const useEn = (document.documentElement.lang || 'ja') === 'en';
+    let prevCentury = null;
+    cards.forEach(c => {
+        if (c.classList.contains('cat-hidden')) return;
+        const yr = parseInt(c.dataset.year || '0', 10);
+        if (!yr) return;
+        const century = Math.floor((yr - 1) / 100) + 1; // 1518 → 16th, 1900 → 19th, 1901 → 20th
+        if (century !== prevCentury) {
+            const m = document.createElement('div');
+            m.className = 'timeline-decade-marker';
+            m.textContent = useEn ? ordinalCentury(century) : century + '世紀';
+            grid.insertBefore(m, c);
+            prevCentury = century;
+        }
+    });
+}
+
+function ordinalCentury(n) {
+    const s = ['th','st','nd','rd'], v = n % 100;
+    return n + (s[(v - 20) % 10] || s[v] || s[0]) + ' century';
 }
 
 // ════════════════════════════════════════════
@@ -2470,6 +2603,8 @@ function applyFilters() {
     document.querySelectorAll('.cat-btn').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.cat === currentCat);
     });
+    // Apply timeline layout when on a history filter
+    applyTimelineLayout(currentCat);
     const empty = document.getElementById('searchEmpty');
     if (empty) empty.hidden = visible > 0;
     // hide featured when searching or filtering by category
