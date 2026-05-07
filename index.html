@@ -213,6 +213,7 @@ header p {
 .thumb-mienai     { background: radial-gradient(ellipse at 50% 30%, #1c3a52 0%, #0a1f2e 60%, #050d18 100%); }
 .thumb-heron      { background: linear-gradient(180deg, #f4ede0 0%, #d6c8a8 60%, #8d9bab 100%); }
 .thumb-akubi      { background: linear-gradient(180deg, #ffe9b5 0%, #ffd9c0 55%, #f9c6d6 100%); }
+.thumb-iromaze    { background: radial-gradient(ellipse at 50% 35%, #2a1f4d 0%, #15102a 60%, #0a0717 100%); }
 
 .card-body {
     padding: 18px 20px 22px;
@@ -416,6 +417,14 @@ footer a:hover { color: #e6edf3; }
 <!-- Featured -->
 <div class="section-label" data-i18n="secFeatured">⭐ おすすめ</div>
 <div class="feat-row">
+        <a class="feat-card" href="https://pndshch.github.io/iro-maze/" target="_blank">
+            <div class="card-thumb thumb-iromaze">
+            <span class="new-badge" data-i18n="newBadge">NEW</span>
+            <span class="thumb-emoji">🎨</span>
+            <img class="thumb-gif" src="assets/iro-maze.gif" alt="" onerror="this.remove()">
+        </div>
+            <span class="feat-title" data-i18n="iromazeTitle">いろまぜ</span>
+        </a>
         <a class="feat-card" href="https://pndshch.github.io/akubi-utsushi/" target="_blank">
             <div class="card-thumb thumb-akubi">
             <span class="new-badge" data-i18n="newBadge">NEW</span>
@@ -550,6 +559,23 @@ footer a:hover { color: #e6edf3; }
 <!-- All apps -->
 <div class="grid" id="app-grid">
     <div class="grid-header" data-cat-header="kids-play" data-i18n="secGridKidsPlay">🎈 こどもがあそぶ</div>
+    <div class="card" data-cat="kids-play">
+            <div class="card-thumb thumb-iromaze">
+                <span class="new-badge" data-i18n="newBadge">NEW</span>
+                <span class="thumb-emoji">🎨</span>
+                <img class="thumb-gif" src="assets/iro-maze.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="iromazeTitle">いろまぜ</h2>
+                <p data-i18n="iromazeDesc">2つの色を ぎゅっとくっつけると、あたらしい色が うまれる！4〜8歳むけ、日本の伝統色（和色）を 25色集める色あそび実験室。あか＋しろ＝桃色（ももいろ）、桃色＋しろ＝桜色（さくらいろ）。「やまぶき」「あさぎ」「うぐいす」など、まぜないと出会えない色がある。読みかなつき、保存対応。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="iromazeTag1">4〜8歳</span>
+                    <span class="tag" data-i18n="iromazeTag2">和色25</span>
+                    <span class="tag" data-i18n="iromazeTag3">混色</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/iro-maze/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
     <div class="card" data-cat="kids-play">
             <div class="card-thumb thumb-akubi">
                 <span class="new-badge" data-i18n="newBadge">NEW</span>
@@ -1812,6 +1838,9 @@ const I18N = {
         akubiTitle: "あくびうつし",
         akubiDesc:  "ひとりがあくびすると、まわりにもうつる！キャラクターをタップすると、あくびがじゅんばんに広がっていく。みんなねむったらクリア。3〜7歳むけ、伝染現象を遊びにした連鎖パズル。コーヒーを飲んでいる目ざめた子は2回タップが必要。5ステージ、夜の街まで。",
         akubiTag1: "3〜7歳", akubiTag2: "連鎖", akubiTag3: "あくび",
+        iromazeTitle: "いろまぜ",
+        iromazeDesc:  "2つの色を ぎゅっとくっつけると、あたらしい色が うまれる！4〜8歳むけ、日本の伝統色（和色）を 25色集める色あそび実験室。あか＋しろ＝桃色（ももいろ）、桃色＋しろ＝桜色（さくらいろ）。「やまぶき」「あさぎ」「うぐいす」など、まぜないと出会えない色がある。読みかなつき、保存対応。",
+        iromazeTag1: "4〜8歳", iromazeTag2: "和色25", iromazeTag3: "混色",
     },
     en: {
         tagline:   "Games · Education · Tools — delivered via browser and apps",
@@ -2040,6 +2069,9 @@ const I18N = {
         akubiTitle: "Yawn Spreader",
         akubiDesc:  "One yawn, and it spreads to everyone! Tap any character to make them yawn — the yawn ripples outward in delayed waves to nearby characters. Put the whole scene to sleep. A chain-reaction puzzle for ages 3–7 that turns the real psychology of contagious yawning into joyful play. Coffee-drinking characters resist once. 5 stages, all the way to midnight.",
         akubiTag1: "Ages 3–7", akubiTag2: "Chain Reaction", akubiTag3: "Yawn",
+        iromazeTitle: "Iro-maze (Color Lab)",
+        iromazeDesc:  "Press two color blobs together — a new color is born! For ages 4–8, a discovery lab of 25 traditional Japanese colors (和色). Red + white = momo-iro (peach); peach + white = sakura-iro (cherry blossom). Yamabuki, asagi, uguisu — colors you only meet by mixing. Hiragana readings, progress saved.",
+        iromazeTag1: "Ages 4–8", iromazeTag2: "25 Wa-iro", iromazeTag3: "Mixing",
     }
 };
 

@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="theme-color" content="#15102a">
+<title>いろまぜ — 和色を発見しよう（4〜8歳）</title>
+<meta name="description" content="2つのいろをまぜて、25の日本の伝統色（和色）を見つけよう。4〜8歳むけの色あそび実験室。さくらいろ、あさぎいろ、うぐいすいろ — まぜないと出会えない色がある。">
+<meta property="og:title" content="いろまぜ — 和色を発見しよう">
+<meta property="og:description" content="2つの色をまぜて、25の和色を集める色あそび実験室。4〜8歳むけ。">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+html, body { width:100%; height:100%; overflow:hidden; }
+body {
+  background: radial-gradient(ellipse at 50% 30%, #2a1f4d 0%, #15102a 60%, #0a0717 100%);
+  font-family: 'Hiragino Maru Gothic ProN', 'Yu Gothic', 'Helvetica Neue', sans-serif;
+  color: #f4f0ff;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Header ── */
+header {
+  flex: 0 0 auto;
+  padding: 10px 14px 6px;
+  text-align: center;
+  position: relative;
+  z-index: 10;
+}
+header h1 {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: 4px;
+  background: linear-gradient(120deg, #ff8fb1, #ffd96a, #8ad8ff, #c4a3ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 24px rgba(255,160,200,0.18);
+}
+header .sub {
+  font-size: 10.5px;
+  color: #b6a8d6;
+  margin-top: 2px;
+  letter-spacing: 1px;
+}
+.hud {
+  position: absolute;
+  top: 12px;
+  display: flex;
+  align-items: center;
+  height: 30px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  background: rgba(40,28,72,0.6);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: 0 12px;
+  color: #f4f0ff;
+  cursor: pointer;
+}
+.hud:active { transform: scale(0.95); }
+#hud-collection { right: 10px; }
+#hud-help { left: 10px; padding: 0 10px; }
+.count-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #ff8fb1, #c4a3ff);
+  color: #1a0a2a;
+  border-radius: 10px;
+  padding: 1px 7px;
+  font-size: 10px;
+  margin-left: 5px;
+}
+
+/* ── Canvas ── */
+#canvas {
+  flex: 1 1 auto;
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  background:
+    radial-gradient(circle at 20% 30%, rgba(255,180,220,0.04), transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(180,220,255,0.04), transparent 40%);
+}
+#canvas::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle 1px at 10% 20%, rgba(255,255,255,0.3), transparent),
+    radial-gradient(circle 1px at 30% 60%, rgba(255,255,255,0.2), transparent),
+    radial-gradient(circle 1px at 70% 30%, rgba(255,255,255,0.25), transparent),
+    radial-gradient(circle 1px at 85% 80%, rgba(255,255,255,0.2), transparent),
+    radial-gradient(circle 1px at 50% 90%, rgba(255,255,255,0.15), transparent);
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+/* Tutorial ghost */
+#tutorial {
+  position: absolute;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(40,28,72,0.85);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,180,220,0.3);
+  border-radius: 14px;
+  padding: 10px 14px;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  text-align: center;
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.6s;
+  max-width: 280px;
+  z-index: 5;
+  line-height: 1.7;
+}
+#tutorial.hidden { opacity: 0; }
+#tutorial b { color: #ffd96a; }
+
+/* ── Blob ── */
+.blob {
+  position: absolute;
+  width: var(--r);
+  height: var(--r);
+  margin-left: calc(var(--r) * -0.5);
+  margin-top: calc(var(--r) * -0.5);
+  left: 0; top: 0;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 33% 30%, rgba(255,255,255,0.55), rgba(255,255,255,0) 48%),
+    var(--c);
+  box-shadow:
+    0 8px 24px rgba(0,0,0,0.4),
+    0 0 32px var(--glow, rgba(255,255,255,0.1)),
+    inset 0 -6px 14px rgba(0,0,0,0.18);
+  transform: translate(var(--x), var(--y)) scale(var(--s, 1));
+  transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: grab;
+  touch-action: none;
+  will-change: transform;
+  animation: wobble 4s ease-in-out infinite;
+}
+.blob.grabbing {
+  cursor: grabbing;
+  transition: none;
+  z-index: 100;
+  filter: brightness(1.08);
+}
+.blob.spawning { animation: spawn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards, wobble 4s ease-in-out infinite 0.4s; }
+.blob.consuming { animation: consume 0.35s ease-in forwards; }
+@keyframes wobble {
+  0%, 100% { border-radius: 50% 48% 52% 50% / 50% 52% 48% 50%; }
+  25%      { border-radius: 52% 50% 48% 50% / 48% 50% 52% 50%; }
+  50%      { border-radius: 48% 52% 50% 50% / 52% 48% 50% 52%; }
+  75%      { border-radius: 50% 48% 52% 50% / 50% 52% 48% 50%; }
+}
+@keyframes spawn {
+  0%   { transform: translate(var(--x), var(--y)) scale(0); }
+  60%  { transform: translate(var(--x), var(--y)) scale(1.2); }
+  100% { transform: translate(var(--x), var(--y)) scale(1); }
+}
+@keyframes consume {
+  0%   { transform: translate(var(--x), var(--y)) scale(1); opacity: 1; }
+  100% { transform: translate(var(--x), var(--y)) scale(0.2); opacity: 0; }
+}
+.blob-label {
+  position: absolute;
+  bottom: -22px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: rgba(255,255,255,0.85);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* ── Splash particles ── */
+.splash {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  pointer-events: none;
+  animation: splashOut 0.55s ease-out forwards;
+}
+@keyframes splashOut {
+  0% { transform: translate(0,0) scale(1); opacity: 0.9; }
+  100% { transform: translate(var(--dx), var(--dy)) scale(0.1); opacity: 0; }
+}
+
+/* ── Trash ── */
+#trash {
+  position: absolute;
+  bottom: 8px;
+  right: 10px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(40,28,72,0.75);
+  border: 2px dashed rgba(255,255,255,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  z-index: 4;
+  transition: transform 0.2s, border-color 0.2s, background 0.2s;
+}
+#trash.active {
+  transform: scale(1.2);
+  background: rgba(220,80,100,0.5);
+  border-color: #ff8fb1;
+}
+
+/* ── Palette ── */
+#palette {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 10px 18px;
+  background: linear-gradient(to top, rgba(0,0,0,0.4), transparent);
+  z-index: 10;
+}
+.pot {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 3px solid rgba(255,255,255,0.18);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #fff;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.15s;
+  box-shadow:
+    0 4px 14px rgba(0,0,0,0.5),
+    inset 0 -4px 10px rgba(0,0,0,0.25),
+    inset 0 4px 10px rgba(255,255,255,0.15);
+  background:
+    radial-gradient(circle at 33% 30%, rgba(255,255,255,0.55), rgba(255,255,255,0) 48%),
+    var(--c);
+}
+.pot:active { transform: scale(0.88); }
+.pot-white { color: #1a0a2a; text-shadow: 0 0 4px rgba(255,255,255,0.5); }
+.pot-black { color: #f4f0ff; }
+.pot::after {
+  content: '+';
+  position: absolute;
+  bottom: -6px;
+  right: -2px;
+  width: 18px;
+  height: 18px;
+  background: #ff8fb1;
+  color: #1a0a2a;
+  border-radius: 50%;
+  font-size: 14px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* ── Modal ── */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 5, 25, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+.modal.hidden { opacity: 0; pointer-events: none; }
+.modal-card {
+  background: linear-gradient(160deg, #2a1f4d 0%, #1a1230 100%);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 24px;
+  padding: 24px 22px;
+  max-width: 92vw;
+  max-height: 86vh;
+  width: 380px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+  color: #f4f0ff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* ── Discovery modal ── */
+#modal-discovery .modal-card { text-align: center; padding: 30px 22px; }
+#discovery-blob {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  margin: 8px auto 18px;
+  background:
+    radial-gradient(circle at 33% 30%, rgba(255,255,255,0.6), rgba(255,255,255,0) 50%),
+    var(--c, #fff);
+  box-shadow:
+    0 0 60px var(--glow, rgba(255,255,255,0.4)),
+    inset 0 -8px 18px rgba(0,0,0,0.15);
+  animation: discoveryPulse 1.4s ease-in-out infinite, wobble 4s ease-in-out infinite;
+}
+@keyframes discoveryPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.06); }
+}
+#discovery-headline {
+  font-size: 12px;
+  letter-spacing: 4px;
+  color: #ffd96a;
+  margin-bottom: 6px;
+  font-weight: 700;
+}
+#discovery-kanji {
+  font-size: 38px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  margin-bottom: 4px;
+  color: #fff;
+}
+#discovery-kana {
+  font-size: 16px;
+  color: #ffb6d4;
+  letter-spacing: 3px;
+  margin-bottom: 14px;
+}
+#discovery-en {
+  font-size: 12px;
+  color: #b6a8d6;
+  letter-spacing: 1px;
+  margin-bottom: 18px;
+}
+#discovery-meta {
+  font-size: 11px;
+  color: #8b80a8;
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+.discovery-btn {
+  background: linear-gradient(135deg, #ff8fb1, #c4a3ff);
+  border: none;
+  border-radius: 999px;
+  padding: 12px 30px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  color: #1a0a2a;
+  cursor: pointer;
+  letter-spacing: 1px;
+  box-shadow: 0 6px 20px rgba(255,143,177,0.35);
+}
+.discovery-btn:active { transform: scale(0.95); }
+
+/* ── Collection modal ── */
+#modal-collection h2 {
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  margin-bottom: 4px;
+  text-align: center;
+}
+#modal-collection .progress {
+  text-align: center;
+  font-size: 12px;
+  color: #b6a8d6;
+  margin-bottom: 16px;
+  letter-spacing: 1px;
+}
+.col-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  overflow-y: auto;
+  padding: 4px;
+}
+.col-cell {
+  min-width: 0;
+  aspect-ratio: 1 / 1.2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.06);
+  padding: 6px 4px;
+  text-align: center;
+  cursor: pointer;
+  overflow: hidden;
+}
+.col-cell.locked { opacity: 0.45; }
+.col-cell.locked .col-swatch {
+  background: rgba(255,255,255,0.05) !important;
+  border: 1px dashed rgba(255,255,255,0.2);
+}
+.col-cell.locked .col-name { color: rgba(255,255,255,0.3); }
+.col-swatch {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--c);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4), inset 0 -3px 6px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: rgba(255,255,255,0.6);
+}
+.col-name { font-size: 10px; font-weight: 700; letter-spacing: 0.5px; color: #f4f0ff; }
+.col-name.lg { font-size: 11px; }
+.col-kana { font-size: 8.5px; color: #b6a8d6; letter-spacing: 0.5px; }
+.col-cell.primary { border-color: rgba(255,217,106,0.3); }
+
+/* ── Help modal ── */
+#modal-help .modal-card { width: 340px; }
+#modal-help h2 {
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: 3px;
+  margin-bottom: 14px;
+  text-align: center;
+}
+#modal-help p {
+  font-size: 12px;
+  line-height: 1.9;
+  color: #d6cee8;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+#modal-help .age {
+  background: rgba(255,217,106,0.14);
+  border: 1px solid rgba(255,217,106,0.3);
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-size: 11px;
+  color: #ffd96a;
+  margin: 6px 0 14px;
+  letter-spacing: 0.5px;
+}
+#modal-help .step {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 8px;
+  font-size: 12px;
+}
+#modal-help .step-n {
+  flex: 0 0 22px;
+  width: 22px;
+  height: 22px;
+  background: linear-gradient(135deg, #ff8fb1, #c4a3ff);
+  color: #1a0a2a;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 11px;
+}
+#modal-help .step-text { flex: 1; line-height: 1.6; color: #d6cee8; }
+#modal-help .step-text b { color: #ffd96a; }
+
+/* ── Toast ── */
+#toast {
+  position: fixed;
+  top: 60px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-20px);
+  background: rgba(40,28,72,0.95);
+  border: 1px solid rgba(255,217,106,0.4);
+  border-radius: 999px;
+  padding: 8px 18px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #ffd96a;
+  z-index: 250;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s, transform 0.25s;
+}
+#toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ── Confetti for full collection ── */
+.confetti {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  pointer-events: none;
+  z-index: 300;
+  border-radius: 2px;
+}
+
+@media (max-height: 640px) {
+  header h1 { font-size: 18px; letter-spacing: 3px; }
+  header .sub { display: none; }
+  .pot { width: 48px; height: 48px; font-size: 10px; }
+  #palette { padding: 10px 8px 14px; gap: 8px; }
+}
+@media (min-width: 720px) {
+  header h1 { font-size: 28px; }
+  .pot { width: 64px; height: 64px; font-size: 12px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>いろまぜ</h1>
+  <div class="sub">2つのいろを ぎゅっと くっつけると あたらしい色が うまれる ・ 4〜8歳むけ</div>
+  <button class="hud" id="hud-help">？</button>
+  <button class="hud" id="hud-collection">📔 ずかん <span class="count-badge" id="hud-count">5/25</span></button>
+</header>
+
+<main id="canvas">
+  <div id="tutorial">
+    <b>あかとあお</b>を ぎゅっとくっつけてみよう！<br>
+    あたらしい色が うまれるよ。
+  </div>
+  <div id="trash" aria-label="ごみ箱">🗑️</div>
+</main>
+
+<div id="palette">
+  <button class="pot pot-red"    data-paint="red"    style="--c:#e34234;">あか</button>
+  <button class="pot pot-yellow" data-paint="yellow" style="--c:#f5d020;">き</button>
+  <button class="pot pot-blue"   data-paint="blue"   style="--c:#2a4d9e;">あお</button>
+  <button class="pot pot-white"  data-paint="white"  style="--c:#f7f5f0;">しろ</button>
+  <button class="pot pot-black"  data-paint="black"  style="--c:#1a1a1a;">くろ</button>
+</div>
+
+<!-- Discovery Modal -->
+<div class="modal hidden" id="modal-discovery" role="dialog">
+  <div class="modal-card">
+    <div id="discovery-blob"></div>
+    <div id="discovery-headline">あたらしい色を はっけん！</div>
+    <div id="discovery-kanji"></div>
+    <div id="discovery-kana"></div>
+    <div id="discovery-en"></div>
+    <div id="discovery-meta"></div>
+    <button class="discovery-btn" id="discovery-ok">やったー！</button>
+  </div>
+</div>
+
+<!-- Collection Modal -->
+<div class="modal hidden" id="modal-collection" role="dialog">
+  <div class="modal-card">
+    <button class="modal-close" data-close-modal="modal-collection">×</button>
+    <h2>いろずかん</h2>
+    <div class="progress" id="col-progress">5 / 25 はっけん</div>
+    <div class="col-grid" id="col-grid"></div>
+  </div>
+</div>
+
+<!-- Help Modal -->
+<div class="modal hidden" id="modal-help" role="dialog">
+  <div class="modal-card">
+    <button class="modal-close" data-close-modal="modal-help">×</button>
+    <h2>あそびかた</h2>
+    <div class="age">🎈 4〜8歳むけ — 日本の伝統色（和色）を まぜて 集めよう</div>
+    <div class="step"><div class="step-n">1</div><div class="step-text">下の <b>5つのつぼ</b> をタップすると、いろの たまが 出てくるよ。</div></div>
+    <div class="step"><div class="step-n">2</div><div class="step-text"><b>2つのたま</b> を ゆびで ぎゅっと くっつけると、まざる！</div></div>
+    <div class="step"><div class="step-n">3</div><div class="step-text">なまえの ある色が できると、<b>「はっけん！」</b>になるよ。</div></div>
+    <div class="step"><div class="step-n">4</div><div class="step-text">いらない たまは <b>🗑️ごみばこ</b>に いれてね。</div></div>
+    <div class="step"><div class="step-n">5</div><div class="step-text">ぜんぶで <b>25色</b> あるよ。みつかるかな？</div></div>
+    <button class="discovery-btn" data-close-modal="modal-help" style="margin-top:10px;">はじめる</button>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+'use strict';
+
+/* ──────────────────────────── DATA ──────────────────────────── */
+
+const COLORS = {
+  // ── Primaries (always known) ──
+  red:    { rgb:'#e34234', kanji:'赤',     kana:'あか',         en:'Red',           hint:'もとからある いろ',                           order: 1, primary:true },
+  yellow: { rgb:'#f5d020', kanji:'黄',     kana:'きいろ',       en:'Yellow',        hint:'もとからある いろ',                           order: 2, primary:true },
+  blue:   { rgb:'#2a4d9e', kanji:'青',     kana:'あお',         en:'Blue',          hint:'もとからある いろ',                           order: 3, primary:true },
+  white:  { rgb:'#f7f5f0', kanji:'白',     kana:'しろ',         en:'White',         hint:'もとからある いろ',                           order: 4, primary:true },
+  black:  { rgb:'#1a1a1a', kanji:'黒',     kana:'くろ',         en:'Black',         hint:'もとからある いろ',                           order: 5, primary:true },
+
+  // ── Secondary (1-step from primaries) ──
+  daidai:    { rgb:'#ee7800', kanji:'橙',     kana:'だいだい',       en:'Daidai (Mandarin orange)', hint:'お正月にかざる「だいだい」の実',     order: 6,  recipe:['red','yellow'] },
+  midori:    { rgb:'#4d8c57', kanji:'緑',     kana:'みどり',         en:'Midori (Green)',           hint:'葉っぱや 草の いろ',                  order: 7,  recipe:['blue','yellow'] },
+  murasaki:  { rgb:'#6e3a85', kanji:'紫',     kana:'むらさき',       en:'Murasaki (Purple)',        hint:'むかしは とても たかかった いろ',      order: 8,  recipe:['red','blue'] },
+  momo:      { rgb:'#f4a3b8', kanji:'桃色',   kana:'ももいろ',       en:'Momo-iro (Peach pink)',    hint:'ももの花の やさしい ピンク',           order: 9,  recipe:['red','white'] },
+  mizu:      { rgb:'#8db8db', kanji:'水色',   kana:'みずいろ',       en:'Mizu-iro (Water blue)',    hint:'川や みずの いろ',                    order: 10, recipe:['blue','white'] },
+  nezumi:    { rgb:'#888888', kanji:'鼠',     kana:'ねずみ',         en:'Nezumi (Mouse gray)',      hint:'ねずみの 毛なみの 色',                order: 11, recipe:['white','black'] },
+  tamago:    { rgb:'#f7e9aa', kanji:'卵色',   kana:'たまごいろ',     en:'Tamago-iro (Egg yellow)',  hint:'たまごの きみたいな やさしい 黄色',     order: 12, recipe:['yellow','white'] },
+
+  // ── Tertiary (need a discovery step first) ──
+  sakura:    { rgb:'#fce0e6', kanji:'桜色',   kana:'さくらいろ',     en:'Sakura-iro (Cherry blossom)', hint:'はるに さく さくらの 花びら',         order: 13, recipe:['momo','white'] },
+  yamabuki:  { rgb:'#f8b500', kanji:'山吹',   kana:'やまぶき',       en:'Yamabuki (Japanese rose)',    hint:'山吹の 花の 黄金いろ',                order: 14, recipe:['yellow','daidai'] },
+  shu:       { rgb:'#d2462a', kanji:'朱',     kana:'しゅいろ',       en:'Shu-iro (Vermilion)',         hint:'お寺の 鳥居の あかい色',              order: 15, recipe:['red','daidai'] },
+  kimidori:  { rgb:'#b8d24d', kanji:'黄緑',   kana:'きみどり',       en:'Ki-midori (Yellow green)',    hint:'若葉の あかるい みどり',              order: 16, recipe:['yellow','midori'] },
+  asagi:     { rgb:'#34818b', kanji:'浅葱',   kana:'あさぎいろ',     en:'Asagi (Pale leek blue)',      hint:'葱（ねぎ）の若葉の青みどり',           order: 17, recipe:['blue','midori'] },
+  ai:        { rgb:'#1d335f', kanji:'藍',     kana:'あいいろ',       en:'Ai-iro (Indigo)',             hint:'むかしから ある 深い 青',              order: 18, recipe:['blue','black'] },
+  akane:     { rgb:'#8a2a2a', kanji:'茜',     kana:'あかねいろ',     en:'Akane-iro (Madder red)',      hint:'夕やけの 深い 赤',                   order: 19, recipe:['red','black'] },
+  fuji:      { rgb:'#b8a4d0', kanji:'藤',     kana:'ふじいろ',       en:'Fuji-iro (Wisteria)',         hint:'ふじの 花の やさしい むらさき',        order: 20, recipe:['murasaki','white'] },
+  cha:       { rgb:'#6f4b1f', kanji:'茶色',   kana:'ちゃいろ',       en:'Cha-iro (Tea brown)',         hint:'おちゃの 葉の 色',                   order: 21, recipe:['daidai','black'] },
+
+  // ── Advanced (2+ steps) ──
+  rikyu:     { rgb:'#6e8268', kanji:'利休鼠', kana:'りきゅうねずみ', en:'Rikyu-nezu',                  hint:'お茶人「利休」が 好んだ しぶい色',    order: 22, recipe:['midori','nezumi'] },
+  uguisu:    { rgb:'#5e6e3a', kanji:'鶯色',   kana:'うぐいすいろ',   en:'Uguisu-iro (Bush warbler)',   hint:'うぐいすの 羽の 色',                 order: 23, recipe:['midori','cha'] },
+  kon:       { rgb:'#0e1d3a', kanji:'紺',     kana:'こんいろ',       en:'Kon-iro (Navy)',              hint:'もっと 深い 藍の 色',                order: 24, recipe:['ai','black'] },
+  nadeshiko: { rgb:'#c47086', kanji:'撫子',   kana:'なでしこ',       en:'Nadeshiko (Pink)',            hint:'なでしこの 花の あざやかピンク',       order: 25, recipe:['momo','murasaki'] },
+};
+
+const ORDER = Object.entries(COLORS).sort((a,b) => a[1].order - b[1].order).map(([k]) => k);
+
+/* Build recipe lookup */
+const RECIPE_MAP = new Map();
+for (const [id, c] of Object.entries(COLORS)) {
+  if (c.recipe) {
+    const key = [...c.recipe].sort().join('+');
+    RECIPE_MAP.set(key, id);
+  }
+}
+
+/* ──────────────────────────── STATE ──────────────────────────── */
+
+const STORE_KEY = 'iro-maze-discovered-v1';
+const FIRST_KEY = 'iro-maze-firstplay-v1';
+const blobs = []; // { el, id, x, y, r, dragging }
+let nextBlobId = 0;
+let discovered = new Set(['red','yellow','blue','white','black']);
+
+function loadProgress() {
+  try {
+    const raw = localStorage.getItem(STORE_KEY);
+    if (raw) {
+      const arr = JSON.parse(raw);
+      if (Array.isArray(arr)) {
+        arr.forEach(id => { if (COLORS[id]) discovered.add(id); });
+      }
+    }
+  } catch(_) {}
+}
+
+function saveProgress() {
+  try {
+    localStorage.setItem(STORE_KEY, JSON.stringify([...discovered]));
+  } catch(_) {}
+}
+
+function isFirstPlay() {
+  try { return !localStorage.getItem(FIRST_KEY); } catch(_) { return true; }
+}
+function markPlayed() {
+  try { localStorage.setItem(FIRST_KEY, '1'); } catch(_) {}
+}
+
+/* ──────────────────────────── AUDIO ──────────────────────────── */
+
+let ac = null;
+function ensureAudio() {
+  if (ac) return ac;
+  try {
+    ac = new (window.AudioContext || window.webkitAudioContext)();
+  } catch(_) { ac = null; }
+  return ac;
+}
+
+function playTone(freq, duration=0.15, type='sine', vol=0.18) {
+  if (!ac || ac.state === 'suspended') return;
+  const o = ac.createOscillator();
+  const g = ac.createGain();
+  o.frequency.value = freq;
+  o.type = type;
+  g.gain.setValueAtTime(vol, ac.currentTime);
+  g.gain.exponentialRampToValueAtTime(0.001, ac.currentTime + duration);
+  o.connect(g).connect(ac.destination);
+  o.start();
+  o.stop(ac.currentTime + duration + 0.02);
+}
+
+function playSpawn() { playTone(660, 0.1, 'sine', 0.12); }
+function playMix() {
+  if (!ac) return;
+  // low-frequency bloosh
+  const buf = ac.createBuffer(1, ac.sampleRate * 0.25, ac.sampleRate);
+  const data = buf.getChannelData(0);
+  for (let i = 0; i < data.length; i++) {
+    data[i] = (Math.random() - 0.5) * (1 - i / data.length);
+  }
+  const src = ac.createBufferSource();
+  src.buffer = buf;
+  const filter = ac.createBiquadFilter();
+  filter.type = 'lowpass';
+  filter.frequency.value = 600;
+  const g = ac.createGain();
+  g.gain.setValueAtTime(0.25, ac.currentTime);
+  g.gain.exponentialRampToValueAtTime(0.001, ac.currentTime + 0.3);
+  src.connect(filter).connect(g).connect(ac.destination);
+  src.start();
+}
+function playDiscover() {
+  // Major arpeggio
+  [523, 659, 784, 1047, 1319].forEach((f, i) => {
+    setTimeout(() => playTone(f, 0.18, 'triangle', 0.16), i * 70);
+  });
+}
+function playTrash() { playTone(180, 0.18, 'square', 0.1); }
+
+/* ──────────────────────────── BLOB MANAGEMENT ──────────────────────────── */
+
+const canvasEl = document.getElementById('canvas');
+const trashEl  = document.getElementById('trash');
+const tutorialEl = document.getElementById('tutorial');
+
+function canvasRect() { return canvasEl.getBoundingClientRect(); }
+
+function spawnBlob(colorId, opts = {}) {
+  ensureAudio();
+  if (ac && ac.state === 'suspended') ac.resume();
+  const c = COLORS[colorId];
+  if (!c) return null;
+  const r = opts.r || 70;
+  const rect = canvasRect();
+  const px = Math.max(r/2 + 10, Math.min(rect.width  - r/2 - 10, opts.x ?? rect.width  / 2 + (Math.random() - 0.5) * 80));
+  const py = Math.max(r/2 + 10, Math.min(rect.height - r/2 - 10, opts.y ?? rect.height / 2 + (Math.random() - 0.5) * 60));
+
+  const el = document.createElement('div');
+  el.className = 'blob spawning';
+  el.style.setProperty('--c', c.rgb);
+  el.style.setProperty('--glow', hexToGlow(c.rgb));
+  el.style.setProperty('--r', r + 'px');
+  el.style.setProperty('--x', px + 'px');
+  el.style.setProperty('--y', py + 'px');
+  canvasEl.appendChild(el);
+
+  const blob = { el, id: ++nextBlobId, colorId, x: px, y: py, r, dragging: false };
+  blobs.push(blob);
+  attachDrag(blob);
+  if (!opts.silent) playSpawn();
+  return blob;
+}
+
+function hexToGlow(hex) {
+  const h = hex.replace('#','');
+  const r = parseInt(h.slice(0,2),16);
+  const g = parseInt(h.slice(2,4),16);
+  const b = parseInt(h.slice(4,6),16);
+  return `rgba(${r},${g},${b},0.35)`;
+}
+
+function setBlobPos(blob, x, y) {
+  blob.x = x;
+  blob.y = y;
+  blob.el.style.setProperty('--x', x + 'px');
+  blob.el.style.setProperty('--y', y + 'px');
+}
+
+function removeBlob(blob, animate = true) {
+  const idx = blobs.indexOf(blob);
+  if (idx >= 0) blobs.splice(idx, 1);
+  if (animate) {
+    blob.el.classList.add('consuming');
+    setTimeout(() => blob.el.remove(), 350);
+  } else {
+    blob.el.remove();
+  }
+}
+
+/* ──────────────────────────── DRAGGING ──────────────────────────── */
+
+let activePointer = null; // {blob, ox, oy}
+
+function attachDrag(blob) {
+  blob.el.addEventListener('pointerdown', (e) => {
+    if (activePointer) return;
+    e.preventDefault();
+    e.stopPropagation();
+    blob.el.setPointerCapture(e.pointerId);
+    blob.el.classList.add('grabbing');
+    blob.dragging = true;
+    const rect = canvasRect();
+    const mx = e.clientX - rect.left;
+    const my = e.clientY - rect.top;
+    activePointer = {
+      blob,
+      pointerId: e.pointerId,
+      ox: mx - blob.x,
+      oy: my - blob.y,
+    };
+    if (tutorialEl && !tutorialEl.classList.contains('hidden')) {
+      tutorialEl.classList.add('hidden');
+    }
+  });
+  blob.el.addEventListener('pointermove', (e) => {
+    if (!activePointer || activePointer.pointerId !== e.pointerId) return;
+    const rect = canvasRect();
+    const mx = e.clientX - rect.left;
+    const my = e.clientY - rect.top;
+    const x = Math.max(blob.r/2, Math.min(rect.width - blob.r/2, mx - activePointer.ox));
+    const y = Math.max(blob.r/2, Math.min(rect.height - blob.r/2, my - activePointer.oy));
+    setBlobPos(blob, x, y);
+    updateTrashHover(x, y);
+  });
+  blob.el.addEventListener('pointerup', (e) => endDrag(blob, e));
+  blob.el.addEventListener('pointercancel', (e) => endDrag(blob, e));
+}
+
+function updateTrashHover(x, y) {
+  const cr = canvasRect();
+  const tr = trashEl.getBoundingClientRect();
+  const tx = tr.left - cr.left + tr.width/2;
+  const ty = tr.top  - cr.top  + tr.height/2;
+  const d = Math.hypot(x - tx, y - ty);
+  if (d < 50) trashEl.classList.add('active');
+  else trashEl.classList.remove('active');
+}
+
+function endDrag(blob, e) {
+  if (!activePointer || activePointer.blob !== blob) return;
+  blob.el.classList.remove('grabbing');
+  blob.dragging = false;
+  activePointer = null;
+  // Check trash
+  const cr = canvasRect();
+  const tr = trashEl.getBoundingClientRect();
+  const tx = tr.left - cr.left + tr.width/2;
+  const ty = tr.top  - cr.top  + tr.height/2;
+  if (Math.hypot(blob.x - tx, blob.y - ty) < 50) {
+    playTrash();
+    removeBlob(blob);
+    trashEl.classList.remove('active');
+    return;
+  }
+  trashEl.classList.remove('active');
+  // Check merge
+  for (const other of blobs) {
+    if (other === blob) continue;
+    const d = Math.hypot(other.x - blob.x, other.y - blob.y);
+    if (d < (blob.r + other.r) * 0.55) {
+      tryMerge(blob, other);
+      return;
+    }
+  }
+}
+
+/* ──────────────────────────── MERGING ──────────────────────────── */
+
+function tryMerge(a, b) {
+  const key = [a.colorId, b.colorId].sort().join('+');
+  const result = RECIPE_MAP.get(key);
+  // Merge position
+  const mx = (a.x + b.x) / 2;
+  const my = (a.y + b.y) / 2;
+  const newR = Math.min(110, Math.sqrt(a.r * a.r + b.r * b.r) * 0.78 + 18);
+  // Splash
+  splash(mx, my, COLORS[a.colorId].rgb, 6);
+  splash(mx, my, COLORS[b.colorId].rgb, 6);
+  removeBlob(a);
+  removeBlob(b);
+  playMix();
+  if (result) {
+    setTimeout(() => {
+      const blob = spawnBlob(result, { x: mx, y: my, r: newR, silent: true });
+      // Discovery
+      if (!discovered.has(result)) {
+        discovered.add(result);
+        saveProgress();
+        showDiscovery(result);
+        updateHud();
+      } else {
+        showToast('「' + COLORS[result].kanji + '」だよ');
+      }
+    }, 200);
+  } else {
+    // No recipe — show "うーん..." toast and spawn an averaged anonymous mix that we just throw away
+    setTimeout(() => {
+      showToast('うーん… この組み合わせは ないみたい');
+    }, 250);
+  }
+}
+
+function splash(x, y, color, n) {
+  for (let i = 0; i < n; i++) {
+    const s = document.createElement('div');
+    s.className = 'splash';
+    s.style.background = color;
+    s.style.left = (x - 4) + 'px';
+    s.style.top  = (y - 4) + 'px';
+    const angle = Math.random() * Math.PI * 2;
+    const dist  = 30 + Math.random() * 50;
+    s.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
+    s.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
+    canvasEl.appendChild(s);
+    setTimeout(() => s.remove(), 600);
+  }
+}
+
+/* ──────────────────────────── DISCOVERY MODAL ──────────────────────────── */
+
+const modalDiscovery = document.getElementById('modal-discovery');
+const dBlob   = document.getElementById('discovery-blob');
+const dKanji  = document.getElementById('discovery-kanji');
+const dKana   = document.getElementById('discovery-kana');
+const dEn     = document.getElementById('discovery-en');
+const dMeta   = document.getElementById('discovery-meta');
+const dHead   = document.getElementById('discovery-headline');
+
+function showDiscovery(id) {
+  const c = COLORS[id];
+  dBlob.style.setProperty('--c', c.rgb);
+  dBlob.style.setProperty('--glow', hexToGlow(c.rgb));
+  dKanji.textContent = c.kanji;
+  dKana.textContent  = c.kana;
+  dEn.textContent    = c.en;
+  dMeta.textContent  = c.hint;
+  const totalNew = discovered.size;
+  if (totalNew === 25) {
+    dHead.textContent = '🏆 ぜんぶ あつめた！';
+  } else {
+    dHead.textContent = `あたらしい色を はっけん！  (${totalNew} / 25)`;
+  }
+  modalDiscovery.classList.remove('hidden');
+  playDiscover();
+  if (totalNew === 25) confettiRain();
+}
+
+document.getElementById('discovery-ok').addEventListener('click', () => {
+  modalDiscovery.classList.add('hidden');
+});
+
+/* ──────────────────────────── COLLECTION ──────────────────────────── */
+
+const modalCollection = document.getElementById('modal-collection');
+const colGrid = document.getElementById('col-grid');
+const colProgress = document.getElementById('col-progress');
+
+function renderCollection() {
+  colGrid.innerHTML = '';
+  for (const id of ORDER) {
+    const c = COLORS[id];
+    const cell = document.createElement('div');
+    cell.className = 'col-cell' + (c.primary ? ' primary' : '');
+    if (!discovered.has(id)) cell.classList.add('locked');
+    cell.style.setProperty('--c', c.rgb);
+    const sw = document.createElement('div');
+    sw.className = 'col-swatch';
+    sw.style.setProperty('--c', c.rgb);
+    if (!discovered.has(id)) sw.textContent = '？';
+    cell.appendChild(sw);
+    const nm = document.createElement('div');
+    nm.className = 'col-name' + (c.kanji.length <= 2 ? ' lg' : '');
+    nm.textContent = discovered.has(id) ? c.kanji : '？？';
+    cell.appendChild(nm);
+    const ka = document.createElement('div');
+    ka.className = 'col-kana';
+    ka.textContent = discovered.has(id) ? c.kana : '';
+    cell.appendChild(ka);
+    if (discovered.has(id)) {
+      cell.addEventListener('click', () => {
+        // Spawn one onto canvas (close modal)
+        modalCollection.classList.add('hidden');
+        spawnBlob(id);
+      });
+    } else {
+      cell.addEventListener('click', () => {
+        // Reveal recipe hint
+        if (c.recipe) {
+          const rec = c.recipe.map(r => COLORS[r].kanji + (discovered.has(r) ? '' : '?')).join(' + ');
+          showToast('ヒント: ' + rec);
+        }
+      });
+    }
+    colGrid.appendChild(cell);
+  }
+  colProgress.textContent = `${discovered.size} / 25 はっけん`;
+}
+
+document.getElementById('hud-collection').addEventListener('click', () => {
+  renderCollection();
+  modalCollection.classList.remove('hidden');
+});
+
+/* ──────────────────────────── HELP ──────────────────────────── */
+
+const modalHelp = document.getElementById('modal-help');
+document.getElementById('hud-help').addEventListener('click', () => {
+  modalHelp.classList.remove('hidden');
+});
+
+document.querySelectorAll('[data-close-modal]').forEach(b => {
+  b.addEventListener('click', () => {
+    document.getElementById(b.dataset.closeModal).classList.add('hidden');
+  });
+});
+
+/* ──────────────────────────── TOAST ──────────────────────────── */
+
+const toastEl = document.getElementById('toast');
+let toastTimer = null;
+function showToast(msg) {
+  toastEl.textContent = msg;
+  toastEl.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toastEl.classList.remove('show'), 1800);
+}
+
+/* ──────────────────────────── HUD ──────────────────────────── */
+
+function updateHud() {
+  document.getElementById('hud-count').textContent = discovered.size + '/25';
+}
+
+/* ──────────────────────────── CONFETTI ──────────────────────────── */
+
+function confettiRain() {
+  const colors = ['#ff8fb1','#ffd96a','#8ad8ff','#c4a3ff','#7be0a3','#ff7e95'];
+  for (let i = 0; i < 80; i++) {
+    setTimeout(() => {
+      const c = document.createElement('div');
+      c.className = 'confetti';
+      c.style.background = colors[i % colors.length];
+      c.style.left = Math.random() * 100 + 'vw';
+      c.style.top = '-20px';
+      c.style.transform = `rotate(${Math.random() * 360}deg)`;
+      const duration = 2 + Math.random() * 2;
+      c.animate([
+        { transform: `translateY(0) rotate(0deg)`, opacity: 1 },
+        { transform: `translateY(110vh) rotate(${720 + Math.random()*360}deg)`, opacity: 0.4 }
+      ], { duration: duration * 1000, easing: 'cubic-bezier(0.4,0,0.2,1)' });
+      document.body.appendChild(c);
+      setTimeout(() => c.remove(), duration * 1000);
+    }, i * 30);
+  }
+}
+
+/* ──────────────────────────── PALETTE ──────────────────────────── */
+
+document.querySelectorAll('.pot').forEach(b => {
+  b.addEventListener('pointerdown', (e) => {
+    e.preventDefault();
+  });
+  b.addEventListener('click', (e) => {
+    e.preventDefault();
+    spawnBlob(b.dataset.paint);
+  });
+});
+
+/* ──────────────────────────── BOOT ──────────────────────────── */
+
+function boot() {
+  loadProgress();
+  updateHud();
+  // Show help on first play
+  if (isFirstPlay()) {
+    setTimeout(() => {
+      modalHelp.classList.remove('hidden');
+      markPlayed();
+    }, 500);
+  }
+  // Hide tutorial after a while if untouched
+  setTimeout(() => {
+    if (tutorialEl && !tutorialEl.classList.contains('hidden')) {
+      // keep visible until first interaction
+    }
+  }, 9000);
+}
+
+// Prevent default touch scrolling on canvas
+['touchstart','touchmove'].forEach(ev => {
+  canvasEl.addEventListener(ev, e => e.preventDefault(), { passive: false });
+});
+
+// Resume audio on first user gesture (mobile)
+['pointerdown','touchstart','click'].forEach(ev => {
+  document.addEventListener(ev, () => {
+    ensureAudio();
+    if (ac && ac.state === 'suspended') ac.resume();
+  }, { once: true });
+});
+
+window.addEventListener('load', boot);
+</script>
+</body>
+</html>
