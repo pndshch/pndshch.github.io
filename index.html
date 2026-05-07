@@ -225,6 +225,7 @@ header p {
 .thumb-yamabikozoo { background: radial-gradient(ellipse at 50% 35%, #2a1438 0%, #18103a 55%, #0a0820 100%); }
 .thumb-kururinanime { background: radial-gradient(ellipse at 50% 35%, #FFE9A8 0%, #FFC93C 55%, #B8860B 100%); }
 .thumb-sunanouta { background: radial-gradient(ellipse at 50% 40%, #4a3618 0%, #1a1208 55%, #050302 100%); }
+.thumb-mongiri   { background: radial-gradient(ellipse at 50% 40%, #1a2c47 0%, #0f1c2e 55%, #060c18 100%); }
 .thumb-torishima { background: linear-gradient(180deg, #3a4a5e 0%, #1c2434 55%, #0a0e1a 100%); }
 .thumb-wald      { background: radial-gradient(ellipse at 50% 35%, #2c2a20 0%, #1a1812 55%, #0d0c08 100%); }
 
@@ -508,6 +509,22 @@ footer a:hover { color: #e6edf3; }
 
 <!-- All apps -->
 <div class="grid" id="app-grid">
+    <div class="card" data-cat="kids" data-added="2026-05-08T00:30:00+09:00" data-slug="mongiri">
+            <div class="card-thumb thumb-mongiri">
+            <span class="thumb-emoji">✦</span>
+                <img class="thumb-gif" src="assets/mongiri.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="mongiriTitle">もんきり</h2>
+                <p data-i18n="mongiriDesc">「紙を 三角に 折って、ハサミで ちょん。ぱっと ひらくと——ふしぎな もよう が あらわれる！」4〜9さい向け、世界の キッズアプリでも まれな、江戸時代（17世紀ごろ）から つたわる『紋切り（もんきり）』を、ゆびと 画面で まるごと 体験する 対称あそび。むかしの 日本の おうちには、それぞれの「家紋（かもん）」が あった——梅・松・菊・つる の しるし。その しるしを つくる 方法 が もんきり。三角に 折った 紙の 端を ちょっと 切って ひらくと、おなじ かたち が ぐるりと 8つ・16つ あらわれて、ぴたっと そろった しるし に なる。アプリでは、うえの「おりがみ」に ゆびで すうっ と えがくと、したの えんに 16の おなじ かたち が ぱっと あらわれる——dihedral対称（線対称＋回転対称）の しくみ を、こどもの ゆびで さわって しる。「4・6・8・12」の おりかた を ボタンで かえられるから、シンプルな 八角から 細かい 12角まで。「ひらく」を おすと、ばらばらの コピー が ぱぱぱ と じゅんに あらわれる ふしぎな ひらき アニメ。「ほぞん」で ずかんに たまり、いつでも PNG として ダウンロード。せいかいも しっぱいも ない no-fail な つくる おもちゃで、ことばが まだ よめない 4さいでも あそべる。「対称（シンメトリー）」を、教科書では なく、ほんものの 江戸の 工芸 で、ゆびで しる。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="mongiriTag1">4〜9歳</span>
+                    <span class="tag" data-i18n="mongiriTag2">江戸時代・紋切り</span>
+                    <span class="tag" data-i18n="mongiriTag3">対称あそび</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/mongiri/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
     <div class="card" data-cat="kids" data-added="2026-05-07T22:45:00+09:00" data-slug="suna-no-uta">
             <div class="card-thumb thumb-sunanouta">
             <span class="thumb-emoji">🎶</span>
@@ -1984,6 +2001,9 @@ const I18N = {
         yamabikozooTitle: "やまびこ どうぶつえん",
         yamabikozooDesc:  "ボタンを おして こえを だすと、8ひきの どうぶつが それぞれ ちがう おとの せいかくで あなたに こたえる。3〜7さい。",
         yamabikozooTag1: "3〜7歳", yamabikozooTag2: "こえあそび", yamabikozooTag3: "acoustic-personality",
+        mongiriTitle: "もんきり",
+        mongiriDesc:  "「紙を 三角に 折って、ちょん。ぱっと ひらくと——ふしぎな もよう！」江戸時代から つたわる 紋切り を ゆびで 体験する 対称あそび。4〜9さい。",
+        mongiriTag1: "4〜9歳", mongiriTag2: "江戸時代・紋切り", mongiriTag3: "対称あそび",
         sunanoutaTitle: "すなのうた",
         sunanoutaDesc:  "「おとを ならすと、すなが もよう を つくる！」1787年クラドニ図形を ゆびで さわって あそぶ おもちゃ。4〜8さい。",
         sunanoutaTag1: "4〜8歳", sunanoutaTag2: "おとのかたち", sunanoutaTag3: "1787年・クラドニ",
@@ -2254,6 +2274,9 @@ const I18N = {
         yamabikozooTitle: "Yamabiko Zoo (Echo Zoo)",
         yamabikozooDesc:  "Hold and speak — 8 animals each answer in their own acoustic personality. Ages 3–7.",
         yamabikozooTag1: "Ages 3–7", yamabikozooTag2: "Voice play", yamabikozooTag3: "Acoustic personality",
+        mongiriTitle: "Mongiri (Crest Cutting)",
+        mongiriDesc:  "Fold paper into a wedge, snip with your finger, then unfold — perfect dihedral symmetry appears. Edo-era Japanese fold-and-cut craft for ages 4–9.",
+        mongiriTag1: "Ages 4–9", mongiriTag2: "Edo Mongiri", mongiriTag3: "Symmetry play",
         sunanoutaTitle: "Suna no Uta (Sand's Song)",
         sunanoutaDesc:  "Press a note — sand forms a pattern on a vibrating plate. Chladni's 1787 cymatics for ages 4–8.",
         sunanoutaTag1: "Ages 4–8", sunanoutaTag2: "Shape of Sound", sunanoutaTag3: "1787 Chladni",
