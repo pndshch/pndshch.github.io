@@ -229,6 +229,7 @@ header p {
 .thumb-torishima { background: linear-gradient(180deg, #3a4a5e 0%, #1c2434 55%, #0a0e1a 100%); }
 .thumb-wald      { background: radial-gradient(ellipse at 50% 35%, #2c2a20 0%, #1a1812 55%, #0d0c08 100%); }
 .thumb-itoko     { background: radial-gradient(ellipse at 50% 30%, #4a1c5e 0%, #261447 55%, #07050f 100%); }
+.thumb-darumasan { background: radial-gradient(ellipse at 50% 38%, #ffd66b 0%, #f08e3a 45%, #b03a1f 100%); }
 .thumb-tako      { background: radial-gradient(ellipse at 50% 35%, #1a2c5c 0%, #0a1438 55%, #050b22 100%); }
 
 .card-body {
@@ -284,6 +285,37 @@ footer {
 footer a { color: #6d7680; text-decoration: none; transition: color 0.15s; }
 footer a:hover { color: #e6edf3; }
 .footer-sep { margin: 0 8px; }
+
+.contact-note {
+    color: #6c757a;
+    font-size: 11px;
+    margin: 6px 0 8px;
+    letter-spacing: 0.4px;
+}
+.contact-row {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+}
+.contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background: #161b22;
+    border: 1px solid #30363d;
+    border-radius: 999px;
+    color: #c9d1d9 !important;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: border-color 0.15s, background 0.15s, color 0.15s;
+    line-height: 1;
+}
+.contact-link svg { width: 14px; height: 14px; fill: currentColor; flex-shrink: 0; }
+.contact-link:hover { border-color: #7c3aed; background: #1c2128; color: #e6edf3 !important; }
 
 /* ── Responsive ── */
 @media (max-width: 480px) {
@@ -597,6 +629,22 @@ footer a:hover { color: #e6edf3; }
                     <span class="tag" data-i18n="takoyumeTag3">2023年・OIST</span>
                 </div>
                 <a class="card-btn btn-play" href="https://pndshch.github.io/tako-no-yume/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
+    <div class="card" data-cat="kids" data-added="2026-05-08T01:00:00+09:00" data-slug="darumasan">
+            <div class="card-thumb thumb-darumasan">
+            <span class="thumb-emoji">🟥</span>
+                <img class="thumb-gif" src="assets/darumasan.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="darumasanTitle">だるまさんがころんだ</h2>
+                <p data-i18n="darumasanDesc">「だるまが むこう を むいたら、とんとん タップ！すすもう。」3〜7さい向け、世界の キッズアプリでも まれな、日本の むかしから つたわる『だるまさんがころんだ』を、スマホの<strong>「うごきセンサー」</strong>で ほんものの「フリーズ」あそびに した もの。ふつうの アプリ版 は ボタンを ぽちっと おして とまる だけ——でも これは ちがう。だるまが くるりと ふりむいた しゅんかん、スマホ じたい が <strong>うごいたら、つかまる</strong>。なかみは カメラ では なく、<strong>かそくどセンサー</strong>。手の ふるえ も、しゃがむ うごき も、ぜんぶ だるま に みえちゃう。タップで すすんで、ふりむいた しゅんかん に <strong>じっと</strong>。3つの ハート、ゴール の マーク に たどりつけば しょうり。ことばが まだ よめない 3さい でも、だるまの かおが かわる だけ で わかる。「じっとする ちから（ぐっと こらえる ちから）」を、ボタン では なく、ほんとうに からだ で しる。みんなで わいわい、ひとりで しずかに。ちいさい こども が「いう こと を きく」では なく「<strong>からだ で とまる</strong>」を おぼえる、3〜7さいの セルフコントロール おもちゃ。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="darumasanTag1">3〜7歳</span>
+                    <span class="tag" data-i18n="darumasanTag2">うごきセンサー</span>
+                    <span class="tag" data-i18n="darumasanTag3">じっとする力</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/darumasan/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
     <div class="card" data-cat="kids" data-added="2026-05-08T00:30:00+09:00" data-slug="mongiri">
@@ -1839,7 +1887,21 @@ footer a:hover { color: #e6edf3; }
 
 <!-- Footer -->
 <footer>
-    <p><a href="https://github.com/pndshch" target="_blank">GitHub</a></p>
+    <p class="contact-note" data-i18n="contactNote">不具合のご連絡・お問い合わせはこちら</p>
+    <div class="contact-row">
+        <a class="contact-link" href="https://x.com/pndshch" target="_blank" rel="noopener" aria-label="X (Twitter)">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            <span>@pndshch</span>
+        </a>
+        <a class="contact-link" href="https://www.instagram.com/pndshch/" target="_blank" rel="noopener" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            <span>@pndshch</span>
+        </a>
+        <a class="contact-link" href="https://github.com/pndshch" target="_blank" rel="noopener" aria-label="GitHub">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.111.82-.261.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+            <span>pndshch</span>
+        </a>
+    </div>
     <p style="margin-top:8px">
         <img src="https://visitor-badge.laobi.icu/badge?page_id=pndshch.github.io&left_color=%23161b22&right_color=%2330363d&left_text=visitors" alt="visitors" style="height:20px;vertical-align:middle;">
     </p>
@@ -1851,6 +1913,7 @@ const I18N = {
     ja: {
         tagline: "ゲーム・教育・ツール — ブラウザとアプリで届けます",
         bmcLabel: "気に入ったら支援していただけると嬉しいです",
+        contactNote: "不具合のご連絡・お問い合わせはこちら",
         secGames: "🎮 ゲーム",
         secEdu:   "📚 教育・知育",
         secFun:   "🎪 おもしろ",
@@ -2110,6 +2173,9 @@ const I18N = {
         yamabikozooTitle: "やまびこ どうぶつえん",
         yamabikozooDesc:  "ボタンを おして こえを だすと、8ひきの どうぶつが それぞれ ちがう おとの せいかくで あなたに こたえる。3〜7さい。",
         yamabikozooTag1: "3〜7歳", yamabikozooTag2: "こえあそび", yamabikozooTag3: "acoustic-personality",
+        darumasanTitle: "だるまさんがころんだ",
+        darumasanDesc:  "「だるまが ふりむいた しゅんかん、スマホを じっと とめろ！」スマホの かそくどセンサー が ほんとうに うごき を はんてい する『だるまさんがころんだ』。タップで すすんで、ふりむいたら じっと。3〜7さい、じっとする ちから の おもちゃ。",
+        darumasanTag1: "3〜7歳", darumasanTag2: "うごきセンサー", darumasanTag3: "じっとする力",
         mongiriTitle: "もんきり",
         mongiriDesc:  "「紙を 三角に 折って、ちょん。ぱっと ひらくと——ふしぎな もよう！」江戸時代から つたわる 紋切り を ゆびで 体験する 対称あそび。4〜9さい。",
         mongiriTag1: "4〜9歳", mongiriTag2: "江戸時代・紋切り", mongiriTag3: "対称あそび",
@@ -2126,6 +2192,7 @@ const I18N = {
     en: {
         tagline:   "Games · Education · Tools — delivered via browser and apps",
         bmcLabel:  "If you enjoy what I make, your support means a lot",
+        contactNote: "Bug reports & contact",
         secGames:  "🎮 Games",
         secEdu:    "📚 Education",
         secFun:    "🎪 Fun",
@@ -2389,6 +2456,9 @@ const I18N = {
         yamabikozooTitle: "Yamabiko Zoo (Echo Zoo)",
         yamabikozooDesc:  "Hold and speak — 8 animals each answer in their own acoustic personality. Ages 3–7.",
         yamabikozooTag1: "Ages 3–7", yamabikozooTag2: "Voice play", yamabikozooTag3: "Acoustic personality",
+        darumasanTitle: "Darumasan ga Koronda",
+        darumasanDesc:  "The instant the daruma turns around, <strong>HOLD STILL</strong>! The phone's <strong>accelerometer</strong> actually judges whether you froze — not a tap-to-stop puzzle. Tap to creep forward during her chant, freeze on the turn, three hearts to reach the goal. A digital take on Japan's classic playground freeze game, training the embodied self-regulation that the original requires. Ages 3–7.",
+        darumasanTag1: "Ages 3–7", darumasanTag2: "Motion sensor", darumasanTag3: "Self-regulation",
         mongiriTitle: "Mongiri (Crest Cutting)",
         mongiriDesc:  "Fold paper into a wedge, snip with your finger, then unfold — perfect dihedral symmetry appears. Edo-era Japanese fold-and-cut craft for ages 4–9.",
         mongiriTag1: "Ages 4–9", mongiriTag2: "Edo Mongiri", mongiriTag3: "Symmetry play",
