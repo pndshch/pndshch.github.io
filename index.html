@@ -231,6 +231,7 @@ header p {
 .thumb-itoko     { background: radial-gradient(ellipse at 50% 30%, #4a1c5e 0%, #261447 55%, #07050f 100%); }
 .thumb-darumasan { background: radial-gradient(ellipse at 50% 38%, #ffd66b 0%, #f08e3a 45%, #b03a1f 100%); }
 .thumb-tako      { background: radial-gradient(ellipse at 50% 35%, #1a2c5c 0%, #0a1438 55%, #050b22 100%); }
+.thumb-tunguska  { background: radial-gradient(ellipse at 50% 28%, #2a3a48 0%, #131a22 55%, #08090c 100%); }
 
 .card-body {
     padding: 18px 20px 22px;
@@ -1229,6 +1230,22 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/itoko-aeons/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
+    <div class="card" data-cat="world-history" data-added="2026-05-07T21:55:00+09:00" data-slug="tunguska-1908" data-year="1908">
+            <div class="card-thumb thumb-tunguska">
+            <span class="thumb-emoji">☄️</span>
+                <img class="thumb-gif" src="assets/tunguska-1908.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="tunguskaTitle">ツングースカ 1908</h2>
+                <p data-i18n="tunguskaDesc">1908年6月30日、シベリア上空で空が <strong>二つに割れた</strong>。8,000万本の木が放射状に倒れ、約 <strong>2,150 km²</strong> の森が一瞬で薙ぎ払われたのに——<strong>クレーターは、ない</strong>。19年後に現地に立ったクーリックは、倒木の方向だけを頼りに爆心地を割り出した。あなたも同じ方法で。調査ポイントを叩き、矢印（倒木の指す方角）を読み、爆心地を置く。3分の三角測量。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="tunguskaTag1">史実体験</span>
+                    <span class="tag" data-i18n="tunguskaTag2">三角測量</span>
+                    <span class="tag" data-i18n="tunguskaTag3">6月30日</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/tunguska-1908/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
     <div class="card" data-cat="world-history" data-added="2026-05-07T20:05:00+09:00" data-slug="wald-1943" data-year="1943">
             <div class="card-thumb thumb-wald">
             <span class="thumb-emoji">✈️</span>
@@ -2158,6 +2175,9 @@ const I18N = {
         waldTitle: "弾痕の地図",
         waldDesc:  "1945年5月7日ドイツ降伏記念日。1943年、統計学者アブラハム・ワルドの解いた爆撃機の装甲問題。「装甲は、弾痕の少ない場所に貼れ」——3分で生存者バイアスを体で知る。",
         waldTag1: "史実体験", waldTag2: "生存者バイアス", waldTag3: "5月7日",
+        tunguskaTitle: "ツングースカ 1908",
+        tunguskaDesc:  "1908年6月30日シベリア。空が二つに割れ、8,000万本の木が放射状に倒れた——クレーターは、ない。倒木の指す方角だけを頼りに、地質学者クーリックがやったように爆心地を三角測量する3分の歴史体験。",
+        tunguskaTag1: "史実体験", tunguskaTag2: "三角測量", tunguskaTag3: "6月30日",
         itokoTitle: "イトコ何億年",
         itokoDesc:  "クジラの一番近い親戚は海ではなくカバ。キノコは植物よりあなたに近い。ふたつの生き物の「最後の共通祖先」はいつ？対数スケールの時間軸を指でなぞる、5ラウンドのディープタイム推定。全員、いとこ。",
         itokoTag1: "気づき", itokoTag2: "進化生物学", itokoTag3: "3分",
@@ -2441,6 +2461,9 @@ const I18N = {
         waldTitle: "The Map of Bullet Holes",
         waldDesc:  "May 7, 1945 — Germany signed unconditional surrender, 81 years ago. In 1943, statistician Abraham Wald solved the bomber-armor problem: 'Armor where the bullet holes are <em>not</em>.' Why? The data you see is only the survivors. A 3-min experience of survivorship bias.",
         waldTag1: "History·Felt", waldTag2: "Survivorship Bias", waldTag3: "May 7",
+        tunguskaTitle: "Tunguska 1908",
+        tunguskaDesc:  "June 30, 1908 — the Siberian sky split in two. 80 million trees fell radially around a single point; ~2,150 km² of forest gone — and no crater. Triangulate the airburst epicenter from the trees' fall direction, the way Kulik did it in 1927. A 3-min history game.",
+        tunguskaTag1: "History·Felt", tunguskaTag2: "Triangulation", tunguskaTag3: "Jun 30",
         itokoTitle: "Cousin Aeons",
         itokoDesc:  "A whale's closest relative isn't in the ocean — it's the <strong>hippo</strong>. A mushroom is closer to you than to a plant; animals and fungi split off together ~1.1 billion years ago. When did two species last share an ancestor? Drag a logarithmic timeline through 4 billion years across 5 rounds of deep-time guessing. The dog you walked, the tomato on your plate — <strong>all cousins</strong>. Just at different distances.",
         itokoTag1: "Takeaway", itokoTag2: "Evolution", itokoTag3: "3 min",
