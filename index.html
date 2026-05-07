@@ -222,6 +222,7 @@ header p {
 .thumb-ashioto    { background: radial-gradient(ellipse at 50% 35%, #2a1d6a 0%, #15102a 55%, #0a0717 100%); }
 .thumb-mimimeiro  { background: radial-gradient(ellipse at 50% 30%, #1a1438 0%, #0c0a20 60%, #050410 100%); }
 .thumb-kaokamo    { background: linear-gradient(160deg, #fef3c7 0%, #fde68a 60%, #fbbf24 100%); }
+.thumb-yamabikozoo { background: radial-gradient(ellipse at 50% 35%, #2a1438 0%, #18103a 55%, #0a0820 100%); }
 
 .card-body {
     padding: 18px 20px 22px;
@@ -501,6 +502,22 @@ footer a:hover { color: #e6edf3; }
 
 <!-- All apps -->
 <div class="grid" id="app-grid">
+    <div class="card" data-cat="kids" data-added="2026-05-07T20:00:00+09:00" data-slug="yamabiko-zoo">
+            <div class="card-thumb thumb-yamabikozoo">
+            <span class="thumb-emoji">🦉</span>
+                <img class="thumb-gif" src="assets/yamabiko-zoo.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="yamabikozooTitle">やまびこ どうぶつえん</h2>
+                <p data-i18n="yamabikozooDesc">ボタンを おして、こえを だしてみよう。はなすと、どうぶつが あなたの こえで こたえてくれる。3〜7さい向け、世界初級の『どうぶつ acoustic personality』あそび。8ひきの どうぶつ（ぞう・ことり・おおかみ・かえる・くじら・ふくろう・ねこ・すずむし）が、それぞれ ぜんぜん ちがう おとの せいかくを もっていて、あなたの こえに ちがう やまびこを かえす。ぞうは ふかく ゆっくり、ことりは たかく はやく、くじらは うみの なかの ような ふかい ひびき、すずむしは きらきらした かろやか な おと。これは ふつうの ボイスチェンジャー（リアルタイム pitch shift）では なくて、Web Audio の「えんちょう エコー × フィルター × たたみこみ ざんきょう」を どうぶつごとに デザイン した、acoustic-personality おもちゃ。せいかいも しっぱいも ない no-fail toy で、ことばを まだ よめない 3さいでも あそべる。「おとは ばしょによって・どうぶつによって ちがう」を、こえと からだで しる、しずかな じっけん。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="yamabikozooTag1">3〜7歳</span>
+                    <span class="tag" data-i18n="yamabikozooTag2">こえあそび</span>
+                    <span class="tag" data-i18n="yamabikozooTag3">acoustic-personality</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/yamabiko-zoo/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
     <div class="card" data-cat="kids" data-added="2026-05-07T18:30:00+09:00" data-slug="kao-kamo">
             <div class="card-thumb thumb-kaokamo">
             <span class="thumb-emoji">👀</span>
@@ -1886,6 +1903,9 @@ const I18N = {
         kaokamoTitle: "かおかも",
         kaokamoDesc:  "もようを じっと みると、かおが かくれてる。3〜7さい向け、人間がもつ『パレイドリア（無生物に顔を見出す本能）』を、まるごと あそびにした、世界初級の no-fail かんさつ あそび。くも・しみ・きのめ・いし・ゆうぐれ・おちば・かべ・じょうき—8つの procedural patterns（ぜんぶ ランダム生成、同じ もようは ふたつと ない）から、タップした ところに かおが あらわれて、まばたきして、にっこり 笑う。「まちがい」が ない。タップした ところが かならず かおに なる、ぜったい うまくいく あそびだから、ことばを まだ よめない 3さいから あそべる。みつけた かおは ぜんぶ ずかんに たまっていく—『じぶんが 見つけた もの』が ふえていく ちいさな よろこび。スクリーン疲労時代に生まれた、勝ち負けの ない、観察と 想像の あそびば。",
         kaokamoTag1: "3〜7歳", kaokamoTag2: "パレイドリア", kaokamoTag3: "no-fail",
+        yamabikozooTitle: "やまびこ どうぶつえん",
+        yamabikozooDesc:  "ボタンを おして、こえを だしてみよう。はなすと、どうぶつが あなたの こえで こたえてくれる。3〜7さい向け、世界初級の『どうぶつ acoustic personality』あそび。8ひきの どうぶつ（ぞう・ことり・おおかみ・かえる・くじら・ふくろう・ねこ・すずむし）が、それぞれ ぜんぜん ちがう おとの せいかくを もっていて、あなたの こえに ちがう やまびこを かえす。ぞうは ふかく ゆっくり、ことりは たかく はやく、くじらは うみの なかの ような ふかい ひびき、すずむしは きらきらした かろやか な おと。これは ふつうの ボイスチェンジャー（リアルタイム pitch shift）では なくて、Web Audio の「えんちょう エコー × フィルター × たたみこみ ざんきょう」を どうぶつごとに デザイン した、acoustic-personality おもちゃ。せいかいも しっぱいも ない no-fail toy で、ことばを まだ よめない 3さいでも あそべる。「おとは ばしょによって・どうぶつによって ちがう」を、こえと からだで しる、しずかな じっけん。",
+        yamabikozooTag1: "3〜7歳", yamabikozooTag2: "こえあそび", yamabikozooTag3: "acoustic-personality",
     },
     en: {
         tagline:   "Games · Education · Tools — delivered via browser and apps",
@@ -2139,6 +2159,9 @@ const I18N = {
         kaokamoTitle: "Kao-Kamo (Maybe-a-Face)",
         kaokamoDesc:  "Stare at the pattern — there's a face hiding in it. A first-of-its-kind no-fail observation toy for ages 3–7, built around pareidolia: the universal human instinct to see faces in clouds, ink stains, wood knots, and water marks. Eight procedurally-generated scenes — Cloud, Ink Stain, Wood Grain, Stone, Sunset, Leaf, Wall, Steam — every pattern is unique. Tap anywhere you can see eyes, and a face pops into being: blinking, blushing, smiling, saying hi. There's no \"wrong\" tap. Wherever you tap becomes a face — so a 3-year-old who can't read yet can succeed every time, and the game positions the child as the discoverer, not the test-taker. Found faces accumulate in a small ZUKAN strip — the quiet joy of a growing collection of \"things I noticed.\" An open-ended creative toy for the screen-fatigued generation, where there's no winning or losing — only observation, imagination, and the magic of seeing faces appear.",
         kaokamoTag1: "Ages 3–7", kaokamoTag2: "Pareidolia", kaokamoTag3: "No-Fail",
+        yamabikozooTitle: "Yamabiko Zoo (Echo Zoo)",
+        yamabikozooDesc:  "Press and hold the button, make a sound, and release — an animal answers your voice in their own acoustic personality. A first-of-its-kind acoustic-physics toy for ages 3–7. Eight animals — Elephant, Bird, Wolf, Frog, Whale, Owl, Cat, Cricket — each carry a distinct acoustic personality: deep slow rumble, quick high chirp, deep underwater echo, sparkling grass shimmer. Unlike real-time voice changers (just pitch-shift), each animal owns a hand-tuned Web Audio chain: playback rate × biquad filter × delay-with-feedback × convolution reverb (with a synthesized impulse). The result isn't a single transformation — it's a character. Eight characters answering your voice. No-fail, no goal — a 3-year-old who can't read yet can play. A quiet experiment that teaches, by ear, the truth that sound is shaped by where it lives.",
+        yamabikozooTag1: "Ages 3–7", yamabikozooTag2: "Voice play", yamabikozooTag3: "Acoustic personality",
     }
 };
 
