@@ -233,6 +233,7 @@ header p {
 .thumb-tako      { background: radial-gradient(ellipse at 50% 35%, #1a2c5c 0%, #0a1438 55%, #050b22 100%); }
 .thumb-tunguska  { background: radial-gradient(ellipse at 50% 28%, #2a3a48 0%, #131a22 55%, #08090c 100%); }
 .thumb-eratosthenes { background: linear-gradient(180deg, #1f3a5a 0%, #4a6a8a 38%, #c9a572 70%, #8a6234 100%); }
+.thumb-carrington { background: linear-gradient(180deg, #050308 0%, #1a0a28 35%, #5a1a4a 65%, #08200a 100%); }
 .thumb-uchu      { background: radial-gradient(ellipse at 50% 30%, #1d3473 0%, #0a1535 55%, #050216 100%); }
 
 .card-body {
@@ -1248,6 +1249,22 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/itoko-aeons/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
+    <div class="card" data-cat="world-history" data-added="2026-05-07T23:30:00+09:00" data-slug="carrington-1859" data-year="1859">
+            <div class="card-thumb thumb-carrington">
+            <span class="thumb-emoji">⚡</span>
+                <img class="thumb-gif" src="assets/carrington-1859.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="carringtonTitle">太陽嵐 1859</h2>
+                <p data-i18n="carringtonDesc">1859年9月1日、太陽が史上最大級の閃光を放った。翌夜、世界中の電信線が<strong>火花</strong>を散らし、操作員は<strong>感電</strong>し——そして<strong>電池を切っても、なぜか線は生きていた</strong>。空はキューバやハワイでも<strong>赤く燃えていた</strong>。あなたは電信局員。鍵を叩いて文字を送れ。嵐が、すべてを変える。3分の<strong>カリントン・イベント</strong>体験。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="carringtonTag1">史実体験</span>
+                    <span class="tag" data-i18n="carringtonTag2">太陽嵐</span>
+                    <span class="tag" data-i18n="carringtonTag3">9月1日</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/carrington-1859/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
     <div class="card" data-cat="world-history" data-added="2026-05-07T22:30:00+09:00" data-slug="eratosthenes-240bc" data-year="-240">
             <div class="card-thumb thumb-eratosthenes">
             <span class="thumb-emoji">📐</span>
@@ -2215,6 +2232,9 @@ const I18N = {
         eratosthenesTitle: "シエネの井戸 紀元前240年",
         eratosthenesDesc:  "紀元前240年、エジプト南部のシエネで夏至の正午、深い井戸の底まで陽光が届く——太陽が真上にある証拠。だがアレクサンドリアでは同じ瞬間、棒は影を作る。図書館長エラトステネスは気づいた——その差を測れば<strong>地球の大きさ</strong>がわかる。あなたも棒を立て、影の角度を読み、5,000スタディアを歩き、地球一周を計算する。誤差わずか1.6%。棒一本で。",
         eratosthenesTag1: "史実体験", eratosthenesTag2: "幾何学", eratosthenesTag3: "紀元前240年",
+        carringtonTitle: "太陽嵐 1859",
+        carringtonDesc:  "1859年9月1日、太陽が史上最大級の閃光を放った。翌夜、電信線は火花を散らし、操作員は感電——電池を切っても、なぜか線は生きていた。キューバやハワイの空も赤く燃えた。鍵を叩いて文字を送れ。嵐が、すべてを変える3分のカリントン・イベント。",
+        carringtonTag1: "史実体験", carringtonTag2: "太陽嵐", carringtonTag3: "9月1日",
         itokoTitle: "イトコ何億年",
         itokoDesc:  "クジラの一番近い親戚は海ではなくカバ。キノコは植物よりあなたに近い。ふたつの生き物の「最後の共通祖先」はいつ？対数スケールの時間軸を指でなぞる、5ラウンドのディープタイム推定。全員、いとこ。",
         itokoTag1: "気づき", itokoTag2: "進化生物学", itokoTag3: "3分",
@@ -2507,6 +2527,9 @@ const I18N = {
         eratosthenesTitle: "The Well of Syene · 240 BC",
         eratosthenesDesc:  "240 BC — chief librarian of Alexandria <strong>Eratosthenes</strong> heard that at noon on the summer solstice, sunlight reached the bottom of a deep well in Syene. Sun directly overhead. But in Alexandria at the same hour a vertical stick still cast a shadow. He realized — the difference reveals <strong>the size of the Earth itself</strong>. Plant a stick, read the shadow's angle, march 5,000 stadia of caravan, calculate the circumference. <strong>Off by only 1.6%</strong> from the modern value. With a stick.",
         eratosthenesTag1: "History·Felt", eratosthenesTag2: "Geometry", eratosthenesTag3: "240 BC",
+        carringtonTitle: "Solar Storm 1859",
+        carringtonDesc:  "1 Sept 1859 — the Sun fired its largest flare on record. The next night, telegraph wires sparked, operators were shocked, and yet, with batteries cut, the lines still ran. Aurora burned red over Cuba and Hawaii. Tap the key and send: a 3-minute Carrington Event.",
+        carringtonTag1: "History·Felt", carringtonTag2: "Solar storm", carringtonTag3: "Sept 1",
         itokoTitle: "Cousin Aeons",
         itokoDesc:  "A whale's closest relative isn't in the ocean — it's the <strong>hippo</strong>. A mushroom is closer to you than to a plant; animals and fungi split off together ~1.1 billion years ago. When did two species last share an ancestor? Drag a logarithmic timeline through 4 billion years across 5 rounds of deep-time guessing. The dog you walked, the tomato on your plate — <strong>all cousins</strong>. Just at different distances.",
         itokoTag1: "Takeaway", itokoTag2: "Evolution", itokoTag3: "3 min",
