@@ -244,6 +244,7 @@ header p {
 .thumb-broadstreet { background: linear-gradient(180deg, #2a1f15 0%, #5a4a36 35%, #b09866 70%, #f0e3c2 100%); }
 .thumb-wegener   { background: linear-gradient(180deg, #2c2218 0%, #6b4f30 35%, #cca06f 70%, #efe4cb 100%); }
 .thumb-lo1969    { background: radial-gradient(ellipse at 50% 50%, #0e1810 0%, #050a05 60%, #020602 100%); }
+.thumb-pelee1902 { background: radial-gradient(ellipse at 70% 30%, #d24a1a 0%, #6a1a08 50%, #1a0c04 100%); }
 .thumb-uchu      { background: radial-gradient(ellipse at 50% 30%, #1d3473 0%, #0a1535 55%, #050216 100%); }
 
 .card-body {
@@ -1356,6 +1357,22 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/itoko-aeons/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
+    <div class="card" data-cat="world-history" data-added="2026-05-08T07:30:00+09:00" data-slug="pelee-1902" data-year="1902">
+            <div class="card-thumb thumb-pelee1902">
+            <span class="thumb-emoji">🌋</span>
+                <img class="thumb-gif" src="assets/pelee-1902.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="pelee1902Title">独房 1902</h2>
+                <p data-i18n="pelee1902Desc">1902年5月8日 7時52分、マルティニーク島サン・ピエール。<strong>プレー山</strong>が割れ、時速<strong>670km</strong>・<strong>1000℃</strong>の<strong>火砕流</strong>が90秒で街を呑んだ。約<strong>28,000人</strong>が死んだ。街の中心で生き残ったのは、けんかで地下の<strong>独房</strong>に入れられていた27歳、<strong>ルジェ・シパリス</strong>ただ一人。あなたは彼。スリットから熱が来る。<em>塞げ、低くなれ、布を濡らせ</em>。124年前の今日、5月8日。3分の史実。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="pelee1902Tag1">史実体験</span>
+                    <span class="tag" data-i18n="pelee1902Tag2">唯一の生還者</span>
+                    <span class="tag" data-i18n="pelee1902Tag3">5月8日 · 1902</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/pelee-1902/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
     <div class="card" data-cat="world-history" data-added="2026-05-08T04:30:00+09:00" data-slug="lo-1969" data-year="1969">
             <div class="card-thumb thumb-lo1969">
             <span class="thumb-emoji">📡</span>
@@ -2424,6 +2441,9 @@ const I18N = {
         lo1969Title: "「エル・オー」1969",
         lo1969Desc:  "1969年10月29日 22:30 PST。UCLAの大学院生チャーリー・クラインは、SRIのビル・デュヴァルに電話越しでLOGINと打とうとした。「L」が届いた。「O」が届いた。そして「G」を打った瞬間——SRIのIMPが落ちた。史上初のインターネット・メッセージは、「LO」だった。1時間後、彼らは復旧し、フルLOGINに成功する。CRTの緑光と50kbpsの専用線で、IMPからIMPへ走るパケットを、あなたが一文字ずつ送る——「LO and behold」、世界はネットワークを得た夜の1分。",
         lo1969Tag1: "史実体験", lo1969Tag2: "ARPANET", lo1969Tag3: "10月29日 · 1969",
+        pelee1902Title: "独房 1902",
+        pelee1902Desc:  "1902年5月8日 7時52分、マルティニーク島サン・ピエール。プレー山が割れ、時速670km・1000℃の火砕流が90秒で街を呑んだ。約28,000人が死んだ。街の中心で生き残ったのは、けんかで地下の独房に入れられていた27歳、ルジェ・シパリスただ一人。あなたは彼。スリットから熱が来る——塞げ、低くなれ、布を濡らせ。124年前の今日、5月8日。3分の史実。",
+        pelee1902Tag1: "史実体験", pelee1902Tag2: "唯一の生還者", pelee1902Tag3: "5月8日 · 1902",
         itokoTitle: "イトコ何億年",
         itokoDesc:  "クジラの一番近い親戚は海ではなくカバ。キノコは植物よりあなたに近い。ふたつの生き物の「最後の共通祖先」はいつ？対数スケールの時間軸を指でなぞる、5ラウンドのディープタイム推定。全員、いとこ。",
         itokoTag1: "気づき", itokoTag2: "進化生物学", itokoTag3: "3分",
@@ -2749,6 +2769,9 @@ const I18N = {
         lo1969Title: "Lo and Behold · 1969",
         lo1969Desc:  "29 October 1969, 22:30 PST. UCLA grad student Charley Kline, on the phone with Bill Duvall at SRI, tries to type LOGIN. The 'L' arrives. The 'O' arrives. As 'G' is sent — the SRI IMP crashes. The first message ever on the Internet was 'LO'. An hour later they reconnect and finish the LOGIN. Send each character yourself across a 50 kbps leased line, watch the packet hop IMP-to-IMP under green CRT light — one minute on the night the world got a network. Lo, and behold.",
         lo1969Tag1: "History·Felt", lo1969Tag2: "ARPANET", lo1969Tag3: "Oct 29 · 1969",
+        pelee1902Title: "The Cell · 1902",
+        pelee1902Desc:  "8 May 1902, 07:52, Saint-Pierre, Martinique. <strong>Mont Pelée</strong> split open. A <strong>1,000°C</strong> pyroclastic flow at <strong>670 km/h</strong> erased the city in 90 seconds. About <strong>28,000</strong> died. The only survivor in the city center was <strong>Ludger Cyparis</strong>, 27, locked in a half-buried solitary cell for a brawl. You are him. Heat is coming through the slit — <em>plug it, get low, wet a cloth</em>. 124 years ago today. A 3-min history piece.",
+        pelee1902Tag1: "History·Felt", pelee1902Tag2: "Sole survivor", pelee1902Tag3: "May 8 · 1902",
         itokoTitle: "Cousin Aeons",
         itokoDesc:  "A whale's closest relative isn't in the ocean — it's the <strong>hippo</strong>. A mushroom is closer to you than to a plant; animals and fungi split off together ~1.1 billion years ago. When did two species last share an ancestor? Drag a logarithmic timeline through 4 billion years across 5 rounds of deep-time guessing. The dog you walked, the tomato on your plate — <strong>all cousins</strong>. Just at different distances.",
         itokoTag1: "Takeaway", itokoTag2: "Evolution", itokoTag3: "3 min",
