@@ -219,6 +219,7 @@ header p {
 .thumb-pikopiko   { background: radial-gradient(ellipse at 50% 45%, #10103a 0%, #08081f 55%, #04030d 100%); }
 .thumb-kiokuiz    { background: radial-gradient(ellipse at 30% 30%, #4a1a6a 0%, #2a1860 45%, #0a0420 100%); }
 .thumb-ashioto    { background: radial-gradient(ellipse at 50% 35%, #2a1d6a 0%, #15102a 55%, #0a0717 100%); }
+.thumb-mimimeiro  { background: radial-gradient(ellipse at 50% 30%, #1a1438 0%, #0c0a20 60%, #050410 100%); }
 
 .card-body {
     padding: 18px 20px 22px;
@@ -498,6 +499,22 @@ footer a:hover { color: #e6edf3; }
 
 <!-- All apps -->
 <div class="grid" id="app-grid">
+    <div class="card" data-cat="kids" data-added="2026-05-07T16:30:00+09:00" data-slug="mimi-no-meiro">
+            <div class="card-thumb thumb-mimimeiro">
+            <span class="thumb-emoji">🎧</span>
+                <img class="thumb-gif" src="assets/mimi-no-meiro.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="mimimeiroTitle">みみのめいろ</h2>
+                <p data-i18n="mimimeiroDesc">きこえる おとだけを たよりに、ひかる ホタルを さがそう。6〜9さい向け、目では なく『みみで 見る』空間音響あそび。ホタルは ステレオパン（みぎ／ひだり）・おんりょう・たかさ（220〜880Hz）・なる はやさ の4つで じぶんの ばしょを 知らせる。あかるい→うすやみ→まっくら の3レベル スカフォールドで、6さいでも スタートでき、だんだん 音だけで さがせる ように なる。ヘッドホンが ベスト だけど、スピーカーでも わかる モノラル フォールバック つき。リズム ゲームでも 音あて ゲームでも ない、世界初級の キッズむけ 空間聴覚 トレーニング。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="mimimeiroTag1">6〜9歳</span>
+                    <span class="tag" data-i18n="mimimeiroTag2">空間音響</span>
+                    <span class="tag" data-i18n="mimimeiroTag3">耳で見る</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/mimi-no-meiro/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
     <div class="card" data-cat="kids" data-added="2026-05-07T14:35:12+09:00" data-slug="ashi-oto">
             <div class="card-thumb thumb-ashioto">
             <span class="thumb-emoji">👣</span>
@@ -1826,6 +1843,9 @@ const I18N = {
         ashiotoTitle: "あしおと",
         ashiotoDesc:  "スマホをもって、はねたり、あるいたり、ゆれたり——画面はタップしない。うごきがおんがくになる、3〜7さい向けの『からだ＝楽器』あそび。うさぎはぴょんぴょん、ぞうはドシン、ちょうちょはふわっと、へびはじっと…9種類のどうぶつのリズムを自分のからだで再現するとクリア＝図鑑に集まる『どうぶつのリズム図鑑』モード搭載。加速度センサーが「ジャンプ」「あしおと」「ゆれ」「スピン」「停止」を聞き分けて、それぞれちがう音色（ピアノ・ベル・ドラム・パッド）と光（花火・足あと・きらめき・虹のスパイラル・蓮の花）に変換。受動的なタップではなく、からだぜんぶで遊ぶ──スクリーン疲労時代に生まれた、運動センサーで遊ぶキッズ音楽図鑑。",
         ashiotoTag1: "3〜7歳", ashiotoTag2: "うごき×音", ashiotoTag3: "タップなし",
+        mimimeiroTitle: "みみのめいろ",
+        mimimeiroDesc:  "きこえる おとだけを たよりに、ひかる ホタルを さがそう。6〜9さい向け、目では なく『みみで 見る』空間音響あそび。ホタルは ステレオパン（みぎ／ひだり）・おんりょう・たかさ（220〜880Hz）・なる はやさ の4つで じぶんの ばしょを 知らせる。あかるい→うすやみ→まっくら の3レベル スカフォールドで、6さいでも スタートでき、だんだん 音だけで さがせる ように なる。ヘッドホンが ベスト だけど、スピーカーでも わかる モノラル フォールバック つき。リズム ゲームでも 音あて ゲームでも ない、世界初級の キッズむけ 空間聴覚 トレーニング。",
+        mimimeiroTag1: "6〜9歳", mimimeiroTag2: "空間音響", mimimeiroTag3: "耳で見る",
     },
     en: {
         tagline:   "Games · Education · Tools — delivered via browser and apps",
@@ -2070,6 +2090,9 @@ const I18N = {
         ashiotoTitle: "Ashi-oto (Footsteps Music)",
         ashiotoDesc:  "Hold the phone — and hop, walk, sway, spin. Don't tap the screen. Your movement becomes music, in this body-as-instrument toy for ages 3–7. The accelerometer tells \"jump\" from \"step\" from \"sway\" from \"spin\" from \"still\" — and each motion paints a different sound (piano / bell / drum / pad) and a different light (fireworks / footprints / sparkles / rainbow spiral / lotus). 'Animal Rhythm Zoo' mode challenges kids to copy 9 animals with their body: bunny hops, elephant stomps, butterfly sways, snake stays still, horse trots, frog jumps-and-waits… Mimic correctly and the animal joins your zoo. A first-of-its-kind kids music encyclopedia played with motion sensors — for the screen-fatigued generation, where the body is the controller.",
         ashiotoTag1: "Ages 3–7", ashiotoTag2: "Motion × Music", ashiotoTag3: "No Tapping",
+        mimimeiroTitle: "Mimi-no-Meiro (Ear Maze)",
+        mimimeiroDesc:  "Find the firefly using only sound. A spatial-audio navigation game for ages 6–9 that grows the often-untrained sense of \"seeing with your ears.\" The firefly emits a continuous chime that maps four cues to its position: stereo pan (L/R direction), volume (distance), pitch from 220–880 Hz (closer = higher), and pulse rate (closer = faster). Three difficulty levels scaffold from Bright (full sight) to Dim (compass + warmth dots) to Pitch Dark (audio-dominant), so a 6-year-old can succeed and gradually graduate to ears-only navigation. Headphones are best, but a mono fallback (volume + pitch + pulse) keeps it playable on tablet speakers. Not a rhythm game, not a sound-matching quiz — a first-of-its-kind kids' spatial-hearing trainer.",
+        mimimeiroTag1: "Ages 6–9", mimimeiroTag2: "Spatial Audio", mimimeiroTag3: "See with Ears",
     }
 };
 
