@@ -239,6 +239,7 @@ header p {
 .thumb-fleming    { background: radial-gradient(ellipse at 50% 38%, #3a2a18 0%, #1f1610 55%, #0d0805 100%); }
 .thumb-kosuruto  { background: radial-gradient(ellipse at 50% 35%, #2b1a4d 0%, #1a1230 65%, #0c0820 100%); }
 .thumb-kiin      { background: radial-gradient(ellipse at 50% 28%, #08332e 0%, #0a1d1b 55%, #021816 100%); }
+.thumb-menotanken { background: radial-gradient(ellipse at 50% 80%, #6b5a44 0%, #2a3a55 35%, #101a30 70%, #050a18 100%); }
 .thumb-broadstreet { background: linear-gradient(180deg, #2a1f15 0%, #5a4a36 35%, #b09866 70%, #f0e3c2 100%); }
 .thumb-wegener   { background: linear-gradient(180deg, #2c2218 0%, #6b4f30 35%, #cca06f 70%, #efe4cb 100%); }
 .thumb-lo1969    { background: radial-gradient(ellipse at 50% 50%, #0e1810 0%, #050a05 60%, #020602 100%); }
@@ -627,6 +628,22 @@ footer a:hover { color: #e6edf3; }
 
 <!-- All apps -->
 <div class="grid" id="app-grid">
+    <div class="card" data-cat="kids" data-added="2026-05-08T18:00:00+09:00" data-slug="me-no-tanken">
+            <div class="card-thumb thumb-menotanken">
+            <span class="thumb-emoji">🦉</span>
+                <img class="thumb-gif" src="assets/me-no-tanken.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="menotankenTitle">めの たんけん</h2>
+                <p data-i18n="menotankenDesc"><strong>スマホで めが つかれた こども に、めを やすめる ゲーム。</strong>4〜9さい むけ、世界の キッズアプリの ほとんどは <strong>めを つかれさせる</strong>もの——でも これは ぎゃく。<strong>がめんから めを はなしたら ごほうび</strong>に なる、anti-screen な あそび。3分間、よる の もりで 6つの ステージ：①<strong>ふくろうの あいさつ</strong>（ゆっくり まばたき）②<strong>ホタル おっかけ</strong>（スムーズ追視）③<strong>ぱっぱの ほし</strong>（さっと めを うごかす・サッカード）④<strong>ちかい・とおい</strong>（ピント調節：スマホを ちかく/とおく）⑤<strong>20びょう やすみ</strong>（米国眼科学会の <strong>20-20-20 ルール</strong> を 体で おぼえる：スマホを よこに かたむけたら カウントダウンが すすむ・うごきセンサーで 検知）⑥<strong>よあけ</strong>（おつかれさま）。アジアの こども の <strong>近視（きんし）</strong> は 過去30年で 何倍にも 増えていて、東アジアの 大学生は 8割以上が 近視。タブレット時代の こどもの目を まもる ための、世界でも まれな『めを やすめる』こども ゲーム。日本語と English の バイリンガル、1枚 HTML、ライブラリなし。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="menotankenTag1">4〜9歳</span>
+                    <span class="tag" data-i18n="menotankenTag2">20-20-20</span>
+                    <span class="tag" data-i18n="menotankenTag3">めを やすめる</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/me-no-tanken/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
     <div class="card" data-cat="kids" data-added="2026-05-08T08:00:00+09:00" data-slug="kiin-no-mori">
             <div class="card-thumb thumb-kiin">
             <span class="thumb-emoji">🔔</span>
@@ -2428,6 +2445,9 @@ const I18N = {
         kiinTitle: "キーンのもり",
         kiinDesc:  "「あなたの みみは なんさい？」もりには 12この ベル。8kHz から 22kHzへ。きこえたら タップ、きこえない ところで おわり。たかい音 を きく ゆうもうさいぼう は いちばん つかれやすく、ほとんどの ひとは おとなに なると たかい音から きこえなくなる(presbycusis)。こども(〜13さい)は ~20kHz、25さい で 18kHz が めやす。おうちの 人と くらべよう——きみに しか きこえない ベルが ある。6〜12さい。",
         kiinTag1: "6〜12歳", kiinTag2: "高周波聴力", kiinTag3: "親子で比べる",
+        menotankenTitle: "めの たんけん",
+        menotankenDesc:  "<strong>がめんから めを はなしたら ごほうび</strong>に なる、4〜9さい むけの anti-screen ゲーム。世界の キッズアプリの ほとんどは めを つかれさせる——でも これは ぎゃく。3分間、よる の もりで 6つの ステージ：①ふくろうと まばたき ②ホタルを めで おっかけ（スムーズ追視）③ぱっと ひかる ほしを タップ（サッカード）④ちょうちょの 大小で スマホを ちかく/とおく（ピント調節）⑤<strong>20-20-20 ルール</strong>を 体で：スマホを よこに かたむけたら 20びょう カウントダウン（うごきセンサーで 検知）⑥よあけ。アジアの こどもの 近視は 30年で 数倍に。タブレット時代の 目を まもる、世界でも まれな『めを やすめる』こども ゲーム。",
+        menotankenTag1: "4〜9歳", menotankenTag2: "20-20-20", menotankenTag3: "めを やすめる",
     },
     en: {
         tagline:   "Games · Education · Tools — delivered via browser and apps",
@@ -2747,6 +2767,9 @@ const I18N = {
         kiinTitle: "Kīn Forest",
         kiinDesc:  "\"How old are your ears?\" 12 bells in a forest, climbing from 8 kHz to 22 kHz. Tap when you hear one — the test ends where you can't. The hair cells that detect high frequencies are the first to wear out, so most adults gradually lose the highest pitches first (presbycusis). Kids under 13 typically hear up to ~20 kHz; by 25, ~18 kHz. The big reveal: hand the phone to a parent and watch them lose bells you can hear. Same principle as the \"mosquito tone.\" Pure Web Audio sine waves, volume capped for safety. Ages 6-12.",
         kiinTag1: "Ages 6-12", kiinTag2: "Hearing range", kiinTag3: "Parent vs kid",
+        menotankenTitle: "Eye Expedition",
+        menotankenDesc:  "An <strong>anti-screen</strong> game for ages 4-9: it rewards you for <strong>looking away from the screen</strong>. Most kids' apps strain the eyes — this one does the opposite. Six 3-minute stages in a night forest: ① owl blink-along (slows the kid's blink rate, which screens cut in half) ② firefly chase (smooth pursuit) ③ flashing stars (saccades) ④ near/far butterfly (lens accommodation) ⑤ <strong>20-20-20 break</strong>: tilt the phone sideways and a 20-second countdown begins, verified by the device-orientation sensor — embodying the AAO's standard rule ⑥ dawn finale. East Asian childhood myopia rates have multiplied over 30 years. A vanishingly rare 'rest your eyes' game for the tablet era. Bilingual JP/EN, single HTML, no libraries.",
+        menotankenTag1: "Ages 4-9", menotankenTag2: "20-20-20", menotankenTag3: "Eye-friendly",
     }
 };
 
