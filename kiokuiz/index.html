@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0c0a1f">
+<title>キオクイズ — Kiokuiz</title>
+<meta name="description" content="自分の好みを答えるうち、いつしか過去の自分が出題者になる。記憶のキャパシティを試される4択ゲーム。">
+<meta property="og:title" content="キオクイズ — Kiokuiz">
+<meta property="og:description" content="自分の好みを答えるうち、いつしか過去の自分が出題者になる。">
+<meta property="og:type" content="website">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+html, body {
+    width:100%; min-height:100%;
+    overscroll-behavior:none;
+    user-select:none; -webkit-user-select:none;
+}
+body {
+    font-family: -apple-system, "Hiragino Maru Gothic ProN", "Yu Gothic UI", "Segoe UI", "Helvetica Neue", sans-serif;
+    background:
+        radial-gradient(ellipse at 20% 0%, #2a1860 0%, transparent 55%),
+        radial-gradient(ellipse at 90% 90%, #4a1a6a 0%, transparent 55%),
+        linear-gradient(180deg, #0e0825 0%, #0a0420 60%, #060214 100%);
+    color: #fff;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+/* twinkles */
+.stars {
+    position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background-image:
+        radial-gradient(1px 1px at 18% 28%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 72% 64%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 42% 82%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 88% 18%, #fff 0%, transparent 100%),
+        radial-gradient(1px 1px at 52% 48%, #fff 0%, transparent 100%),
+        radial-gradient(2px 2px at 12% 72%, #ffd166 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 84% 38%, #c084fc 0%, transparent 100%);
+    opacity: 0.45;
+    animation: twinkle 4.5s ease-in-out infinite;
+}
+@keyframes twinkle { 0%,100%{opacity:0.35} 50%{opacity:0.65} }
+
+/* ── Top bar ── */
+.topbar {
+    position: sticky; top: 0; z-index: 50;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 14px 10px;
+    background: linear-gradient(to bottom, rgba(10,4,32,0.92) 0%, rgba(10,4,32,0.4) 100%);
+    backdrop-filter: blur(8px);
+}
+.title-block { display:flex; align-items:center; gap:10px; min-width: 0; }
+.title-mark {
+    width: 38px; height: 38px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #c084fc 0%, #f472b6 50%, #fb923c 100%);
+    display:flex; align-items:center; justify-content:center;
+    font-size: 20px;
+    box-shadow: 0 4px 14px rgba(192,132,252,0.4);
+    flex-shrink: 0;
+}
+.title-text { font-weight: 800; font-size: 17px; letter-spacing: -0.2px; }
+.title-sub { font-size: 9px; color: #c9bfee; letter-spacing: 1.2px; text-transform: uppercase; }
+.topbtns { display: flex; gap: 6px; flex-shrink: 0; }
+.icon-btn {
+    width: 38px; height: 38px;
+    border-radius: 11px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.14);
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    font-size: 16px;
+    transition: transform 0.12s, background 0.15s;
+}
+.icon-btn:active { transform: scale(0.92); background: rgba(255,255,255,0.18); }
+.lang-pill { width: auto; padding: 0 11px; font-size: 11px; font-weight: 700; letter-spacing: 0.5px; }
+
+/* ── Screens ── */
+.screen { display: none; padding: 16px 18px 32px; max-width: 480px; margin: 0 auto; position: relative; z-index: 1; }
+.screen.active { display: block; animation: fadein 0.3s ease; }
+@keyframes fadein { from {opacity:0; transform: translateY(8px);} to {opacity:1; transform:none;} }
+
+/* ── Home ── */
+.hero {
+    text-align: center;
+    padding: 24px 8px 18px;
+}
+.hero-mark {
+    width: 92px; height: 92px;
+    border-radius: 28px;
+    background: linear-gradient(135deg, #c084fc 0%, #f472b6 50%, #fb923c 100%);
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 50px;
+    margin-bottom: 14px;
+    box-shadow: 0 10px 30px rgba(192,132,252,0.35);
+    position: relative;
+}
+.hero-mark::after {
+    content: ""; position: absolute; inset: -6px; border-radius: 32px;
+    border: 2px solid rgba(192,132,252,0.35);
+    animation: pulse 2.4s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{transform:scale(1); opacity:0.7} 50%{transform:scale(1.05); opacity:0.3} }
+.hero-title { font-size: 30px; font-weight: 800; margin-bottom: 6px; letter-spacing: -0.5px; }
+.hero-title .accent { background: linear-gradient(135deg, #f472b6, #fb923c); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.hero-tag { color: #c9bfee; font-size: 13px; letter-spacing: 1px; margin-bottom: 22px; }
+.rules {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 18px;
+    padding: 16px 18px;
+    margin-bottom: 22px;
+    text-align: left;
+}
+.rules-title {
+    font-size: 12px; font-weight: 700; color: #c084fc;
+    letter-spacing: 1.5px; margin-bottom: 12px;
+}
+.rule { display: flex; gap: 10px; margin-bottom: 10px; font-size: 13px; line-height: 1.55; color: #e8e3ff; }
+.rule:last-child { margin-bottom: 0; }
+.rule-icon {
+    flex-shrink: 0; width: 22px; height: 22px; border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 800;
+    background: rgba(192,132,252,0.18); color: #c084fc;
+    margin-top: 1px;
+}
+.rule-icon.kioku { background: rgba(167,139,250,0.2); color: #a78bfa; }
+.rule-icon.quiz  { background: rgba(244,114,182,0.2); color: #f472b6; }
+.rule-icon.bad   { background: rgba(248,113,113,0.2); color: #f87171; }
+.start-btn {
+    display: block;
+    width: 100%;
+    padding: 18px 20px;
+    border: none;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #c084fc 0%, #f472b6 60%, #fb923c 100%);
+    color: #fff;
+    font-size: 17px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(192,132,252,0.4);
+    transition: transform 0.12s, box-shadow 0.12s;
+}
+.start-btn:active { transform: scale(0.97); box-shadow: 0 4px 12px rgba(192,132,252,0.3); }
+.best-score-line {
+    text-align: center;
+    margin-top: 14px;
+    color: #c9bfee;
+    font-size: 12px;
+    letter-spacing: 0.5px;
+}
+.best-score-line strong { color: #ffd166; font-weight: 800; }
+
+/* ── Game screen ── */
+.game-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 14px;
+}
+.stat-cell {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 8px 10px;
+    text-align: center;
+}
+.stat-label { font-size: 9px; color: #b8b3d8; letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 2px; }
+.stat-value { font-size: 18px; font-weight: 800; color: #fff; }
+.stat-value.brain { color: #a78bfa; }
+.stat-value.score { color: #fbbf24; }
+.stat-value.best  { color: #f472b6; }
+
+.phase-card {
+    border-radius: 22px;
+    padding: 22px 18px 24px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+    border: 2px solid rgba(255,255,255,0.08);
+    transition: background 0.4s, border-color 0.4s;
+    position: relative;
+    overflow: hidden;
+}
+.phase-card.kioku {
+    background: linear-gradient(160deg, #2e1f6b 0%, #1a1248 60%, #0e0a32 100%);
+    border-color: rgba(167,139,250,0.45);
+}
+.phase-card.quiz {
+    background: linear-gradient(160deg, #5a1a3e 0%, #3a0d2a 50%, #1f0618 100%);
+    border-color: rgba(244,114,182,0.55);
+}
+
+.phase-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    margin-bottom: 14px;
+}
+.phase-card.kioku .phase-badge {
+    background: rgba(167,139,250,0.18);
+    color: #c4b5fd;
+    border: 1px solid rgba(167,139,250,0.45);
+}
+.phase-card.quiz .phase-badge {
+    background: rgba(244,114,182,0.18);
+    color: #fbcfe8;
+    border: 1px solid rgba(244,114,182,0.55);
+    animation: questPulse 1.6s ease-in-out infinite;
+}
+@keyframes questPulse {
+    0%,100% { box-shadow: 0 0 0 0 rgba(244,114,182,0.4); }
+    50% { box-shadow: 0 0 0 5px rgba(244,114,182,0); }
+}
+
+.phase-hint {
+    font-size: 11px;
+    color: #c9bfee;
+    margin-bottom: 6px;
+    letter-spacing: 0.4px;
+}
+.phase-card.quiz .phase-hint { color: #fbcfe8; }
+
+.question {
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1.45;
+    margin-bottom: 22px;
+    min-height: 64px;
+    color: #fff;
+    word-break: break-word;
+}
+
+.choices {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+}
+.choice {
+    background: rgba(255,255,255,0.07);
+    border: 1.5px solid rgba(255,255,255,0.18);
+    color: #fff;
+    padding: 16px 16px;
+    border-radius: 14px;
+    font-size: 15px;
+    font-weight: 700;
+    text-align: left;
+    cursor: pointer;
+    line-height: 1.4;
+    transition: transform 0.1s, background 0.15s, border-color 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 56px;
+    font-family: inherit;
+}
+.choice:active { transform: scale(0.98); }
+.phase-card.kioku .choice:hover { background: rgba(167,139,250,0.16); border-color: rgba(167,139,250,0.6); }
+.phase-card.quiz  .choice:hover { background: rgba(244,114,182,0.16); border-color: rgba(244,114,182,0.6); }
+
+.choice-num {
+    flex-shrink: 0;
+    width: 26px; height: 26px;
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 12px;
+    font-weight: 800;
+    background: rgba(255,255,255,0.12);
+    color: #fff;
+    letter-spacing: 0.5px;
+}
+.phase-card.kioku .choice-num { background: rgba(167,139,250,0.3); color: #ddd6fe; }
+.phase-card.quiz  .choice-num { background: rgba(244,114,182,0.3); color: #fce7f3; }
+
+.choice.correct {
+    background: rgba(34,197,94,0.25) !important;
+    border-color: rgba(34,197,94,0.7) !important;
+    animation: flashGreen 0.5s ease;
+}
+.choice.wrong {
+    background: rgba(239,68,68,0.25) !important;
+    border-color: rgba(239,68,68,0.75) !important;
+    animation: shake 0.45s ease;
+}
+.choice.dim { opacity: 0.4; }
+@keyframes flashGreen {
+    0%,100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
+    50% { box-shadow: 0 0 0 6px rgba(34,197,94,0.3); }
+}
+@keyframes shake {
+    0%,100% { transform: translateX(0); }
+    20% { transform: translateX(-6px); }
+    40% { transform: translateX(6px); }
+    60% { transform: translateX(-4px); }
+    80% { transform: translateX(4px); }
+}
+
+/* memory growth visualization */
+.brain-strip {
+    margin-top: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    justify-content: center;
+    min-height: 18px;
+}
+.memory-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #a78bfa, #c084fc);
+    box-shadow: 0 0 6px rgba(167,139,250,0.5);
+    animation: dotpop 0.35s ease;
+}
+@keyframes dotpop {
+    0% { transform: scale(0); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* ── Game over ── */
+.over-card {
+    background: linear-gradient(160deg, #4a0a1c 0%, #2a0612 60%, #0e030a 100%);
+    border: 2px solid rgba(248,113,113,0.4);
+    border-radius: 22px;
+    padding: 24px 18px 22px;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    margin-bottom: 16px;
+}
+.over-emoji { font-size: 56px; margin-bottom: 8px; }
+.over-title { font-size: 22px; font-weight: 800; margin-bottom: 4px; color: #fff; }
+.over-sub { color: #fda4af; font-size: 12px; letter-spacing: 1px; margin-bottom: 16px; }
+.over-result {
+    background: rgba(0,0,0,0.3);
+    border-radius: 14px;
+    padding: 14px;
+    text-align: left;
+    margin-bottom: 14px;
+}
+.over-result-label { font-size: 10px; letter-spacing: 1.5px; color: #fda4af; margin-bottom: 6px; }
+.over-result-q { font-size: 14px; font-weight: 700; margin-bottom: 10px; color: #fff; line-height: 1.4; }
+.over-row {
+    display: flex; align-items: center; gap: 8px;
+    padding: 8px 12px;
+    border-radius: 10px;
+    font-size: 13px;
+    margin-bottom: 6px;
+}
+.over-row.you { background: rgba(248,113,113,0.18); color: #fecaca; border: 1px solid rgba(248,113,113,0.4); }
+.over-row.past { background: rgba(34,197,94,0.18); color: #bbf7d0; border: 1px solid rgba(34,197,94,0.4); }
+.over-row strong { font-weight: 800; }
+.over-row .lab { font-size: 9px; letter-spacing: 1px; opacity: 0.8; min-width: 56px; flex-shrink: 0; }
+.over-stats {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+    margin-bottom: 18px;
+}
+.over-stat {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 12px 8px;
+    text-align: center;
+}
+.over-stat-label { font-size: 10px; letter-spacing: 1.2px; color: #b8b3d8; margin-bottom: 3px; }
+.over-stat-value { font-size: 22px; font-weight: 800; }
+.over-stat.score .over-stat-value { color: #fbbf24; }
+.over-stat.best  .over-stat-value { color: #f472b6; }
+.over-best-tag {
+    display: inline-block;
+    margin-top: 6px;
+    padding: 3px 9px;
+    background: rgba(251,191,36,0.2);
+    color: #fde68a;
+    border: 1px solid rgba(251,191,36,0.5);
+    border-radius: 999px;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+}
+
+.again-btn {
+    display: block;
+    width: 100%;
+    padding: 16px 20px;
+    border: none;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #c084fc 0%, #f472b6 60%, #fb923c 100%);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(192,132,252,0.35);
+    transition: transform 0.12s;
+}
+.again-btn:active { transform: scale(0.97); }
+.home-btn {
+    display: block;
+    width: 100%;
+    margin-top: 8px;
+    padding: 12px;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.18);
+    color: #c9bfee;
+    font-size: 13px;
+    font-weight: 700;
+    border-radius: 14px;
+    cursor: pointer;
+    font-family: inherit;
+}
+.home-btn:active { background: rgba(255,255,255,0.05); }
+
+/* burden indicator on later rounds */
+.burden-msg {
+    text-align: center;
+    margin-top: 8px;
+    font-size: 11px;
+    color: #c4b5fd;
+    letter-spacing: 0.5px;
+    min-height: 14px;
+}
+.burden-msg.heavy { color: #fbbf24; }
+.burden-msg.crisis { color: #f87171; animation: throb 1.2s ease-in-out infinite; }
+@keyframes throb { 0%,100%{opacity:1} 50%{opacity:0.6} }
+
+/* footer */
+.footer {
+    text-align: center;
+    padding: 20px 12px 8px;
+    color: #6c5fa3;
+    font-size: 10px;
+    letter-spacing: 0.5px;
+}
+.footer a { color: #8b80b8; text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="stars"></div>
+
+<div class="topbar">
+    <div class="title-block">
+        <div class="title-mark">🧠</div>
+        <div>
+            <div class="title-text" id="appTitle">キオクイズ</div>
+            <div class="title-sub">KIOKUIZ</div>
+        </div>
+    </div>
+    <div class="topbtns">
+        <button class="icon-btn lang-pill" id="langBtn">JP</button>
+        <button class="icon-btn" id="homeBtn" title="home">🏠</button>
+    </div>
+</div>
+
+<!-- ── Home screen ── -->
+<div class="screen active" id="homeScreen">
+    <div class="hero">
+        <div class="hero-mark">🧠</div>
+        <h1 class="hero-title"><span class="accent" id="heroTitle">キオクイズ</span></h1>
+        <div class="hero-tag" id="heroTag">あなたの「好み」が、いつしか「問題」になる</div>
+    </div>
+    <div class="rules">
+        <div class="rules-title" id="rulesTitle">ルール</div>
+        <div class="rule">
+            <div class="rule-icon kioku">記</div>
+            <div id="rule1"><strong>キオクフェーズ</strong>では、4択から自分の好みを答える。</div>
+        </div>
+        <div class="rule">
+            <div class="rule-icon quiz">問</div>
+            <div id="rule2"><strong>クイズフェーズ</strong>では、過去の自分の答えを思い出す。</div>
+        </div>
+        <div class="rule">
+            <div class="rule-icon bad">×</div>
+            <div id="rule3">過去の自分を間違えたら<strong>終了</strong>。</div>
+        </div>
+        <div class="rule">
+            <div class="rule-icon">∞</div>
+            <div id="rule4">続けるほど、覚える「好み」が積み重なっていく。</div>
+        </div>
+    </div>
+    <button class="start-btn" id="startBtn">スタート</button>
+    <div class="best-score-line" id="bestScoreLine"></div>
+</div>
+
+<!-- ── Game screen ── -->
+<div class="screen" id="gameScreen">
+    <div class="game-stats">
+        <div class="stat-cell">
+            <div class="stat-label" id="statBrainLabel">記憶</div>
+            <div class="stat-value brain" id="statBrain">0</div>
+        </div>
+        <div class="stat-cell">
+            <div class="stat-label" id="statScoreLabel">スコア</div>
+            <div class="stat-value score" id="statScore">0</div>
+        </div>
+        <div class="stat-cell">
+            <div class="stat-label" id="statBestLabel">ベスト</div>
+            <div class="stat-value best" id="statBest">0</div>
+        </div>
+    </div>
+    <div class="phase-card kioku" id="phaseCard">
+        <div class="phase-badge" id="phaseBadge">記 キオク</div>
+        <div class="phase-hint" id="phaseHint">あなたの好みを選んでください</div>
+        <div class="question" id="questionText">―</div>
+        <div class="choices" id="choices"></div>
+    </div>
+    <div class="burden-msg" id="burdenMsg"></div>
+</div>
+
+<!-- ── Game over screen ── -->
+<div class="screen" id="overScreen">
+    <div class="over-card">
+        <div class="over-emoji">💔</div>
+        <div class="over-title" id="overTitle">記憶ロスト</div>
+        <div class="over-sub" id="overSub">過去の自分とすれ違った</div>
+        <div class="over-result" id="overResult"></div>
+    </div>
+    <div class="over-stats">
+        <div class="over-stat score">
+            <div class="over-stat-label" id="overStatScoreLabel">スコア</div>
+            <div class="over-stat-value" id="overStatScore">0</div>
+        </div>
+        <div class="over-stat best">
+            <div class="over-stat-label" id="overStatBestLabel">ベスト</div>
+            <div class="over-stat-value" id="overStatBest">0</div>
+        </div>
+    </div>
+    <div id="bestBadgeWrap" style="text-align:center; margin-bottom: 14px; display:none;">
+        <span class="over-best-tag" id="bestBadge">★ NEW BEST</span>
+    </div>
+    <button class="again-btn" id="againBtn">もう一度</button>
+    <button class="home-btn" id="overHomeBtn">ホーム</button>
+</div>
+
+<div class="footer">
+    <a href="https://pndshch.github.io/" target="_blank">← Pinda Lab</a>
+</div>
+
+<script>
+// ════════════════════════════════════════════
+//   Question pool — each question has 4 choices
+//   q  = question text  (ja / en)
+//   c  = 4 choices      (ja / en, same order)
+// ════════════════════════════════════════════
+const QUESTIONS = [
+    // ── 食 ──
+    { q:{ja:"朝ごはんで食べたいのは？", en:"Breakfast of choice?"},
+      c:[{ja:"ごはん",en:"Rice"},{ja:"パン",en:"Bread"},{ja:"シリアル",en:"Cereal"},{ja:"食べない",en:"Skip it"}] },
+    { q:{ja:"ラーメン派は？", en:"Ramen broth?"},
+      c:[{ja:"醤油",en:"Shōyu"},{ja:"味噌",en:"Miso"},{ja:"塩",en:"Shio"},{ja:"豚骨",en:"Tonkotsu"}] },
+    { q:{ja:"お寿司で最初に食べる？", en:"First sushi to grab?"},
+      c:[{ja:"マグロ",en:"Tuna"},{ja:"サーモン",en:"Salmon"},{ja:"イカ",en:"Squid"},{ja:"たまご",en:"Tamago"}] },
+    { q:{ja:"カレーは？", en:"Curry spice?"},
+      c:[{ja:"甘口",en:"Mild"},{ja:"中辛",en:"Medium"},{ja:"辛口",en:"Hot"},{ja:"激辛",en:"Inferno"}] },
+    { q:{ja:"パスタの定番は？", en:"Pasta of choice?"},
+      c:[{ja:"ペペロンチーノ",en:"Peperoncino"},{ja:"ボロネーゼ",en:"Bolognese"},{ja:"カルボナーラ",en:"Carbonara"},{ja:"トマト",en:"Pomodoro"}] },
+    { q:{ja:"おにぎりの具は？", en:"Onigiri filling?"},
+      c:[{ja:"鮭",en:"Salmon"},{ja:"梅",en:"Umeboshi"},{ja:"ツナマヨ",en:"Tuna mayo"},{ja:"おかか",en:"Bonito"}] },
+    { q:{ja:"焼き肉で頼むのは？", en:"Yakiniku cut?"},
+      c:[{ja:"カルビ",en:"Karubi"},{ja:"ハラミ",en:"Harami"},{ja:"タン",en:"Tan"},{ja:"ホルモン",en:"Hormone"}] },
+    { q:{ja:"卵料理は？", en:"Egg style?"},
+      c:[{ja:"目玉焼き",en:"Sunny-side"},{ja:"オムレツ",en:"Omelette"},{ja:"ゆで",en:"Boiled"},{ja:"スクランブル",en:"Scramble"}] },
+    { q:{ja:"ピザの定番は？", en:"Pizza topping?"},
+      c:[{ja:"マルゲリータ",en:"Margherita"},{ja:"ペパロニ",en:"Pepperoni"},{ja:"ハワイアン",en:"Hawaiian"},{ja:"シーフード",en:"Seafood"}] },
+    { q:{ja:"餃子は？", en:"Gyoza style?"},
+      c:[{ja:"焼き",en:"Fried"},{ja:"水",en:"Boiled"},{ja:"揚げ",en:"Deep-fried"},{ja:"蒸し",en:"Steamed"}] },
+    { q:{ja:"ハンバーガーの中身は？", en:"Burger?"},
+      c:[{ja:"ビーフ",en:"Beef"},{ja:"チーズ",en:"Cheese"},{ja:"照り焼き",en:"Teriyaki"},{ja:"フィッシュ",en:"Fish"}] },
+    { q:{ja:"夜食食べるなら？", en:"Late-night snack?"},
+      c:[{ja:"ラーメン",en:"Ramen"},{ja:"おにぎり",en:"Onigiri"},{ja:"アイス",en:"Ice cream"},{ja:"食べない",en:"Skip"}] },
+    { q:{ja:"パン屋で買う？", en:"Bakery pick?"},
+      c:[{ja:"食パン",en:"Loaf"},{ja:"クロワッサン",en:"Croissant"},{ja:"メロンパン",en:"Melonpan"},{ja:"カレーパン",en:"Curry bun"}] },
+    { q:{ja:"ランチは？", en:"Lunch style?"},
+      c:[{ja:"定食",en:"Teishoku"},{ja:"麺類",en:"Noodles"},{ja:"弁当",en:"Bento"},{ja:"カフェ",en:"Café"}] },
+    { q:{ja:"居酒屋の最初は？", en:"Izakaya first dish?"},
+      c:[{ja:"枝豆",en:"Edamame"},{ja:"唐揚げ",en:"Karaage"},{ja:"刺身",en:"Sashimi"},{ja:"お通し",en:"Otōshi"}] },
+    { q:{ja:"デザートは？", en:"Dessert?"},
+      c:[{ja:"ケーキ",en:"Cake"},{ja:"アイス",en:"Ice cream"},{ja:"プリン",en:"Pudding"},{ja:"フルーツ",en:"Fruit"}] },
+
+    // ── 飲 ──
+    { q:{ja:"お茶選ぶなら？", en:"Tea?"},
+      c:[{ja:"緑茶",en:"Green"},{ja:"紅茶",en:"Black"},{ja:"ほうじ茶",en:"Hōjicha"},{ja:"麦茶",en:"Mugicha"}] },
+    { q:{ja:"コーヒーは？", en:"Coffee style?"},
+      c:[{ja:"ブラック",en:"Black"},{ja:"ミルク",en:"With milk"},{ja:"砂糖入り",en:"Sweet"},{ja:"ラテ",en:"Latte"}] },
+    { q:{ja:"朝の一杯は？", en:"Morning drink?"},
+      c:[{ja:"水",en:"Water"},{ja:"コーヒー",en:"Coffee"},{ja:"お茶",en:"Tea"},{ja:"ジュース",en:"Juice"}] },
+    { q:{ja:"のどが渇いたら？", en:"Thirsty? Reach for…"},
+      c:[{ja:"水",en:"Water"},{ja:"お茶",en:"Tea"},{ja:"炭酸",en:"Soda"},{ja:"スポーツ飲料",en:"Sports drink"}] },
+    { q:{ja:"お酒選ぶなら？", en:"Drink?"},
+      c:[{ja:"ビール",en:"Beer"},{ja:"ワイン",en:"Wine"},{ja:"日本酒",en:"Sake"},{ja:"カクテル",en:"Cocktail"}] },
+    { q:{ja:"冬のホットドリンクは？", en:"Winter warm drink?"},
+      c:[{ja:"ココア",en:"Cocoa"},{ja:"お茶",en:"Tea"},{ja:"ホットミルク",en:"Hot milk"},{ja:"ホットレモン",en:"Hot lemon"}] },
+    { q:{ja:"自販機で買うなら？", en:"Vending machine pick?"},
+      c:[{ja:"お茶",en:"Tea"},{ja:"コーヒー",en:"Coffee"},{ja:"ジュース",en:"Juice"},{ja:"水",en:"Water"}] },
+
+    // ── 色 ──
+    { q:{ja:"好きな色は？", en:"Favorite color?"},
+      c:[{ja:"赤",en:"Red"},{ja:"青",en:"Blue"},{ja:"緑",en:"Green"},{ja:"黄色",en:"Yellow"}] },
+    { q:{ja:"服の色は？", en:"Clothing color?"},
+      c:[{ja:"黒",en:"Black"},{ja:"白",en:"White"},{ja:"紺",en:"Navy"},{ja:"グレー",en:"Gray"}] },
+    { q:{ja:"部屋の色は？", en:"Room color?"},
+      c:[{ja:"ベージュ",en:"Beige"},{ja:"白",en:"White"},{ja:"木目",en:"Wood"},{ja:"グレー",en:"Gray"}] },
+    { q:{ja:"見たい空は？", en:"Sky to watch?"},
+      c:[{ja:"青空",en:"Blue sky"},{ja:"夕焼け",en:"Sunset"},{ja:"星空",en:"Starry"},{ja:"雲",en:"Clouds"}] },
+
+    // ── 季 ──
+    { q:{ja:"好きな季節は？", en:"Favorite season?"},
+      c:[{ja:"春",en:"Spring"},{ja:"夏",en:"Summer"},{ja:"秋",en:"Autumn"},{ja:"冬",en:"Winter"}] },
+    { q:{ja:"夏の過ごし方？", en:"Summer plan?"},
+      c:[{ja:"海",en:"Beach"},{ja:"山",en:"Mountain"},{ja:"プール",en:"Pool"},{ja:"涼しい家",en:"Stay cool"}] },
+    { q:{ja:"雨の日は？", en:"Rainy day?"},
+      c:[{ja:"読書",en:"Read"},{ja:"映画",en:"Movie"},{ja:"散歩",en:"Walk"},{ja:"寝る",en:"Sleep"}] },
+    { q:{ja:"雪が降ったら？", en:"Snow day?"},
+      c:[{ja:"雪だるま",en:"Snowman"},{ja:"スキー",en:"Ski"},{ja:"家でぬくぬく",en:"Cozy in"},{ja:"写真撮る",en:"Photos"}] },
+    { q:{ja:"桜の時期は？", en:"Cherry-blossom time?"},
+      c:[{ja:"お花見",en:"Hanami"},{ja:"散歩",en:"Walk"},{ja:"カフェ",en:"Café"},{ja:"家",en:"Stay home"}] },
+
+    // ── 動 ──
+    { q:{ja:"飼うなら？", en:"Pet?"},
+      c:[{ja:"犬",en:"Dog"},{ja:"猫",en:"Cat"},{ja:"鳥",en:"Bird"},{ja:"魚",en:"Fish"}] },
+    { q:{ja:"動物園で見たい？", en:"Zoo favorite?"},
+      c:[{ja:"パンダ",en:"Panda"},{ja:"ライオン",en:"Lion"},{ja:"ゾウ",en:"Elephant"},{ja:"キリン",en:"Giraffe"}] },
+    { q:{ja:"海の生き物は？", en:"Sea creature?"},
+      c:[{ja:"イルカ",en:"Dolphin"},{ja:"クラゲ",en:"Jellyfish"},{ja:"タコ",en:"Octopus"},{ja:"サメ",en:"Shark"}] },
+    { q:{ja:"鳥は？", en:"Favorite bird?"},
+      c:[{ja:"ツバメ",en:"Swallow"},{ja:"フクロウ",en:"Owl"},{ja:"鶴",en:"Crane"},{ja:"カラス",en:"Crow"}] },
+
+    // ── 趣味 ──
+    { q:{ja:"休日の過ごし方？", en:"Weekend?"},
+      c:[{ja:"外出",en:"Go out"},{ja:"家で映画",en:"Home movie"},{ja:"ゲーム",en:"Games"},{ja:"読書",en:"Reading"}] },
+    { q:{ja:"運動するなら？", en:"Exercise?"},
+      c:[{ja:"ジョギング",en:"Jogging"},{ja:"筋トレ",en:"Strength"},{ja:"ヨガ",en:"Yoga"},{ja:"散歩",en:"Walking"}] },
+    { q:{ja:"楽器選ぶなら？", en:"Instrument?"},
+      c:[{ja:"ピアノ",en:"Piano"},{ja:"ギター",en:"Guitar"},{ja:"ドラム",en:"Drums"},{ja:"歌",en:"Singing"}] },
+    { q:{ja:"ゲームジャンルは？", en:"Game genre?"},
+      c:[{ja:"RPG",en:"RPG"},{ja:"アクション",en:"Action"},{ja:"パズル",en:"Puzzle"},{ja:"シミュ",en:"Sim"}] },
+
+    // ── 場所 ──
+    { q:{ja:"旅行なら？", en:"Trip type?"},
+      c:[{ja:"山",en:"Mountains"},{ja:"海",en:"Sea"},{ja:"街",en:"City"},{ja:"田舎",en:"Countryside"}] },
+    { q:{ja:"カフェの席は？", en:"Café seat?"},
+      c:[{ja:"窓際",en:"Window"},{ja:"奥の席",en:"Back"},{ja:"カウンター",en:"Counter"},{ja:"テラス",en:"Terrace"}] },
+    { q:{ja:"散歩したい場所？", en:"Walk where?"},
+      c:[{ja:"公園",en:"Park"},{ja:"川沿い",en:"Riverside"},{ja:"商店街",en:"Shotengai"},{ja:"山道",en:"Trail"}] },
+    { q:{ja:"住むなら？", en:"Live where?"},
+      c:[{ja:"都会",en:"City"},{ja:"郊外",en:"Suburb"},{ja:"海辺",en:"Coast"},{ja:"山の中",en:"Mountains"}] },
+
+    // ── 移動 ──
+    { q:{ja:"移動手段は？", en:"Daily commute?"},
+      c:[{ja:"電車",en:"Train"},{ja:"車",en:"Car"},{ja:"自転車",en:"Bike"},{ja:"徒歩",en:"Walk"}] },
+    { q:{ja:"旅の手段は？", en:"Travel mode?"},
+      c:[{ja:"飛行機",en:"Plane"},{ja:"新幹線",en:"Bullet train"},{ja:"車",en:"Car"},{ja:"船",en:"Ship"}] },
+
+    // ── ファンタジー ──
+    { q:{ja:"魔法使うなら？", en:"Magic element?"},
+      c:[{ja:"火",en:"Fire"},{ja:"水",en:"Water"},{ja:"風",en:"Wind"},{ja:"土",en:"Earth"}] },
+    { q:{ja:"ペットドラゴンは？", en:"Dragon color?"},
+      c:[{ja:"赤",en:"Red"},{ja:"青",en:"Blue"},{ja:"緑",en:"Green"},{ja:"金",en:"Gold"}] },
+    { q:{ja:"異世界で職業は？", en:"Isekai class?"},
+      c:[{ja:"勇者",en:"Hero"},{ja:"魔法使い",en:"Mage"},{ja:"商人",en:"Merchant"},{ja:"農民",en:"Farmer"}] },
+    { q:{ja:"持ちたい超能力？", en:"Superpower?"},
+      c:[{ja:"飛ぶ",en:"Fly"},{ja:"透明化",en:"Invisible"},{ja:"時間停止",en:"Pause time"},{ja:"テレパシー",en:"Telepathy"}] },
+
+    // ── 価値観 ──
+    { q:{ja:"大事なのは？", en:"Most important?"},
+      c:[{ja:"お金",en:"Money"},{ja:"時間",en:"Time"},{ja:"健康",en:"Health"},{ja:"人間関係",en:"Bonds"}] },
+    { q:{ja:"あなたは？", en:"You are…"},
+      c:[{ja:"慎重派",en:"Cautious"},{ja:"大胆派",en:"Bold"},{ja:"マイペース",en:"Own pace"},{ja:"リーダー型",en:"Leader"}] },
+    { q:{ja:"朝型 or 夜型？", en:"Morning or night?"},
+      c:[{ja:"早起き",en:"Early bird"},{ja:"早寝早起き",en:"Steady"},{ja:"夜型",en:"Night owl"},{ja:"不規則",en:"Random"}] },
+
+    // ── 音楽 ──
+    { q:{ja:"音楽ジャンルは？", en:"Music genre?"},
+      c:[{ja:"ポップ",en:"Pop"},{ja:"ロック",en:"Rock"},{ja:"ジャズ",en:"Jazz"},{ja:"クラシック",en:"Classical"}] },
+    { q:{ja:"音楽を聴くタイミング？", en:"When you listen?"},
+      c:[{ja:"通勤中",en:"Commute"},{ja:"作業中",en:"Working"},{ja:"リラックス",en:"Relaxing"},{ja:"寝る前",en:"Before bed"}] },
+
+    // ── スポーツ ──
+    { q:{ja:"見るスポーツは？", en:"Watch sport?"},
+      c:[{ja:"野球",en:"Baseball"},{ja:"サッカー",en:"Soccer"},{ja:"バスケ",en:"Basketball"},{ja:"格闘技",en:"Combat"}] },
+    { q:{ja:"やるなら？", en:"Play sport?"},
+      c:[{ja:"球技",en:"Ball sport"},{ja:"マラソン",en:"Running"},{ja:"水泳",en:"Swim"},{ja:"武道",en:"Martial arts"}] },
+
+    // ── もの ──
+    { q:{ja:"ペンは？", en:"Pen type?"},
+      c:[{ja:"ボールペン",en:"Ballpoint"},{ja:"万年筆",en:"Fountain"},{ja:"シャーペン",en:"Mechanical"},{ja:"鉛筆",en:"Pencil"}] },
+    { q:{ja:"ノートは？", en:"Notebook ruling?"},
+      c:[{ja:"罫線",en:"Lined"},{ja:"方眼",en:"Grid"},{ja:"無地",en:"Blank"},{ja:"ドット",en:"Dot"}] },
+    { q:{ja:"カバンは？", en:"Bag style?"},
+      c:[{ja:"リュック",en:"Backpack"},{ja:"トート",en:"Tote"},{ja:"ショルダー",en:"Shoulder"},{ja:"クラッチ",en:"Clutch"}] },
+    { q:{ja:"時計は？", en:"Watch?"},
+      c:[{ja:"アナログ",en:"Analog"},{ja:"デジタル",en:"Digital"},{ja:"スマート",en:"Smart"},{ja:"持たない",en:"None"}] },
+    { q:{ja:"靴は？", en:"Shoes?"},
+      c:[{ja:"スニーカー",en:"Sneakers"},{ja:"革靴",en:"Leather"},{ja:"ブーツ",en:"Boots"},{ja:"サンダル",en:"Sandals"}] },
+
+    // ── 朝・夜の習慣 ──
+    { q:{ja:"朝起きてまずすること？", en:"First thing in morning?"},
+      c:[{ja:"コーヒー",en:"Coffee"},{ja:"シャワー",en:"Shower"},{ja:"SNSチェック",en:"Phone scroll"},{ja:"二度寝",en:"Back to bed"}] },
+    { q:{ja:"通勤中に聞くのは？", en:"Commute audio?"},
+      c:[{ja:"音楽",en:"Music"},{ja:"ラジオ",en:"Radio"},{ja:"ポッドキャスト",en:"Podcast"},{ja:"無音",en:"Silence"}] },
+    { q:{ja:"寝る前は？", en:"Before bed?"},
+      c:[{ja:"読書",en:"Read"},{ja:"スマホ",en:"Phone"},{ja:"音楽",en:"Music"},{ja:"何もしない",en:"Nothing"}] },
+    { q:{ja:"入浴は？", en:"Bath?"},
+      c:[{ja:"湯船",en:"Soak"},{ja:"シャワー",en:"Shower"},{ja:"朝風呂",en:"Morning"},{ja:"サウナ",en:"Sauna"}] },
+    { q:{ja:"何時に寝る？", en:"Bedtime?"},
+      c:[{ja:"22時前",en:"Before 10"},{ja:"23時頃",en:"Around 11"},{ja:"24時頃",en:"Around 12"},{ja:"深夜",en:"Late night"}] },
+
+    // ── 仕事 ──
+    { q:{ja:"集中する場所は？", en:"Focus where?"},
+      c:[{ja:"自宅",en:"Home"},{ja:"カフェ",en:"Café"},{ja:"図書館",en:"Library"},{ja:"オフィス",en:"Office"}] },
+    { q:{ja:"作業のお供は？", en:"Work companion?"},
+      c:[{ja:"コーヒー",en:"Coffee"},{ja:"お茶",en:"Tea"},{ja:"水",en:"Water"},{ja:"音楽",en:"Music"}] },
+    { q:{ja:"締切前は？", en:"Before deadline?"},
+      c:[{ja:"早めに着手",en:"Early start"},{ja:"ギリギリ",en:"Last minute"},{ja:"計画的",en:"Planned"},{ja:"逃げる",en:"Avoid"}] },
+
+    // ── 文化 ──
+    { q:{ja:"映画ジャンルは？", en:"Film genre?"},
+      c:[{ja:"アクション",en:"Action"},{ja:"恋愛",en:"Romance"},{ja:"ホラー",en:"Horror"},{ja:"コメディ",en:"Comedy"}] },
+    { q:{ja:"本のジャンルは？", en:"Book genre?"},
+      c:[{ja:"小説",en:"Novel"},{ja:"マンガ",en:"Manga"},{ja:"ビジネス",en:"Business"},{ja:"自己啓発",en:"Self-help"}] },
+    { q:{ja:"アニメ見るなら？", en:"Anime?"},
+      c:[{ja:"バトル",en:"Battle"},{ja:"日常",en:"Slice-of-life"},{ja:"恋愛",en:"Romance"},{ja:"SF",en:"Sci-fi"}] },
+
+    // ── 性格 ──
+    { q:{ja:"知らない人と話す？", en:"Talk to strangers?"},
+      c:[{ja:"得意",en:"Easy"},{ja:"普通",en:"Neutral"},{ja:"苦手",en:"Hard"},{ja:"避ける",en:"Avoid"}] },
+    { q:{ja:"計画派？", en:"Planning style?"},
+      c:[{ja:"きっちり",en:"Strict"},{ja:"ざっくり",en:"Loose"},{ja:"その場で",en:"On the spot"},{ja:"なんとかなる",en:"Wing it"}] },
+    { q:{ja:"行動は？", en:"Action style?"},
+      c:[{ja:"すぐ動く",en:"Act fast"},{ja:"考えてから",en:"Think first"},{ja:"様子見",en:"Wait & see"},{ja:"動かない",en:"Stay put"}] },
+    { q:{ja:"集団 vs 個人？", en:"Group vs solo?"},
+      c:[{ja:"チーム",en:"Team"},{ja:"ペア",en:"Pair"},{ja:"一人",en:"Solo"},{ja:"リーダー",en:"Lead"}] },
+
+    // ── お金 ──
+    { q:{ja:"お金の使い方は？", en:"Money usage?"},
+      c:[{ja:"貯金",en:"Save"},{ja:"体験",en:"Experiences"},{ja:"モノ",en:"Things"},{ja:"人にあげる",en:"Give"}] },
+
+    // ── 暇な時間 ──
+    { q:{ja:"暇な時間は？", en:"Free time?"},
+      c:[{ja:"ゴロゴロ",en:"Lounge"},{ja:"片付け",en:"Tidy up"},{ja:"趣味",en:"Hobbies"},{ja:"人と会う",en:"See people"}] },
+    { q:{ja:"連休あったら？", en:"Long weekend?"},
+      c:[{ja:"旅行",en:"Trip"},{ja:"家でゆっくり",en:"Stay in"},{ja:"イベント",en:"Events"},{ja:"仕事する",en:"Work"}] },
+
+    // ── ストレス・気分 ──
+    { q:{ja:"ストレス発散は？", en:"Stress relief?"},
+      c:[{ja:"食べる",en:"Eat"},{ja:"寝る",en:"Sleep"},{ja:"運動",en:"Exercise"},{ja:"話す",en:"Talk"}] },
+    { q:{ja:"プレゼントもらうなら？", en:"Best gift?"},
+      c:[{ja:"花",en:"Flowers"},{ja:"お菓子",en:"Sweets"},{ja:"雑貨",en:"Goods"},{ja:"体験ギフト",en:"Experience"}] },
+
+    // ── 食卓 ──
+    { q:{ja:"鍋なら？", en:"Hot pot?"},
+      c:[{ja:"寄せ鍋",en:"Mixed"},{ja:"すき焼き",en:"Sukiyaki"},{ja:"しゃぶしゃぶ",en:"Shabu"},{ja:"キムチ",en:"Kimchi"}] },
+    { q:{ja:"アイスは？", en:"Ice cream?"},
+      c:[{ja:"バニラ",en:"Vanilla"},{ja:"チョコ",en:"Chocolate"},{ja:"抹茶",en:"Matcha"},{ja:"いちご",en:"Strawberry"}] },
+    { q:{ja:"ケーキは？", en:"Cake?"},
+      c:[{ja:"ショート",en:"Shortcake"},{ja:"チョコ",en:"Chocolate"},{ja:"チーズ",en:"Cheese"},{ja:"モンブラン",en:"Mont Blanc"}] },
+    { q:{ja:"果物選ぶなら？", en:"Fruit pick?"},
+      c:[{ja:"りんご",en:"Apple"},{ja:"バナナ",en:"Banana"},{ja:"いちご",en:"Strawberry"},{ja:"みかん",en:"Mikan"}] },
+    { q:{ja:"スナックは？", en:"Snack?"},
+      c:[{ja:"ポテチ",en:"Chips"},{ja:"チョコ",en:"Chocolate"},{ja:"せんべい",en:"Senbei"},{ja:"ナッツ",en:"Nuts"}] },
+
+    // ── 空間 ──
+    { q:{ja:"部屋の照明は？", en:"Room light?"},
+      c:[{ja:"明るく",en:"Bright"},{ja:"暖色",en:"Warm"},{ja:"間接照明",en:"Indirect"},{ja:"ろうそく",en:"Candle"}] },
+    { q:{ja:"BGMは？", en:"Background sound?"},
+      c:[{ja:"無音",en:"Silence"},{ja:"音楽",en:"Music"},{ja:"自然音",en:"Nature"},{ja:"カフェ音",en:"Café noise"}] },
+    { q:{ja:"植物置くなら？", en:"Plant?"},
+      c:[{ja:"観葉",en:"Foliage"},{ja:"花",en:"Flowers"},{ja:"多肉",en:"Succulent"},{ja:"なし",en:"None"}] },
+
+    // ── 旅 ──
+    { q:{ja:"旅行のスタイルは？", en:"Travel style?"},
+      c:[{ja:"ガッツリ計画",en:"Planned"},{ja:"ふらり",en:"Wander"},{ja:"温泉",en:"Onsen"},{ja:"アクティビティ",en:"Activity"}] },
+    { q:{ja:"行きたい国は？", en:"Country to visit?"},
+      c:[{ja:"フランス",en:"France"},{ja:"イタリア",en:"Italy"},{ja:"アメリカ",en:"USA"},{ja:"タイ",en:"Thailand"}] },
+    { q:{ja:"温泉どこ？", en:"Onsen?"},
+      c:[{ja:"露天",en:"Outdoor"},{ja:"内湯",en:"Indoor"},{ja:"足湯",en:"Foot bath"},{ja:"サウナ付き",en:"With sauna"}] },
+
+    // ── 関係性 ──
+    { q:{ja:"友達の数は？", en:"Friends?"},
+      c:[{ja:"少なく深く",en:"Few deep"},{ja:"広く浅く",en:"Wide net"},{ja:"バランス",en:"Balanced"},{ja:"少ない",en:"Very few"}] },
+    { q:{ja:"連絡手段は？", en:"Contact mode?"},
+      c:[{ja:"電話",en:"Call"},{ja:"メッセージ",en:"Text"},{ja:"音声",en:"Voice msg"},{ja:"ビデオ",en:"Video"}] }
+];
+
+// ════════════════════════════════════════════
+//   i18n
+// ════════════════════════════════════════════
+const I18N = {
+    ja: {
+        appTitle: "キオクイズ",
+        heroTitle: "キオクイズ",
+        heroTag: "あなたの「好み」が、いつしか「問題」になる",
+        rulesTitle: "ルール",
+        rule1Html: "<strong>キオクフェーズ</strong>では、4択から自分の好みを答える。",
+        rule2Html: "<strong>クイズフェーズ</strong>では、過去の自分の答えを思い出す。",
+        rule3Html: "過去の自分を間違えたら<strong>終了</strong>。",
+        rule4Html: "続けるほど、覚える「好み」が積み重なっていく。",
+        startBtn: "スタート",
+        bestBlank: "ベストスコア —",
+        bestFmt: (n)=>"ベストスコア　★ "+n,
+        statBrainLabel: "記憶",
+        statScoreLabel: "スコア",
+        statBestLabel: "ベスト",
+        phaseKioku: "記　キオク",
+        phaseQuiz: "問　クイズ",
+        hintKioku: "あなたの好みを選んでください",
+        hintQuiz: "過去のあなたは何を選んだ？",
+        burdenLight: "",
+        burdenMedium: "記憶が増えてきた…",
+        burdenHeavy: "そろそろ思い出すのが大変…",
+        burdenCrisis: "もう自分が分からない！",
+        overTitle: "記憶ロスト",
+        overSub: "過去の自分とすれ違った",
+        overResultLabel: "問題と、あなたの答え",
+        overYouLabel: "今の答え",
+        overPastLabel: "過去の答え",
+        overStatScoreLabel: "スコア",
+        overStatBestLabel: "ベスト",
+        bestBadge: "★ ベスト更新！",
+        againBtn: "もう一度",
+        homeBtn: "ホーム",
+    },
+    en: {
+        appTitle: "Kiokuiz",
+        heroTitle: "Kiokuiz",
+        heroTag: "Your taste — soon, your test.",
+        rulesTitle: "Rules",
+        rule1Html: "<strong>Memorize phase:</strong> pick the option you actually like.",
+        rule2Html: "<strong>Quiz phase:</strong> recall what your past self chose.",
+        rule3Html: "Mismatch your past self — <strong>game over</strong>.",
+        rule4Html: "The longer you play, the more 'preferences' you must hold.",
+        startBtn: "START",
+        bestBlank: "Best score —",
+        bestFmt: (n)=>"Best score　★ "+n,
+        statBrainLabel: "MEMORY",
+        statScoreLabel: "SCORE",
+        statBestLabel: "BEST",
+        phaseKioku: "MEMORIZE",
+        phaseQuiz: "QUIZ",
+        hintKioku: "Pick what you actually prefer",
+        hintQuiz: "What did past-you pick?",
+        burdenLight: "",
+        burdenMedium: "Memories are piling up…",
+        burdenHeavy: "Getting hard to recall…",
+        burdenCrisis: "Who am I anymore?!",
+        overTitle: "MEMORY LOST",
+        overSub: "Past-you and now-you disagreed",
+        overResultLabel: "The question, and your answers",
+        overYouLabel: "now",
+        overPastLabel: "past",
+        overStatScoreLabel: "SCORE",
+        overStatBestLabel: "BEST",
+        bestBadge: "★ NEW BEST",
+        againBtn: "Try again",
+        homeBtn: "Home",
+    }
+};
+
+// ════════════════════════════════════════════
+//   State
+// ════════════════════════════════════════════
+let lang = 'ja';
+let memoryBank = [];     // [{qIdx, choiceIdx}]
+let usedKiokuQs = new Set(); // qIdx already used in kioku
+let score = 0;
+let best = 0;
+let phase = 'kioku';     // 'kioku' | 'quiz'
+let currentQIdx = null;
+let currentMemoryIdx = null; // index in memoryBank when in quiz phase
+let acceptInput = true;
+
+const $ = id => document.getElementById(id);
+
+function loadBest() {
+    try {
+        const v = parseInt(localStorage.getItem('kiokuiz-best') || '0', 10);
+        return isNaN(v) ? 0 : v;
+    } catch (e) { return 0; }
+}
+function saveBest(n) {
+    try { localStorage.setItem('kiokuiz-best', String(n)); } catch (e) {}
+}
+function loadLang() {
+    try {
+        const stored = localStorage.getItem('kiokuiz-lang');
+        if (stored === 'ja' || stored === 'en') return stored;
+    } catch (e) {}
+    const nav = (navigator.language || 'ja').toLowerCase();
+    return nav.startsWith('ja') ? 'ja' : 'en';
+}
+function saveLang(l) { try { localStorage.setItem('kiokuiz-lang', l); } catch (e) {} }
+
+function applyLang(newLang) {
+    lang = newLang;
+    saveLang(lang);
+    const t = I18N[lang];
+    document.documentElement.lang = lang;
+
+    $('appTitle').textContent = t.appTitle;
+    $('heroTitle').textContent = t.heroTitle;
+    $('heroTag').textContent = t.heroTag;
+    $('rulesTitle').textContent = t.rulesTitle;
+    $('rule1').innerHTML = t.rule1Html;
+    $('rule2').innerHTML = t.rule2Html;
+    $('rule3').innerHTML = t.rule3Html;
+    $('rule4').innerHTML = t.rule4Html;
+    $('startBtn').textContent = t.startBtn;
+    $('againBtn').textContent = t.againBtn;
+    $('overHomeBtn').textContent = t.homeBtn;
+    $('statBrainLabel').textContent = t.statBrainLabel;
+    $('statScoreLabel').textContent = t.statScoreLabel;
+    $('statBestLabel').textContent = t.statBestLabel;
+    $('overStatScoreLabel').textContent = t.overStatScoreLabel;
+    $('overStatBestLabel').textContent = t.overStatBestLabel;
+    $('bestBadge').textContent = t.bestBadge;
+    $('overTitle').textContent = t.overTitle;
+    $('overSub').textContent = t.overSub;
+
+    $('langBtn').textContent = lang === 'ja' ? 'EN' : 'JP';
+    updateBestLine();
+    if ($('gameScreen').classList.contains('active')) renderQuestion();
+}
+
+function updateBestLine() {
+    const t = I18N[lang];
+    $('bestScoreLine').textContent = best > 0 ? t.bestFmt(best) : t.bestBlank;
+}
+
+// ════════════════════════════════════════════
+//   Game
+// ════════════════════════════════════════════
+function showScreen(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    $(id).classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'instant' });
+}
+
+function startGame() {
+    memoryBank = [];
+    usedKiokuQs = new Set();
+    score = 0;
+    phase = 'kioku';
+    acceptInput = true;
+    showScreen('gameScreen');
+    nextRound();
+}
+
+function pickKiokuQuestion() {
+    // pick a question that hasn't been used yet
+    const available = [];
+    for (let i = 0; i < QUESTIONS.length; i++) {
+        if (!usedKiokuQs.has(i)) available.push(i);
+    }
+    if (available.length === 0) return null;
+    return available[Math.floor(Math.random() * available.length)];
+}
+
+function decidePhase() {
+    // round count based on score+1
+    const round = score + 1;
+    // forced kioku for first 2 rounds
+    if (round <= 2) return 'kioku';
+    // can't quiz with empty memory
+    if (memoryBank.length === 0) return 'kioku';
+    // can't kioku if no questions left
+    if (usedKiokuQs.size >= QUESTIONS.length) return 'quiz';
+    // 50/50 random thereafter — slight quiz bias as memory grows for difficulty
+    const quizProb = Math.min(0.65, 0.45 + memoryBank.length * 0.01);
+    return Math.random() < quizProb ? 'quiz' : 'kioku';
+}
+
+function nextRound() {
+    phase = decidePhase();
+    if (phase === 'kioku') {
+        currentQIdx = pickKiokuQuestion();
+        currentMemoryIdx = null;
+    } else {
+        // pick random memory
+        currentMemoryIdx = Math.floor(Math.random() * memoryBank.length);
+        currentQIdx = memoryBank[currentMemoryIdx].qIdx;
+    }
+    renderQuestion();
+}
+
+function renderQuestion() {
+    const t = I18N[lang];
+    const card = $('phaseCard');
+    card.classList.toggle('kioku', phase === 'kioku');
+    card.classList.toggle('quiz',  phase === 'quiz');
+    $('phaseBadge').textContent = phase === 'kioku' ? t.phaseKioku : t.phaseQuiz;
+    $('phaseHint').textContent = phase === 'kioku' ? t.hintKioku : t.hintQuiz;
+
+    const q = QUESTIONS[currentQIdx];
+    $('questionText').textContent = q.q[lang];
+
+    const choicesEl = $('choices');
+    choicesEl.innerHTML = '';
+    q.c.forEach((choice, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'choice';
+        btn.innerHTML = '<span class="choice-num">'+(idx+1)+'</span><span>'+escapeHtml(choice[lang])+'</span>';
+        btn.addEventListener('click', () => onChoice(idx, btn));
+        choicesEl.appendChild(btn);
+    });
+
+    $('statBrain').textContent = memoryBank.length;
+    $('statScore').textContent = score;
+    $('statBest').textContent = best;
+
+    // burden message
+    const bm = $('burdenMsg');
+    bm.classList.remove('heavy', 'crisis');
+    if (memoryBank.length >= 18) {
+        bm.textContent = t.burdenCrisis; bm.classList.add('crisis');
+    } else if (memoryBank.length >= 12) {
+        bm.textContent = t.burdenHeavy; bm.classList.add('heavy');
+    } else if (memoryBank.length >= 6) {
+        bm.textContent = t.burdenMedium;
+    } else {
+        bm.textContent = t.burdenLight;
+    }
+}
+
+function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, m => (
+        {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]
+    ));
+}
+
+function onChoice(idx, btn) {
+    if (!acceptInput) return;
+    acceptInput = false;
+
+    if (phase === 'kioku') {
+        // record memory
+        memoryBank.push({ qIdx: currentQIdx, choiceIdx: idx });
+        usedKiokuQs.add(currentQIdx);
+        btn.classList.add('correct');
+        score++;
+        // animate brain count
+        $('statBrain').textContent = memoryBank.length;
+        $('statScore').textContent = score;
+        setTimeout(() => {
+            acceptInput = true;
+            nextRound();
+        }, 580);
+    } else {
+        const correctIdx = memoryBank[currentMemoryIdx].choiceIdx;
+        if (idx === correctIdx) {
+            btn.classList.add('correct');
+            score++;
+            $('statScore').textContent = score;
+            setTimeout(() => {
+                acceptInput = true;
+                nextRound();
+            }, 580);
+        } else {
+            btn.classList.add('wrong');
+            // also reveal the correct one
+            const choices = $('choices').children;
+            for (let i = 0; i < choices.length; i++) {
+                if (i === correctIdx) choices[i].classList.add('correct');
+                else if (i !== idx) choices[i].classList.add('dim');
+            }
+            // game over
+            setTimeout(() => gameOver(idx, correctIdx), 1100);
+        }
+    }
+}
+
+function gameOver(yourIdx, pastIdx) {
+    const t = I18N[lang];
+    const isNewBest = score > best;
+    if (isNewBest) {
+        best = score;
+        saveBest(best);
+    }
+
+    // build the comparison
+    const q = QUESTIONS[currentQIdx];
+    $('overResult').innerHTML =
+        '<div class="over-result-label">'+escapeHtml(t.overResultLabel)+'</div>'+
+        '<div class="over-result-q">'+escapeHtml(q.q[lang])+'</div>'+
+        '<div class="over-row past"><span class="lab">'+escapeHtml(t.overPastLabel)+'</span><strong>'+escapeHtml(q.c[pastIdx][lang])+'</strong></div>'+
+        '<div class="over-row you"><span class="lab">'+escapeHtml(t.overYouLabel)+'</span><strong>'+escapeHtml(q.c[yourIdx][lang])+'</strong></div>';
+
+    $('overStatScore').textContent = score;
+    $('overStatBest').textContent = best;
+    $('bestBadgeWrap').style.display = isNewBest && score > 0 ? 'block' : 'none';
+
+    showScreen('overScreen');
+    updateBestLine();
+}
+
+// ════════════════════════════════════════════
+//   Init
+// ════════════════════════════════════════════
+function init() {
+    best = loadBest();
+    applyLang(loadLang());
+    updateBestLine();
+
+    $('startBtn').addEventListener('click', startGame);
+    $('againBtn').addEventListener('click', startGame);
+    $('overHomeBtn').addEventListener('click', () => showScreen('homeScreen'));
+    $('homeBtn').addEventListener('click', () => showScreen('homeScreen'));
+    $('langBtn').addEventListener('click', () => applyLang(lang === 'ja' ? 'en' : 'ja'));
+}
+
+init();
+</script>
+</body>
+</html>

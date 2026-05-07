@@ -217,6 +217,7 @@ header p {
 .thumb-enooto     { background: radial-gradient(ellipse at 50% 35%, #1a1248 0%, #0a0820 60%, #04020f 100%); }
 .thumb-koemon     { background: radial-gradient(ellipse at 30% 25%, #2a1860 0%, #150a35 50%, #060214 100%); }
 .thumb-pikopiko   { background: radial-gradient(ellipse at 50% 45%, #10103a 0%, #08081f 55%, #04030d 100%); }
+.thumb-kiokuiz    { background: radial-gradient(ellipse at 30% 30%, #4a1a6a 0%, #2a1860 45%, #0a0420 100%); }
 
 .card-body {
     padding: 18px 20px 22px;
@@ -427,6 +428,14 @@ footer a:hover { color: #e6edf3; }
             <img class="thumb-gif" src="assets/pikopiko-sonar.gif" alt="" onerror="this.remove()">
         </div>
             <span class="feat-title" data-i18n="pikopikoTitle">ぴこぴこソナー</span>
+        </a>
+        <a class="feat-card" href="https://pndshch.github.io/kiokuiz/" target="_blank">
+            <div class="card-thumb thumb-kiokuiz">
+            <span class="new-badge" data-i18n="newBadge">NEW</span>
+            <span class="thumb-emoji">🧠</span>
+            <img class="thumb-gif" src="assets/kiokuiz.gif" alt="" onerror="this.remove()">
+        </div>
+            <span class="feat-title" data-i18n="kiokuizTitle">キオクイズ</span>
         </a>
         <a class="feat-card" href="https://pndshch.github.io/koe-monster/" target="_blank">
             <div class="card-thumb thumb-koemon">
@@ -1041,6 +1050,23 @@ footer a:hover { color: #e6edf3; }
             </div>
         </div>
     <div class="grid-header" data-cat-header="games" data-i18n="secGridGames">🎮 ゲーム</div>
+    <div class="card" data-cat="games">
+            <div class="card-thumb thumb-kiokuiz">
+                <span class="new-badge" data-i18n="newBadge">NEW</span>
+                <span class="thumb-emoji">🧠</span>
+                <img class="thumb-gif" src="assets/kiokuiz.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="kiokuizTitle">キオクイズ</h2>
+                <p data-i18n="kiokuizDesc">最初は「朝ごはんは？」「コーヒーは？」と、4択であなたの好みをただ答えるだけ。でも気づくと、過去の自分の答えを思い出すクイズフェーズが交ざりはじめる。「あれ、自分はサーモン派だっけ？マグロ派だっけ？」——間違えたら終了。続けるほど抱える「好み」が増え、自分が誰だか分からなくなっていく、4択メモリーゲーム。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="kiokuizTag1">記憶</span>
+                    <span class="tag" data-i18n="kiokuizTag2">4択</span>
+                    <span class="tag" data-i18n="kiokuizTag3">自己問答</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/kiokuiz/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
     <div class="card" data-cat="games">
             <div class="card-thumb thumb-heron">
                 <span class="new-badge" data-i18n="newBadge">NEW</span>
@@ -1928,6 +1954,9 @@ const I18N = {
         enootoTitle: "えのおと",
         enootoDesc:  "ゆびで えを かくと、おとが うまれる！4〜9さい向けの新しい創作あそび。うえに かけば たかい音、したに かけば ひくい音——画面の縦位置がそのままピッチになる、絵と音楽がひとつになる体験。ぴあの・さくら（こと）・きらきら・だいこの4音色、五音音階だから何を描いても気持ちいい音になる。▶ボタンで描いた絵をアニメ＋音で再生、PNG保存も。",
         enootoTag1: "4〜9歳", enootoTag2: "絵×音", enootoTag3: "五音音階",
+        kiokuizTitle: "キオクイズ",
+        kiokuizDesc:  "最初は「朝ごはんは？」「コーヒーは？」と、4択であなたの好みをただ答えるだけ。でも気づくと、過去の自分の答えを思い出すクイズフェーズが交ざりはじめる。「あれ、自分はサーモン派だっけ？マグロ派だっけ？」——間違えたら終了。続けるほど抱える「好み」が増え、自分が誰だか分からなくなっていく、4択メモリーゲーム。",
+        kiokuizTag1: "記憶", kiokuizTag2: "4択", kiokuizTag3: "自己問答",
     },
     en: {
         tagline:   "Games · Education · Tools — delivered via browser and apps",
@@ -2168,6 +2197,9 @@ const I18N = {
         enootoTitle: "Sound of Drawing",
         enootoDesc:  "Draw with your finger — and music is born. For ages 4–9, a brand-new creative toy where the vertical position of your stroke becomes pitch: high up = high notes, low down = low ones. Draw a curve and you've composed a melody. 4 instruments (piano / sakura-koto / bells / drums), all on a pentatonic scale so anything you draw sounds beautiful. ▶ replays both the drawing and its melody together. PNG export.",
         enootoTag1: "Ages 4–9", enootoTag2: "Draw × Music", enootoTag3: "Pentatonic",
+        kiokuizTitle: "Kiokuiz",
+        kiokuizDesc:  "Round 1: \"breakfast?\" — pick what you actually like, from 4 options. Round 2: \"tea?\" — pick again. Then a quiz round slips in: \"what did past-you choose for breakfast?\" Get it wrong, game over. The longer you survive, the bigger your stack of preferences to remember — until you can't tell who you even are anymore. A 4-choice memory game where your own taste becomes the test.",
+        kiokuizTag1: "Memory", kiokuizTag2: "4-choice", kiokuizTag3: "Self-quiz",
     }
 };
 
