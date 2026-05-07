@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0a0820">
+<title>えのおと — Sound of Drawing</title>
+<meta name="description" content="ゆびで絵をかくと、おとが鳴る。4〜9歳向け、絵と音楽がひとつになる創作あそび。">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+html, body {
+    width:100%; height:100%; overflow:hidden;
+    touch-action:none;
+    user-select:none; -webkit-user-select:none;
+    overscroll-behavior:none;
+}
+body {
+    font-family: -apple-system, "Hiragino Maru Gothic ProN", "Yu Gothic UI", "Segoe UI", "Helvetica Neue", sans-serif;
+    background: radial-gradient(ellipse at 50% 35%, #1a1248 0%, #0a0820 60%, #04020f 100%);
+    color: #fff;
+    position: relative;
+}
+
+/* ===== Canvas (full screen) ===== */
+#stage {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+}
+#canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    cursor: crosshair;
+}
+
+/* ===== Top bar ===== */
+.topbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 10;
+    padding: 14px 12px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    pointer-events: none;
+    background: linear-gradient(to bottom, rgba(10,8,32,0.7) 0%, rgba(10,8,32,0) 100%);
+}
+.topbar > * { pointer-events: auto; }
+
+.title-block { display:flex; align-items:center; gap:8px; }
+.title-mark {
+    width: 32px; height: 32px;
+    border-radius: 9px;
+    background: linear-gradient(135deg, #ff6b9d 0%, #ffd166 50%, #06d6a0 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+    box-shadow: 0 2px 12px rgba(255,107,157,0.4);
+}
+.title-text {
+    font-size: 16px;
+    font-weight: 800;
+    letter-spacing: -0.3px;
+    line-height: 1;
+}
+.title-sub {
+    font-size: 9px;
+    color: #b9b3e8;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-top: 3px;
+}
+
+.topbtns { display: flex; gap: 6px; }
+.icon-btn {
+    width: 38px; height: 38px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.14);
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: background 0.15s, transform 0.1s;
+}
+.icon-btn:active { transform: scale(0.92); background: rgba(255,255,255,0.18); }
+.icon-btn.disabled { opacity: 0.35; pointer-events: none; }
+.icon-btn.replay-active {
+    background: linear-gradient(135deg, #ff6b9d, #ffd166);
+    border-color: transparent;
+}
+
+/* ===== Mode selector (bottom) ===== */
+.mode-bar {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 10;
+    padding: 10px 12px max(14px, env(safe-area-inset-bottom)) 12px;
+    background: linear-gradient(to top, rgba(10,8,32,0.85) 0%, rgba(10,8,32,0) 100%);
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+.mode-btn {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 22px;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 8px 14px;
+    cursor: pointer;
+    display: flex; align-items: center; gap: 5px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: all 0.15s;
+    white-space: nowrap;
+}
+.mode-btn:active { transform: scale(0.95); }
+.mode-btn.active {
+    background: rgba(255,255,255,0.95);
+    color: #1a1248;
+    border-color: transparent;
+    box-shadow: 0 4px 16px rgba(255,255,255,0.25);
+}
+.mode-emoji { font-size: 16px; line-height: 1; }
+
+/* ===== Pitch lane indicator (left side) ===== */
+.pitch-lanes {
+    position: fixed;
+    left: 0; top: 0;
+    width: 4px; height: 100%;
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0.25;
+    background: linear-gradient(to bottom,
+        #ff6b9d 0%,
+        #ffd166 25%,
+        #06d6a0 50%,
+        #5dd9ff 75%,
+        #c39bff 100%);
+}
+
+/* ===== Splash / intro overlay ===== */
+.splash {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    background: radial-gradient(ellipse at 50% 40%, #2a1a6a 0%, #0a0820 70%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: opacity 0.4s;
+}
+.splash.hide { opacity: 0; pointer-events: none; }
+
+.splash-mark {
+    width: 84px; height: 84px;
+    border-radius: 22px;
+    background: linear-gradient(135deg, #ff6b9d 0%, #ffd166 45%, #06d6a0 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 42px;
+    margin-bottom: 18px;
+    box-shadow: 0 8px 32px rgba(255,107,157,0.3);
+    animation: floatY 2.4s ease-in-out infinite;
+}
+@keyframes floatY {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-8px); }
+}
+.splash h1 {
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    margin-bottom: 6px;
+    background: linear-gradient(90deg, #ff6b9d, #ffd166, #06d6a0, #5dd9ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.splash h2 {
+    font-size: 11px;
+    color: #b9b3e8;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 22px;
+}
+.splash-desc {
+    font-size: 14px;
+    line-height: 1.7;
+    color: #e8e3ff;
+    max-width: 340px;
+    margin-bottom: 30px;
+}
+.splash-desc b { color: #ffd166; }
+.splash-go {
+    background: linear-gradient(135deg, #ff6b9d, #ffd166);
+    color: #1a1248;
+    border: none;
+    padding: 14px 32px;
+    border-radius: 28px;
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 6px 24px rgba(255,107,157,0.4);
+    transition: transform 0.15s;
+}
+.splash-go:active { transform: scale(0.96); }
+.splash-hint {
+    margin-top: 18px;
+    font-size: 11px;
+    color: #7a73a8;
+    letter-spacing: 0.5px;
+}
+
+/* ===== Toast ===== */
+.toast {
+    position: fixed;
+    bottom: 78px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    z-index: 20;
+    background: rgba(255,255,255,0.95);
+    color: #1a1248;
+    padding: 9px 18px;
+    border-radius: 22px;
+    font-size: 13px;
+    font-weight: 700;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    opacity: 0;
+    transition: opacity 0.25s, transform 0.25s;
+    pointer-events: none;
+    white-space: nowrap;
+}
+.toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* ===== Hint floating in canvas ===== */
+.center-hint {
+    position: fixed;
+    inset: 0;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.4);
+    pointer-events: none;
+    font-size: 14px;
+    transition: opacity 0.4s;
+    text-align: center;
+    line-height: 1.6;
+}
+.center-hint.hide { opacity: 0; }
+.center-hint .ear { font-size: 48px; margin-bottom: 12px; opacity: 0.6; }
+
+/* ===== Responsive tweaks ===== */
+@media (max-height: 540px) {
+    .splash-mark { width: 64px; height: 64px; font-size: 32px; margin-bottom: 12px; }
+    .splash h1 { font-size: 26px; }
+    .splash-desc { font-size: 13px; margin-bottom: 20px; }
+}
+@media (max-width: 380px) {
+    .mode-btn { padding: 7px 11px; font-size: 12px; }
+    .topbar { padding: 10px 8px 8px; }
+    .icon-btn { width: 36px; height: 36px; font-size: 15px; }
+    .title-text { font-size: 14px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Pitch lane gradient guide (left edge) -->
+<div class="pitch-lanes"></div>
+
+<!-- Canvas -->
+<div id="stage">
+    <canvas id="canvas"></canvas>
+</div>
+
+<!-- Center hint -->
+<div class="center-hint" id="hint">
+    <div class="ear">🎵</div>
+    <div>ゆびで えを かいてみよう<br><span style="font-size:11px;opacity:0.7;letter-spacing:1px;">DRAW WITH YOUR FINGER</span></div>
+</div>
+
+<!-- Top bar -->
+<div class="topbar">
+    <div class="title-block">
+        <div class="title-mark">🎨</div>
+        <div>
+            <div class="title-text">えのおと</div>
+            <div class="title-sub">SOUND OF DRAWING</div>
+        </div>
+    </div>
+    <div class="topbtns">
+        <button class="icon-btn disabled" id="btnReplay" aria-label="replay" title="もういちど">▶</button>
+        <button class="icon-btn disabled" id="btnSave" aria-label="save" title="ほぞん">💾</button>
+        <button class="icon-btn disabled" id="btnClear" aria-label="clear" title="けす">✕</button>
+    </div>
+</div>
+
+<!-- Mode selector -->
+<div class="mode-bar" id="modeBar">
+    <button class="mode-btn active" data-mode="piano"><span class="mode-emoji">🎹</span>ぴあの</button>
+    <button class="mode-btn" data-mode="koto"><span class="mode-emoji">🌸</span>さくら</button>
+    <button class="mode-btn" data-mode="bell"><span class="mode-emoji">💎</span>きらきら</button>
+    <button class="mode-btn" data-mode="drum"><span class="mode-emoji">🥁</span>だいこ</button>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- Splash -->
+<div class="splash" id="splash">
+    <div class="splash-mark">🎨</div>
+    <h1>えのおと</h1>
+    <h2>Sound of Drawing</h2>
+    <div class="splash-desc">
+        ゆびで <b>えを かく</b> と、<br>
+        おとが <b>うまれる</b>。<br><br>
+        うえに かけば <b>たかい おと</b>、<br>
+        したに かけば <b>ひくい おと</b>。<br>
+        あとから ▶ボタンで、もういちど きける。
+    </div>
+    <button class="splash-go" id="splashGo">はじめる</button>
+    <div class="splash-hint">4〜9さい むけ・おとが でます</div>
+</div>
+
+<script>
+"use strict";
+
+/* ============================================================
+   AUDIO ENGINE
+   ============================================================ */
+let audioCtx = null;
+let masterGain = null;
+let compressor = null;
+
+function initAudio() {
+    if (audioCtx) return;
+    try {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        compressor = audioCtx.createDynamicsCompressor();
+        compressor.threshold.value = -16;
+        compressor.knee.value = 24;
+        compressor.ratio.value = 6;
+        compressor.attack.value = 0.003;
+        compressor.release.value = 0.18;
+        masterGain = audioCtx.createGain();
+        masterGain.gain.value = 0.55;
+        masterGain.connect(compressor);
+        compressor.connect(audioCtx.destination);
+    } catch (e) {
+        console.warn("audio unavailable", e);
+    }
+}
+
+// C major pentatonic across 3 octaves (15 notes), low → high
+// C4, D4, E4, G4, A4, C5, D5, E5, G5, A5, C6, D6, E6, G6, A6
+const PENTATONIC = [
+    261.63, 293.66, 329.63, 392.00, 440.00,
+    523.25, 587.33, 659.25, 783.99, 880.00,
+    1046.50, 1174.66, 1318.51, 1567.98, 1760.00
+];
+// Slight Japanese koto tuning bias (very minor) — Hirajōshi-flavored remap
+const KOTO_NOTES = [
+    261.63, 293.66, 311.13, 392.00, 415.30,   // C, D, Eb, G, Ab
+    523.25, 587.33, 622.25, 783.99, 830.61,
+    1046.50, 1174.66, 1244.51, 1567.98, 1661.22
+];
+
+function pitchIndexFromY(y, h) {
+    // y in [0..h], return index 0..14 with TOP = high
+    const norm = 1 - clamp(y / h, 0, 1);
+    return Math.round(norm * (PENTATONIC.length - 1));
+}
+
+function freqForMode(mode, idx) {
+    if (mode === "koto") return KOTO_NOTES[idx];
+    return PENTATONIC[idx];
+}
+
+function clamp(v, lo, hi) { return Math.max(lo, Math.min(hi, v)); }
+
+/**
+ * playNote(mode, freq, opts)
+ * Plays a short tone with envelope.
+ */
+function playNote(mode, freq, opts = {}) {
+    if (!audioCtx) return;
+    const t0 = audioCtx.currentTime;
+    const vel = opts.vel != null ? opts.vel : 0.7;
+
+    if (mode === "drum") {
+        // Drum: short noise burst, pitch-tuned
+        const bufLen = audioCtx.sampleRate * 0.18;
+        const buf = audioCtx.createBuffer(1, bufLen, audioCtx.sampleRate);
+        const data = buf.getChannelData(0);
+        for (let i = 0; i < bufLen; i++) {
+            data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (bufLen * 0.25));
+        }
+        const src = audioCtx.createBufferSource();
+        src.buffer = buf;
+        const lp = audioCtx.createBiquadFilter();
+        lp.type = "lowpass";
+        // map pitch idx → cutoff
+        const cutoff = clamp(freq * 0.6 + 200, 180, 2200);
+        lp.frequency.value = cutoff;
+        lp.Q.value = 4;
+        const g = audioCtx.createGain();
+        g.gain.setValueAtTime(0.0001, t0);
+        g.gain.exponentialRampToValueAtTime(0.55 * vel, t0 + 0.005);
+        g.gain.exponentialRampToValueAtTime(0.0001, t0 + 0.16);
+        src.connect(lp); lp.connect(g); g.connect(masterGain);
+        src.start(t0);
+        src.stop(t0 + 0.2);
+        return;
+    }
+
+    // Tone-based modes
+    let oscType, harmonics, atk, dec, rel, peakGain;
+    if (mode === "bell") {
+        oscType = "sine";
+        harmonics = [{ratio:1, gain:0.6}, {ratio:2.76, gain:0.18}, {ratio:5.4, gain:0.05}];
+        atk = 0.003; dec = 0.4; rel = 1.4; peakGain = 0.45;
+    } else if (mode === "koto") {
+        oscType = "triangle";
+        harmonics = [{ratio:1, gain:0.55}, {ratio:2, gain:0.12}, {ratio:3, gain:0.05}];
+        atk = 0.005; dec = 0.25; rel = 0.9; peakGain = 0.5;
+    } else { // piano
+        oscType = "triangle";
+        harmonics = [{ratio:1, gain:0.55}, {ratio:2, gain:0.18}, {ratio:4, gain:0.04}];
+        atk = 0.004; dec = 0.18; rel = 0.55; peakGain = 0.5;
+    }
+
+    const ampG = audioCtx.createGain();
+    ampG.gain.setValueAtTime(0, t0);
+    ampG.gain.linearRampToValueAtTime(peakGain * vel, t0 + atk);
+    ampG.gain.exponentialRampToValueAtTime(Math.max(0.0001, peakGain * vel * 0.4), t0 + atk + dec);
+    ampG.gain.exponentialRampToValueAtTime(0.0001, t0 + atk + dec + rel);
+    ampG.connect(masterGain);
+
+    harmonics.forEach(h => {
+        const o = audioCtx.createOscillator();
+        o.type = oscType;
+        o.frequency.value = freq * h.ratio;
+        const g = audioCtx.createGain();
+        g.gain.value = h.gain;
+        o.connect(g); g.connect(ampG);
+        o.start(t0);
+        o.stop(t0 + atk + dec + rel + 0.05);
+    });
+}
+
+/* ============================================================
+   CANVAS DRAWING
+   ============================================================ */
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+let DPR = Math.min(window.devicePixelRatio || 1, 2.5);
+let W = 0, H = 0;
+
+function resize() {
+    DPR = Math.min(window.devicePixelRatio || 1, 2.5);
+    W = window.innerWidth;
+    H = window.innerHeight;
+    canvas.width = Math.floor(W * DPR);
+    canvas.height = Math.floor(H * DPR);
+    canvas.style.width = W + "px";
+    canvas.style.height = H + "px";
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
+    redrawAll();
+}
+window.addEventListener("resize", resize, {passive:true});
+window.addEventListener("orientationchange", () => setTimeout(resize, 60));
+
+/* ===== Stroke storage =====
+   strokes: Array of stroke objects:
+   { mode, color, points: [{x,y,t,pitchIdx}] }
+*/
+let strokes = [];
+let currentStroke = null;
+let currentMode = "piano";
+let currentPitchIdx = -1;
+let isReplaying = false;
+let replayCancel = null;
+let drawnAnything = false;
+
+function colorForY(y) {
+    // Full rainbow: top (high pitch) = warm pink/red, going through gold→green→cyan→blue→violet at bottom
+    const norm = clamp(y / H, 0, 1); // 0=top, 1=bottom
+    // hue: 340 → 280 across the full -340 + 360 - 280 = +300 degrees
+    // We want top=340 (hot pink), going DOWN means going UP in hue but wrap.
+    // Easier: compute as hue = 340 + norm * 300, mod 360.
+    const hue = (340 + norm * 300) % 360;
+    return `hsl(${hue.toFixed(0)}, 95%, 65%)`;
+}
+function lerp(a, b, t) { return a + (b - a) * t; }
+
+function strokeWidthFor(speed) {
+    // slow → thick, fast → thin
+    return clamp(8 - speed * 0.04, 2.5, 8);
+}
+
+function drawSegment(x0, y0, x1, y1, color, width) {
+    // Outer glow
+    ctx.save();
+    ctx.shadowBlur = 16;
+    ctx.shadowColor = color;
+    ctx.strokeStyle = color;
+    ctx.lineWidth = width;
+    ctx.beginPath();
+    ctx.moveTo(x0, y0);
+    ctx.lineTo(x1, y1);
+    ctx.stroke();
+    // Bright inner core
+    ctx.shadowBlur = 0;
+    ctx.strokeStyle = "rgba(255,255,255,0.85)";
+    ctx.lineWidth = Math.max(1.2, width * 0.35);
+    ctx.beginPath();
+    ctx.moveTo(x0, y0);
+    ctx.lineTo(x1, y1);
+    ctx.stroke();
+    ctx.restore();
+}
+
+function drawDot(x, y, color, r) {
+    ctx.save();
+    ctx.shadowBlur = 18;
+    ctx.shadowColor = color;
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.arc(x, y, r, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.shadowBlur = 0;
+    ctx.fillStyle = "rgba(255,255,255,0.9)";
+    ctx.beginPath();
+    ctx.arc(x, y, Math.max(0.8, r * 0.42), 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+}
+
+function spawnNoteRing(x, y, color) {
+    // Animated expanding ring on note trigger — drawn as overlay (transient)
+    rings.push({x, y, color, r: 4, alpha: 0.85, born: performance.now()});
+}
+const rings = [];
+
+function renderRings() {
+    if (rings.length === 0) return;
+    const now = performance.now();
+    for (let i = rings.length - 1; i >= 0; i--) {
+        const r = rings[i];
+        const age = (now - r.born) / 380;
+        if (age >= 1) { rings.splice(i, 1); continue; }
+        const radius = 4 + age * 36;
+        const a = (1 - age) * 0.85;
+        ctx.save();
+        ctx.strokeStyle = r.color;
+        ctx.globalAlpha = a;
+        ctx.lineWidth = 2.4;
+        ctx.beginPath();
+        ctx.arc(r.x, r.y, radius, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.restore();
+    }
+}
+
+/* ===== Redraw entire scene from stored strokes =====
+   Called on resize, replay, etc.
+*/
+function redrawAll(progress = 1) {
+    ctx.save();
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    // clear (transparent — body bg shines through)
+    ctx.clearRect(0, 0, W, H);
+    ctx.restore();
+
+    const totalStrokes = strokes.length;
+    if (totalStrokes === 0) return;
+
+    // progress in [0..1] determines how much to draw
+    let pTotalPts = 0;
+    strokes.forEach(s => pTotalPts += s.points.length);
+    const drawPts = Math.floor(progress * pTotalPts);
+    let drawn = 0;
+
+    for (const s of strokes) {
+        const pts = s.points;
+        if (pts.length === 0) continue;
+        const startDrawn = drawn;
+        const endDrawn = Math.min(pts.length, drawPts - drawn);
+
+        if (endDrawn <= 0) {
+            drawn += pts.length;
+            continue;
+        }
+        if (endDrawn === 1) {
+            const p = pts[0];
+            drawDot(p.x, p.y, s.color || colorForY(p.y), 5);
+        } else {
+            for (let i = 1; i < endDrawn; i++) {
+                const a = pts[i-1], b = pts[i];
+                const dt = Math.max(1, b.t - a.t);
+                const dist = Math.hypot(b.x - a.x, b.y - a.y);
+                const speed = dist / dt * 16;
+                const w = strokeWidthFor(speed);
+                const col = colorForY((a.y + b.y) / 2);
+                drawSegment(a.x, a.y, b.x, b.y, col, w);
+            }
+            // Cap dot at start
+            drawDot(pts[0].x, pts[0].y, colorForY(pts[0].y), 4);
+        }
+        drawn += pts.length;
+        if (drawn >= drawPts) break;
+    }
+    renderRings();
+}
+
+/* ===== Animation loop for rings ===== */
+let raf = null;
+function animLoop() {
+    if (rings.length > 0 && !isReplaying) {
+        // Re-render incrementally is overkill; we just paint rings on top each frame
+        // But base scene shouldn't be cleared — so we draw a minimal overlay.
+        // Simpler: redraw everything at progress=1
+        redrawAll(1);
+    }
+    raf = requestAnimationFrame(animLoop);
+}
+animLoop();
+
+/* ============================================================
+   INPUT (Pointer events — mouse + touch + pen)
+   ============================================================ */
+let activePointerId = null;
+const ptElem = canvas;
+
+function getPos(e) {
+    return { x: e.clientX, y: e.clientY };
+}
+
+function startStroke(p) {
+    initAudio();
+    if (audioCtx && audioCtx.state === "suspended") audioCtx.resume();
+
+    drawnAnything = true;
+    document.getElementById("hint").classList.add("hide");
+    btnReplay.classList.remove("disabled");
+    btnSave.classList.remove("disabled");
+    btnClear.classList.remove("disabled");
+
+    currentStroke = {
+        mode: currentMode,
+        points: []
+    };
+    strokes.push(currentStroke);
+
+    const t = performance.now();
+    const idx = pitchIndexFromY(p.y, H);
+    currentPitchIdx = idx;
+    currentStroke.points.push({ x: p.x, y: p.y, t, pitchIdx: idx });
+
+    const col = colorForY(p.y);
+    drawDot(p.x, p.y, col, 5);
+    spawnNoteRing(p.x, p.y, col);
+    playNote(currentMode, freqForMode(currentMode, idx), { vel: 0.85 });
+}
+
+function moveStroke(p) {
+    if (!currentStroke) return;
+    const pts = currentStroke.points;
+    const last = pts[pts.length - 1];
+    const dx = p.x - last.x, dy = p.y - last.y;
+    const distSq = dx*dx + dy*dy;
+    if (distSq < 4) return; // skip tiny moves
+
+    const t = performance.now();
+    const idx = pitchIndexFromY(p.y, H);
+    const dt = Math.max(1, t - last.t);
+    const dist = Math.sqrt(distSq);
+    const speed = dist / dt * 16;
+    const w = strokeWidthFor(speed);
+    const col = colorForY((last.y + p.y) / 2);
+
+    drawSegment(last.x, last.y, p.x, p.y, col, w);
+
+    pts.push({ x: p.x, y: p.y, t, pitchIdx: idx });
+
+    if (idx !== currentPitchIdx) {
+        currentPitchIdx = idx;
+        const noteCol = colorForY(p.y);
+        spawnNoteRing(p.x, p.y, noteCol);
+        playNote(currentMode, freqForMode(currentMode, idx), { vel: 0.65 });
+    }
+}
+
+function endStroke() {
+    currentStroke = null;
+    currentPitchIdx = -1;
+}
+
+ptElem.addEventListener("pointerdown", (e) => {
+    if (isReplaying) return;
+    if (activePointerId !== null) return;
+    activePointerId = e.pointerId;
+    ptElem.setPointerCapture(e.pointerId);
+    e.preventDefault();
+    startStroke(getPos(e));
+});
+ptElem.addEventListener("pointermove", (e) => {
+    if (e.pointerId !== activePointerId) return;
+    e.preventDefault();
+    moveStroke(getPos(e));
+});
+function _release(e) {
+    if (e.pointerId !== activePointerId) return;
+    activePointerId = null;
+    try { ptElem.releasePointerCapture(e.pointerId); } catch(_){}
+    endStroke();
+}
+ptElem.addEventListener("pointerup", _release);
+ptElem.addEventListener("pointercancel", _release);
+ptElem.addEventListener("pointerleave", _release);
+
+// Block context menu / pinch zoom on canvas
+ptElem.addEventListener("contextmenu", (e) => e.preventDefault());
+document.addEventListener("gesturestart", (e) => e.preventDefault());
+
+/* ============================================================
+   MODE SELECTOR
+   ============================================================ */
+document.querySelectorAll(".mode-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+        document.querySelectorAll(".mode-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        currentMode = btn.dataset.mode;
+        // little preview note
+        initAudio();
+        if (audioCtx && audioCtx.state === "suspended") audioCtx.resume();
+        playNote(currentMode, freqForMode(currentMode, 7), { vel: 0.55 });
+    });
+});
+
+/* ============================================================
+   TOP BAR BUTTONS: Replay / Save / Clear
+   ============================================================ */
+const btnReplay = document.getElementById("btnReplay");
+const btnSave = document.getElementById("btnSave");
+const btnClear = document.getElementById("btnClear");
+
+btnClear.addEventListener("click", () => {
+    if (isReplaying) return;
+    if (!drawnAnything) return;
+    if (replayCancel) { replayCancel(); replayCancel = null; }
+    strokes = [];
+    rings.length = 0;
+    drawnAnything = false;
+    redrawAll(1);
+    btnReplay.classList.add("disabled");
+    btnSave.classList.add("disabled");
+    btnClear.classList.add("disabled");
+    document.getElementById("hint").classList.remove("hide");
+    showToast("けしました");
+});
+
+btnSave.addEventListener("click", () => {
+    if (!drawnAnything) return;
+    // Composite: dark background + drawn canvas
+    const exp = document.createElement("canvas");
+    exp.width = W * DPR;
+    exp.height = H * DPR;
+    const ec = exp.getContext("2d");
+    // bg
+    const grad = ec.createRadialGradient(
+        exp.width * 0.5, exp.height * 0.35, 0,
+        exp.width * 0.5, exp.height * 0.35, Math.max(exp.width, exp.height)
+    );
+    grad.addColorStop(0, "#1a1248");
+    grad.addColorStop(0.6, "#0a0820");
+    grad.addColorStop(1, "#04020f");
+    ec.fillStyle = grad;
+    ec.fillRect(0, 0, exp.width, exp.height);
+    ec.drawImage(canvas, 0, 0);
+    // tag
+    ec.fillStyle = "rgba(255,255,255,0.55)";
+    ec.font = `${14 * DPR}px -apple-system, "Hiragino Maru Gothic ProN", sans-serif`;
+    ec.textAlign = "right";
+    ec.fillText("えのおと · pndshch.github.io", exp.width - 16 * DPR, exp.height - 14 * DPR);
+
+    exp.toBlob((blob) => {
+        const a = document.createElement("a");
+        const url = URL.createObjectURL(blob);
+        a.href = url;
+        const ts = new Date().toISOString().replace(/[:.]/g, "-").slice(0, 16);
+        a.download = `enooto-${ts}.png`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 2000);
+        showToast("えを ほぞんしました");
+    }, "image/png");
+});
+
+btnReplay.addEventListener("click", () => {
+    if (!drawnAnything || isReplaying) return;
+    runReplay();
+});
+
+/* ============================================================
+   REPLAY: animate redraw + replay sound timeline (setTimeout-based)
+   ============================================================ */
+function runReplay() {
+    if (strokes.length === 0) return;
+    isReplaying = true;
+    btnReplay.classList.add("replay-active");
+
+    // Clear canvas, then re-paint stroke by stroke
+    ctx.clearRect(0, 0, W, H);
+
+    let cancelled = false;
+    replayCancel = () => { cancelled = true; };
+
+    // Build a single timeline of (delay, action) events
+    const events = [];
+    let totalElapsed = 0;
+    const STROKE_GAP = 140;
+    const SPEED = 1.4;  // 1.4x faster than original
+
+    strokes.forEach((s, sIdx) => {
+        if (s.points.length === 0) return;
+        const baseT = s.points[0].t;
+        s.points.forEach((p, pIdx) => {
+            const tAfterBase = (p.t - baseT) / SPEED;
+            const absDelay = totalElapsed + tAfterBase;
+            const prev = pIdx > 0 ? s.points[pIdx - 1] : null;
+            events.push({
+                delay: absDelay,
+                stroke: s,
+                point: p,
+                prev: prev,
+                isFirst: pIdx === 0
+            });
+        });
+        const lastT = (s.points[s.points.length - 1].t - baseT) / SPEED;
+        totalElapsed += lastT + STROKE_GAP;
+    });
+
+    let lastPitchByStroke = new Map();
+
+    events.forEach((ev) => {
+        setTimeout(() => {
+            if (cancelled) return;
+            const s = ev.stroke;
+            const p = ev.point;
+            if (ev.isFirst) {
+                const col = colorForY(p.y);
+                drawDot(p.x, p.y, col, 5);
+                spawnNoteRing(p.x, p.y, col);
+                playNote(s.mode, freqForMode(s.mode, p.pitchIdx), { vel: 0.85 });
+                lastPitchByStroke.set(s, p.pitchIdx);
+            } else {
+                const a = ev.prev, b = p;
+                const dt = Math.max(1, b.t - a.t);
+                const dist = Math.hypot(b.x - a.x, b.y - a.y);
+                const speed = dist / dt * 16;
+                const w = strokeWidthFor(speed);
+                const col = colorForY((a.y + b.y) / 2);
+                drawSegment(a.x, a.y, b.x, b.y, col, w);
+                const last = lastPitchByStroke.get(s);
+                if (b.pitchIdx !== last) {
+                    spawnNoteRing(b.x, b.y, colorForY(b.y));
+                    playNote(s.mode, freqForMode(s.mode, b.pitchIdx), { vel: 0.65 });
+                    lastPitchByStroke.set(s, b.pitchIdx);
+                }
+            }
+        }, ev.delay);
+    });
+
+    // Schedule final cleanup
+    setTimeout(() => {
+        finishReplay();
+    }, totalElapsed + 200);
+}
+
+function finishReplay() {
+    isReplaying = false;
+    replayCancel = null;
+    btnReplay.classList.remove("replay-active");
+    redrawAll(1);
+}
+
+/* ============================================================
+   SPLASH / TOAST
+   ============================================================ */
+const splash = document.getElementById("splash");
+document.getElementById("splashGo").addEventListener("click", () => {
+    initAudio();
+    if (audioCtx && audioCtx.state === "suspended") audioCtx.resume();
+    splash.classList.add("hide");
+    setTimeout(() => splash.remove(), 500);
+    // greeting chord
+    if (audioCtx) {
+        playNote("piano", PENTATONIC[5], { vel: 0.5 });
+        setTimeout(() => playNote("piano", PENTATONIC[7], { vel: 0.5 }), 110);
+        setTimeout(() => playNote("piano", PENTATONIC[10], { vel: 0.5 }), 220);
+    }
+});
+
+let toastTimer = null;
+function showToast(msg) {
+    const t = document.getElementById("toast");
+    t.textContent = msg;
+    t.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => t.classList.remove("show"), 1700);
+}
+
+/* ============================================================
+   START
+   ============================================================ */
+resize();
+
+// Prevent double-tap zoom on iOS
+let lastTouchEnd = 0;
+document.addEventListener("touchend", (e) => {
+    const now = Date.now();
+    if (now - lastTouchEnd < 300) e.preventDefault();
+    lastTouchEnd = now;
+}, {passive:false});
+
+</script>
+</body>
+</html>

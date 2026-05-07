@@ -214,6 +214,7 @@ header p {
 .thumb-heron      { background: linear-gradient(180deg, #f4ede0 0%, #d6c8a8 60%, #8d9bab 100%); }
 .thumb-akubi      { background: linear-gradient(180deg, #ffe9b5 0%, #ffd9c0 55%, #f9c6d6 100%); }
 .thumb-iromaze    { background: radial-gradient(ellipse at 50% 35%, #2a1f4d 0%, #15102a 60%, #0a0717 100%); }
+.thumb-enooto     { background: radial-gradient(ellipse at 50% 35%, #1a1248 0%, #0a0820 60%, #04020f 100%); }
 
 .card-body {
     padding: 18px 20px 22px;
@@ -417,6 +418,14 @@ footer a:hover { color: #e6edf3; }
 <!-- Featured -->
 <div class="section-label" data-i18n="secFeatured">⭐ おすすめ</div>
 <div class="feat-row">
+        <a class="feat-card" href="https://pndshch.github.io/e-no-oto/" target="_blank">
+            <div class="card-thumb thumb-enooto">
+            <span class="new-badge" data-i18n="newBadge">NEW</span>
+            <span class="thumb-emoji">🎨</span>
+            <img class="thumb-gif" src="assets/e-no-oto.gif" alt="" onerror="this.remove()">
+        </div>
+            <span class="feat-title" data-i18n="enootoTitle">えのおと</span>
+        </a>
         <a class="feat-card" href="https://pndshch.github.io/iro-maze/" target="_blank">
             <div class="card-thumb thumb-iromaze">
             <span class="new-badge" data-i18n="newBadge">NEW</span>
@@ -559,6 +568,23 @@ footer a:hover { color: #e6edf3; }
 <!-- All apps -->
 <div class="grid" id="app-grid">
     <div class="grid-header" data-cat-header="kids-play" data-i18n="secGridKidsPlay">🎈 こどもがあそぶ</div>
+    <div class="card" data-cat="kids-play">
+            <div class="card-thumb thumb-enooto">
+                <span class="new-badge" data-i18n="newBadge">NEW</span>
+                <span class="thumb-emoji">🎨</span>
+                <img class="thumb-gif" src="assets/e-no-oto.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="enootoTitle">えのおと</h2>
+                <p data-i18n="enootoDesc">ゆびで えを かくと、おとが うまれる！4〜9さい向けの新しい創作あそび。うえに かけば たかい音、したに かけば ひくい音——画面の縦位置がそのままピッチになる、絵と音楽がひとつになる体験。ぴあの・さくら（こと）・きらきら・だいこの4音色、五音音階だから何を描いても気持ちいい音になる。▶ボタンで描いた絵をアニメ＋音で再生、PNG保存も。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="enootoTag1">4〜9歳</span>
+                    <span class="tag" data-i18n="enootoTag2">絵×音</span>
+                    <span class="tag" data-i18n="enootoTag3">五音音階</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/e-no-oto/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
     <div class="card" data-cat="kids-play">
             <div class="card-thumb thumb-iromaze">
                 <span class="new-badge" data-i18n="newBadge">NEW</span>
@@ -1841,6 +1867,9 @@ const I18N = {
         iromazeTitle: "いろまぜ",
         iromazeDesc:  "2つの色を ぎゅっとくっつけると、あたらしい色が うまれる！4〜8歳むけ、日本の伝統色（和色）を 25色集める色あそび実験室。あか＋しろ＝桃色（ももいろ）、桃色＋しろ＝桜色（さくらいろ）。「やまぶき」「あさぎ」「うぐいす」など、まぜないと出会えない色がある。読みかなつき、保存対応。",
         iromazeTag1: "4〜8歳", iromazeTag2: "和色25", iromazeTag3: "混色",
+        enootoTitle: "えのおと",
+        enootoDesc:  "ゆびで えを かくと、おとが うまれる！4〜9さい向けの新しい創作あそび。うえに かけば たかい音、したに かけば ひくい音——画面の縦位置がそのままピッチになる、絵と音楽がひとつになる体験。ぴあの・さくら（こと）・きらきら・だいこの4音色、五音音階だから何を描いても気持ちいい音になる。▶ボタンで描いた絵をアニメ＋音で再生、PNG保存も。",
+        enootoTag1: "4〜9歳", enootoTag2: "絵×音", enootoTag3: "五音音階",
     },
     en: {
         tagline:   "Games · Education · Tools — delivered via browser and apps",
@@ -2072,6 +2101,9 @@ const I18N = {
         iromazeTitle: "Iro-maze (Color Lab)",
         iromazeDesc:  "Press two color blobs together — a new color is born! For ages 4–8, a discovery lab of 25 traditional Japanese colors (和色). Red + white = momo-iro (peach); peach + white = sakura-iro (cherry blossom). Yamabuki, asagi, uguisu — colors you only meet by mixing. Hiragana readings, progress saved.",
         iromazeTag1: "Ages 4–8", iromazeTag2: "25 Wa-iro", iromazeTag3: "Mixing",
+        enootoTitle: "Sound of Drawing",
+        enootoDesc:  "Draw with your finger — and music is born. For ages 4–9, a brand-new creative toy where the vertical position of your stroke becomes pitch: high up = high notes, low down = low ones. Draw a curve and you've composed a melody. 4 instruments (piano / sakura-koto / bells / drums), all on a pentatonic scale so anything you draw sounds beautiful. ▶ replays both the drawing and its melody together. PNG export.",
+        enootoTag1: "Ages 4–9", enootoTag2: "Draw × Music", enootoTag3: "Pentatonic",
     }
 };
 
