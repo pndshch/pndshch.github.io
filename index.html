@@ -232,6 +232,8 @@ header p {
 .thumb-darumasan { background: radial-gradient(ellipse at 50% 38%, #ffd66b 0%, #f08e3a 45%, #b03a1f 100%); }
 .thumb-tako      { background: radial-gradient(ellipse at 50% 35%, #1a2c5c 0%, #0a1438 55%, #050b22 100%); }
 .thumb-tunguska  { background: radial-gradient(ellipse at 50% 28%, #2a3a48 0%, #131a22 55%, #08090c 100%); }
+.thumb-eratosthenes { background: linear-gradient(180deg, #1f3a5a 0%, #4a6a8a 38%, #c9a572 70%, #8a6234 100%); }
+.thumb-uchu      { background: radial-gradient(ellipse at 50% 30%, #1d3473 0%, #0a1535 55%, #050216 100%); }
 
 .card-body {
     padding: 18px 20px 22px;
@@ -616,6 +618,22 @@ footer a:hover { color: #e6edf3; }
 
 <!-- All apps -->
 <div class="grid" id="app-grid">
+    <div class="card" data-cat="learn" data-added="2026-05-08T03:00:00+09:00" data-slug="uchu-elevator">
+            <div class="card-thumb thumb-uchu">
+            <span class="thumb-emoji">🚀</span>
+                <img class="thumb-gif" src="assets/uchu-elevator.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="uchuTitle">うちゅうエレベーター</h2>
+                <p data-i18n="uchuDesc"><strong>ちじょう から つき まで、ぜんぶ ひとつの エレベーター で。</strong>スカイツリー (634m) → ふじさん (3,776m) → ジェットき (11km) → オゾンそう (25km) → ながれぼし (80km) → カーマンライン (100km・ここから「うちゅう」) → ISS (408km) → せいしえいせい (3万6千km) → つき (38万km)。8けたの たかさを ひとつの「のぼる」ボタン で たどる、たいすう スケール の からだ体験。各「フロア」では エレベーターが ちゃんと とまって、その たかさで なに が おきるのか を ひと言 で おしえる。「カーマンライン」を こえた しゅんかん、そらが まっくらに なって ほし が きらり——「あ、いま うちゅう に はいった」が からだ で わかる。5〜9さい の さんすう が まだ つよく ない こども でも、「えらい たかい」と 「こうそく きどう」と 「つき」が ぜんぜん ちがう スケール である こと を、おやゆびひとつ で つかむ。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="uchuTag1">5〜9歳</span>
+                    <span class="tag" data-i18n="uchuTag2">対数スケール</span>
+                    <span class="tag" data-i18n="uchuTag3">大気圏→月</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/uchu-elevator/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
     <div class="card" data-cat="learn" data-added="2026-05-08T02:00:00+09:00" data-slug="tako-no-yume">
             <div class="card-thumb thumb-tako">
             <span class="thumb-emoji">🐙</span>
@@ -1228,6 +1246,22 @@ footer a:hover { color: #e6edf3; }
                     <span class="tag" data-i18n="itokoTag3">3分</span>
                 </div>
                 <a class="card-btn btn-play" href="https://pndshch.github.io/itoko-aeons/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
+    <div class="card" data-cat="world-history" data-added="2026-05-07T22:30:00+09:00" data-slug="eratosthenes-240bc" data-year="-240">
+            <div class="card-thumb thumb-eratosthenes">
+            <span class="thumb-emoji">📐</span>
+                <img class="thumb-gif" src="assets/eratosthenes-240bc.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="eratosthenesTitle">シエネの井戸 紀元前240年</h2>
+                <p data-i18n="eratosthenesDesc">紀元前240年、エジプト南部のシエネで、夏至の正午に深い井戸の底まで陽光が届くという——太陽が<strong>真上</strong>にある証拠。だがアレクサンドリアでは同じ瞬間、棒は影を作る。アレクサンドリア図書館長<strong>エラトステネス</strong>は気づいた——その差を測れば、<strong>地球の大きさ</strong>がわかる。あなたも棒を立て、影の角度を読み、ラクダのキャラバンで5,000スタディアを歩き、地球一周を計算する。誤差はわずか<strong>1.6%</strong>。紀元前240年に、棒一本で。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="eratosthenesTag1">史実体験</span>
+                    <span class="tag" data-i18n="eratosthenesTag2">幾何学</span>
+                    <span class="tag" data-i18n="eratosthenesTag3">紀元前240年</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/eratosthenes-240bc/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
     <div class="card" data-cat="world-history" data-added="2026-05-07T21:55:00+09:00" data-slug="tunguska-1908" data-year="1908">
@@ -2178,6 +2212,9 @@ const I18N = {
         tunguskaTitle: "ツングースカ 1908",
         tunguskaDesc:  "1908年6月30日シベリア。空が二つに割れ、8,000万本の木が放射状に倒れた——クレーターは、ない。倒木の指す方角だけを頼りに、地質学者クーリックがやったように爆心地を三角測量する3分の歴史体験。",
         tunguskaTag1: "史実体験", tunguskaTag2: "三角測量", tunguskaTag3: "6月30日",
+        eratosthenesTitle: "シエネの井戸 紀元前240年",
+        eratosthenesDesc:  "紀元前240年、エジプト南部のシエネで夏至の正午、深い井戸の底まで陽光が届く——太陽が真上にある証拠。だがアレクサンドリアでは同じ瞬間、棒は影を作る。図書館長エラトステネスは気づいた——その差を測れば<strong>地球の大きさ</strong>がわかる。あなたも棒を立て、影の角度を読み、5,000スタディアを歩き、地球一周を計算する。誤差わずか1.6%。棒一本で。",
+        eratosthenesTag1: "史実体験", eratosthenesTag2: "幾何学", eratosthenesTag3: "紀元前240年",
         itokoTitle: "イトコ何億年",
         itokoDesc:  "クジラの一番近い親戚は海ではなくカバ。キノコは植物よりあなたに近い。ふたつの生き物の「最後の共通祖先」はいつ？対数スケールの時間軸を指でなぞる、5ラウンドのディープタイム推定。全員、いとこ。",
         itokoTag1: "気づき", itokoTag2: "進化生物学", itokoTag3: "3分",
@@ -2208,6 +2245,9 @@ const I18N = {
         takoyumeTitle: "タコのゆめ",
         takoyumeDesc:  "タコは ねむりながら 肌の 色を かえる。2023年OIST研究——タコの「アクティブ睡眠」中、皮膚は 起きている ときと 同じ パターン を みせる。タコは 夢を 見ている のかもしれない。1分間 だけ、夢に あう 色を タップして、タコの ねむりを そめる。",
         takoyumeTag1: "気づき", takoyumeTag2: "無脊椎の夢", takoyumeTag3: "2023年・OIST",
+        uchuTitle: "うちゅうエレベーター",
+        uchuDesc:  "ちじょう→スカイツリー(634m)→ふじさん(3,776m)→ジェットき(11km)→オゾン(25km)→ながれぼし(80km)→カーマン(100km・ここから うちゅう)→ISS(408km)→せいし(3万6千km)→つき(38万km)。「のぼる」を おすだけ で 8けた のたかさ を たいすうスケール で 体験。5〜9さいに、地球のスケール感を おやゆびひとつで。",
+        uchuTag1: "5〜9歳", uchuTag2: "対数スケール", uchuTag3: "大気圏→月",
     },
     en: {
         tagline:   "Games · Education · Tools — delivered via browser and apps",
@@ -2464,6 +2504,9 @@ const I18N = {
         tunguskaTitle: "Tunguska 1908",
         tunguskaDesc:  "June 30, 1908 — the Siberian sky split in two. 80 million trees fell radially around a single point; ~2,150 km² of forest gone — and no crater. Triangulate the airburst epicenter from the trees' fall direction, the way Kulik did it in 1927. A 3-min history game.",
         tunguskaTag1: "History·Felt", tunguskaTag2: "Triangulation", tunguskaTag3: "Jun 30",
+        eratosthenesTitle: "The Well of Syene · 240 BC",
+        eratosthenesDesc:  "240 BC — chief librarian of Alexandria <strong>Eratosthenes</strong> heard that at noon on the summer solstice, sunlight reached the bottom of a deep well in Syene. Sun directly overhead. But in Alexandria at the same hour a vertical stick still cast a shadow. He realized — the difference reveals <strong>the size of the Earth itself</strong>. Plant a stick, read the shadow's angle, march 5,000 stadia of caravan, calculate the circumference. <strong>Off by only 1.6%</strong> from the modern value. With a stick.",
+        eratosthenesTag1: "History·Felt", eratosthenesTag2: "Geometry", eratosthenesTag3: "240 BC",
         itokoTitle: "Cousin Aeons",
         itokoDesc:  "A whale's closest relative isn't in the ocean — it's the <strong>hippo</strong>. A mushroom is closer to you than to a plant; animals and fungi split off together ~1.1 billion years ago. When did two species last share an ancestor? Drag a logarithmic timeline through 4 billion years across 5 rounds of deep-time guessing. The dog you walked, the tomato on your plate — <strong>all cousins</strong>. Just at different distances.",
         itokoTag1: "Takeaway", itokoTag2: "Evolution", itokoTag3: "3 min",
@@ -2494,6 +2537,9 @@ const I18N = {
         takoyumeTitle: "Tako no Yume (Octopus Dreams)",
         takoyumeDesc:  "Octopuses change skin color while sleeping. A 2023 OIST + UW study: during ~1-min 'active sleep' the skin shows the same patterns it uses awake. They might be dreaming. For 60 seconds, tap a color matching each dream-bubble. By dawn, six dreams remain.",
         takoyumeTag1: "Realization", takoyumeTag2: "Invertebrate dreams", takoyumeTag3: "2023 OIST",
+        uchuTitle: "Uchū Elevator (Space Elevator)",
+        uchuDesc:  "Ground → Skytree (634m) → Mt. Fuji (3,776m) → jet (11km) → ozone (25km) → meteors (80km) → Kármán line (100km, space starts) → ISS (408km) → geostationary (35,786km) → Moon (384,400km). Hold one button to ride 8 orders of magnitude on a log scale. For ages 5-9: feel the scale of Earth and beyond with a single thumb.",
+        uchuTag1: "Ages 5-9", uchuTag2: "Log scale", uchuTag3: "Atmosphere → Moon",
     }
 };
 
@@ -2564,7 +2610,8 @@ function decorateCards() {
         if (c.dataset.year && !thumb.querySelector('.year-badge')) {
             const yb = document.createElement('span');
             yb.className = 'year-badge';
-            yb.textContent = c.dataset.year;
+            const yr = parseInt(c.dataset.year, 10);
+            yb.textContent = yr < 0 ? ('BC ' + Math.abs(yr)) : c.dataset.year;
             thumb.insertBefore(yb, thumb.firstChild);
         }
     });
@@ -2613,18 +2660,24 @@ function applyTimelineLayout(cat) {
 
     // insert century markers before each card whose century differs from the previous
     const useEn = (document.documentElement.lang || 'ja') === 'en';
-    let prevCentury = null;
+    let prevKey = null;
     cards.forEach(c => {
         if (c.classList.contains('cat-hidden')) return;
         const yr = parseInt(c.dataset.year || '0', 10);
         if (!yr) return;
-        const century = Math.floor((yr - 1) / 100) + 1; // 1518 → 16th, 1900 → 19th, 1901 → 20th
-        if (century !== prevCentury) {
+        // century for AD: 1518 → 16th, 1901 → 20th. For BC: -240 → 3rd BC, -100 → 1st BC.
+        const isBC = yr < 0;
+        const century = isBC ? Math.floor((-yr - 1) / 100) + 1
+                              : Math.floor((yr - 1) / 100) + 1;
+        const key = (isBC ? 'BC' : 'AD') + century;
+        if (key !== prevKey) {
             const m = document.createElement('div');
             m.className = 'timeline-decade-marker';
-            m.textContent = useEn ? ordinalCentury(century) : century + '世紀';
+            m.textContent = useEn
+                ? (ordinalCentury(century) + (isBC ? ' BC' : ''))
+                : ((isBC ? '紀元前' : '') + century + '世紀');
             grid.insertBefore(m, c);
-            prevCentury = century;
+            prevKey = key;
         }
     });
 }
