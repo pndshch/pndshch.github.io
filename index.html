@@ -229,6 +229,7 @@ header p {
 .thumb-torishima { background: linear-gradient(180deg, #3a4a5e 0%, #1c2434 55%, #0a0e1a 100%); }
 .thumb-wald      { background: radial-gradient(ellipse at 50% 35%, #2c2a20 0%, #1a1812 55%, #0d0c08 100%); }
 .thumb-itoko     { background: radial-gradient(ellipse at 50% 30%, #4a1c5e 0%, #261447 55%, #07050f 100%); }
+.thumb-tako      { background: radial-gradient(ellipse at 50% 35%, #1a2c5c 0%, #0a1438 55%, #050b22 100%); }
 
 .card-body {
     padding: 18px 20px 22px;
@@ -582,6 +583,22 @@ footer a:hover { color: #e6edf3; }
 
 <!-- All apps -->
 <div class="grid" id="app-grid">
+    <div class="card" data-cat="learn" data-added="2026-05-08T02:00:00+09:00" data-slug="tako-no-yume">
+            <div class="card-thumb thumb-tako">
+            <span class="thumb-emoji">🐙</span>
+                <img class="thumb-gif" src="assets/tako-no-yume.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="takoyumeTitle">タコのゆめ</h2>
+                <p data-i18n="takoyumeDesc"><strong>タコは ねむりながら 色を かえる。</strong>2023年、沖縄科学技術大学院大学 (OIST) と ワシントン大学の チームが Octopus laqueus の睡眠を 観察。約1時間に1回、約1分間 だけ「アクティブ睡眠」が おとずれ、その 間 皮膚は 起きている ときと 同じ パターン (狩り・カモフラージュ・社会表示) を 見せる。脳活動も 起床時に そっくり——タコは <strong>夢を 見ている</strong> のかもしれない。あなたは その タコの 飼い主。1分間 (タコの アクティブ睡眠と 同じ 長さ) だけ、夢の あぶく が ふっと うかぶ。🦀(かりする)・🦈(かくれる)・🪨(いわかげ)・💕(であい) ——その 夢に あう 色を タップすると、タコの 肌が ぐるりと そまる。あさには、6つの 夢の 記録 が 並ぶ。脊椎動物では ない 8本の 腕の 生き物 が、夜の 中で 何を 見ている のか——指先で のぞき込む。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="takoyumeTag1">気づき</span>
+                    <span class="tag" data-i18n="takoyumeTag2">無脊椎の夢</span>
+                    <span class="tag" data-i18n="takoyumeTag3">2023年・OIST</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/tako-no-yume/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
     <div class="card" data-cat="kids" data-added="2026-05-08T00:30:00+09:00" data-slug="mongiri">
             <div class="card-thumb thumb-mongiri">
             <span class="thumb-emoji">✦</span>
@@ -2102,6 +2119,9 @@ const I18N = {
         kururinanimeTitle: "くるりんアニメ",
         kururinanimeDesc:  "12まいの えを かいて、まわすと——うごく！1832年フェナキストスコープを こどもが あそぶ アニメ おもちゃ。5〜9さい。",
         kururinanimeTag1: "5〜9歳", kururinanimeTag2: "アニメをつくる", kururinanimeTag3: "1832年・フェナキストスコープ",
+        takoyumeTitle: "タコのゆめ",
+        takoyumeDesc:  "タコは ねむりながら 肌の 色を かえる。2023年OIST研究——タコの「アクティブ睡眠」中、皮膚は 起きている ときと 同じ パターン を みせる。タコは 夢を 見ている のかもしれない。1分間 だけ、夢に あう 色を タップして、タコの ねむりを そめる。",
+        takoyumeTag1: "気づき", takoyumeTag2: "無脊椎の夢", takoyumeTag3: "2023年・OIST",
     },
     en: {
         tagline:   "Games · Education · Tools — delivered via browser and apps",
@@ -2378,6 +2398,9 @@ const I18N = {
         kururinanimeTitle: "Kururin Anime (Spin-Disc Animator)",
         kururinanimeDesc:  "Draw 12 frames, spin them — magic. Plateau's 1832 phenakistoscope studio for ages 5–9.",
         kururinanimeTag1: "Ages 5–9", kururinanimeTag2: "Make Animation", kururinanimeTag3: "1832 Phenakistoscope",
+        takoyumeTitle: "Tako no Yume (Octopus Dreams)",
+        takoyumeDesc:  "Octopuses change skin color while sleeping. A 2023 OIST + UW study: during ~1-min 'active sleep' the skin shows the same patterns it uses awake. They might be dreaming. For 60 seconds, tap a color matching each dream-bubble. By dawn, six dreams remain.",
+        takoyumeTag1: "Realization", takoyumeTag2: "Invertebrate dreams", takoyumeTag3: "2023 OIST",
     }
 };
 
