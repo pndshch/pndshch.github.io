@@ -264,6 +264,7 @@ header p {
 .thumb-nioi      { background: linear-gradient(160deg, #fef6e7 0%, #ffe7d6 50%, #ffd8e8 100%); }
 .thumb-buranko   { background: linear-gradient(180deg, #1a1849 0%, #2a1a4d 60%, #0a0a2a 100%); }
 .thumb-jishaku   { background: radial-gradient(ellipse at 50% 50%, #f8edd3 0%, #efe1c4 55%, #d8c39c 100%); }
+.thumb-zonezumi  { background: linear-gradient(180deg, #f7eedd 0%, #ead9b8 70%, #d8c39a 100%); }
 
 .card-body {
     padding: 18px 20px 22px;
@@ -648,6 +649,23 @@ footer a:hover { color: #e6edf3; }
 
 <!-- All apps -->
 <div class="grid" id="app-grid">
+    <div class="card" data-cat="kids" data-added="2026-05-09T16:00:00+09:00" data-slug="zo-to-nezumi">
+            <div class="card-thumb thumb-zonezumi">
+            <span class="new-badge">NEW</span>
+            <span class="thumb-emoji">🐭⚖️🐘</span>
+                <img class="thumb-gif" src="assets/zo-to-nezumi.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="zonezumiTitle">ぞうとねずみ</h2>
+                <p data-i18n="zonezumiDesc"><strong>ちいさな ねずみ ひとつ で、 おおきな ぞう を もちあげる。</strong>4〜9さい むけ、世界の キッズアプリ では ほとんど みかけない <strong>「てこ・しーそー の ほうそく」 の あそびば</strong>を ブラウザで。 子ども向け の 物理アプリ には、 「光」 「音」 「磁石」 は たくさん あるのに、 <strong>てこ の ほうそく（torque, lever law）を ゆびで さわって ためせる ものは ほとんど ない</strong>。 「ピボット に とおい ほど おもく きく」 という ひとつ の きまりが、 すべての <strong>しーそー、 はさみ、 ペンチ、 一輪車、 クレーン、 ねこ車</strong> の しくみ を つくっている。 これは アルキメデス が紀元前 250年 ごろ 「<strong>立つ場所さえあれば てこで地球も動かそう</strong>」 と 言った あの ほうそく そのもの。 <strong>あそびかた</strong>: ① 7しゅるい の どうぶつ（🐭ねずみ=1、🐰うさぎ=2、🐱ねこ=3、🐶いぬ=5、🐷ぶた=7、🐻くま=9、🐘ぞう=10）を はり に ドラッグ。 ② <strong>とおく に おく ほど、 おなじ どうぶつ でも おもく きく</strong>（torque = しつりょう × きょり）。 ③ ひだり と みぎ の トルク 合計 が ぴったり おなじ で つりあう。 たとえば <strong>ぞう を −1 ばんめ</strong>（torque 10）に おいたら、 <strong>ねずみ を +10 ばんめ</strong> に おけば 1×10 = 10 で つりあう —— ねずみ ひとつ で ぞう を もちあげる、 アルキメデス の あの ことば の 形。 <strong>パズル モード</strong>: 7つ の レベル — 「ねずみ で ねこ を つりあう」 から、 ぞう を ねずみ ひとつ で もちあげる「アルキメデス の もんだい」 まで。 はり が 30度 を こえて かたむくと、 はじっこ の どうぶつ は <strong>すべり おちる</strong>。 1まい HTML、 ライブラリ なし、 マイク・カメラ なし、 データ は のこさない。 日本語 と English の バイリンガル。 Pinda Lab。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="zonezumiTag1">4〜9歳</span>
+                    <span class="tag" data-i18n="zonezumiTag2">てこの ほうそく</span>
+                    <span class="tag" data-i18n="zonezumiTag3">torque = mass × distance</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/zo-to-nezumi/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
     <div class="card" data-cat="kids" data-added="2026-05-09T15:00:00+09:00" data-slug="jishaku-moyo">
             <div class="card-thumb thumb-jishaku">
             <span class="new-badge">NEW</span>
@@ -2868,6 +2886,9 @@ const I18N = {
         jishakuTitle: "じしゃくの もよう",
         jishakuDesc:  "ゆびで じしゃくを うごかすと、見えない『力のかたち』が すがたを あらわす。600つぶの 鉄粉が 磁場の むきに そろう。1じしゃく・2じしゃく・U字 + 線モード。5〜9さい。",
         jishakuTag1: "5〜9歳", jishakuTag2: "磁場・磁力線", jishakuTag3: "600つぶ 鉄粉",
+        zonezumiTitle: "ぞうとねずみ",
+        zonezumiDesc:  "ちいさな ねずみ ひとつ で、おおきな ぞう を もちあげる。てこ・しーそー の ほうそく（torque = しつりょう × きょり）を ゆびで さわる。ぞうを−1ばんめ、ねずみを+10ばんめに おけば 10×1=10 で つりあう。アルキメデス の『立つ場所さえあれば』。7つ の パズル + じゆう モード。4〜9さい。",
+        zonezumiTag1: "4〜9歳", zonezumiTag2: "てこの ほうそく", zonezumiTag3: "torque = mass × distance",
     },
     en: {
         tagline:   "Games · Education · Tools — delivered via browser and apps",
@@ -3250,6 +3271,9 @@ const I18N = {
         jishakuTitle: "Magnet Patterns · Jishaku no Moyō",
         jishakuDesc:  "Drag the magnet and the invisible 'shape of force' suddenly appears. 600 simulated iron filings align to the field in real time. Bar / dual / horseshoe modes + field-line trail mode. Ages 5–9.",
         jishakuTag1: "Ages 5–9", jishakuTag2: "Magnetic field", jishakuTag3: "600 iron filings",
+        zonezumiTitle: "Elephant & Mouse · Zō to Nezumi",
+        zonezumiDesc:  "Lift an elephant — with one mouse. A lever-law sandbox: torque = mass × distance. Place the elephant 1 step from the pivot (10×1=10), then drag a single mouse to position 10 on the other side (1×10=10) and the beam balances perfectly — Archimedes' \"give me a place to stand\" in your hand. 7 puzzles + free play. Ages 4–9.",
+        zonezumiTag1: "Ages 4–9", zonezumiTag2: "Lever law / torque", zonezumiTag3: "torque = mass × distance",
     }
 };
 
