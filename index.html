@@ -266,6 +266,7 @@ header p {
 .thumb-buranko   { background: linear-gradient(180deg, #1a1849 0%, #2a1a4d 60%, #0a0a2a 100%); }
 .thumb-jishaku   { background: radial-gradient(ellipse at 50% 50%, #f8edd3 0%, #efe1c4 55%, #d8c39c 100%); }
 .thumb-zonezumi  { background: linear-gradient(180deg, #f7eedd 0%, #ead9b8 70%, #d8c39a 100%); }
+.thumb-atama     { background: linear-gradient(165deg, #fdf6e3 0%, #f6ecd2 55%, #e8cfa3 100%); }
 
 .card-body {
     padding: 18px 20px 22px;
@@ -699,6 +700,23 @@ footer a:hover { color: #e6edf3; }
                     <span class="tag" data-i18n="burankoTag3">音→静寂→タップ</span>
                 </div>
                 <a class="card-btn btn-play" href="https://pndshch.github.io/buranko-byoshi/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
+    <div class="card" data-cat="kids" data-added="2026-05-09T16:00:00+09:00" data-slug="atama-dokei">
+            <div class="card-thumb thumb-atama">
+            <span class="new-badge">NEW</span>
+            <span class="thumb-emoji">⏱️</span>
+                <img class="thumb-gif" src="assets/atama-dokei.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="atamaTitle">あたまどけい</h2>
+                <p data-i18n="atamaDesc"><strong>メを つぶって、心の中で <em>3秒・5秒・10秒・30秒・1分・1分30秒</em> を 数えて、たったと おもったら ガメンを タップ。</strong>5〜9さい むけ、世界の キッズアプリ では ほとんど みかけない <strong>「内部時間感覚（ないぶ じかん かんかく）の トレーニング」</strong>を ブラウザで。 こども向け の 「とけい」 アプリ は ほとんどが <strong>とけいを みせる</strong> もの ばかり ── これは ちがう。 <strong>とけい を みせない</strong>。 まちあわせ の あいだ ぜんめん が <strong>くらい いろ</strong>に なって、 カウントダウン も 進行バー も でない。 だから かんで しか はかれない。 タップしたら、 ダイヤル に 「あなた の じかん」 と 「ほんとう の じかん」 が 2本 の はり で あらわれる。 ★3 (5%以内)、 ★2 (15%以内)、 ★1 (30%以内)。 こども の じかん かんかく は おそく 育つ —— 4さい の 「1ぷん」 は ぜんぜん ちがう、 9さい で やっと ちかづく。 れんしゅう が きく ところ。 <strong>レベル を クリア するたびに「どうぶつ の じかん かんかく」</strong>の ふしぎ が ひらく：ねずみ は 1秒 を 5倍 ながく かんじる、 ハエ には ヒト の 手 が <strong>スローモーション</strong>、 こども は おとな より 1.5倍 ながく ── だから 夏休み が ながい！ 1まい HTML、 ライブラリ なし、 マイク・カメラ なし、 データ は ローカル のみ。 日本語 と English の バイリンガル。 Pinda Lab。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="atamaTag1">5〜9歳</span>
+                    <span class="tag" data-i18n="atamaTag2">時間感覚</span>
+                    <span class="tag" data-i18n="atamaTag3">6レベル</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/atama-dokei/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
     <div class="card" data-cat="kids" data-added="2026-05-09T13:00:00+09:00" data-slug="nioi-tanken">
@@ -2901,6 +2919,9 @@ const I18N = {
         nioiTitle: "においたんけん",
         nioiDesc:  "おうちの においを ハナで みつけて にわを そだてる、嗅覚あそび。16しゅるい × 6つの へや。4〜8さい。",
         nioiTag1: "4〜8歳", nioiTag2: "嗅覚", nioiTag3: "16しゅるい",
+        atamaTitle: "あたまどけい",
+        atamaDesc:  "メを つぶって、心の中で 3秒〜1分30秒を 数えて タップ。とけいを 見せない 内部時間感覚あそび。6レベル。5〜9さい。",
+        atamaTag1: "5〜9歳", atamaTag2: "時間感覚", atamaTag3: "6レベル",
         burankoTitle: "ブランコ びょうし",
         burankoDesc:  "音楽がきえても、おなじびょうしでタップしてブランコを空に飛ばす。「内なるびょうし」の練習。4〜8さい。",
         burankoTag1: "4〜8歳", burankoTag2: "内なるびょうし", burankoTag3: "音→静寂→タップ",
@@ -3286,6 +3307,9 @@ const I18N = {
         oikakekkoTitle: "Oikakekko · Pursuit Curves",
         oikakekkoDesc:  "Each animal chases the next. One simple rule, every time: a beautiful spiral, all meeting in the middle. The classic 1730s n-bug pursuit problem, made playable. Ages 5–9.",
         oikakekkoTag1: "Ages 5–9", oikakekkoTag2: "Pursuit curves", oikakekkoTag3: "Emergence · spirals",
+        atamaTitle: "Atama-dokei · Head Clock",
+        atamaDesc:  "Close your eyes, count seconds in your head, tap when you think the target time has passed. The screen never shows a clock. 6 levels (3s→1m30s); each unlocks an animal time-sense fact. Ages 5–9.",
+        atamaTag1: "Ages 5–9", atamaTag2: "Inner time sense", atamaTag3: "6 levels",
         nioiTitle: "Nioi Tanken · Smell Expedition",
         nioiDesc:  "Find smells around your home with your nose, grow a garden of colored flowers — the only sense the browser cannot measure. 16 categories × 6 rooms. Ages 4–8.",
         nioiTag1: "Ages 4–8", nioiTag2: "Olfactory", nioiTag3: "16 categories",
