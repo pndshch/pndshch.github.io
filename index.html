@@ -209,6 +209,7 @@ header p {
 .thumb-ninth      { background: linear-gradient(135deg, #1a0e04 0%, #2a1608 50%, #0a0603 100%); }
 .thumb-ricecooker { background: linear-gradient(135deg, #2a1608 0%, #5a3818 50%, #1a0f04 100%); }
 .thumb-warmth     { background: linear-gradient(135deg, #2a1f3d 0%, #c9836b 50%, #16101f 100%); }
+.thumb-dome       { background: linear-gradient(180deg, #88c4e8 0%, #cfe7d8 55%, #7e9b5a 100%); }
 .thumb-iki        { background: linear-gradient(135deg, #d8c5e8 0%, #f3d6e0 50%, #fbe6cf 100%); }
 .thumb-cargo      { background: linear-gradient(135deg, #0e2a3e 0%, #5a93b8 35%, #d4a574 75%, #1a0e04 100%); }
 .thumb-mienai     { background: radial-gradient(ellipse at 50% 30%, #1c3a52 0%, #0a1f2e 60%, #050d18 100%); }
@@ -637,6 +638,23 @@ footer a:hover { color: #e6edf3; }
 
 <!-- All apps -->
 <div class="grid" id="app-grid">
+    <div class="card" data-cat="kids" data-added="2026-05-09T11:30:00+09:00" data-slug="dobutsu-no-me">
+            <div class="card-thumb thumb-dome">
+            <span class="new-badge">NEW</span>
+            <span class="thumb-emoji">👁️</span>
+                <img class="thumb-gif" src="assets/dobutsu-no-me.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="domeTitle">どうぶつの め</h2>
+                <p data-i18n="domeDesc"><strong>ネコ・ハチ・ヘビ・フクロウ・ハエ — どうぶつ には せかい が どう みえている？</strong>5〜10さい むけ、世界の キッズアプリ では めずらしい <strong>「8しゅるいの どうぶつ の め を、おなじ シーン に リアルタイムで かけて くらべる ビジョン・ラボ」</strong>を ブラウザで。たいていの 「動物 視覚」 サイト は しゃしん を ならべるだけ。これは ちがう。<strong>おなじ おはなばたけ が、ネコ には どう、ハチ には どう、ヘビ には どう みえるか</strong>を、おなじ ばめんで ピクセル単位 に へんかん して みせる。<strong>ネコ</strong> は 2色型（あおと きいろ だけ。あかと みどり が にた色 に）、<strong>ハチ</strong> は しがいせん が みえて はな に <strong>「みつのみち」</strong> と よばれる かくれた もよう が ぱっと あらわれる、<strong>ヘビ</strong> は ピットきかん で あたたかい ねずみ・ちょう・たいよう だけが やみの なかに ひかる、<strong>ハエ</strong> は 4000こ の ふくがん で せかいが ぜんぶ ハニカム タイル に なる、<strong>フクロウ</strong> は ほぼ モノクロ で よる の ひかり を ぐっと 拡大、<strong>トリ</strong> は 4色型 で 色 が より こく シャープに みえる。<strong>くらべる</strong> ボタン で がめん を ふたつ に わって、ヒト と どうぶつ を ならべて みれる。スマホ の カメラ を ひらけば、いま みえている まわり の せかい も そのまま どうぶつ の め に かわる（カメラ えいぞう は はしりません、きろくも しません、ぜんぶ はしりこんだ ローカル しょり）。1まい HTML、ライブラリ なし、データ は ローカル のみ。日本語と English の バイリンガル。Pinda Lab。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="domeTag1">5〜10歳</span>
+                    <span class="tag" data-i18n="domeTag2">8しゅるいの め</span>
+                    <span class="tag" data-i18n="domeTag3">カメラ対応</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/dobutsu-no-me/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
     <div class="card" data-cat="kids" data-added="2026-05-09T10:00:00+09:00" data-slug="iki-no-hana">
             <div class="card-thumb thumb-iki">
             <span class="new-badge">NEW</span>
@@ -2637,6 +2655,9 @@ const I18N = {
         ikiTitle: "いきのはな",
         ikiDesc:  "ふーっと いきを はいて、おはなを さかせよう。マイクで本当に呼吸を聞く、3〜7さい むけ おちつきの こきゅうあそび。",
         ikiTag1: "3〜7歳", ikiTag2: "こきゅう", ikiTag3: "マイク連動",
+        domeTitle: "どうぶつの め",
+        domeDesc:  "ネコ・ハチ・ヘビ・フクロウ・ハエの目で世界を見るビジョンラボ。8種をリアルタイム比較。5〜10さい。",
+        domeTag1: "5〜10歳", domeTag2: "8しゅるいの め", domeTag3: "カメラ対応",
     },
     en: {
         tagline:   "Games · Education · Tools — delivered via browser and apps",
@@ -2986,6 +3007,9 @@ const I18N = {
         ikiTitle: "Breath Flower",
         ikiDesc:  "Blow gently — the mic actually listens. A 1-min calming breath ritual for ages 3–7.",
         ikiTag1: "Ages 3–7", ikiTag2: "Breathing", ikiTag3: "Mic-verified",
+        domeTitle: "Through Animal Eyes",
+        domeDesc:  "Cat, bee, snake, owl, fly — see the same scene through 8 animal eyes, side-by-side. Live filters. Ages 5–10.",
+        domeTag1: "Ages 5–10", domeTag2: "8 visions", domeTag3: "Camera-ready",
     }
 };
 
