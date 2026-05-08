@@ -252,6 +252,7 @@ header p {
 .thumb-kexing1054 { background: radial-gradient(ellipse at 62% 38%, #f7b06a 0%, #b56fb0 28%, #2e1f4a 60%, #0a0820 100%); }
 .thumb-lascaux1940 { background: radial-gradient(ellipse at 50% 60%, #c25a30 0%, #8a4218 28%, #2e1a0e 60%, #0a0603 100%); }
 .thumb-galileo1610 { background: radial-gradient(ellipse at 50% 35%, #f0d59a 0%, #b48642 32%, #2a1a0a 70%, #050200 100%); }
+.thumb-oikakekko { background: radial-gradient(circle at 50% 52%, #fff5dd 0%, #ffd58a 38%, #ffa17a 75%, #c66e58 100%); }
 .thumb-uchu      { background: radial-gradient(ellipse at 50% 30%, #1d3473 0%, #0a1535 55%, #050216 100%); }
 .thumb-sukima    { background: radial-gradient(circle at 30% 20%, #faf3df 0%, #f4ead5 38%, #ecdcb6 100%); }
 .thumb-ashiato   { background: linear-gradient(180deg, #0e1d33 0%, #2a3e6a 38%, #c5b3d4 65%, #e8eaf3 78%, #f6f7fb 100%); }
@@ -640,6 +641,23 @@ footer a:hover { color: #e6edf3; }
 
 <!-- All apps -->
 <div class="grid" id="app-grid">
+    <div class="card" data-cat="kids" data-added="2026-05-09T12:30:00+09:00" data-slug="oikakekko">
+            <div class="card-thumb thumb-oikakekko">
+            <span class="new-badge">NEW</span>
+            <span class="thumb-emoji">🌀</span>
+                <img class="thumb-gif" src="assets/oikakekko.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="oikakekkoTitle">おいかけっこ</h2>
+                <p data-i18n="oikakekkoDesc"><strong>3〜8ひきの どうぶつ が、ぐるりと ならんで、ぜんいん「となりを おいかける」。それだけ。</strong>5〜9さい むけ、世界の キッズアプリ では ほとんど みかけない <strong>「追跡曲線（pursuit curve）の あそび場」</strong>を ブラウザで。これは 1730年代から 数学者が おいかけてきた 古典問題 — <em>n匹 の むし が、おなじ「となりを おいかける」 ルール だけで うごくと、なに が おきる？</em> こたえ は 美しい <strong>らせん</strong>。みんなが おたがいを おいかけて、けっして つかまえられないまま、ぜんいん が <strong>まんなか で あう</strong>。<br><strong>ルールは ひとつ だけ。それでも もよう ができる。</strong>これが 「<strong>創発（そうはつ）</strong>」— 蟻が みち を つくる、鳥が むれ を なす、雪の けっしょう が きまった かたち に なる、その みなもと。<br>あそびかた: なんにん（3・4・5・6・8）か えらぶ、すきな どうぶつ（🐭🦆🐠🐱🐝🦀）に かえる、はじまる まえに <strong>ゆびで ●を ドラッグ</strong>して すきな ばしょ に おく、<strong>「よーい、どん！」</strong>。みんなが <strong>あしあと</strong> を のこしながら しずかに らせん を えがき、まんなか で あう。<strong>「ゆびを おいかける」</strong> モード も — みんなが あなた の ゆび に むかって くる。1まい HTML、ライブラリ なし、データ は ローカル のみ。日本語と English の バイリンガル。Pinda Lab。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="oikakekkoTag1">5〜9歳</span>
+                    <span class="tag" data-i18n="oikakekkoTag2">追跡曲線</span>
+                    <span class="tag" data-i18n="oikakekkoTag3">創発・らせん</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/oikakekko/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
     <div class="card" data-cat="kids" data-added="2026-05-09T11:30:00+09:00" data-slug="dobutsu-no-me">
             <div class="card-thumb thumb-dome">
             <span class="new-badge">NEW</span>
@@ -2700,6 +2718,9 @@ const I18N = {
         domeTitle: "どうぶつの め",
         domeDesc:  "ネコ・ハチ・ヘビ・フクロウ・ハエの目で世界を見るビジョンラボ。8種をリアルタイム比較。5〜10さい。",
         domeTag1: "5〜10歳", domeTag2: "8しゅるいの め", domeTag3: "カメラ対応",
+        oikakekkoTitle: "おいかけっこ",
+        oikakekkoDesc:  "ぜんいんが「となりを おいかける」だけで、らせん が できて、まんなかで あう。1730年代の追跡曲線あそび。5〜9さい。",
+        oikakekkoTag1: "5〜9歳", oikakekkoTag2: "追跡曲線", oikakekkoTag3: "創発・らせん",
     },
     en: {
         tagline:   "Games · Education · Tools — delivered via browser and apps",
@@ -3058,6 +3079,9 @@ const I18N = {
         domeTitle: "Through Animal Eyes",
         domeDesc:  "Cat, bee, snake, owl, fly — see the same scene through 8 animal eyes, side-by-side. Live filters. Ages 5–10.",
         domeTag1: "Ages 5–10", domeTag2: "8 visions", domeTag3: "Camera-ready",
+        oikakekkoTitle: "Oikakekko · Pursuit Curves",
+        oikakekkoDesc:  "Each animal chases the next. One simple rule, every time: a beautiful spiral, all meeting in the middle. The classic 1730s n-bug pursuit problem, made playable. Ages 5–9.",
+        oikakekkoTag1: "Ages 5–9", oikakekkoTag2: "Pursuit curves", oikakekkoTag3: "Emergence · spirals",
     }
 };
 
