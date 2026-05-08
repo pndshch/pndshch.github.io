@@ -648,6 +648,23 @@ footer a:hover { color: #e6edf3; }
 
 <!-- All apps -->
 <div class="grid" id="app-grid">
+    <div class="card" data-cat="kids" data-added="2026-05-09T15:00:00+09:00" data-slug="jishaku-moyo">
+            <div class="card-thumb thumb-jishaku">
+            <span class="new-badge">NEW</span>
+            <span class="thumb-emoji">🧲</span>
+                <img class="thumb-gif" src="assets/jishaku-moyo.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="jishakuTitle">じしゃくの もよう</h2>
+                <p data-i18n="jishakuDesc"><strong>ゆびで じしゃくを うごかすと、見えない『力のかたち』が ぱっと すがたを あらわす。</strong>5〜9さい むけ、世界の キッズアプリ では ほとんど みかけない <strong>「磁場（じば）の あそびば」</strong>を ブラウザで。 こども の 物理アプリ は 「光」 と 「音」 ばかり、 <strong>磁石の 力 を じっさい に 触れる ものは ほとんど ない</strong>。 鉄粉（てっぷん）を 紙に まいて 磁石の もよう を 見る あの たいけん は、 安全 と 後始末 の 都合で、 いまの 子ども は ほとんど できなくなった。 ブラウザ なら、 何度でも、 安全に、 まっさらな 紙を ばらまける。 <strong>画面いっぱい の 600つぶ の 鉄粉</strong>が、 各フレーム ごとに、 ぜんぶ の 磁極 から の 場ベクトル を たし合わせて、 その むき に そろう —— ほんもの と おなじ 物理。 じしゃくを ゆびで うごかすたび、 もよう ぜんたい が ゆれて、 組みなおされる。<br><strong>3つの モード。</strong> <em>1じしゃく</em>: ぼう型 じしゃく の まわりに ひろがる、 教科書 そのままの ダイポール 磁場。 <em>2じしゃく</em>: タップで N⇄S 反転、 <strong>同じ極 は しりぞけあい</strong>、 <strong>ちがう極 は 引きあう</strong> —— もよう が ぜんぜん ちがう。 <em>U字（馬蹄）</em>: N と S が 近い ぶん、 <strong>すき間 に 力 が ぎゅっと あつまる</strong> —— クレーン・スピーカー・電気モーター の しくみ。 <strong>「線」</strong>を おすと、 鉄粉 の あと が のこって、 <strong>磁力線（じりょくせん）</strong> が えがかれる。 1まい HTML、 ライブラリ なし、 マイク・カメラ なし、 データ は のこさない。 日本語 と English の バイリンガル。 Pinda Lab。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="jishakuTag1">5〜9歳</span>
+                    <span class="tag" data-i18n="jishakuTag2">磁場・磁力線</span>
+                    <span class="tag" data-i18n="jishakuTag3">600つぶ 鉄粉</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/jishaku-moyo/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
     <div class="card" data-cat="kids" data-added="2026-05-09T14:00:00+09:00" data-slug="buranko-byoshi">
             <div class="card-thumb thumb-buranko">
             <span class="new-badge">NEW</span>
@@ -2848,6 +2865,9 @@ const I18N = {
         burankoTitle: "ブランコ びょうし",
         burankoDesc:  "音楽がきえても、おなじびょうしでタップしてブランコを空に飛ばす。「内なるびょうし」の練習。4〜8さい。",
         burankoTag1: "4〜8歳", burankoTag2: "内なるびょうし", burankoTag3: "音→静寂→タップ",
+        jishakuTitle: "じしゃくの もよう",
+        jishakuDesc:  "ゆびで じしゃくを うごかすと、見えない『力のかたち』が すがたを あらわす。600つぶの 鉄粉が 磁場の むきに そろう。1じしゃく・2じしゃく・U字 + 線モード。5〜9さい。",
+        jishakuTag1: "5〜9歳", jishakuTag2: "磁場・磁力線", jishakuTag3: "600つぶ 鉄粉",
     },
     en: {
         tagline:   "Games · Education · Tools — delivered via browser and apps",
@@ -3227,6 +3247,9 @@ const I18N = {
         burankoTitle: "Swing-Beat",
         burankoDesc:  "When the music goes silent, keep tapping the same beat — the swing flies higher the closer your inner pulse stays to the music's. Ages 4–8.",
         burankoTag1: "Ages 4–8", burankoTag2: "Inner pulse", burankoTag3: "Sound → silence → tap",
+        jishakuTitle: "Magnet Patterns · Jishaku no Moyō",
+        jishakuDesc:  "Drag the magnet and the invisible 'shape of force' suddenly appears. 600 simulated iron filings align to the field in real time. Bar / dual / horseshoe modes + field-line trail mode. Ages 5–9.",
+        jishakuTag1: "Ages 5–9", jishakuTag2: "Magnetic field", jishakuTag3: "600 iron filings",
     }
 };
 
