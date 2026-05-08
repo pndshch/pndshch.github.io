@@ -260,6 +260,7 @@ header p {
 .thumb-ashiato   { background: linear-gradient(180deg, #0e1d33 0%, #2a3e6a 38%, #c5b3d4 65%, #e8eaf3 78%, #f6f7fb 100%); }
 .thumb-kage      { background: linear-gradient(180deg, #a9d8e8 0%, #f6c4a0 55%, #cba07a 78%, #6a8a4a 100%); }
 .thumb-nioi      { background: linear-gradient(160deg, #fef6e7 0%, #ffe7d6 50%, #ffd8e8 100%); }
+.thumb-buranko   { background: linear-gradient(180deg, #1a1849 0%, #2a1a4d 60%, #0a0a2a 100%); }
 
 .card-body {
     padding: 18px 20px 22px;
@@ -644,6 +645,23 @@ footer a:hover { color: #e6edf3; }
 
 <!-- All apps -->
 <div class="grid" id="app-grid">
+    <div class="card" data-cat="kids" data-added="2026-05-09T14:00:00+09:00" data-slug="buranko-byoshi">
+            <div class="card-thumb thumb-buranko">
+            <span class="new-badge">NEW</span>
+            <span class="thumb-emoji">🎵</span>
+                <img class="thumb-gif" src="assets/buranko-byoshi.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="burankoTitle">ブランコ びょうし</h2>
+                <p data-i18n="burankoDesc"><strong>音楽が ながれて、ブランコが ゆれる。とつぜん 音が きえる。— おなじ びょうしで タップして、ブランコを そらまで とばそう。</strong>4〜8さい むけ、世界の キッズアプリ では ほとんど みかけない <strong>「内なる びょうし（internal pulse）の トレーニング」</strong>を ブラウザで。 子ども アプリ には 「音を きく」 ゲームも 「ボタン を おす」 ゲームも たくさん ある。 でも <strong>「外の音が きえても、自分の 中で びょうしを つづける」</strong> ちから だけは、 ふつう 練習できない —— これは 言語、 読書、 ダンス、 スポーツ、 ぜんぶの 土台に なる ちから（[Tierney & Kraus 2013](https://www.frontiersin.org/articles/10.3389/fnhum.2013.00103/full) など）。 <strong>あそびかた</strong>: ① 音楽が ながれて、ウサギの ブランコが ノる。 ② 音が しずかに きえる。 ブランコも とまる。 ③ <strong>おなじ びょうしで がめんを タップ</strong>。 ぴったり できると ブランコが <strong>もっと たかく</strong> とぶ。 ぜんぶ そろうと 音楽が もどってきて、 そらまで 飛ぶ。 4 つの レベル（72→108 BPM、 静寂 4→8 拍）。 きらきら星 と メリーさんの ひつじ — オシレータで 合成（音声ファイル なし）。 タイミング判定は ±18% で 「ぴったり」、 ±35% で 「いいね」 と やさしめ。 1まい HTML、 マイク・カメラ なし、 データは ローカル のみ。 日本語と English の バイリンガル。 Pinda Lab。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="burankoTag1">4〜8歳</span>
+                    <span class="tag" data-i18n="burankoTag2">内なるびょうし</span>
+                    <span class="tag" data-i18n="burankoTag3">音→静寂→タップ</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/buranko-byoshi/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
     <div class="card" data-cat="kids" data-added="2026-05-09T13:00:00+09:00" data-slug="nioi-tanken">
             <div class="card-thumb thumb-nioi">
             <span class="new-badge">NEW</span>
@@ -2784,6 +2802,9 @@ const I18N = {
         nioiTitle: "においたんけん",
         nioiDesc:  "おうちの においを ハナで みつけて にわを そだてる、嗅覚あそび。16しゅるい × 6つの へや。4〜8さい。",
         nioiTag1: "4〜8歳", nioiTag2: "嗅覚", nioiTag3: "16しゅるい",
+        burankoTitle: "ブランコ びょうし",
+        burankoDesc:  "音楽がきえても、おなじびょうしでタップしてブランコを空に飛ばす。「内なるびょうし」の練習。4〜8さい。",
+        burankoTag1: "4〜8歳", burankoTag2: "内なるびょうし", burankoTag3: "音→静寂→タップ",
     },
     en: {
         tagline:   "Games · Education · Tools — delivered via browser and apps",
@@ -3154,6 +3175,9 @@ const I18N = {
         nioiTitle: "Nioi Tanken · Smell Expedition",
         nioiDesc:  "Find smells around your home with your nose, grow a garden of colored flowers — the only sense the browser cannot measure. 16 categories × 6 rooms. Ages 4–8.",
         nioiTag1: "Ages 4–8", nioiTag2: "Olfactory", nioiTag3: "16 categories",
+        burankoTitle: "Swing-Beat",
+        burankoDesc:  "When the music goes silent, keep tapping the same beat — the swing flies higher the closer your inner pulse stays to the music's. Ages 4–8.",
+        burankoTag1: "Ages 4–8", burankoTag2: "Inner pulse", burankoTag3: "Sound → silence → tap",
     }
 };
 
