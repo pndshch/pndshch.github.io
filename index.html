@@ -268,6 +268,7 @@ header p {
 .thumb-jishaku   { background: radial-gradient(ellipse at 50% 50%, #f8edd3 0%, #efe1c4 55%, #d8c39c 100%); }
 .thumb-zonezumi  { background: linear-gradient(180deg, #f7eedd 0%, #ead9b8 70%, #d8c39a 100%); }
 .thumb-atama     { background: linear-gradient(165deg, #fdf6e3 0%, #f6ecd2 55%, #e8cfa3 100%); }
+.thumb-soraIro   { background: linear-gradient(180deg, #1f3870 0%, #4a6da8 35%, #d68a4a 75%, #8b3018 100%); }
 
 .card-body {
     padding: 18px 20px 22px;
@@ -652,6 +653,23 @@ footer a:hover { color: #e6edf3; }
 
 <!-- All apps -->
 <div class="grid" id="app-grid">
+    <div class="card" data-cat="kids" data-added="2026-05-09T17:00:00+09:00" data-slug="sora-iro">
+            <div class="card-thumb thumb-soraIro">
+            <span class="new-badge">NEW</span>
+            <span class="thumb-emoji">☀🌌</span>
+                <img class="thumb-gif" src="assets/sora-iro.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="soraIroTitle">そらのいろ</h2>
+                <p data-i18n="soraIroDesc"><strong>太陽を ゆびで ドラッグすると、空ぜんたい の いろが リアルタイムで かわる。あさ・ひる・夕やけ・たそがれ・よる が ぜんぶ じぶん の ゆびの 中。</strong>5〜9さい むけ、世界の キッズアプリ では ほとんど みかけない <strong>「なぜ 空は あおく、夕やけは あかいの？」を ライブで さわれる あそびば</strong>を ブラウザで。 こども が いちばん さいしょに 物理に であう しつもん の ひとつ なのに、 たいていの こども アプリ は 動画 か 図解 だけ —— <strong>太陽を 動かして、空ぜんたい を 物理ごと リアルタイムに 計算する ものは ほとんど ない</strong>。 これは ちがう。 各ピクセル が、 自分の 視線が 太陽までに 通る 空気 の あつさ を はかって、 7いろ の ひかり が それぞれ どれだけ ぬけ、 どれだけ ちらばって 目に くるか を <strong>レイリー散乱 (1871年)</strong> で 計算する。 ほんもの と おなじ 物理。 <strong>あおいひかりは あかいひかりより 16ばい よく ちらばる</strong> —— だから ひるまの 空は あおく、 夕やけ は ながい 経路 で あお が ぜんぶ ぬけて あか・だいだい だけ のこる。<br><strong>4つの モード</strong>。 <em>🌍ちきゅう</em>: ふつうの 空。<em>🔴かせい</em>: ダストの ミー散乱で ひるまは バターしょく、 <strong>夕やけは あおく ひかる</strong> —— NASA の ローバーが 撮った しゃしん と おなじ。 <em>🌑つき</em>: 空気が ない から まっくら、 ひるまでも 星 が 見える（アポロ宇宙飛行士が見たのと同じ）。 <em>💨こいくうき</em>: 3ばい こい 空気の ほし、 夕やけ が ものすごく はげしい。 <strong>「☀ ひかりの道」</strong> ボタンで、 太陽 から あなた に とどく 7いろ の ひかり が、 空気を とおる あいだに どこで ちらばって ぬけるか を 図に する。 <strong>「⏱ 1にち を みる」</strong> で 自動 1日 サイクル。 1まい HTML、 ライブラリ なし、 マイク・カメラ なし、 データ は のこさない。 日本語と English の バイリンガル。 Pinda Lab。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="soraIroTag1">5〜9歳</span>
+                    <span class="tag" data-i18n="soraIroTag2">レイリー散乱</span>
+                    <span class="tag" data-i18n="soraIroTag3">地球 / 火星 / 月</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/sora-iro/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
     <div class="card" data-cat="kids" data-added="2026-05-09T16:00:00+09:00" data-slug="zo-to-nezumi">
             <div class="card-thumb thumb-zonezumi">
             <span class="new-badge">NEW</span>
@@ -2943,6 +2961,9 @@ const I18N = {
         atamaTitle: "あたまどけい",
         atamaDesc:  "メを つぶって、心の中で 3秒〜1分30秒を 数えて タップ。とけいを 見せない 内部時間感覚あそび。6レベル。5〜9さい。",
         atamaTag1: "5〜9歳", atamaTag2: "時間感覚", atamaTag3: "6レベル",
+        soraIroTitle: "そらのいろ",
+        soraIroDesc:  "太陽をドラッグすると、空ぜんたい が レイリー散乱でリアルタイムに色を変える。あおは16倍ちらばる、夕やけは長い経路で あおがぬけてあかが残る — を体で知る。地球・火星・月・こい空気の4モード。5〜9さい。",
+        soraIroTag1: "5〜9歳", soraIroTag2: "レイリー散乱", soraIroTag3: "地球 / 火星 / 月",
         burankoTitle: "ブランコ びょうし",
         burankoDesc:  "音楽がきえても、おなじびょうしでタップしてブランコを空に飛ばす。「内なるびょうし」の練習。4〜8さい。",
         burankoTag1: "4〜8歳", burankoTag2: "内なるびょうし", burankoTag3: "音→静寂→タップ",
@@ -3334,6 +3355,9 @@ const I18N = {
         atamaTitle: "Atama-dokei · Head Clock",
         atamaDesc:  "Close your eyes, count seconds in your head, tap when you think the target time has passed. The screen never shows a clock. 6 levels (3s→1m30s); each unlocks an animal time-sense fact. Ages 5–9.",
         atamaTag1: "Ages 5–9", atamaTag2: "Inner time sense", atamaTag3: "6 levels",
+        soraIroTitle: "Sora no Iro · Sky Color",
+        soraIroDesc:  "Drag the sun across the sky and the whole sky recomputes its color from real Rayleigh-scattering physics. Blue scatters 16× more than red — that is why noon is blue and sunsets are red. 4 modes: Earth, Mars (butterscotch sky, blue sunset), Moon (black sky, stars even at noon), and a thick-atmosphere alien world. Ages 5–9.",
+        soraIroTag1: "Ages 5–9", soraIroTag2: "Rayleigh scattering", soraIroTag3: "Earth / Mars / Moon",
         nioiTitle: "Nioi Tanken · Smell Expedition",
         nioiDesc:  "Find smells around your home with your nose, grow a garden of colored flowers — the only sense the browser cannot measure. 16 categories × 6 rooms. Ages 4–8.",
         nioiTag1: "Ages 4–8", nioiTag2: "Olfactory", nioiTag3: "16 categories",
