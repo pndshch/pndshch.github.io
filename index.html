@@ -277,6 +277,8 @@ header p {
 .thumb-moyo      { background: radial-gradient(ellipse at 30% 30%, #f5ebd2 0%, #d8b97d 50%, #4a3220 100%); }
 .thumb-koma      { background: radial-gradient(ellipse at 50% 45%, #2a2a3a 0%, #14141e 70%, #08080d 100%); }
 .thumb-hidokei   { background: linear-gradient(180deg, #2a1538 0%, #4a2818 45%, #c8742e 75%, #f4a040 100%); }
+.thumb-brewster1816 { background: radial-gradient(ellipse at 50% 50%, #ff6b9d 0%, #cf6bff 22%, #6bd9ff 38%, #3d1d5c 65%, #0d0620 100%); }
+.thumb-gw150914  { background: radial-gradient(ellipse at 50% 50%, #6a3aa0 0%, #2a1450 30%, #0a0820 65%, #04030a 100%); }
 
 .card-body {
     padding: 18px 20px 22px;
@@ -661,6 +663,23 @@ footer a:hover { color: #e6edf3; }
 
 <!-- All apps -->
 <div class="grid" id="app-grid">
+    <div class="card" data-cat="world-history" data-added="2026-05-08T22:00:00+09:00" data-slug="gw150914" data-year="2015">
+            <div class="card-thumb thumb-gw150914">
+            <span class="new-badge">NEW</span>
+            <span class="thumb-emoji">🌀💫</span>
+                <img class="thumb-gif" src="assets/gw150914.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="gw150914Title">じくうのさざなみ 2015</h2>
+                <p data-i18n="gw150914Desc"><strong>2015年9月14日 09:50:45 UTC</strong>、ルイジアナ州リビングストンのLIGOが7ミリ秒だけ揺れた——3000km離れたワシントン州ハンフォードの双子検出器も、寸分たがわぬ波形を記録した。<strong>13億光年彼方</strong>で 2つの<strong>ブラックホール (29 + 36 M☉)</strong> が合体した最後の0.2秒。アインシュタイン1916年の予言が、99年経って初めて<strong>音として聞こえた</strong>瞬間。あなたは2つのBHを置き、重力波放射でぐるぐると螺旋落下する軌道を見守る。Web Audioで合成したチャープが <strong>35Hz→260Hz</strong>に駆け上がり、合体の瞬間 失われた質量 <strong>3M☉</strong> が <em>純粋な重力波</em>として銀河系の50倍の輝度で放たれる(ただし光ではない、時空そのものの鳴動)。検出フェーズでは、本物のGW150914ストレインデータがあなたのシミュレーションに重なる。 結語： <strong>あなたが今立っている床は、絶えず微かに揺れている</strong>——銀河の中の中性子星、何万光年も離れた連星から届くさざなみで。 2017年ノーベル物理学賞 (Weiss, Barish, Thorne)、2017年GW170817中性子星合体 (マルチメッセンジャー天文学の幕開け)、KAGRA(神岡)を含む国際ネットワークでこれまでに約100件検出。 4幕構成、Bilingual JP/EN. 単一HTML、ライブラリなし。 Pinda Lab。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="gw150914Tag1">史実体験</span>
+                    <span class="tag" data-i18n="gw150914Tag2">重力波 初検出</span>
+                    <span class="tag" data-i18n="gw150914Tag3">9月14日 · 2015</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/gw150914/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
     <div class="card" data-cat="world-history" data-added="2026-05-08T20:30:00+09:00" data-slug="romer-1676" data-year="1676">
             <div class="card-thumb thumb-romer1676">
             <span class="new-badge">NEW</span>
@@ -3014,6 +3033,9 @@ const I18N = {
         romer1676Title: "ロェマー 1676",
         romer1676Desc: "1676年、22歳のロェマーは、木星の衛星イオの食(しょく)が、地球が遠ざかると11分遅れて見えることに気づく——光は無限ではない。4幕で食を測り、ずれを見つけ、c のスライダーで観測に重ね、11月9日の食を予言する。光速の最初の測定。",
         romer1676Tag1: "史実体験", romer1676Tag2: "光の速さの発見", romer1676Tag3: "12月7日 · 1676",
+        gw150914Title: "じくうのさざなみ 2015",
+        gw150914Desc: "2015年9月14日、LIGOが13億光年彼方の2つのブラックホール (29+36 M☉) 合体から届いた重力波を初めて捉えた瞬間を、4幕で追体験。アインシュタイン1916年の予言が、99年経ってチャープ音として聞こえた——本物のGW150914ストレインがあなたのシミュレーションに重なる。",
+        gw150914Tag1: "史実体験", gw150914Tag2: "重力波 初検出", gw150914Tag3: "9月14日 · 2015",
         halley1066Title: "ハレー彗星 1066",
         halley1066Desc: "1066年4月、イングランドの空にほうきぼし。10月、ヘイスティングズの戦い。バイユーのタピスリーは『ISTI MIRANT STELLA』と縫いとめた。同じ星が76年ごとに戻る。1066から2061まで、14回の帰還を空で見つける。1705年、ハレーが76年周期と気づき1758年の再来を予言、彼は1742年に没したが、予言通り1758年クリスマスに帰ってきた。",
         halley1066Tag1: "史実体験", halley1066Tag2: "76年周期 · 14回", halley1066Tag3: "バイユーのタピスリー",
@@ -3436,6 +3458,9 @@ const I18N = {
         romer1676Title: "Rømer · 1676",
         romer1676Desc: "1676. The 22-year-old Ole Rømer notices Jupiter's moon Io eclipses arrive 11 minutes late when Earth is far from Jupiter — light is not infinite. 4 acts: time the eclipses, spot the slip, slide the speed of light to fit a year of data, and predict the November 9 eclipse. The first measurement of c.",
         romer1676Tag1: "History·Felt", romer1676Tag2: "Speed of light", romer1676Tag3: "7 Dec · 1676",
+        gw150914Title: "Ripples in Spacetime · 2015",
+        gw150914Desc: "Sept 14, 2015 · 09:50:45 UTC. Advanced LIGO catches the gravitational waves of two black holes (29 + 36 M☉) merging 1.3 billion light-years away. 4 acts re-enact Einstein's 1916 prediction finally heard, 99 years later, as a chirp from 35→260 Hz. Real GW150914 strain data overlays your simulation. Web Audio, single HTML, no libs. Bilingual JP/EN.",
+        gw150914Tag1: "History·Felt", gw150914Tag2: "First GW detection", gw150914Tag3: "14 Sep · 2015",
         halley1066Title: "Halley's Comet · 1066",
         halley1066Desc: "April 1066 — a hairy star over England. By October, the Normans land. The Bayeux Tapestry stitches the moment as 'ISTI MIRANT STELLA'. The same star returns every 76 years — spot it across all 14 returns from 1066 to 2061. In 1705 Halley predicted its 1758 return; he died in 1742, but on Christmas night 1758 a German farmer saw it, exactly where Halley said.",
         halley1066Tag1: "History·Felt", halley1066Tag2: "76-yr cycle · 14 returns", halley1066Tag3: "Bayeux Tapestry",
