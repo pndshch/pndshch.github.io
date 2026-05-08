@@ -270,6 +270,7 @@ header p {
 .thumb-zonezumi  { background: linear-gradient(180deg, #f7eedd 0%, #ead9b8 70%, #d8c39a 100%); }
 .thumb-atama     { background: linear-gradient(165deg, #fdf6e3 0%, #f6ecd2 55%, #e8cfa3 100%); }
 .thumb-soraIro   { background: linear-gradient(180deg, #1f3870 0%, #4a6da8 35%, #d68a4a 75%, #8b3018 100%); }
+.thumb-hotaru    { background: radial-gradient(ellipse at 60% 30%, #1a2a18 0%, #0a1410 55%, #03060a 100%); }
 
 .card-body {
     padding: 18px 20px 22px;
@@ -654,6 +655,23 @@ footer a:hover { color: #e6edf3; }
 
 <!-- All apps -->
 <div class="grid" id="app-grid">
+    <div class="card" data-cat="kids" data-added="2026-05-09T18:00:00+09:00" data-slug="hotaru-awase">
+            <div class="card-thumb thumb-hotaru">
+            <span class="new-badge">NEW</span>
+            <span class="thumb-emoji">✨🌳</span>
+                <img class="thumb-gif" src="assets/hotaru-awase.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="hotaruTitle">ホタルあわせ</h2>
+                <p data-i18n="hotaruDesc"><strong>100ぴき の ホタル が、 さいしょ は ばらばら に ひかっている。「つなぐ」 を おした 30びょう ご、 ぜんぶ が おなじ あいず で いっしょに ひかる。</strong>5〜9さい むけ、世界の キッズアプリ では ほとんど みかけない <strong>「リーダー が いなくても、 たくさん が おのずと そろう」 を ゆびで さわる あそびば</strong>を ブラウザで。 こども の 物理アプリ には 「光」 「磁石」 「てこ」 は たくさん あるのに、 <strong>『同期 (どうき)』 という、 自然界 で いちばん ふしぎ な 現象 を 体験できる ものは ほとんど ない</strong>。 タイ や マレーシア の もり に いる <strong>Pteroptyx</strong> という ホタル は、 1ぽん の 木 に 何百ぴき あつまって <strong>1びょう に 1かい いっせいに ひかる</strong> —— 18せいき の ヨーロッパ の たんけん家 が かいて はじめは ウソ だと おもわれて いた けれど、 ほんとう だった。 <strong>あなたの しんぞう</strong> も、 1まん の さいぼう が これと まったく おなじ やりかた で あいずを あわせて、 1ぷんかん に 60〜80かい いっせいに うごく。<br><strong>これは ほんもの の 数学</strong>。 各ホタル は 「<strong>となり が ひかった なら、 ぼく も ちょっと だけ はやく ひかろう</strong>」 と やる だけ。 リーダー は いない、 命令 も ない。 でも たくさん あつまる と、 ぜんいん が <strong>おのずと そろう</strong> —— 数学者 の <strong>蔵本由紀 (Yoshiki Kuramoto)</strong> が 1975ねん に この しくみ を しき で 書いた、 「クラモト同期」。 <strong>3つの モード</strong>。 <em>🌳 ホタル</em>: もり の よる、 100〜1000ぴき の グロー。 <em>🎵 メトロノーム</em>: 8〜16この 振り子 が ゆれる だい の上 で、 ふしぎ と そろう —— イケグチ ラボ の ゆうめいな 実験。 <em>❤️ しんぞう</em>: グリッド の ペースメーカー さいぼう が おなじ しくみ で あわせる。 <strong>「つなぐ」 「はなす」</strong> で つながり を きって、 また ばらばら に なる ところ も みえる。 <strong>そろい度 (sync %) バー</strong> は <strong>クラモト の 秩序 パラメータ r = |Σ exp(iφ)| / N</strong> の リアルタイム計算。 1まい HTML、 ライブラリ なし、 マイク・カメラ なし、 データ は のこさない。 日本語 と English の バイリンガル。 Pinda Lab。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="hotaruTag1">5〜9歳</span>
+                    <span class="tag" data-i18n="hotaruTag2">クラモト同期 (1975)</span>
+                    <span class="tag" data-i18n="hotaruTag3">100〜1000ぴき</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/hotaru-awase/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
     <div class="card" data-cat="kids" data-added="2026-05-09T17:00:00+09:00" data-slug="sora-iro">
             <div class="card-thumb thumb-soraIro">
             <span class="new-badge">NEW</span>
@@ -2994,6 +3012,9 @@ const I18N = {
         zonezumiTitle: "ぞうとねずみ",
         zonezumiDesc:  "ちいさな ねずみ ひとつ で、おおきな ぞう を もちあげる。てこ・しーそー の ほうそく（torque = しつりょう × きょり）を ゆびで さわる。ぞうを−1ばんめ、ねずみを+10ばんめに おけば 10×1=10 で つりあう。アルキメデス の『立つ場所さえあれば』。7つ の パズル + じゆう モード。4〜9さい。",
         zonezumiTag1: "4〜9歳", zonezumiTag2: "てこの ほうそく", zonezumiTag3: "torque = mass × distance",
+        hotaruTitle: "ホタルあわせ",
+        hotaruDesc:  "100ぴき の ホタル が ばらばらに ひかっている。「つなぐ」 を おすと 30びょう で ぜんぶ おなじ あいずで ひかる。リーダー は いない、 たがいに 「となり に そろえる」 だけ。 タイの ホタル も、 きみの しんぞう も、 おなじ しくみ。蔵本由紀 1975 の クラモト同期。ホタル / メトロノーム / しんぞう の 3モード。5〜9さい。",
+        hotaruTag1: "5〜9歳", hotaruTag2: "クラモト同期 (1975)", hotaruTag3: "100〜1000ぴき",
     },
     en: {
         tagline:   "Games · Education · Tools — delivered via browser and apps",
@@ -3394,6 +3415,9 @@ const I18N = {
         zonezumiTitle: "Elephant & Mouse · Zō to Nezumi",
         zonezumiDesc:  "Lift an elephant — with one mouse. A lever-law sandbox: torque = mass × distance. Place the elephant 1 step from the pivot (10×1=10), then drag a single mouse to position 10 on the other side (1×10=10) and the beam balances perfectly — Archimedes' \"give me a place to stand\" in your hand. 7 puzzles + free play. Ages 4–9.",
         zonezumiTag1: "Ages 4–9", zonezumiTag2: "Lever law / torque", zonezumiTag3: "torque = mass × distance",
+        hotaruTitle: "Hotaru-Awase · Firefly Sync",
+        hotaruDesc:  "100 fireflies blink out of sync. Tap Connect — within 30 seconds, every one is pulsing in unison, on its own. No leader, no clock — just each firefly nudging itself toward its neighbors. Pteroptyx fireflies in Thai forests really do this; so do the 10 000 cells of your heart. Yoshiki Kuramoto wrote the equation in 1975. Three modes: fireflies, metronomes, heart cells. Ages 5–9.",
+        hotaruTag1: "Ages 5–9", hotaruTag2: "Kuramoto sync (1975)", hotaruTag3: "100–1000 fireflies",
     }
 };
 
