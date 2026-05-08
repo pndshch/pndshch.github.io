@@ -272,6 +272,7 @@ header p {
 .thumb-atama     { background: linear-gradient(165deg, #fdf6e3 0%, #f6ecd2 55%, #e8cfa3 100%); }
 .thumb-soraIro   { background: linear-gradient(180deg, #1f3870 0%, #4a6da8 35%, #d68a4a 75%, #8b3018 100%); }
 .thumb-hotaru    { background: radial-gradient(ellipse at 60% 30%, #1a2a18 0%, #0a1410 55%, #03060a 100%); }
+.thumb-moyo      { background: radial-gradient(ellipse at 30% 30%, #f5ebd2 0%, #d8b97d 50%, #4a3220 100%); }
 
 .card-body {
     padding: 18px 20px 22px;
@@ -656,6 +657,23 @@ footer a:hover { color: #e6edf3; }
 
 <!-- All apps -->
 <div class="grid" id="app-grid">
+    <div class="card" data-cat="kids" data-added="2026-05-09T19:00:00+09:00" data-slug="moyo-no-tane">
+            <div class="card-thumb thumb-moyo">
+            <span class="new-badge">NEW</span>
+            <span class="thumb-emoji">🦓🐆🪸</span>
+                <img class="thumb-gif" src="assets/moyo-no-tane.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="moyoTitle">もようのたね</h2>
+                <p data-i18n="moyoDesc"><strong>ゆびで まっしろな がめんに 「くすりの たね」 を まくと、 シマウマの しま が、 ヒョウの ぶつぶつ が、 サンゴの まよろ が、 ひとりでに うかびあがる。</strong>6〜10さい むけ、世界の キッズアプリ では ほとんど みかけない <strong>「もよう が おのずと うまれる ところ」 を ゆびで さわる あそびば</strong>を ブラウザで。 子ども 向け の 「もよう」 アプリ は ほとんど が <strong>スタンプ か ぬりえ</strong> —— あなた が しまを えがけば、 アプリ は しま を かえす。 これは ちがう。 <strong>あなた は もよう を かかない。 もよう が じぶん で うまれる。</strong> あなた は ルール（すうしき）を きめる だけ。<br><strong>1952ねん。 エニグマを やぶった アラン・チューリング</strong> が、 さいご に かいた ろんぶん は こども が ほんとうに 聞く しつもん だった —— <em>たまごの 中で、 シマウマ は どうやって しま を そだてる の？</em> こたえ は ふしぎ で かんたん だった：<strong>2 しゅるい の くすり <em>U</em> と <em>V</em> が、 おなかの中の はだ を ひろがって、 たがいに おいかける</strong>。 はやさ が ちょうど いい バランス なら、 何も ない ところから しま、 ぶつぶつ、 まよろ が おのずと うまれる。 <strong>ねっつる うお の おびもよう、 ふぐの とげ、 サンゴ の あなぼこ、 きみ の ゆびもん</strong> ぜんぶ おなじ 1つ の すうしき。 <strong>しぜん は むずかしい もよう に せっけい図 を かかない —— かんたんな ルール の くりかえし で すべて つくる</strong>。 これは その しょうこ。<br><strong>6つの プリセット</strong> で すうしき の 1パラメータ を ちょっとだけ うごかすと、 まったく ちがう もよう が うまれる： <em>🦓シマウマ</em>(F=0.060)、 <em>🐆ヒョウ</em>(F=0.030)、 <em>🦒キリン</em>(F=0.040)、 <em>🐠ねっつる うお</em>、 <em>🪸サンゴ</em>、 <em>☝️ゆびもん</em>。 <strong>「🦓 どうぶつ に きせる」</strong> ボタン で、 できた もよう を シマウマ や ヒョウ の シルエット に <strong>そのまま 着せて</strong> 見せる。 <strong>「🎚 すうしき を いじる」</strong> で F・k スライダー が ひらく —— ±0.005 ずらす だけ で しま⇄ぶつぶつ⇄まよろ が ぜんぶ きりかわる、 その ふしぎ を 9さい の ゆびで さわらせる。 <strong>192×192 の グリッド、 9点 ラプラシアン、 グレイ＝スコット 反応拡散方程式</strong>、 すべて あなたの ブラウザ で リアルタイム。 1まい HTML、 ライブラリ なし、 マイク・カメラ なし、 データ は のこらない。 日本語 と English の バイリンガル。 Pinda Lab。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="moyoTag1">6〜10歳</span>
+                    <span class="tag" data-i18n="moyoTag2">チューリング 1952</span>
+                    <span class="tag" data-i18n="moyoTag3">反応拡散・6プリセット</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/moyo-no-tane/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
     <div class="card" data-cat="kids" data-added="2026-05-09T18:00:00+09:00" data-slug="hotaru-awase">
             <div class="card-thumb thumb-hotaru">
             <span class="new-badge">NEW</span>
@@ -3036,6 +3054,9 @@ const I18N = {
         hotaruTitle: "ホタルあわせ",
         hotaruDesc:  "100ぴき の ホタル が ばらばらに ひかっている。「つなぐ」 を おすと 30びょう で ぜんぶ おなじ あいずで ひかる。リーダー は いない、 たがいに 「となり に そろえる」 だけ。 タイの ホタル も、 きみの しんぞう も、 おなじ しくみ。蔵本由紀 1975 の クラモト同期。ホタル / メトロノーム / しんぞう の 3モード。5〜9さい。",
         hotaruTag1: "5〜9歳", hotaruTag2: "クラモト同期 (1975)", hotaruTag3: "100〜1000ぴき",
+        moyoTitle: "もようのたね",
+        moyoDesc:  "ゆびで まっしろな がめんに「くすりの たね」を まくと、シマウマの しま、ヒョウの ぶつぶつ、サンゴの まよろ が ひとりでに うかびあがる。きみは もようを かかない、もようが じぶんで うまれる。アラン・チューリング 1952 の グレイ＝スコット 反応拡散方程式。シマウマ・ヒョウ・キリン・ねっつるうお・サンゴ・ゆびもん の 6プリセット + すうしき スライダー + どうぶつ シルエット。6〜10さい。",
+        moyoTag1: "6〜10歳", moyoTag2: "チューリング 1952", moyoTag3: "反応拡散・6プリセット",
     },
     en: {
         tagline:   "Games · Education · Tools — delivered via browser and apps",
@@ -3442,6 +3463,9 @@ const I18N = {
         hotaruTitle: "Hotaru-Awase · Firefly Sync",
         hotaruDesc:  "100 fireflies blink out of sync. Tap Connect — within 30 seconds, every one is pulsing in unison, on its own. No leader, no clock — just each firefly nudging itself toward its neighbors. Pteroptyx fireflies in Thai forests really do this; so do the 10 000 cells of your heart. Yoshiki Kuramoto wrote the equation in 1975. Three modes: fireflies, metronomes, heart cells. Ages 5–9.",
         hotaruTag1: "Ages 5–9", hotaruTag2: "Kuramoto sync (1975)", hotaruTag3: "100–1000 fireflies",
+        moyoTitle: "Moyō no Tane · Pattern Seeds",
+        moyoDesc:  "Tap a chemistry seed on a blank field — zebra stripes, leopard spots, and coral mazes grow by themselves. You don't draw the pattern; the pattern grows. Alan Turing's 1952 morphogenesis paper, made tactile: two chemicals U and V diffusing and chasing each other across a 192×192 grid (Gray-Scott reaction-diffusion). Six animal presets, F/k sliders to flip stripes ↔ spots ↔ mazes, and a silhouette overlay that drapes the pattern on a zebra or leopard. Ages 6–10.",
+        moyoTag1: "Ages 6–10", moyoTag2: "Turing 1952", moyoTag3: "reaction-diffusion · 6 presets",
     }
 };
 
