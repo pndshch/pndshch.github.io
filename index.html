@@ -209,6 +209,7 @@ header p {
 .thumb-ninth      { background: linear-gradient(135deg, #1a0e04 0%, #2a1608 50%, #0a0603 100%); }
 .thumb-ricecooker { background: linear-gradient(135deg, #2a1608 0%, #5a3818 50%, #1a0f04 100%); }
 .thumb-warmth     { background: linear-gradient(135deg, #2a1f3d 0%, #c9836b 50%, #16101f 100%); }
+.thumb-iki        { background: linear-gradient(135deg, #d8c5e8 0%, #f3d6e0 50%, #fbe6cf 100%); }
 .thumb-cargo      { background: linear-gradient(135deg, #0e2a3e 0%, #5a93b8 35%, #d4a574 75%, #1a0e04 100%); }
 .thumb-mienai     { background: radial-gradient(ellipse at 50% 30%, #1c3a52 0%, #0a1f2e 60%, #050d18 100%); }
 .thumb-heron      { background: linear-gradient(180deg, #f4ede0 0%, #d6c8a8 60%, #8d9bab 100%); }
@@ -636,6 +637,23 @@ footer a:hover { color: #e6edf3; }
 
 <!-- All apps -->
 <div class="grid" id="app-grid">
+    <div class="card" data-cat="kids" data-added="2026-05-09T10:00:00+09:00" data-slug="iki-no-hana">
+            <div class="card-thumb thumb-iki">
+            <span class="new-badge">NEW</span>
+            <span class="thumb-emoji">🌸</span>
+                <img class="thumb-gif" src="assets/iki-no-hana.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="ikiTitle">いきのはな</h2>
+                <p data-i18n="ikiDesc"><strong>「ふーっ」と いきを はいて、おはなを さかせよう。</strong>3〜7さい むけ、世界の キッズアプリ では めずらしい <strong>「マイクで ほんとうに いきを きく こきゅうゲーム」</strong>を ブラウザで。たいていの こども向け こきゅう アプリ は まる が ぐるぐる するだけで、ほんとうに はけているか は チェック しない。これは ちがう。<strong>すうー（4びょう）→ ふーーっ（6びょう）</strong> の リズムで すすみ、ふーっ の あいだ マイクが きみの『ふーっ』を きく。きちんと はけたら はなびらが ひとつ ひらく。<strong>5かい くりかえすと、よる の そらが しずかに おりてきて、おはなが まんかい に さく</strong>。息を 長く はく ことは 副交感神経 を ゆっくり 動かす——ねるまえ、ふあん な とき、ぐっすり ねむれない ばんに、医師 も すすめる <strong>「のばしの 呼吸」を こども版 にした もの</strong>。4-7-8呼吸 は こども には きつい ので、4-6 で やさしく した。マイクが つかえない ときは ボタンを おさえても あそべる。録音 は しない、データは ローカル のみ。1まい HTML、ライブラリ なし、おとは Web Audio で ぜんぶ 合成。日本語と English の バイリンガル。Pinda Lab。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="ikiTag1">3〜7歳</span>
+                    <span class="tag" data-i18n="ikiTag2">こきゅう</span>
+                    <span class="tag" data-i18n="ikiTag3">マイク連動</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/iki-no-hana/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
     <div class="card" data-cat="kids" data-added="2026-05-09T08:30:00+09:00" data-slug="kage-asobi">
             <div class="card-thumb thumb-kage">
             <span class="new-badge">NEW</span>
@@ -2616,6 +2634,9 @@ const I18N = {
         cityDesc: "3Dの街を自由にドライブ。三人称・運転席・俯瞰の3視点切り替え。",
         kageTag1: "4〜8歳", kageTag2: "影の物理", kageTag3: "3モード",
         ashiatoTag1: "5〜9歳", ashiatoTag2: "どうぶつトラッキング", ashiatoTag3: "8しゅるい",
+        ikiTitle: "いきのはな",
+        ikiDesc:  "ふーっと いきを はいて、おはなを さかせよう。マイクで本当に呼吸を聞く、3〜7さい むけ おちつきの こきゅうあそび。",
+        ikiTag1: "3〜7歳", ikiTag2: "こきゅう", ikiTag3: "マイク連動",
     },
     en: {
         tagline:   "Games · Education · Tools — delivered via browser and apps",
@@ -2962,6 +2983,9 @@ const I18N = {
         kageTitle: "Shadow Play",
         kageDesc:  "Move the sun with your finger — every shadow follows.",
         kageTag1: "Ages 4–8", kageTag2: "Shadow physics", kageTag3: "3 modes",
+        ikiTitle: "Breath Flower",
+        ikiDesc:  "Blow gently — the mic actually listens. A 1-min calming breath ritual for ages 3–7.",
+        ikiTag1: "Ages 3–7", ikiTag2: "Breathing", ikiTag3: "Mic-verified",
     }
 };
 
