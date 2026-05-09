@@ -207,6 +207,7 @@ header p {
 .thumb-nihilist   { background: linear-gradient(135deg, #0a0e1a 0%, #141830 100%); }
 .thumb-neuralfighter { background: linear-gradient(135deg, #0a1f48 0%, #02040a 100%); }
 .thumb-shiitakenav { background: linear-gradient(135deg, #2a1f14 0%, #1a1410 100%); }
+.thumb-flappyrl   { background: linear-gradient(180deg, #7ec8ff 0%, #bde7ff 55%, #ded895 100%); }
 .thumb-doomscroll { background: linear-gradient(135deg, #2a0a14 0%, #1a0d2a 100%); }
 .thumb-ninth      { background: linear-gradient(135deg, #1a0e04 0%, #2a1608 50%, #0a0603 100%); }
 .thumb-ricecooker { background: linear-gradient(135deg, #2a1608 0%, #5a3818 50%, #1a0f04 100%); }
@@ -785,6 +786,23 @@ footer a:hover { color: #e6edf3; }
 
 <!-- All apps -->
 <div class="grid" id="app-grid">
+    <div class="card" data-cat="games" data-added="2026-05-10T17:00:00+09:00" data-slug="flappy-rl">
+            <div class="card-thumb thumb-flappyrl">
+            <span class="new-badge">NEW</span>
+            <span class="thumb-emoji">🐦</span>
+                <img class="thumb-gif" src="assets/flappy-rl.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="flappyrlTitle">Flappy RL</h2>
+                <p data-i18n="flappyrlDesc">ブラウザで動くFlappy Bird風のミニゲーム。プレイヤーは シンプルな丸、SPACE / クリックで ジャンプ。— ただし本命は別にあって、<strong>ゲームロジックを描画から完全に分離</strong>し、<code>window.FlappyEnv</code> から <code>resetGame(seed)</code> / <code>step(action)</code> / <code>getState()</code> で 強化学習エージェントが直接プレイできるようにしてある。state は <code>{playerY, playerVelocity, nextObstacleX, gapCenterY, gapSize, score, done}</code>。RNGはmulberry32でseedable、同じseedなら同じ軌跡。3ファイル(index.html / style.css / game.js)、依存ライブラリなし。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="flappyrlTag1">Canvas</span>
+                    <span class="tag" data-i18n="flappyrlTag2">強化学習</span>
+                    <span class="tag" data-i18n="flappyrlTag3">window.FlappyEnv</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/flappy-rl/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
     <div class="card" data-cat="kids" data-added="2026-05-10T15:30:00+09:00" data-slug="odoru-enpitsu">
             <div class="card-thumb thumb-odoru">
             <span class="new-badge">NEW</span>
@@ -3186,6 +3204,9 @@ const I18N = {
         neuralfighterTitle: "ニューラルファイター",
         neuralfighterDesc:  "ニューラルネットワークを題材にしたドット絵格闘ゲーム。「アンダーフィット」「オーバーフィット」「勾配消失」の3体と戦い、攻撃を当てて勾配ゲージを溜めて必殺技を放て。各ラウンドの背景は入力層→隠れ層→出力層へ深まっていく。誤差逆伝播で戦え。",
         neuralfighterTag1: "ドット絵", neuralfighterTag2: "格闘", neuralfighterTag3: "機械学習",
+        flappyrlTitle: "Flappy RL",
+        flappyrlDesc:  "ブラウザで動くFlappy Bird風のミニゲーム。プレイヤーは シンプルな丸、SPACE / クリックで ジャンプ。— ただし本命は別にあって、<strong>ゲームロジックを描画から完全に分離</strong>し、<code>window.FlappyEnv</code> から <code>resetGame(seed)</code> / <code>step(action)</code> / <code>getState()</code> で 強化学習エージェントが直接プレイできるようにしてある。state は <code>{playerY, playerVelocity, nextObstacleX, gapCenterY, gapSize, score, done}</code>。RNGはmulberry32でseedable、同じseedなら同じ軌跡。3ファイル(index.html / style.css / game.js)、依存ライブラリなし。",
+        flappyrlTag1: "Canvas", flappyrlTag2: "強化学習", flappyrlTag3: "window.FlappyEnv",
         shiitakenavTitle: "しいたけ栽培ナビ",
         shiitakenavDesc:  "家で椎茸を育てたいけど何から始めればいいか分からない人のための実用アプリ。菌床キット／原木の比較、買い物リスト、状態別の「今日のやること」、浸水タイマー、収穫記録、症状からのトラブル診断。8章のガイドで0から収穫まで案内。",
         shiitakenavTag1: "家庭菜園", shiitakenavTag2: "きのこ栽培", shiitakenavTag3: "実用ツール",
@@ -3639,6 +3660,9 @@ const I18N = {
         neuralfighterTitle: "Neural Fighter",
         neuralfighterDesc:  "A pixel-art fighting game built around neural networks. Battle three foes — Underfit, Overfit, and Vanishing Gradient — landing hits to charge your gradient gauge and unleash an activation special. The stage deepens from input layer to hidden layer to output layer. Train by backpropagation.",
         neuralfighterTag1: "Pixel Art", neuralfighterTag2: "Fighting", neuralfighterTag3: "Machine Learning",
+        flappyrlTitle: "Flappy RL",
+        flappyrlDesc:  "A browser Flappy Bird clone — the player is just a circle and SPACE / click jumps. The point isn't really the game though; it's that the <strong>game logic is fully decoupled from rendering</strong> and exposed as <code>window.FlappyEnv</code>, so a reinforcement-learning agent can drive it via <code>resetGame(seed)</code> / <code>step(action)</code> / <code>getState()</code>. State is <code>{playerY, playerVelocity, nextObstacleX, gapCenterY, gapSize, score, done}</code>. RNG is seedable mulberry32 — same seed reproduces the same trajectory. Three files (index.html / style.css / game.js), no dependencies.",
+        flappyrlTag1: "Canvas", flappyrlTag2: "Reinforcement Learning", flappyrlTag3: "window.FlappyEnv",
         shiitakenavTitle: "Shiitake Grow Helper",
         shiitakenavDesc:  "A practical app for anyone who wants to grow shiitake at home but has no idea where to start. Sawdust kit vs log comparison, shopping list, stage-aware \"today's task\" cards, soak timer, harvest log, and a symptom-based troubleshooting guide. Eight chapters take you from zero to first harvest.",
         shiitakenavTag1: "Home Gardening", shiitakenavTag2: "Mushroom", shiitakenavTag3: "Practical Tool",
