@@ -286,6 +286,7 @@ header p {
 .thumb-moire     { background: radial-gradient(ellipse at 50% 50%, #fff 0%, #f9d8e6 30%, #c9e9f5 60%, #1d1240 100%); }
 .thumb-himawari  { background: linear-gradient(180deg, #7eb1d4 0%, #9fcd80 50%, #5e8c3a 100%); }
 .thumb-odoru     { background: radial-gradient(circle at 30% 20%, #3a2a1a 0%, #1a1410 70%); }
+.thumb-guuzen    { background: radial-gradient(ellipse at 50% 30%, #1c1448 0%, #0d0830 55%, #050315 100%); }
 
 .card-body {
     padding: 18px 20px 22px;
@@ -786,6 +787,23 @@ footer a:hover { color: #e6edf3; }
 
 <!-- All apps -->
 <div class="grid" id="app-grid">
+    <div class="card" data-cat="kids" data-added="2026-05-10T18:30:00+09:00" data-slug="guuzen-no-yama">
+            <div class="card-thumb thumb-guuzen">
+            <span class="new-badge">NEW</span>
+            <span class="thumb-emoji">🎲⛰</span>
+                <img class="thumb-gif" src="assets/guuzen-no-yama.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="guuzenTitle">ぐうぜん の やま</h2>
+                <p data-i18n="guuzenDesc">ボール 1000こ が ぱらぱら くぎ に あたって おちる だけ。 でも ふしぎと まんなか が たかい『やま』に なる —— 1889ねん フランシス・ガルトン の ふしぎな はこ を ゆびで ためす、 6〜10さい むけ。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="guuzenTag1">6〜10歳</span>
+                    <span class="tag" data-i18n="guuzenTag2">ガルトン 1889</span>
+                    <span class="tag" data-i18n="guuzenTag3">正規分布・ベルこうせん</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/guuzen-no-yama/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
     <div class="card" data-cat="games" data-added="2026-05-10T17:00:00+09:00" data-slug="flappy-rl">
             <div class="card-thumb thumb-flappyrl">
             <span class="new-badge">NEW</span>
@@ -3213,6 +3231,9 @@ const I18N = {
         odoruTitle: "おどるエンピツ",
         odoruDesc:  "ふりこ ふたつ で エンピツ が おどる —— 1844年 ヴィクトリア朝 の ふしぎな おもちゃ を ブラウザで。4〜9さい むけ。",
         odoruTag1: "4〜9歳", odoruTag2: "Blackburn 1844", odoruTag3: "ハーモノグラフ",
+        guuzenTitle: "ぐうぜん の やま",
+        guuzenDesc:  "ボール 1000こ が ぱらぱら くぎ に あたって おちる だけ。 でも ふしぎと まんなか が たかい『やま』に なる —— 1889ねん フランシス・ガルトン の ふしぎな はこ を ゆびで ためす、 6〜10さい むけ。",
+        guuzenTag1: "6〜10歳", guuzenTag2: "ガルトン 1889", guuzenTag3: "正規分布・ベルこうせん",
         doomscrollTitle: "ドゥームスクロール研究室",
         doomscrollDesc:  "3分のSNSを過ごすと、アルゴリズムがあなたを学習し始める。",
         doomscrollTag1: "認知科学", doomscrollTag2: "SNS依存", doomscrollTag3: "3分実験",
@@ -3669,6 +3690,9 @@ const I18N = {
         odoruTitle: "Pendulum Pen",
         odoruDesc:  "Two pendulums dance one pen — the 1844 Victorian harmonograph, in your browser. Ages 4–9.",
         odoruTag1: "Ages 4–9", odoruTag2: "Blackburn 1844", odoruTag3: "Harmonograph",
+        guuzenTitle: "Mountain of Chance",
+        guuzenDesc:  "1,000 balls bounce randomly through 12 rows of pegs — yet a tidy mountain always grows in the middle. Galton's 1889 quincunx, for ages 6-10.",
+        guuzenTag1: "Ages 6-10", guuzenTag2: "Galton 1889", guuzenTag3: "Bell curve · Normal dist.",
         doomscrollTitle: "Doom Scroll Lab",
         doomscrollDesc:  "Three minutes of fake feed — watch the algorithm learn you in real time.",
         doomscrollTag1: "Cognitive Science", doomscrollTag2: "Social Media", doomscrollTag3: "3-min Experiment",
