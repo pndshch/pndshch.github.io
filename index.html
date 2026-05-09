@@ -325,6 +325,65 @@ header p {
 .bmc-top:hover { opacity: 0.85; }
 .bmc-top img { display: block; height: 48px; width: auto; }
 
+/* ── GIF marquee in header (lots-of-apps feel) ── */
+.gif-marquee {
+    width: 100vw;
+    margin: 22px calc(50% - 50vw) 4px;
+    overflow: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+    pointer-events: none;
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+            mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+}
+.gif-row {
+    display: flex;
+    gap: 8px;
+    width: max-content;
+    padding: 4px 0;
+}
+.gif-row.scroll-left  { animation: gifMarqueeLeft  60s linear infinite; }
+.gif-row.scroll-right { animation: gifMarqueeRight 75s linear infinite; }
+.gif-row + .gif-row { margin-top: 8px; }
+.gif-tile {
+    width: 92px; height: 92px;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #161b22;
+    border: 1px solid #30363d;
+    flex-shrink: 0;
+    position: relative;
+}
+.gif-tile img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+}
+@keyframes gifMarqueeLeft  { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes gifMarqueeRight { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+@media (prefers-reduced-motion: reduce) {
+    .gif-row.scroll-left, .gif-row.scroll-right { animation: none; }
+}
+@media (max-width: 480px) {
+    .gif-tile { width: 78px; height: 78px; border-radius: 12px; }
+    .gif-row { gap: 6px; }
+    .gif-row + .gif-row { margin-top: 6px; }
+}
+.app-count {
+    text-align: center;
+    color: #c9d1d9;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin: 8px 0 -4px;
+}
+.app-count .count-num {
+    color: #a855f7;
+    font-weight: 800;
+    font-size: 17px;
+    margin: 0 2px;
+}
+
 /* ── Footer ── */
 footer {
     margin-top: 60px;
@@ -635,6 +694,63 @@ footer a:hover { color: #e6edf3; }
         <div class="logo-text">Pinda<span> Lab</span></div>
     </div>
     <p data-i18n="tagline">ゲーム・教育・ツール — ブラウザとアプリで届けます</p>
+    <p class="app-count"><span class="count-num" id="appCountNum">100+</span><span data-i18n="appCountSuffix">アプリ・ゲーム</span></p>
+    <div class="gif-marquee" aria-hidden="true">
+        <div class="gif-row scroll-left">
+            <span class="gif-tile"><img src="assets/e-no-oto.gif" alt=""></span>
+            <span class="gif-tile"><img src="assets/akubi-utsushi.gif" alt=""></span>
+            <span class="gif-tile"><img src="assets/iro-maze.gif" alt=""></span>
+            <span class="gif-tile"><img src="assets/heron-oyster.gif" alt=""></span>
+            <span class="gif-tile"><img src="assets/cargo-cult-1947.gif" alt=""></span>
+            <span class="gif-tile"><img src="assets/warmth-1958.gif" alt=""></span>
+            <span class="gif-tile"><img src="assets/rosetta-1822.gif" alt=""></span>
+            <span class="gif-tile"><img src="assets/fleming-1928.gif" alt=""></span>
+            <span class="gif-tile"><img src="assets/broad-street-1854.gif" alt=""></span>
+            <span class="gif-tile"><img src="assets/kosuruto.gif" alt=""></span>
+            <span class="gif-tile"><img src="assets/eratosthenes-240bc.gif" alt=""></span>
+            <span class="gif-tile"><img src="assets/fruit-drop-ai.gif" alt=""></span>
+            <!-- duplicated for seamless loop -->
+            <span class="gif-tile"><img src="assets/e-no-oto.gif" alt=""></span>
+            <span class="gif-tile"><img src="assets/akubi-utsushi.gif" alt=""></span>
+            <span class="gif-tile"><img src="assets/iro-maze.gif" alt=""></span>
+            <span class="gif-tile"><img src="assets/heron-oyster.gif" alt=""></span>
+            <span class="gif-tile"><img src="assets/cargo-cult-1947.gif" alt=""></span>
+            <span class="gif-tile"><img src="assets/warmth-1958.gif" alt=""></span>
+            <span class="gif-tile"><img src="assets/rosetta-1822.gif" alt=""></span>
+            <span class="gif-tile"><img src="assets/fleming-1928.gif" alt=""></span>
+            <span class="gif-tile"><img src="assets/broad-street-1854.gif" alt=""></span>
+            <span class="gif-tile"><img src="assets/kosuruto.gif" alt=""></span>
+            <span class="gif-tile"><img src="assets/eratosthenes-240bc.gif" alt=""></span>
+            <span class="gif-tile"><img src="assets/fruit-drop-ai.gif" alt=""></span>
+        </div>
+        <div class="gif-row scroll-right">
+            <span class="gif-tile"><img src="assets/ashi-oto.gif" alt=""></span>
+            <span class="gif-tile"><img src="assets/kiokuiz.gif" alt=""></span>
+            <span class="gif-tile"><img src="assets/choco-bomber.gif" alt=""></span>
+            <span class="gif-tile"><img src="assets/city-drive.gif" alt=""></span>
+            <span class="gif-tile"><img src="assets/koi-no-taki.gif" alt=""></span>
+            <span class="gif-tile"><img src="assets/rugby-try.gif" alt=""></span>
+            <span class="gif-tile"><img src="assets/yen-defender.gif" alt=""></span>
+            <span class="gif-tile"><img src="assets/pompeii-79.gif" alt=""></span>
+            <span class="gif-tile"><img src="assets/prism-1666.gif" alt=""></span>
+            <span class="gif-tile"><img src="assets/moyo-no-tane.gif" alt=""></span>
+            <span class="gif-tile"><img src="assets/lo-1969.gif" alt=""></span>
+            <span class="gif-tile"><img src="assets/gw150914.gif" alt=""></span>
+            <!-- duplicated for seamless loop -->
+            <span class="gif-tile"><img src="assets/ashi-oto.gif" alt=""></span>
+            <span class="gif-tile"><img src="assets/kiokuiz.gif" alt=""></span>
+            <span class="gif-tile"><img src="assets/choco-bomber.gif" alt=""></span>
+            <span class="gif-tile"><img src="assets/city-drive.gif" alt=""></span>
+            <span class="gif-tile"><img src="assets/koi-no-taki.gif" alt=""></span>
+            <span class="gif-tile"><img src="assets/rugby-try.gif" alt=""></span>
+            <span class="gif-tile"><img src="assets/yen-defender.gif" alt=""></span>
+            <span class="gif-tile"><img src="assets/pompeii-79.gif" alt=""></span>
+            <span class="gif-tile"><img src="assets/prism-1666.gif" alt=""></span>
+            <span class="gif-tile"><img src="assets/moyo-no-tane.gif" alt=""></span>
+            <span class="gif-tile"><img src="assets/lo-1969.gif" alt=""></span>
+            <span class="gif-tile"><img src="assets/gw150914.gif" alt=""></span>
+        </div>
+    </div>
     <p class="bmc-label" data-i18n="bmcLabel">気に入ったら支援していただけると嬉しいです</p>
     <a class="bmc-top" href="https://www.buymeacoffee.com/pndshch" target="_blank" rel="noopener">
         <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee">
@@ -2817,6 +2933,7 @@ const I18N = {
         tagline: "ゲーム・教育・ツール — ブラウザとアプリで届けます",
         bmcLabel: "気に入ったら支援していただけると嬉しいです",
         contactNote: "不具合のご連絡・お問い合わせはこちら",
+        appCountSuffix: " アプリ・ゲームを公開中",
         secGames: "🎮 ゲーム",
         secEdu:   "📚 教育・知育",
         secFun:   "🎪 おもしろ",
@@ -3254,6 +3371,7 @@ const I18N = {
         tagline:   "Games · Education · Tools — delivered via browser and apps",
         bmcLabel:  "If you enjoy what I make, your support means a lot",
         contactNote: "Bug reports & contact",
+        appCountSuffix: " apps & games live",
         secGames:  "🎮 Games",
         secEdu:    "📚 Education",
         secFun:    "🎪 Fun",
@@ -3746,6 +3864,12 @@ function decorateCards() {
         return (a.dataset.slug || '').localeCompare(b.dataset.slug || '');
     });
     cards.forEach(c => grid.appendChild(c));
+    // app-count: floor to nearest 5 then add "+"
+    const countEl = document.getElementById('appCountNum');
+    if (countEl) {
+        const floor5 = Math.floor(cards.length / 5) * 5;
+        countEl.textContent = floor5 + '+';
+    }
     // tag NEW + year
     cards.forEach(c => {
         const thumb = c.querySelector('.card-thumb');
