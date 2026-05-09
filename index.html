@@ -291,6 +291,7 @@ header p {
 .thumb-mitsubachi{ background: linear-gradient(110deg, #2a1808 0%, #4a2e10 38%, #88c050 60%, #5a8230 100%); }
 .thumb-chladni   { background: radial-gradient(circle at 30% 25%, #3d2918 0%, #2a1d12 70%, #0d0a14 100%); }
 .thumb-morisasayaki{ background: linear-gradient(180deg, #86bce0 0%, #cfe9c5 35%, #5b4025 50%, #1a0f06 100%); }
+.thumb-kumamushi { background: radial-gradient(ellipse at 50% 45%, #d6913a 0%, #8a4a18 55%, #2a160a 100%); }
 
 .card-body {
     padding: 18px 20px 22px;
@@ -791,6 +792,23 @@ footer a:hover { color: #e6edf3; }
 
 <!-- All apps -->
 <div class="grid" id="app-grid">
+    <div class="card" data-cat="kids" data-added="2026-05-11T08:30:00+09:00" data-slug="kumamushi-moshimo">
+            <div class="card-thumb thumb-kumamushi">
+            <span class="new-badge">NEW</span>
+            <span class="thumb-emoji">🐻</span>
+                <img class="thumb-gif" src="assets/kumamushi-moshimo.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="kumamushiTitle">クマムシ・もしも</h2>
+                <p data-i18n="kumamushiDesc">からからに してから うちゅうへ。「ターン」状態 なら、150℃も しんくうも へいき。クマムシの ふしぎ、5〜9さい。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="kumamushiTag1">5〜9歳</span>
+                    <span class="tag" data-i18n="kumamushiTag2">クマムシ・ターン</span>
+                    <span class="tag" data-i18n="kumamushiTag3">クリプトビオシス</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/kumamushi-moshimo/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
     <div class="card" data-cat="kids" data-added="2026-05-11T07:00:00+09:00" data-slug="mori-no-sasayaki">
             <div class="card-thumb thumb-morisasayaki">
             <span class="new-badge">NEW</span>
@@ -3318,6 +3336,9 @@ const I18N = {
         moriSasayakiTitle: "もりのささやき",
         moriSasayakiDesc:  "きの ねっこは きのこの いとで つながっている —— よわった なかまへ おかしを おくる「ウッド・ワイド・ウェブ」を ゆびで そだてる、シマード 1997、5〜10さい。",
         moriSasayakiTag1: "5〜10歳", moriSasayakiTag2: "シマード 1997", moriSasayakiTag3: "きのこの ねっと・もりの せいたい",
+        kumamushiTitle: "クマムシ・もしも",
+        kumamushiDesc:  "からからに してから うちゅうへ。「ターン」状態 なら、150℃も しんくうも へいき。クマムシの ふしぎ、5〜9さい。",
+        kumamushiTag1: "5〜9歳", kumamushiTag2: "クマムシ・ターン", kumamushiTag3: "クリプトビオシス",
         doomscrollTitle: "ドゥームスクロール研究室",
         doomscrollDesc:  "3分のSNSを過ごすと、アルゴリズムがあなたを学習し始める。",
         doomscrollTag1: "認知科学", doomscrollTag2: "SNS依存", doomscrollTag3: "3分実験",
@@ -3789,6 +3810,9 @@ const I18N = {
         moriSasayakiTitle: "Forest Whispers",
         moriSasayakiDesc:  "Trees aren't alone — they share sugar through fungal threads. Tend the wood-wide-web with your finger, Simard 1997, ages 5-10.",
         moriSasayakiTag1: "Ages 5-10", moriSasayakiTag2: "Simard 1997", moriSasayakiTag3: "Mycorrhizal network · Forest ecology",
+        kumamushiTitle: "Kumamushi Moshimo",
+        kumamushiDesc:  "Dry it FIRST — then send it to space. In tun state, the tardigrade laughs at 150°C, vacuum, and 1000× our radiation limit. Ages 5-9.",
+        kumamushiTag1: "Ages 5-9", kumamushiTag2: "Tardigrade Tun", kumamushiTag3: "Cryptobiosis",
         doomscrollTitle: "Doom Scroll Lab",
         doomscrollDesc:  "Three minutes of fake feed — watch the algorithm learn you in real time.",
         doomscrollTag1: "Cognitive Science", doomscrollTag2: "Social Media", doomscrollTag3: "3-min Experiment",
