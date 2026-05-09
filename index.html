@@ -205,6 +205,7 @@ header p {
 .thumb-mottainai { background: linear-gradient(135deg, #1a0a2e 0%, #0d0015 100%); }
 .thumb-danceplague { background: linear-gradient(135deg, #2a1a08 0%, #1a0e04 100%); }
 .thumb-nihilist   { background: linear-gradient(135deg, #0a0e1a 0%, #141830 100%); }
+.thumb-neuralfighter { background: linear-gradient(135deg, #0a1f48 0%, #02040a 100%); }
 .thumb-doomscroll { background: linear-gradient(135deg, #2a0a14 0%, #1a0d2a 100%); }
 .thumb-ninth      { background: linear-gradient(135deg, #1a0e04 0%, #2a1608 50%, #0a0603 100%); }
 .thumb-ricecooker { background: linear-gradient(135deg, #2a1608 0%, #5a3818 50%, #1a0f04 100%); }
@@ -663,6 +664,22 @@ footer a:hover { color: #e6edf3; }
 
 <!-- All apps -->
 <div class="grid" id="app-grid">
+    <div class="card" data-cat="games" data-added="2026-05-09T23:30:00+09:00" data-slug="neural-fighter">
+            <div class="card-thumb thumb-neuralfighter">
+            <span class="thumb-emoji">🥊</span>
+                <img class="thumb-gif" src="assets/neural-fighter.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="neuralfighterTitle">ニューラルファイター</h2>
+                <p data-i18n="neuralfighterDesc">ニューラルネットワークを題材にしたドット絵格闘ゲーム。「アンダーフィット」「オーバーフィット」「勾配消失」の3体と戦い、攻撃を当てて勾配ゲージを溜めて必殺技を放て。各ラウンドの背景は入力層→隠れ層→出力層へ深まっていく。誤差逆伝播で戦え。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="neuralfighterTag1">ドット絵</span>
+                    <span class="tag" data-i18n="neuralfighterTag2">格闘</span>
+                    <span class="tag" data-i18n="neuralfighterTag3">機械学習</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/neural-fighter/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
     <div class="card" data-cat="world-history" data-added="2026-05-08T22:00:00+09:00" data-slug="gw150914" data-year="2015">
             <div class="card-thumb thumb-gw150914">
             <span class="new-badge">NEW</span>
@@ -2960,6 +2977,9 @@ const I18N = {
         mottainaiTitle: "もったいないダンジョン",
         mottainaiDesc:  "「もったいない」が冒険者を破滅させる。サンクコストのローグライクRPG。",
         mottainaiTag1: "認知バイアス", mottainaiTag2: "サンクコスト", mottainaiTag3: "ローグライク",
+        neuralfighterTitle: "ニューラルファイター",
+        neuralfighterDesc:  "ニューラルネットワークを題材にしたドット絵格闘ゲーム。「アンダーフィット」「オーバーフィット」「勾配消失」の3体と戦い、攻撃を当てて勾配ゲージを溜めて必殺技を放て。各ラウンドの背景は入力層→隠れ層→出力層へ深まっていく。誤差逆伝播で戦え。",
+        neuralfighterTag1: "ドット絵", neuralfighterTag2: "格闘", neuralfighterTag3: "機械学習",
         doomscrollTitle: "ドゥームスクロール研究室",
         doomscrollDesc:  "3分のSNSを過ごすと、アルゴリズムがあなたを学習し始める。",
         doomscrollTag1: "認知科学", doomscrollTag2: "SNS依存", doomscrollTag3: "3分実験",
@@ -3388,6 +3408,9 @@ const I18N = {
         mottainaiTitle: "Mottainai Dungeon",
         mottainaiDesc:  "\"Mottainai\" destroys adventurers. A roguelike about sunk-cost bias.",
         mottainaiTag1: "Cognitive Bias", mottainaiTag2: "Sunk Cost", mottainaiTag3: "Roguelike",
+        neuralfighterTitle: "Neural Fighter",
+        neuralfighterDesc:  "A pixel-art fighting game built around neural networks. Battle three foes — Underfit, Overfit, and Vanishing Gradient — landing hits to charge your gradient gauge and unleash an activation special. The stage deepens from input layer to hidden layer to output layer. Train by backpropagation.",
+        neuralfighterTag1: "Pixel Art", neuralfighterTag2: "Fighting", neuralfighterTag3: "Machine Learning",
         doomscrollTitle: "Doom Scroll Lab",
         doomscrollDesc:  "Three minutes of fake feed — watch the algorithm learn you in real time.",
         doomscrollTag1: "Cognitive Science", doomscrollTag2: "Social Media", doomscrollTag3: "3-min Experiment",
