@@ -282,6 +282,7 @@ header p {
 .thumb-gw150914  { background: radial-gradient(ellipse at 50% 50%, #6a3aa0 0%, #2a1450 30%, #0a0820 65%, #04030a 100%); }
 .thumb-kaseki    { background: linear-gradient(180deg, #d4a373 0%, #c89868 35%, #6b4f3a 75%, #3d2818 100%); }
 .thumb-moire     { background: radial-gradient(ellipse at 50% 50%, #fff 0%, #f9d8e6 30%, #c9e9f5 60%, #1d1240 100%); }
+.thumb-himawari  { background: linear-gradient(180deg, #7eb1d4 0%, #9fcd80 50%, #5e8c3a 100%); }
 
 .card-body {
     padding: 18px 20px 22px;
@@ -782,6 +783,23 @@ footer a:hover { color: #e6edf3; }
 
 <!-- All apps -->
 <div class="grid" id="app-grid">
+    <div class="card" data-cat="kids" data-added="2026-05-10T00:30:00+09:00" data-slug="himawari-137">
+            <div class="card-thumb thumb-himawari">
+            <span class="new-badge">NEW</span>
+            <span class="thumb-emoji">🌻</span>
+                <img class="thumb-gif" src="assets/himawari-137.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="himawariTitle">ひまわり 137°</h2>
+                <p data-i18n="himawariDesc"><strong>ひまわり が たね を ならべる ひみつ は、 ぜんぶ おなじ かく 137.5° で まわす だけ。</strong>5〜9さい むけ、世界の キッズアプリ では ほとんど みかけない <strong>「おうごんかく と フィボナッチの ひみつ」 を ゆびで さわる あそびば</strong>を ブラウザで。 こども 向け の 「ひまわり」 アプリ は ほとんど が <em>ぬりえ か しゃしん</em> ばかり —— 「きれいだね」 で おわる。 これは ちがう。 <strong>ひまわり が なぜ ぐるぐる の もよう に なる か</strong>、 その しくみ を ゆびで かえる スライダー。<br><strong>137.5°「おうごんかく」</strong>。 1979ねん、 ドイツの ヘルムート フォーゲル が しき で 書いた： <em>たね を、 まえ の たね から 137.5° まわした ばしょ に おく</em>。 それを 700かい くりかえす だけ で、 すきま なく かさなり なく <strong>ぐるぐる の もよう</strong> が おのずと できる。 90° や 120° や 144° に スライダー を まわす と —— <strong>がたがた に くずれて、 4ぼん・3ぼん・5ぼん の まっすぐ の すじ</strong> に なる。 137.5° に もどす と <em>ぴたっと</em> ぐるぐる が 復活。<br><strong>ぐるぐる の すじ を かぞえると、 21・34・55…</strong> という <strong>「フィボナッチの 数」</strong> ——  ひとつ まえ と さらに ひとつ まえ を たした 数。 <strong>まつぼっくり、 パイナップル、 デイジー、 ロマネスコ</strong> ぜんぶ おなじ ルール。 6つ の プリセット (60° / 90° / 120° / 137.5° / 144° / 180°) と 0.05° きざみ の スライダー、 リアルタイム の すじ計算、 700たね の フォーゲル しき による なめらかな トランジション。 <strong>1まい HTML、 ライブラリ なし、 マイク・カメラ なし、 データ は のこさない</strong>。 日本語 と English の バイリンガル。 Pinda Lab。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="himawariTag1">5〜9歳</span>
+                    <span class="tag" data-i18n="himawariTag2">フォーゲル 1979</span>
+                    <span class="tag" data-i18n="himawariTag3">おうごんかく・フィボナッチ</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/himawari-137/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
     <div class="card" data-cat="games" data-added="2026-05-09T23:30:00+09:00" data-slug="neural-fighter">
             <div class="card-thumb thumb-neuralfighter">
             <span class="thumb-emoji">🥊</span>
@@ -3363,6 +3381,11 @@ const I18N = {
         moireTag1:         "5〜10歳",
         moireTag2:         "波の干渉・モアレ",
         moireTag3:         "4パターン × 6色",
+        himawariTitle:     "ひまわり 137°",
+        himawariDesc:      "ひまわりが たねを ならべる ひみつ「137.5° おうごんかく」を ゆびで うごかす。0.1°ずれると もよう が くずれる。5〜9さい。",
+        himawariTag1:      "5〜9歳",
+        himawariTag2:      "フォーゲル 1979",
+        himawariTag3:      "おうごんかく・フィボナッチ",
         brewster1816Title: "ブリュースター 1816",
         brewster1816Desc:  "1816年、ブリュースターが灯台レンズの研究中に発見した万華鏡のしくみ。5〜9さい。",
         brewster1816Tag1: "5〜9歳", brewster1816Tag2: "ブリュースター 1816", brewster1816Tag3: "対称群 D_n・万華鏡",
@@ -3804,6 +3827,11 @@ const I18N = {
         moireTag1:         "Ages 5–10",
         moireTag2:         "Wave interference",
         moireTag3:         "4 patterns × 6 palettes",
+        himawariTitle:     "Sunflower 137°",
+        himawariDesc:      "Touch the golden angle 137.5° that packs sunflower seeds. Shift it 0.1° and the spirals collapse. Ages 5–9.",
+        himawariTag1:      "Ages 5–9",
+        himawariTag2:      "Vogel 1979",
+        himawariTag3:      "Golden angle · Fibonacci",
         brewster1816Title: "Brewster 1816 · Kaleidoscope",
         brewster1816Desc:  "1816 — Brewster found the kaleidoscope while studying lighthouse lenses.",
         brewster1816Tag1: "Ages 5–9", brewster1816Tag2: "Brewster · 1816", brewster1816Tag3: "Group D_n · kaleidoscope",
