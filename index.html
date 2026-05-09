@@ -289,6 +289,7 @@ header p {
 .thumb-odoru     { background: radial-gradient(circle at 30% 20%, #3a2a1a 0%, #1a1410 70%); }
 .thumb-guuzen    { background: radial-gradient(ellipse at 50% 30%, #1c1448 0%, #0d0830 55%, #050315 100%); }
 .thumb-mitsubachi{ background: linear-gradient(110deg, #2a1808 0%, #4a2e10 38%, #88c050 60%, #5a8230 100%); }
+.thumb-chladni   { background: radial-gradient(circle at 30% 25%, #3d2918 0%, #2a1d12 70%, #0d0a14 100%); }
 
 .card-body {
     padding: 18px 20px 22px;
@@ -789,6 +790,23 @@ footer a:hover { color: #e6edf3; }
 
 <!-- All apps -->
 <div class="grid" id="app-grid">
+    <div class="card" data-cat="kids" data-added="2026-05-11T05:30:00+09:00" data-slug="chladni-1787">
+            <div class="card-thumb thumb-chladni">
+            <span class="new-badge">NEW</span>
+            <span class="thumb-emoji">〰️</span>
+                <img class="thumb-gif" src="assets/chladni-1787.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="chladniTitle">クラドニ もよう 1787</h2>
+                <p data-i18n="chladniDesc">スライダーを なでて、すなを 12の もように そろえよう。1787、クラドニ、 5〜10さい。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="chladniTag1">5〜10歳</span>
+                    <span class="tag" data-i18n="chladniTag2">クラドニ 1787</span>
+                    <span class="tag" data-i18n="chladniTag3">ていざい波・かたちのある音</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/chladni-1787/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
     <div class="card" data-cat="kids" data-added="2026-05-10T23:30:00+09:00" data-slug="mitsubachi-no-chizu">
             <div class="card-thumb thumb-mitsubachi">
             <span class="new-badge">NEW</span>
@@ -3276,6 +3294,9 @@ const I18N = {
         mitsubachiTitle: "みつばち の ちず",
         mitsubachiDesc:  "ハチは ことば を しゃべらない。 でも 8の字 ダンス で 「はなばたけ が どこ に ある か」 を なかま に つたえる —— 1944年 フォン・フリッシュ の 発見 (1973年 ノーベル賞) を ゆびで よみとく、 5〜9さい むけ。",
         mitsubachiTag1: "5〜9歳", mitsubachiTag2: "フリッシュ 1944", mitsubachiTag3: "8の字ダンス・動物のことば",
+        chladniTitle: "クラドニ もよう 1787",
+        chladniDesc:  "スライダーを なでて、すなを 12の もように そろえよう。1787、クラドニ、 5〜10さい。",
+        chladniTag1: "5〜10歳", chladniTag2: "クラドニ 1787", chladniTag3: "ていざい波・かたちのある音",
         doomscrollTitle: "ドゥームスクロール研究室",
         doomscrollDesc:  "3分のSNSを過ごすと、アルゴリズムがあなたを学習し始める。",
         doomscrollTag1: "認知科学", doomscrollTag2: "SNS依存", doomscrollTag3: "3分実験",
@@ -3741,6 +3762,9 @@ const I18N = {
         mitsubachiTitle: "Bee Dance Map",
         mitsubachiDesc:  "Bees don't speak — but they tell each other where the flowers are with a figure-8 dance. Decode Karl von Frisch's 1944 discovery (1973 Nobel) on your screen, ages 5-9.",
         mitsubachiTag1: "Ages 5-9", mitsubachiTag2: "von Frisch 1944", mitsubachiTag3: "Waggle dance · Animal language",
+        chladniTitle: "Chladni 1787",
+        chladniDesc:  "Slide, listen, watch sand snap into 12 standing-wave shapes. Chladni 1787, ages 5-10.",
+        chladniTag1: "Ages 5-10", chladniTag2: "Chladni 1787", chladniTag3: "Standing waves · Shapes of sound",
         doomscrollTitle: "Doom Scroll Lab",
         doomscrollDesc:  "Three minutes of fake feed — watch the algorithm learn you in real time.",
         doomscrollTag1: "Cognitive Science", doomscrollTag2: "Social Media", doomscrollTag3: "3-min Experiment",
