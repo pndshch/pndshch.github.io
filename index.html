@@ -292,6 +292,7 @@ header p {
 .thumb-chladni   { background: radial-gradient(circle at 30% 25%, #3d2918 0%, #2a1d12 70%, #0d0a14 100%); }
 .thumb-morisasayaki{ background: linear-gradient(180deg, #86bce0 0%, #cfe9c5 35%, #5b4025 50%, #1a0f06 100%); }
 .thumb-kumamushi { background: radial-gradient(ellipse at 50% 45%, #d6913a 0%, #8a4a18 55%, #2a160a 100%); }
+.thumb-cajal     { background: radial-gradient(ellipse at 35% 40%, #4a2870 0%, #1d1138 50%, #0a0612 100%); }
 
 .card-body {
     padding: 18px 20px 22px;
@@ -792,6 +793,23 @@ footer a:hover { color: #e6edf3; }
 
 <!-- All apps -->
 <div class="grid" id="app-grid">
+    <div class="card" data-cat="kids" data-added="2026-05-12T07:30:00+09:00" data-slug="cajal-1888">
+            <div class="card-thumb thumb-cajal">
+            <span class="new-badge">NEW</span>
+            <span class="thumb-emoji">⚡</span>
+                <img class="thumb-gif" src="assets/cajal-1888.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="cajalTitle">シナプスの もり</h2>
+                <p data-i18n="cajalDesc">ゆびで しんけい を うえる。はっか させると ピカっと あみを つたわる。1888年 カハール、6〜10さい。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="cajalTag1">6〜10歳</span>
+                    <span class="tag" data-i18n="cajalTag2">スパイク・カスケード</span>
+                    <span class="tag" data-i18n="cajalTag3">カハール 1888</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/cajal-1888/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
     <div class="card" data-cat="kids" data-added="2026-05-11T08:30:00+09:00" data-slug="kumamushi-moshimo">
             <div class="card-thumb thumb-kumamushi">
             <span class="new-badge">NEW</span>
@@ -3339,6 +3357,9 @@ const I18N = {
         kumamushiTitle: "クマムシ・もしも",
         kumamushiDesc:  "からからに してから うちゅうへ。「ターン」状態 なら、150℃も しんくうも へいき。クマムシの ふしぎ、5〜9さい。",
         kumamushiTag1: "5〜9歳", kumamushiTag2: "クマムシ・ターン", kumamushiTag3: "クリプトビオシス",
+        cajalTitle: "シナプスの もり",
+        cajalDesc:  "ゆびで しんけい を うえる。はっか させると ピカっと あみを つたわる。1888年 カハール、6〜10さい。",
+        cajalTag1: "6〜10歳", cajalTag2: "スパイク・カスケード", cajalTag3: "カハール 1888",
         doomscrollTitle: "ドゥームスクロール研究室",
         doomscrollDesc:  "3分のSNSを過ごすと、アルゴリズムがあなたを学習し始める。",
         doomscrollTag1: "認知科学", doomscrollTag2: "SNS依存", doomscrollTag3: "3分実験",
@@ -3813,6 +3834,9 @@ const I18N = {
         kumamushiTitle: "Kumamushi Moshimo",
         kumamushiDesc:  "Dry it FIRST — then send it to space. In tun state, the tardigrade laughs at 150°C, vacuum, and 1000× our radiation limit. Ages 5-9.",
         kumamushiTag1: "Ages 5-9", kumamushiTag2: "Tardigrade Tun", kumamushiTag3: "Cryptobiosis",
+        cajalTitle: "Synapse Forest",
+        cajalDesc:  "Plant neurons, fire one, watch the spike cascade through the forest. Cajal 1888, ages 6-10.",
+        cajalTag1: "Ages 6-10", cajalTag2: "Spike Cascade", cajalTag3: "Cajal 1888",
         doomscrollTitle: "Doom Scroll Lab",
         doomscrollDesc:  "Three minutes of fake feed — watch the algorithm learn you in real time.",
         doomscrollTag1: "Cognitive Science", doomscrollTag2: "Social Media", doomscrollTag3: "3-min Experiment",
