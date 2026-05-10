@@ -294,6 +294,7 @@ header p {
 .thumb-kumamushi { background: radial-gradient(ellipse at 50% 45%, #d6913a 0%, #8a4a18 55%, #2a160a 100%); }
 .thumb-cajal     { background: radial-gradient(ellipse at 35% 40%, #4a2870 0%, #1d1138 50%, #0a0612 100%); }
 .thumb-turing    { background: radial-gradient(ellipse at 50% 50%, #f7e9c8 0%, #d8c08a 60%, #6b4d28 100%); }
+.thumb-nenkin    { background: radial-gradient(ellipse at 50% 50%, #f0c75a 0%, #8a4f10 50%, #06080f 100%); }
 
 .card-body {
     padding: 18px 20px 22px;
@@ -794,6 +795,23 @@ footer a:hover { color: #e6edf3; }
 
 <!-- All apps -->
 <div class="grid" id="app-grid">
+    <div class="card" data-cat="kids" data-added="2026-05-14T08:00:00+09:00" data-slug="nenkin-2010">
+            <div class="card-thumb thumb-nenkin">
+            <span class="new-badge">NEW</span>
+            <span class="thumb-emoji">🌾</span>
+                <img class="thumb-gif" src="assets/nenkin-2010.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="nenkinTitle">ねんきん 2010</h2>
+                <p data-i18n="nenkinDesc">のうも こころも ない いきもの が、 ちずを かく。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="nenkinTag1">5〜9歳</span>
+                    <span class="tag" data-i18n="nenkinTag2">中垣 2010</span>
+                    <span class="tag" data-i18n="nenkinTag3">モジホコリ・ネットワーク</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/nenkin-2010/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
     <div class="card" data-cat="kids" data-added="2026-05-13T08:00:00+09:00" data-slug="turing-1952">
             <div class="card-thumb thumb-turing">
             <span class="new-badge">NEW</span>
@@ -3378,6 +3396,9 @@ const I18N = {
         cajalTitle: "シナプスの もり",
         cajalDesc:  "ゆびで しんけい を うえる。はっか させると ピカっと あみを つたわる。1888年 カハール、6〜10さい。",
         cajalTag1: "6〜10歳", cajalTag2: "スパイク・カスケード", cajalTag3: "カハール 1888",
+        nenkinTitle: "ねんきん 2010",
+        nenkinDesc:  "のうも こころも ない いきもの が、 ちずを かく。",
+        nenkinTag1: "5〜9歳", nenkinTag2: "中垣 2010", nenkinTag3: "モジホコリ・ネットワーク",
         turingTitle: "ターイングもよう 1952",
         turingDesc:  "おなじ しき で、しまうま も ヒョウ も さんご も うまれる ふしぎ。",
         turingTag1: "5〜10歳", turingTag2: "ターイング 1952", turingTag3: "はんのう・かくさん",
@@ -3858,6 +3879,9 @@ const I18N = {
         cajalTitle: "Synapse Forest",
         cajalDesc:  "Plant neurons, fire one, watch the spike cascade through the forest. Cajal 1888, ages 6-10.",
         cajalTag1: "Ages 6-10", cajalTag2: "Spike Cascade", cajalTag3: "Cajal 1888",
+        nenkinTitle: "Slime Mold 2010",
+        nenkinDesc:  "No brain. No heart. Still draws maps.",
+        nenkinTag1: "Ages 5-9", nenkinTag2: "Nakagaki 2010", nenkinTag3: "Physarum Network",
         turingTitle: "Turing Patterns 1952",
         turingDesc:  "One equation paints zebra stripes, leopard spots, and coral — change the recipe.",
         turingTag1: "Ages 5-10", turingTag2: "Turing 1952", turingTag3: "Reaction-Diffusion",
