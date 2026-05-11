@@ -400,6 +400,116 @@ header p {
     margin: 0 2px;
 }
 
+/* ── Spotlight ── */
+.spotlight {
+    width: 100%;
+    max-width: 960px;
+    margin: -18px 0 28px;
+    border: 1px solid rgba(168, 85, 247, 0.34);
+    border-radius: 22px;
+    background:
+        radial-gradient(circle at 12% 10%, rgba(236, 72, 153, 0.2), transparent 28%),
+        radial-gradient(circle at 88% 24%, rgba(34, 197, 94, 0.15), transparent 30%),
+        linear-gradient(135deg, rgba(22, 27, 34, 0.98), rgba(13, 17, 23, 0.98));
+    box-shadow: 0 22px 70px rgba(0, 0, 0, 0.38);
+    overflow: hidden;
+}
+.spotlight-link {
+    display: grid;
+    grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.92fr);
+    min-height: 320px;
+    color: inherit;
+    text-decoration: none;
+}
+.spotlight-copy {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 16px;
+    padding: 34px;
+}
+.spotlight-kicker {
+    color: #f0abfc;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+}
+.spotlight-title {
+    color: #fff;
+    font-size: clamp(32px, 6vw, 58px);
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -0.8px;
+}
+.spotlight-desc {
+    max-width: 540px;
+    color: #c9d1d9;
+    font-size: 15px;
+    line-height: 1.8;
+}
+.spotlight-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.spotlight-tags .tag {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.16);
+    color: #e6edf3;
+}
+.spotlight-cta {
+    width: fit-content;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 18px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #2ea043, #238636);
+    border: 1px solid rgba(63, 185, 80, 0.8);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 900;
+    box-shadow: 0 12px 30px rgba(35, 134, 54, 0.28);
+}
+.spotlight-media {
+    position: relative;
+    min-height: 260px;
+    overflow: hidden;
+    background: #161b22;
+}
+.spotlight-media .card-thumb {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+}
+.spotlight-media .thumb-emoji {
+    font-size: 92px;
+}
+.spotlight-media .new-badge {
+    top: 18px;
+    right: 18px;
+}
+.spotlight-media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(90deg, rgba(13, 17, 23, 0.72), transparent 42%),
+        linear-gradient(0deg, rgba(13, 17, 23, 0.28), transparent 48%);
+    pointer-events: none;
+    z-index: 4;
+}
+.spotlight:hover {
+    border-color: rgba(168, 85, 247, 0.62);
+}
+.spotlight-link:hover .spotlight-cta {
+    filter: brightness(1.12);
+}
+
 /* ── Footer ── */
 footer {
     margin-top: 60px;
@@ -452,6 +562,12 @@ footer a:hover { color: #e6edf3; }
     .cat-btn { font-size: 11px; padding: 6px 12px; }
     .feat-card { width: 120px; }
     .feat-card .card-thumb { height: 75px; }
+    .spotlight { margin-top: -8px; border-radius: 16px; }
+    .spotlight-link { grid-template-columns: 1fr; }
+    .spotlight-copy { padding: 22px; }
+    .spotlight-media { min-height: 220px; order: -1; }
+    .spotlight-title { letter-spacing: -0.3px; }
+    .spotlight-desc { font-size: 13px; }
 }
 
 /* ── Search bar ── */
@@ -772,6 +888,9 @@ footer a:hover { color: #e6edf3; }
         <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee">
     </a>
 </header>
+
+<!-- Spotlight (JS-populated from newest app) -->
+<section class="spotlight" id="spotlight" aria-label="Spotlight"></section>
 
 <!-- Search bar -->
 <div class="search-wrap">
@@ -3237,6 +3356,8 @@ const I18N = {
         searchPlaceholder: "アプリを検索…",
         newBadge: "NEW",
         searchEmpty: "見つかりませんでした",
+        spotlightKicker: "NEW SPOTLIGHT",
+        spotlightCta: "今すぐひらく",
         dailyTag: "毎日",
         poopTitle: "うんち占い",
         poopDesc:  "きょうの「うんち運」をチェック！毎日かわるSS〜Dランク。",
@@ -3725,6 +3846,8 @@ const I18N = {
         searchPlaceholder: "Search apps…",
         newBadge: "NEW",
         searchEmpty: "No matches.",
+        spotlightKicker: "NEW SPOTLIGHT",
+        spotlightCta: "Open now",
         dailyTag:  "Daily",
         poopTitle: "Poop Fortune",
         poopDesc:  "Check today's poop fortune — daily SS to D ranking.",
@@ -4238,6 +4361,10 @@ function refreshNewBadgeText(text) {
     document.querySelectorAll('.new-badge').forEach(b => b.textContent = text);
 }
 
+function textKey(el) {
+    return el ? el.getAttribute('data-i18n') : null;
+}
+
 // ════════════════════════════════════════════
 //   Tag NEW + sort cards by added desc
 // ════════════════════════════════════════════
@@ -4397,6 +4524,76 @@ function buildFeatured() {
 }
 
 // ════════════════════════════════════════════
+//   Spotlight (newest app as a guided entrance)
+// ════════════════════════════════════════════
+function buildSpotlight() {
+    const shell = document.getElementById('spotlight');
+    const grid = document.getElementById('app-grid');
+    if (!shell || !grid) return;
+
+    const card = Array.from(grid.querySelectorAll('.card'))
+        .sort((a, b) => (b.dataset.added || '').localeCompare(a.dataset.added || ''))[0];
+    if (!card) {
+        shell.hidden = true;
+        return;
+    }
+
+    const slug = card.dataset.slug;
+    const titleEl = card.querySelector('h2');
+    const descEl = card.querySelector('p');
+    const tags = Array.from(card.querySelectorAll('.tag')).slice(0, 3);
+    const thumb = card.querySelector('.card-thumb');
+    const titleKey = textKey(titleEl);
+    const descKey = textKey(descEl);
+
+    const link = document.createElement('a');
+    link.className = 'spotlight-link';
+    link.href = `https://pndshch.github.io/${slug}/`;
+    link.target = '_blank';
+    link.rel = 'noopener';
+
+    const copyWrap = document.createElement('div');
+    copyWrap.className = 'spotlight-copy';
+
+    const kicker = document.createElement('span');
+    kicker.className = 'spotlight-kicker';
+    kicker.dataset.i18n = 'spotlightKicker';
+    kicker.textContent = I18N.ja.spotlightKicker;
+    copyWrap.appendChild(kicker);
+
+    const title = document.createElement('strong');
+    title.className = 'spotlight-title';
+    if (titleKey) title.dataset.i18n = titleKey;
+    title.textContent = titleEl ? titleEl.textContent : slug;
+    copyWrap.appendChild(title);
+
+    const desc = document.createElement('p');
+    desc.className = 'spotlight-desc';
+    if (descKey) desc.dataset.i18n = descKey;
+    desc.textContent = descEl ? descEl.textContent : '';
+    copyWrap.appendChild(desc);
+
+    const tagWrap = document.createElement('div');
+    tagWrap.className = 'spotlight-tags';
+    tags.forEach(tag => tagWrap.appendChild(tag.cloneNode(true)));
+    copyWrap.appendChild(tagWrap);
+
+    const cta = document.createElement('span');
+    cta.className = 'spotlight-cta';
+    cta.dataset.i18n = 'spotlightCta';
+    cta.textContent = I18N.ja.spotlightCta;
+    copyWrap.appendChild(cta);
+
+    const media = document.createElement('div');
+    media.className = 'spotlight-media';
+    if (thumb) media.appendChild(thumb.cloneNode(true));
+
+    link.append(copyWrap, media);
+    shell.replaceChildren(link);
+    shell.hidden = false;
+}
+
+// ════════════════════════════════════════════
 //   Filter (category + search combined)
 // ════════════════════════════════════════════
 let currentCat = 'all';
@@ -4469,6 +4666,7 @@ document.querySelectorAll('.cat-btn').forEach(btn => {
         lang = nav.startsWith('ja') ? 'ja' : 'en';
     }
     decorateCards();
+    buildSpotlight();
     buildFeatured();
     applyLang(lang);
 
