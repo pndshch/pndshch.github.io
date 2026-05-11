@@ -299,6 +299,8 @@ header p {
 .thumb-nakaya    { background: radial-gradient(ellipse at 50% 50%, #2a4870 0%, #142850 55%, #050912 100%); }
 .thumb-voronoi   { background: linear-gradient(135deg, #e65f4b 0%, #f5d7b6 24%, #168f8a 48%, #f4df93 68%, #5b986b 100%); }
 .thumb-chokkan   { background: linear-gradient(135deg, #111827 0%, #1b3f58 42%, #7a4b24 100%); }
+.thumb-sonae     { background: linear-gradient(135deg, #0f3d3a 0%, #197f79 38%, #de6951 72%, #f5f1e8 100%); }
+.thumb-sonae .thumb-gif { object-position: right center; }
 
 .card-body {
     padding: 18px 20px 22px;
@@ -918,6 +920,23 @@ footer a:hover { color: #e6edf3; }
 
 <!-- All apps -->
 <div class="grid" id="app-grid">
+    <div class="card" data-cat="tools kids" data-added="2026-05-11T23:30:00+09:00" data-pin="1" data-slug="sonae-pack-jr">
+            <div class="card-thumb thumb-sonae">
+            <span class="new-badge">NEW</span>
+            <span class="thumb-emoji">🎒</span>
+                <img class="thumb-gif" src="assets/sonae-pack-jr.svg" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="sonaeTitle">そなえバッグJr.</h2>
+                <p data-i18n="sonaeDesc">家族の人数と日数から、防災バッグの中身を自動計算。子どもと一緒に水・食料・ライト・薬をチェックできる実用ツール。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="sonaeTag1">防災</span>
+                    <span class="tag" data-i18n="sonaeTag2">チェックリスト</span>
+                    <span class="tag" data-i18n="sonaeTag3">家族向け</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/sonae-pack-jr/" target="_blank" data-i18n="useTool">▶ ツールを使う</a>
+            </div>
+        </div>
     <div class="card" data-cat="learn" data-added="2026-05-11T23:20:00+09:00" data-slug="chokkan-lab">
             <div class="card-thumb thumb-chokkan">
             <span class="new-badge">NEW</span>
@@ -3592,6 +3611,9 @@ const I18N = {
         cajalTitle: "シナプスの もり",
         cajalDesc:  "ゆびで しんけい を うえる。はっか させると ピカっと あみを つたわる。1888年 カハール、6〜10さい。",
         cajalTag1: "6〜10歳", cajalTag2: "スパイク・カスケード", cajalTag3: "カハール 1888",
+        sonaeTitle: "そなえバッグJr.",
+        sonaeDesc:  "家族の人数と日数から、防災バッグの中身を自動計算。子どもと一緒に水・食料・ライト・薬をチェックできる実用ツール。",
+        sonaeTag1: "防災", sonaeTag2: "チェックリスト", sonaeTag3: "家族向け",
         chokkanTitle: "直感ラボ",
         chokkanDesc:  "規則がある環境では直感が育つ。ノイズだけの環境では、自信だけが育つことがある。A/B予測で体験する判断ゲーム。",
         chokkanTag1: "判断心理", chokkanTag2: "規則とノイズ", chokkanTag3: "直感ギャップ",
@@ -4089,6 +4111,9 @@ const I18N = {
         cajalTitle: "Synapse Forest",
         cajalDesc:  "Plant neurons, fire one, watch the spike cascade through the forest. Cajal 1888, ages 6-10.",
         cajalTag1: "Ages 6-10", cajalTag2: "Spike Cascade", cajalTag3: "Cajal 1888",
+        sonaeTitle: "Sonae Pack Jr.",
+        sonaeDesc:  "A family emergency-bag checklist that calculates water, meals, lights, medicine, and kid-friendly tasks from your household size and days.",
+        sonaeTag1: "Emergency prep", sonaeTag2: "Checklist", sonaeTag3: "Family tool",
         chokkanTitle: "Intuition Lab",
         chokkanDesc:  "Train on a world with a stable rule, then compare it with pure noise. A/B predictions reveal when intuition learns and when confidence only pretends.",
         chokkanTag1: "Judgment", chokkanTag2: "Rule vs noise", chokkanTag3: "Confidence gap",
@@ -4389,6 +4414,15 @@ function textKey(el) {
     return el ? el.getAttribute('data-i18n') : null;
 }
 
+function compareCards(a, b) {
+    const pa = a.dataset.pin === '1' ? 1 : 0;
+    const pb = b.dataset.pin === '1' ? 1 : 0;
+    if (pa !== pb) return pb - pa;
+    const da = a.dataset.added || '0', db = b.dataset.added || '0';
+    if (da !== db) return da > db ? -1 : 1;
+    return (a.dataset.slug || '').localeCompare(b.dataset.slug || '');
+}
+
 // ════════════════════════════════════════════
 //   Tag NEW + sort cards by added desc
 // ════════════════════════════════════════════
@@ -4396,11 +4430,7 @@ function decorateCards() {
     const grid = document.getElementById('app-grid');
     const cards = Array.from(grid.querySelectorAll('.card'));
     // default sort by added desc; timeline reorder happens in applyFilters
-    cards.sort((a, b) => {
-        const da = a.dataset.added || '0', db = b.dataset.added || '0';
-        if (da !== db) return da > db ? -1 : 1;
-        return (a.dataset.slug || '').localeCompare(b.dataset.slug || '');
-    });
+    cards.sort(compareCards);
     cards.forEach(c => grid.appendChild(c));
     // app-count: floor to nearest 5 then add "+"
     const countEl = document.getElementById('appCountNum');
@@ -4450,11 +4480,7 @@ function applyTimelineLayout(cat) {
     if (!isHistory) {
         // restore default order: by added desc
         const cards = Array.from(grid.querySelectorAll('.card'));
-        cards.sort((a, b) => {
-            const da = a.dataset.added || '0', db = b.dataset.added || '0';
-            if (da !== db) return da > db ? -1 : 1;
-            return (a.dataset.slug || '').localeCompare(b.dataset.slug || '');
-        });
+        cards.sort(compareCards);
         cards.forEach(c => grid.appendChild(c));
         return;
     }
@@ -4508,7 +4534,7 @@ function buildFeatured() {
     const grid = document.getElementById('app-grid');
     const cards = Array.from(grid.querySelectorAll('.card'))
         .filter(isNew)
-        .sort((a, b) => (b.dataset.added || '').localeCompare(a.dataset.added || ''))
+        .sort(compareCards)
         .slice(0, FEATURED_MAX);
     row.innerHTML = '';
     cards.forEach(card => {
@@ -4555,8 +4581,7 @@ function buildSpotlight() {
     const grid = document.getElementById('app-grid');
     if (!shell || !grid) return;
 
-    const card = Array.from(grid.querySelectorAll('.card'))
-        .sort((a, b) => (b.dataset.added || '').localeCompare(a.dataset.added || ''))[0];
+    const card = grid.querySelector('.card');
     if (!card) {
         shell.hidden = true;
         return;

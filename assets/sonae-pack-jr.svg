@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">そなえバッグJr.</title>
+  <desc id="desc">防災バッグとチェックリストのプレビュー画像</desc>
+  <rect width="1200" height="630" fill="#f5f1e8"/>
+  <path d="M0 92c188 84 312 16 505 75 177 54 249 158 433 117 98-22 161-72 262-58v404H0z" fill="#e8f3ef"/>
+  <path d="M0 400c155-82 287-44 425-7 146 39 282 73 454-10 127-61 219-74 321-47v294H0z" fill="#f8dfd6"/>
+  <g transform="translate(110 92)">
+    <text x="0" y="48" font-family="Hiragino Maru Gothic ProN, Hiragino Sans, system-ui, sans-serif" font-size="34" font-weight="800" fill="#66737c">Pinda Lab</text>
+    <text x="0" y="144" font-family="Hiragino Maru Gothic ProN, Hiragino Sans, system-ui, sans-serif" font-size="82" font-weight="900" fill="#24313a">そなえバッグJr.</text>
+    <text x="4" y="205" font-family="Hiragino Maru Gothic ProN, Hiragino Sans, system-ui, sans-serif" font-size="30" font-weight="700" fill="#3e515d">家族に合わせて、防災バッグをチェック。</text>
+    <g transform="translate(0 270)">
+      <rect width="178" height="72" rx="16" fill="#24313a"/>
+      <text x="34" y="47" font-family="Hiragino Maru Gothic ProN, Hiragino Sans, system-ui, sans-serif" font-size="30" font-weight="900" fill="#fffdf7">3日分</text>
+      <rect x="202" width="178" height="72" rx="16" fill="#197f79"/>
+      <text x="236" y="47" font-family="Hiragino Maru Gothic ProN, Hiragino Sans, system-ui, sans-serif" font-size="30" font-weight="900" fill="#fffdf7">水 18L</text>
+      <rect x="404" width="200" height="72" rx="16" fill="#de6951"/>
+      <text x="438" y="47" font-family="Hiragino Maru Gothic ProN, Hiragino Sans, system-ui, sans-serif" font-size="30" font-weight="900" fill="#fffdf7">18食</text>
+    </g>
+  </g>
+  <g transform="translate(750 84)">
+    <ellipse cx="190" cy="462" rx="176" ry="26" fill="#24313a" opacity=".16"/>
+    <path d="M70 250c-36 0-48 38-48 89v74h44v-86c0-31 7-42 23-42z" fill="none" stroke="#24313a" stroke-width="18" stroke-linecap="round"/>
+    <path d="M310 250c36 0 48 38 48 89v74h-44v-86c0-31-7-42-23-42z" fill="none" stroke="#24313a" stroke-width="18" stroke-linecap="round"/>
+    <path d="M72 130c0-72 51-119 118-119s118 47 118 119v310H72z" fill="#197f79" stroke="#24313a" stroke-width="18" stroke-linejoin="round"/>
+    <path d="M96 145c14-62 56-92 112-86 39 4 68 25 82 58-28-20-61-30-99-30-43 0-75 19-95 58z" fill="#fffdf7" opacity=".48"/>
+    <rect x="102" y="250" width="78" height="146" rx="12" fill="#67a7d7" stroke="#24313a" stroke-width="10"/>
+    <rect x="202" y="275" width="78" height="121" rx="12" fill="#d9a43c" stroke="#24313a" stroke-width="10"/>
+    <rect x="118" y="162" width="62" height="52" rx="12" fill="#e8c748" stroke="#24313a" stroke-width="10"/>
+    <rect x="202" y="162" width="62" height="52" rx="12" fill="#e47482" stroke="#24313a" stroke-width="10"/>
+  </g>
+</svg>
