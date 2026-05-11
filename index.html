@@ -297,6 +297,7 @@ header p {
 .thumb-turing    { background: radial-gradient(ellipse at 50% 50%, #f7e9c8 0%, #d8c08a 60%, #6b4d28 100%); }
 .thumb-nenkin    { background: radial-gradient(ellipse at 50% 50%, #f0c75a 0%, #8a4f10 50%, #06080f 100%); }
 .thumb-nakaya    { background: radial-gradient(ellipse at 50% 50%, #2a4870 0%, #142850 55%, #050912 100%); }
+.thumb-voronoi   { background: linear-gradient(135deg, #e65f4b 0%, #f5d7b6 24%, #168f8a 48%, #f4df93 68%, #5b986b 100%); }
 
 .card-body {
     padding: 18px 20px 22px;
@@ -797,6 +798,23 @@ footer a:hover { color: #e6edf3; }
 
 <!-- All apps -->
 <div class="grid" id="app-grid">
+    <div class="card" data-cat="kids" data-added="2026-05-11T22:30:00+09:00" data-slug="voronoi-no-niwa">
+            <div class="card-thumb thumb-voronoi">
+            <span class="new-badge">NEW</span>
+            <span class="thumb-emoji">◎</span>
+                <img class="thumb-gif" src="assets/voronoi-no-niwa.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="voronoiTitle">ボロノイの庭 1908</h2>
+                <p data-i18n="voronoiDesc">点を うえると、いちばん 近い 場所ごとに 庭が わかれる。地図・配達・結晶に つながる 近さの もよう。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="voronoiTag1">6〜10歳</span>
+                    <span class="tag" data-i18n="voronoiTag2">ボロノイ 1908</span>
+                    <span class="tag" data-i18n="voronoiTag3">最近傍・平面分割</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/voronoi-no-niwa/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
     <div class="card" data-cat="kids" data-added="2026-05-15T08:00:00+09:00" data-slug="nakaya-1936">
             <div class="card-thumb thumb-nakaya">
             <span class="new-badge">NEW</span>
@@ -3435,6 +3453,9 @@ const I18N = {
         cajalTitle: "シナプスの もり",
         cajalDesc:  "ゆびで しんけい を うえる。はっか させると ピカっと あみを つたわる。1888年 カハール、6〜10さい。",
         cajalTag1: "6〜10歳", cajalTag2: "スパイク・カスケード", cajalTag3: "カハール 1888",
+        voronoiTitle: "ボロノイの庭 1908",
+        voronoiDesc:  "点を うえると、いちばん 近い 場所ごとに 庭が わかれる。地図・配達・結晶に つながる 近さの もよう。",
+        voronoiTag1: "6〜10歳", voronoiTag2: "ボロノイ 1908", voronoiTag3: "最近傍・平面分割",
         nakayaTitle: "ゆきの レシピ 1936",
         nakayaDesc:  "ゆきは てんからの てがみ。おんどと しっけ で、ろっかっけいの けっしょうが かわる。",
         nakayaTag1: "5〜9歳", nakayaTag2: "中谷 1936", nakayaTag3: "ナカヤ ダイヤグラム",
@@ -3924,6 +3945,9 @@ const I18N = {
         cajalTitle: "Synapse Forest",
         cajalDesc:  "Plant neurons, fire one, watch the spike cascade through the forest. Cajal 1888, ages 6-10.",
         cajalTag1: "Ages 6-10", cajalTag2: "Spike Cascade", cajalTag3: "Cajal 1888",
+        voronoiTitle: "Voronoi Garden 1908",
+        voronoiDesc:  "Plant points and watch the garden split by nearest place. A touchable map of distance, delivery zones, and crystal-like patterns.",
+        voronoiTag1: "Ages 6-10", voronoiTag2: "Voronoi 1908", voronoiTag3: "Nearest neighbor · Tessellation",
         nakayaTitle: "Snowflake Recipe 1936",
         nakayaDesc:  "Snow is a letter from heaven — drag temperature × humidity and watch six different hex crystals grow.",
         nakayaTag1: "Ages 5-9", nakayaTag2: "Nakaya 1936", nakayaTag3: "Nakaya Diagram",
