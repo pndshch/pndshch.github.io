@@ -299,6 +299,7 @@ header p {
 .thumb-nakaya    { background: radial-gradient(ellipse at 50% 50%, #2a4870 0%, #142850 55%, #050912 100%); }
 .thumb-voronoi   { background: linear-gradient(135deg, #e65f4b 0%, #f5d7b6 24%, #168f8a 48%, #f4df93 68%, #5b986b 100%); }
 .thumb-chokkan   { background: linear-gradient(135deg, #111827 0%, #1b3f58 42%, #7a4b24 100%); }
+.thumb-philippines { background: linear-gradient(135deg, #0b6f72 0%, #f5bf28 38%, #d94f5c 72%, #ffffff 100%); }
 .thumb-sonae     { background: linear-gradient(135deg, #0f3d3a 0%, #197f79 38%, #de6951 72%, #f5f1e8 100%); }
 .thumb-sonae .thumb-gif { object-position: right center; }
 .thumb-yotei     { background: linear-gradient(135deg, #f8e6b4 0%, #86d0c8 44%, #53669d 100%); }
@@ -922,6 +923,22 @@ footer a:hover { color: #e6edf3; }
 
 <!-- All apps -->
 <div class="grid" id="app-grid">
+    <div class="card" data-cat="learn world-history" data-added="2026-05-12T22:32:00+09:00" data-pin="1" data-slug="philippines-explorer">
+            <div class="card-thumb thumb-philippines">
+            <span class="new-badge">NEW</span>
+            <span class="thumb-emoji">🇵🇭</span>
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="philippinesTitle">フィリピン・レンズ</h2>
+                <p data-i18n="philippinesDesc">7,641の島、18地域、ことば、歴史、文化、経済を地図・フレーズ・年表・クイズで立体的に学ぶフィリピン入門アプリ。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="philippinesTag1">フィリピン</span>
+                    <span class="tag" data-i18n="philippinesTag2">地理と文化</span>
+                    <span class="tag" data-i18n="philippinesTag3">クイズ</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/philippines-explorer/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
     <div class="card" data-cat="tools kids" data-added="2026-05-12T05:04:00+09:00" data-pin="1" data-slug="yotei-board-jr">
             <div class="card-thumb thumb-yotei">
             <span class="new-badge">NEW</span>
@@ -3630,6 +3647,9 @@ const I18N = {
         cajalTitle: "シナプスの もり",
         cajalDesc:  "ゆびで しんけい を うえる。はっか させると ピカっと あみを つたわる。1888年 カハール、6〜10さい。",
         cajalTag1: "6〜10歳", cajalTag2: "スパイク・カスケード", cajalTag3: "カハール 1888",
+        philippinesTitle: "フィリピン・レンズ",
+        philippinesDesc:  "7,641の島、18地域、ことば、歴史、文化、経済を地図・フレーズ・年表・クイズで立体的に学ぶフィリピン入門アプリ。",
+        philippinesTag1: "フィリピン", philippinesTag2: "地理と文化", philippinesTag3: "クイズ",
         yoteiTitle: "こども予定ボード",
         yoteiDesc:  "朝・昼・夜のルーティンを時間順カードで見える化。テンプレート、持ちもの、次の予定、コピー、印刷まで入った家族向けツール。",
         yoteiTag1: "予定表", yoteiTag2: "ルーティン", yoteiTag3: "家族向け",
@@ -4133,6 +4153,9 @@ const I18N = {
         cajalTitle: "Synapse Forest",
         cajalDesc:  "Plant neurons, fire one, watch the spike cascade through the forest. Cajal 1888, ages 6-10.",
         cajalTag1: "Ages 6-10", cajalTag2: "Spike Cascade", cajalTag3: "Cajal 1888",
+        philippinesTitle: "Philippines Lens",
+        philippinesDesc:  "A Philippines primer that connects 7,641 islands, 18 regions, languages, history, culture, and economy through a map, phrases, timeline, and quiz.",
+        philippinesTag1: "Philippines", philippinesTag2: "Geography & Culture", philippinesTag3: "Quiz",
         yoteiTitle: "Kids Schedule Board",
         yoteiDesc:  "A family routine board that turns morning, daytime, and night tasks into ordered cards, with templates, packing checklist, next-task status, copy, and print.",
         yoteiTag1: "Schedule", yoteiTag2: "Routine", yoteiTag3: "Family tool",
