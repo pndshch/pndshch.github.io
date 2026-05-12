@@ -300,6 +300,8 @@ header p {
 .thumb-voronoi   { background: linear-gradient(135deg, #e65f4b 0%, #f5d7b6 24%, #168f8a 48%, #f4df93 68%, #5b986b 100%); }
 .thumb-chokkan   { background: linear-gradient(135deg, #111827 0%, #1b3f58 42%, #7a4b24 100%); }
 .thumb-philippines { background: linear-gradient(135deg, #0b6f72 0%, #f5bf28 38%, #d94f5c 72%, #ffffff 100%); }
+.thumb-honlog    { background: linear-gradient(135deg, #d8f0ed 0%, #fff4d1 42%, #ffd2c2 100%); }
+.thumb-honlog .thumb-gif { object-position: center; }
 .thumb-sonae     { background: linear-gradient(135deg, #0f3d3a 0%, #197f79 38%, #de6951 72%, #f5f1e8 100%); }
 .thumb-sonae .thumb-gif { object-position: right center; }
 .thumb-yotei     { background: linear-gradient(135deg, #f8e6b4 0%, #86d0c8 44%, #53669d 100%); }
@@ -923,6 +925,23 @@ footer a:hover { color: #e6edf3; }
 
 <!-- All apps -->
 <div class="grid" id="app-grid">
+    <div class="card" data-cat="tools kids" data-added="2026-05-13T05:20:00+09:00" data-pin="1" data-slug="hon-log-jr">
+            <div class="card-thumb thumb-honlog">
+            <span class="new-badge">NEW</span>
+            <span class="thumb-emoji">📚</span>
+                <img class="thumb-gif" src="assets/hon-log-jr.svg" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="honlogTitle">ほんログJr.</h2>
+                <p data-i18n="honlogDesc">読み聞かせ・ひとり読みを、タイマー、ページ記録、質問カード、読書ビンゴで続けやすくする子ども向け読書パスポート。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="honlogTag1">読書記録</span>
+                    <span class="tag" data-i18n="honlogTag2">読み聞かせ</span>
+                    <span class="tag" data-i18n="honlogTag3">家族向け</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/hon-log-jr/" target="_blank" data-i18n="useTool">▶ ツールを使う</a>
+            </div>
+        </div>
     <div class="card" data-cat="learn world-history" data-added="2026-05-12T22:32:00+09:00" data-pin="1" data-slug="philippines-explorer">
             <div class="card-thumb thumb-philippines">
             <span class="new-badge">NEW</span>
@@ -3647,6 +3666,9 @@ const I18N = {
         cajalTitle: "シナプスの もり",
         cajalDesc:  "ゆびで しんけい を うえる。はっか させると ピカっと あみを つたわる。1888年 カハール、6〜10さい。",
         cajalTag1: "6〜10歳", cajalTag2: "スパイク・カスケード", cajalTag3: "カハール 1888",
+        honlogTitle: "ほんログJr.",
+        honlogDesc:  "読み聞かせ・ひとり読みを、タイマー、ページ記録、質問カード、読書ビンゴで続けやすくする子ども向け読書パスポート。",
+        honlogTag1: "読書記録", honlogTag2: "読み聞かせ", honlogTag3: "家族向け",
         philippinesTitle: "フィリピン・レンズ",
         philippinesDesc:  "7,641の島、18地域、ことば、歴史、文化、経済を地図・フレーズ・年表・クイズで立体的に学ぶフィリピン入門アプリ。",
         philippinesTag1: "フィリピン", philippinesTag2: "地理と文化", philippinesTag3: "クイズ",
@@ -4153,6 +4175,9 @@ const I18N = {
         cajalTitle: "Synapse Forest",
         cajalDesc:  "Plant neurons, fire one, watch the spike cascade through the forest. Cajal 1888, ages 6-10.",
         cajalTag1: "Ages 6-10", cajalTag2: "Spike Cascade", cajalTag3: "Cajal 1888",
+        honlogTitle: "Hon Log Jr.",
+        honlogDesc:  "A kid-friendly reading passport for read-aloud and solo reading, with a timer, page log, question cards, and reading bingo.",
+        honlogTag1: "Reading log", honlogTag2: "Read-aloud", honlogTag3: "Family tool",
         philippinesTitle: "Philippines Lens",
         philippinesDesc:  "A Philippines primer that connects 7,641 islands, 18 regions, languages, history, culture, and economy through a map, phrases, timeline, and quiz.",
         philippinesTag1: "Philippines", philippinesTag2: "Geography & Culture", philippinesTag3: "Quiz",
