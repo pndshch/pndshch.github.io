@@ -306,6 +306,10 @@ header p {
 .thumb-sonae .thumb-gif { object-position: right center; }
 .thumb-yotei     { background: linear-gradient(135deg, #f8e6b4 0%, #86d0c8 44%, #53669d 100%); }
 .thumb-yotei .thumb-gif { object-position: center; }
+.thumb-gutenberg { background: linear-gradient(135deg, #17202b 0%, #d9a441 42%, #b6422f 70%, #167a78 100%); }
+.thumb-gutenberg .thumb-gif { object-position: center; }
+.thumb-jiyukenkyu { background: linear-gradient(135deg, #fbf8ef 0%, #dff4e8 38%, #f2b84b 66%, #ef715e 100%); }
+.thumb-jiyukenkyu .thumb-gif { object-position: center; }
 
 .card-body {
     padding: 18px 20px 22px;
@@ -925,6 +929,41 @@ footer a:hover { color: #e6edf3; }
 
 <!-- All apps -->
 <div class="grid" id="app-grid">
+    <div class="card" data-cat="tools kids learn" data-added="2026-05-14T05:10:00+09:00" data-pin="1" data-slug="jiyu-kenkyu-planner">
+            <div class="card-thumb thumb-jiyukenkyu">
+            <span class="new-badge">NEW</span>
+            <span class="thumb-emoji">🔬</span>
+                <img class="thumb-gif" src="assets/jiyu-kenkyu-planner.svg" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="jiyuTitle">自由研究プランナーJr.</h2>
+                <p data-i18n="jiyuDesc">問い、予想、実験、記録、発表までを1つずつ組み立てる自由研究ツール。材料チェック、日別スケジュール、観察グラフ、1分スピーチまで作れます。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="jiyuTag1">自由研究</span>
+                    <span class="tag" data-i18n="jiyuTag2">計画表</span>
+                    <span class="tag" data-i18n="jiyuTag3">子ども向け</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/jiyu-kenkyu-planner/" target="_blank" data-i18n="useTool">▶ ツールを使う</a>
+            </div>
+        </div>
+    <div class="card" data-cat="games world-history learn" data-added="2026-05-13T10:20:00+09:00" data-pin="1" data-slug="gutenberg-press-1455" data-year="1455">
+            <div class="card-thumb thumb-gutenberg">
+            <span class="new-badge">NEW</span>
+            <span class="year-badge">1455</span>
+            <span class="thumb-emoji">▣</span>
+                <img class="thumb-gif" src="assets/gutenberg-press-1455.svg" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="gutenbergTitle">活字工房 1455</h2>
+                <p data-i18n="gutenbergDesc">マインツの印刷工房で、活字を組み、インク量と圧を合わせ、プレスを引き、誤植を探す。グーテンベルクの活版印刷を手で覚える歴史ゲーム。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="gutenbergTag1">史実ゲーム</span>
+                    <span class="tag" data-i18n="gutenbergTag2">活版印刷</span>
+                    <span class="tag" data-i18n="gutenbergTag3">マインツ 1455</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/gutenberg-press-1455/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
     <div class="card" data-cat="tools kids" data-added="2026-05-13T05:20:00+09:00" data-pin="1" data-slug="hon-log-jr">
             <div class="card-thumb thumb-honlog">
             <span class="new-badge">NEW</span>
@@ -3666,6 +3705,12 @@ const I18N = {
         cajalTitle: "シナプスの もり",
         cajalDesc:  "ゆびで しんけい を うえる。はっか させると ピカっと あみを つたわる。1888年 カハール、6〜10さい。",
         cajalTag1: "6〜10歳", cajalTag2: "スパイク・カスケード", cajalTag3: "カハール 1888",
+        jiyuTitle: "自由研究プランナーJr.",
+        jiyuDesc:  "問い、予想、実験、記録、発表までを1つずつ組み立てる自由研究ツール。材料チェック、日別スケジュール、観察グラフ、1分スピーチまで作れます。",
+        jiyuTag1: "自由研究", jiyuTag2: "計画表", jiyuTag3: "子ども向け",
+        gutenbergTitle: "活字工房 1455",
+        gutenbergDesc:  "マインツの印刷工房で、活字を組み、インク量と圧を合わせ、プレスを引き、誤植を探す。グーテンベルクの活版印刷を手で覚える歴史ゲーム。",
+        gutenbergTag1: "史実ゲーム", gutenbergTag2: "活版印刷", gutenbergTag3: "マインツ 1455",
         honlogTitle: "ほんログJr.",
         honlogDesc:  "読み聞かせ・ひとり読みを、タイマー、ページ記録、質問カード、読書ビンゴで続けやすくする子ども向け読書パスポート。",
         honlogTag1: "読書記録", honlogTag2: "読み聞かせ", honlogTag3: "家族向け",
@@ -4175,6 +4220,12 @@ const I18N = {
         cajalTitle: "Synapse Forest",
         cajalDesc:  "Plant neurons, fire one, watch the spike cascade through the forest. Cajal 1888, ages 6-10.",
         cajalTag1: "Ages 6-10", cajalTag2: "Spike Cascade", cajalTag3: "Cajal 1888",
+        jiyuTitle: "Jiyu Kenkyu Planner Jr.",
+        jiyuDesc:  "A kid-friendly research planner that turns a question into a hypothesis, experiment plan, daily log, chart, and one-minute presentation script.",
+        jiyuTag1: "Research project", jiyuTag2: "Planner", jiyuTag3: "Kids tool",
+        gutenbergTitle: "Type Workshop 1455",
+        gutenbergDesc:  "Set movable type, tune ink and pressure, pull the press, and proofread the page in a Mainz print shop. A hands-on history game about Gutenberg printing.",
+        gutenbergTag1: "History game", gutenbergTag2: "Movable type", gutenbergTag3: "Mainz 1455",
         honlogTitle: "Hon Log Jr.",
         honlogDesc:  "A kid-friendly reading passport for read-aloud and solo reading, with a timer, page log, question cards, and reading bingo.",
         honlogTag1: "Reading log", honlogTag2: "Read-aloud", honlogTag3: "Family tool",
