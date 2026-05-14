@@ -529,6 +529,112 @@ header p {
     filter: brightness(1.12);
 }
 
+/* ── AI News Daily ribbon ── */
+.ai-news-banner {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 22px;
+    width: 100%;
+    max-width: 960px;
+    margin: 0 0 28px;
+    padding: 18px 22px;
+    border: 1px solid rgba(52, 211, 153, 0.32);
+    border-radius: 16px;
+    background:
+        linear-gradient(90deg, rgba(6, 95, 70, 0.20) 0%, rgba(8, 51, 68, 0.18) 45%, rgba(13, 17, 23, 0.96) 100%),
+        repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.022) 0 2px, transparent 2px 4px),
+        #0b1620;
+    color: inherit;
+    text-decoration: none;
+    box-shadow: 0 10px 38px rgba(0, 0, 0, 0.32);
+    transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
+    position: relative;
+    overflow: hidden;
+}
+.ai-news-banner::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, transparent 30%, rgba(52, 211, 153, 0.07) 50%, transparent 70%);
+    transform: translateX(-100%);
+    transition: transform 0.6s;
+    pointer-events: none;
+}
+.ai-news-banner:hover {
+    border-color: rgba(52, 211, 153, 0.78);
+    box-shadow: 0 14px 48px rgba(16, 185, 129, 0.20);
+    transform: translateY(-2px);
+}
+.ai-news-banner:hover::before { transform: translateX(100%); }
+.ainb-pulse {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 11px;
+    border: 1px solid rgba(248, 113, 113, 0.42);
+    border-radius: 999px;
+    background: rgba(127, 29, 29, 0.18);
+    font-family: 'SF Mono', 'JetBrains Mono', 'Menlo', monospace;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    color: #fca5a5;
+    white-space: nowrap;
+}
+.ainb-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #ef4444;
+    box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7);
+    animation: ainb-pulse 1.8s infinite;
+}
+@keyframes ainb-pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+    70%  { box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+.ainb-body { min-width: 0; }
+.ainb-title {
+    font-family: 'SF Mono', 'JetBrains Mono', 'Menlo', monospace;
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: -0.2px;
+    color: #e6edf3;
+    margin-bottom: 4px;
+}
+.ainb-title::before {
+    content: "$ ";
+    color: #34d399;
+}
+.ainb-desc {
+    color: #94a3b8;
+    font-size: 13px;
+    line-height: 1.55;
+}
+.ainb-cta {
+    font-family: 'SF Mono', 'JetBrains Mono', 'Menlo', monospace;
+    padding: 10px 16px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #10b981, #06b6d4);
+    color: #04221f;
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.32);
+}
+@media (max-width: 720px) {
+    .ai-news-banner {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        padding: 18px;
+    }
+    .ainb-cta { width: 100%; text-align: center; }
+    .ainb-pulse { width: fit-content; }
+}
+
 /* ── Footer ── */
 footer {
     margin-top: 60px;
@@ -910,6 +1016,19 @@ footer a:hover { color: #e6edf3; }
 
 <!-- Spotlight (JS-populated from newest app) -->
 <section class="spotlight" id="spotlight" aria-label="Spotlight"></section>
+
+<!-- AI News Daily ribbon -->
+<a class="ai-news-banner" href="https://pndshch.github.io/ai-news-daily/" target="_blank" rel="noopener" aria-label="AI News Daily">
+    <span class="ainb-pulse">
+        <span class="ainb-dot" aria-hidden="true"></span>
+        <span data-i18n="ainbLive">DAILY</span>
+    </span>
+    <div class="ainb-body">
+        <div class="ainb-title">AI News Daily</div>
+        <p class="ainb-desc" data-i18n="ainbDesc">毎朝、arXiv・HN・Reddit・GitHub・AIラボ公式から100件超を集めて、日本語要約とハイライト付きで配信。</p>
+    </div>
+    <span class="ainb-cta" data-i18n="ainbCta">今日のニュースを読む →</span>
+</a>
 
 <!-- Search bar -->
 <div class="search-wrap">
@@ -3651,6 +3770,9 @@ const I18N = {
         searchEmpty: "見つかりませんでした",
         spotlightKicker: "NEW SPOTLIGHT",
         spotlightCta: "今すぐひらく",
+        ainbLive: "DAILY",
+        ainbDesc: "毎朝、arXiv・HN・Reddit・GitHub・AIラボ公式から100件超を集めて、日本語要約とハイライト付きで配信。",
+        ainbCta: "今日のニュースを読む →",
         dailyTag: "毎日",
         poopTitle: "うんち占い",
         poopDesc:  "きょうの「うんち運」をチェック！毎日かわるSS〜Dランク。",
@@ -4189,6 +4311,9 @@ const I18N = {
         searchEmpty: "No matches.",
         spotlightKicker: "NEW SPOTLIGHT",
         spotlightCta: "Open now",
+        ainbLive: "DAILY",
+        ainbDesc: "Every morning — 100+ items from arXiv, HN, Reddit, GitHub & AI lab blogs, with bilingual summaries and curated highlights.",
+        ainbCta: "Read today's drop →",
         dailyTag:  "Daily",
         poopTitle: "Poop Fortune",
         poopDesc:  "Check today's poop fortune — daily SS to D ranking.",
