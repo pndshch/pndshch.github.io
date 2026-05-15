@@ -312,6 +312,7 @@ header p {
 .thumb-yotei .thumb-gif { object-position: center; }
 .thumb-gutenberg { background: linear-gradient(135deg, #17202b 0%, #d9a441 42%, #b6422f 70%, #167a78 100%); }
 .thumb-gutenberg .thumb-gif { object-position: center; }
+.thumb-bunmeikiseki { background: linear-gradient(135deg, #1a0e05 0%, #2d1810 30%, #0a0a20 70%, #08080e 100%); }
 .thumb-jiyukenkyu { background: linear-gradient(135deg, #fbf8ef 0%, #dff4e8 38%, #f2b84b 66%, #ef715e 100%); }
 .thumb-jiyukenkyu .thumb-gif { object-position: center; }
 .thumb-tulip     { background: radial-gradient(ellipse at 50% 40%, #2a1a08 0%, #1a0e04 50%, #0a0804 100%); }
@@ -1062,6 +1063,23 @@ footer a:hover { color: #e6edf3; }
 
 <!-- All apps -->
 <div class="grid" id="app-grid">
+    <div class="card" data-cat="learn world-history" data-added="2026-05-16T22:00:00+09:00" data-pin="1" data-slug="bunmei-kiseki">
+            <div class="card-thumb thumb-bunmeikiseki">
+            <span class="new-badge">NEW</span>
+            <span class="thumb-emoji">🏛️</span>
+                <img class="thumb-gif" src="assets/bunmei-kiseki.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="bunmeiTitle">文明軌跡</h2>
+                <p data-i18n="bunmeiDesc">飢餓から退屈まで——人類1万年の文明をシミュレーション。すべてが満たされた先に何が待つ？</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="bunmeiTag1">文明シミュ</span>
+                    <span class="tag" data-i18n="bunmeiTag2">哲学</span>
+                    <span class="tag" data-i18n="bunmeiTag3">1万年</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/bunmei-kiseki/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
     <div class="card" data-cat="tools kids learn" data-added="2026-05-14T05:10:00+09:00" data-pin="1" data-slug="jiyu-kenkyu-planner">
             <div class="card-thumb thumb-jiyukenkyu">
             <span class="new-badge">NEW</span>
@@ -4176,6 +4194,9 @@ const I18N = {
         cajalTitle: "シナプスの もり",
         cajalDesc:  "ゆびで しんけい を うえる。はっか させると ピカっと あみを つたわる。1888年 カハール、6〜10さい。",
         cajalTag1: "6〜10歳", cajalTag2: "スパイク・カスケード", cajalTag3: "カハール 1888",
+        bunmeiTitle: "文明軌跡",
+        bunmeiDesc:  "飢餓から退屈まで——人類1万年の文明をシミュレーション。すべてが満たされた先に何が待つ？",
+        bunmeiTag1: "文明シミュ", bunmeiTag2: "哲学", bunmeiTag3: "1万年",
         jiyuTitle: "自由研究プランナーJr.",
         jiyuDesc:  "問い、予想、実験、記録、発表までを1つずつ組み立てる自由研究ツール。材料チェック、日別スケジュール、観察グラフ、1分スピーチまで作れます。",
         jiyuTag1: "自由研究", jiyuTag2: "計画表", jiyuTag3: "子ども向け",
@@ -4748,6 +4769,9 @@ const I18N = {
         cajalTitle: "Synapse Forest",
         cajalDesc:  "Plant neurons, fire one, watch the spike cascade through the forest. Cajal 1888, ages 6-10.",
         cajalTag1: "Ages 6-10", cajalTag2: "Spike Cascade", cajalTag3: "Cajal 1888",
+        bunmeiTitle: "Civilization Trajectory",
+        bunmeiDesc:  "A 10,000-year simulation from hunger to boredom. What awaits when every human need is met?",
+        bunmeiTag1: "Civ Sim", bunmeiTag2: "Philosophy", bunmeiTag3: "10,000 Years",
         jiyuTitle: "Jiyu Kenkyu Planner Jr.",
         jiyuDesc:  "A kid-friendly research planner that turns a question into a hypothesis, experiment plan, daily log, chart, and one-minute presentation script.",
         jiyuTag1: "Research project", jiyuTag2: "Planner", jiyuTag3: "Kids tool",
