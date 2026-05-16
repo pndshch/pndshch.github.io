@@ -325,6 +325,7 @@ header p {
 .thumb-beacon221bc { background: linear-gradient(180deg, #050d1a 0%, #0a1628 30%, #1a2d50 60%, #6b5d4e 90%, #4a3f35 100%); }
 .thumb-berlinwall1989 { background: linear-gradient(180deg, #060818 0%, #0a0e22 30%, #666 60%, #888 80%, #12162a 100%); }
 .thumb-olympia   { background: linear-gradient(180deg, #4A90D4 0%, #87CEEB 40%, #C8A96E 60%, #A08050 100%); }
+.thumb-mahounosuna { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); }
 
 .card-body {
     padding: 18px 20px 22px;
@@ -1063,6 +1064,23 @@ footer a:hover { color: #e6edf3; }
 
 <!-- All apps -->
 <div class="grid" id="app-grid">
+    <div class="card" data-cat="games kids" data-added="2026-05-17T11:00:00+09:00" data-pin="1" data-slug="mahou-no-suna">
+            <div class="card-thumb thumb-mahounosuna">
+            <span class="new-badge">NEW</span>
+            <span class="thumb-emoji">🏖️</span>
+                <img class="thumb-gif" src="assets/mahou-no-suna.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="mahounosunaTitle">まほうの砂</h2>
+                <p data-i18n="mahounosunaDesc">砂・水・火・植物を指で注いで、ふしぎな物理世界をつくろう。3〜7歳向け粒子シミュレーター。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="mahounosunaTag1">粒子物理</span>
+                    <span class="tag" data-i18n="mahounosunaTag2">3〜7歳</span>
+                    <span class="tag" data-i18n="mahounosunaTag3">自由あそび</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/mahou-no-suna/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
     <div class="card" data-cat="learn world-history" data-added="2026-05-16T22:00:00+09:00" data-pin="1" data-slug="bunmei-kiseki">
             <div class="card-thumb thumb-bunmeikiseki">
             <span class="new-badge">NEW</span>
@@ -4194,6 +4212,9 @@ const I18N = {
         cajalTitle: "シナプスの もり",
         cajalDesc:  "ゆびで しんけい を うえる。はっか させると ピカっと あみを つたわる。1888年 カハール、6〜10さい。",
         cajalTag1: "6〜10歳", cajalTag2: "スパイク・カスケード", cajalTag3: "カハール 1888",
+        mahounosunaTitle: "まほうの砂",
+        mahounosunaDesc: "砂・水・火・植物を指で注いで、ふしぎな物理世界をつくろう。3〜7歳向け粒子シミュレーター。",
+        mahounosunaTag1: "粒子物理", mahounosunaTag2: "3〜7歳", mahounosunaTag3: "自由あそび",
         bunmeiTitle: "文明軌跡",
         bunmeiDesc:  "飢餓から退屈まで——人類1万年の文明をシミュレーション。すべてが満たされた先に何が待つ？",
         bunmeiTag1: "文明シミュ", bunmeiTag2: "哲学", bunmeiTag3: "1万年",
@@ -4769,6 +4790,9 @@ const I18N = {
         cajalTitle: "Synapse Forest",
         cajalDesc:  "Plant neurons, fire one, watch the spike cascade through the forest. Cajal 1888, ages 6-10.",
         cajalTag1: "Ages 6-10", cajalTag2: "Spike Cascade", cajalTag3: "Cajal 1888",
+        mahounosunaTitle: "Magic Sand",
+        mahounosunaDesc: "Pour sand, water, fire, and plants to build a wondrous physics world. Particle simulator for ages 3-7.",
+        mahounosunaTag1: "Particle Physics", mahounosunaTag2: "Ages 3-7", mahounosunaTag3: "Free Play",
         bunmeiTitle: "Civilization Trajectory",
         bunmeiDesc:  "A 10,000-year simulation from hunger to boredom. What awaits when every human need is met?",
         bunmeiTag1: "Civ Sim", bunmeiTag2: "Philosophy", bunmeiTag3: "10,000 Years",
