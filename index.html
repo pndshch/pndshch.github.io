@@ -326,6 +326,7 @@ header p {
 .thumb-berlinwall1989 { background: linear-gradient(180deg, #060818 0%, #0a0e22 30%, #666 60%, #888 80%, #12162a 100%); }
 .thumb-olympia   { background: linear-gradient(180deg, #4A90D4 0%, #87CEEB 40%, #C8A96E 60%, #A08050 100%); }
 .thumb-mahounosuna { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); }
+.thumb-souseinosuna { background: linear-gradient(180deg, #0a0e1a 0%, #16213e 45%, #4a2f1a 100%); }
 .thumb-vinland1000 { background: linear-gradient(180deg, #0a1628 0%, #162040 30%, #0d2847 60%, #061428 100%); }
 
 .card-body {
@@ -1065,6 +1066,23 @@ footer a:hover { color: #e6edf3; }
 
 <!-- All apps -->
 <div class="grid" id="app-grid">
+    <div class="card" data-cat="games learn" data-added="2026-05-17T23:30:00+09:00" data-pin="1" data-slug="sousei-no-suna">
+            <div class="card-thumb thumb-souseinosuna">
+            <span class="new-badge">NEW</span>
+            <span class="thumb-emoji">🌍</span>
+                <img class="thumb-gif" src="assets/sousei-no-suna.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="souseinosunaTitle">創世の砂</h2>
+                <p data-i18n="souseinosunaDesc">砂が土になり森が育ち、生きものが現れ、やがて人類が文明を築く——神様シミュレーター。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="souseinosunaTag1">神様シミュ</span>
+                    <span class="tag" data-i18n="souseinosunaTag2">生命と文明</span>
+                    <span class="tag" data-i18n="souseinosunaTag3">10歳〜大人</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/sousei-no-suna/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
     <div class="card" data-cat="games kids" data-added="2026-05-17T11:00:00+09:00" data-pin="1" data-slug="mahou-no-suna">
             <div class="card-thumb thumb-mahounosuna">
             <span class="new-badge">NEW</span>
@@ -1082,7 +1100,7 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/mahou-no-suna/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="learn world-history" data-added="2026-05-16T22:00:00+09:00" data-pin="1" data-slug="bunmei-kiseki">
+    <div class="card" data-cat="games world-history learn" data-added="2026-05-17T18:00:00+09:00" data-pin="1" data-slug="bunmei-kiseki">
             <div class="card-thumb thumb-bunmeikiseki">
             <span class="new-badge">NEW</span>
             <span class="thumb-emoji">🏛️</span>
@@ -1090,11 +1108,11 @@ footer a:hover { color: #e6edf3; }
             </div>
             <div class="card-body">
                 <h2 data-i18n="bunmeiTitle">文明軌跡</h2>
-                <p data-i18n="bunmeiDesc">飢餓から退屈まで——人類1万年の文明をシミュレーション。すべてが満たされた先に何が待つ？</p>
+                <p data-i18n="bunmeiDesc">破滅か、停滞か、退屈か——それとも調和か。8つの岐路の選択が、人類一万年の結末を分ける。</p>
                 <div class="tags">
-                    <span class="tag" data-i18n="bunmeiTag1">文明シミュ</span>
+                    <span class="tag" data-i18n="bunmeiTag1">文明ゲーム</span>
                     <span class="tag" data-i18n="bunmeiTag2">哲学</span>
-                    <span class="tag" data-i18n="bunmeiTag3">1万年</span>
+                    <span class="tag" data-i18n="bunmeiTag3">4つの結末</span>
                 </div>
                 <a class="card-btn btn-play" href="https://pndshch.github.io/bunmei-kiseki/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
@@ -4231,12 +4249,15 @@ const I18N = {
         cajalTitle: "シナプスの もり",
         cajalDesc:  "ゆびで しんけい を うえる。はっか させると ピカっと あみを つたわる。1888年 カハール、6〜10さい。",
         cajalTag1: "6〜10歳", cajalTag2: "スパイク・カスケード", cajalTag3: "カハール 1888",
+        souseinosunaTitle: "創世の砂",
+        souseinosunaDesc: "砂が土になり森が育ち、生きものが現れ、やがて人類が文明を築く——神様シミュレーター。",
+        souseinosunaTag1: "神様シミュ", souseinosunaTag2: "生命と文明", souseinosunaTag3: "10歳〜大人",
         mahounosunaTitle: "まほうの砂",
         mahounosunaDesc: "砂・水・火・植物を指で注いで、ふしぎな物理世界をつくろう。3〜7歳向け粒子シミュレーター。",
         mahounosunaTag1: "粒子物理", mahounosunaTag2: "3〜7歳", mahounosunaTag3: "自由あそび",
         bunmeiTitle: "文明軌跡",
-        bunmeiDesc:  "飢餓から退屈まで——人類1万年の文明をシミュレーション。すべてが満たされた先に何が待つ？",
-        bunmeiTag1: "文明シミュ", bunmeiTag2: "哲学", bunmeiTag3: "1万年",
+        bunmeiDesc:  "破滅か、停滞か、退屈か——それとも調和か。8つの岐路の選択が、人類一万年の結末を分ける。",
+        bunmeiTag1: "文明ゲーム", bunmeiTag2: "哲学", bunmeiTag3: "4つの結末",
         jiyuTitle: "自由研究プランナーJr.",
         jiyuDesc:  "問い、予想、実験、記録、発表までを1つずつ組み立てる自由研究ツール。材料チェック、日別スケジュール、観察グラフ、1分スピーチまで作れます。",
         jiyuTag1: "自由研究", jiyuTag2: "計画表", jiyuTag3: "子ども向け",
@@ -4812,12 +4833,15 @@ const I18N = {
         cajalTitle: "Synapse Forest",
         cajalDesc:  "Plant neurons, fire one, watch the spike cascade through the forest. Cajal 1888, ages 6-10.",
         cajalTag1: "Ages 6-10", cajalTag2: "Spike Cascade", cajalTag3: "Cajal 1888",
+        souseinosunaTitle: "Genesis Sand",
+        souseinosunaDesc: "Scatter sand — it turns to soil, forests grow, wildlife appears, and humans rise to build a civilization.",
+        souseinosunaTag1: "God Game", souseinosunaTag2: "Life & Civilization", souseinosunaTag3: "Ages 10+",
         mahounosunaTitle: "Magic Sand",
         mahounosunaDesc: "Pour sand, water, fire, and plants to build a wondrous physics world. Particle simulator for ages 3-7.",
         mahounosunaTag1: "Particle Physics", mahounosunaTag2: "Ages 3-7", mahounosunaTag3: "Free Play",
         bunmeiTitle: "Civilization Trajectory",
-        bunmeiDesc:  "A 10,000-year simulation from hunger to boredom. What awaits when every human need is met?",
-        bunmeiTag1: "Civ Sim", bunmeiTag2: "Philosophy", bunmeiTag3: "10,000 Years",
+        bunmeiDesc:  "Ruin, stagnation, boredom — or harmony? Eight crossroads decide the fate of 10,000 years of humankind.",
+        bunmeiTag1: "Civ Game", bunmeiTag2: "Philosophy", bunmeiTag3: "4 Endings",
         jiyuTitle: "Jiyu Kenkyu Planner Jr.",
         jiyuDesc:  "A kid-friendly research planner that turns a question into a hypothesis, experiment plan, daily log, chart, and one-minute presentation script.",
         jiyuTag1: "Research project", jiyuTag2: "Planner", jiyuTag3: "Kids tool",
