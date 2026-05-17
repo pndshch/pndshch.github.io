@@ -328,6 +328,7 @@ header p {
 .thumb-mahounosuna { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); }
 .thumb-souseinosuna { background: linear-gradient(180deg, #0a0e1a 0%, #16213e 45%, #4a2f1a 100%); }
 .thumb-vinland1000 { background: linear-gradient(180deg, #0a1628 0%, #162040 30%, #0d2847 60%, #061428 100%); }
+.thumb-shinkai { background: linear-gradient(180deg, #0a2463 0%, #1e6091 30%, #0a1628 70%, #030508 100%); }
 
 .card-body {
     padding: 18px 20px 22px;
@@ -1066,6 +1067,22 @@ footer a:hover { color: #e6edf3; }
 
 <!-- All apps -->
 <div class="grid" id="app-grid">
+    <div class="card" data-cat="kids learn" data-added="2026-05-18T10:00:00+09:00" data-slug="shinkai-tanken">
+            <div class="card-thumb thumb-shinkai">
+            <span class="thumb-emoji">🐟</span>
+                <img class="thumb-gif" src="assets/shinkai-tanken.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="shinkaiTitle">しんかいたんけん</h2>
+                <p data-i18n="shinkaiDesc">潜水艦で海面からマリアナ海溝11,000mへ。5つの深海ゾーンで20種の本物の生きものに出会おう。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="shinkaiTag1">深海</span>
+                    <span class="tag" data-i18n="shinkaiTag2">生きもの図鑑</span>
+                    <span class="tag" data-i18n="shinkaiTag3">5〜9歳</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/shinkai-tanken/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
     <div class="card" data-cat="games learn" data-added="2026-05-17T23:30:00+09:00" data-pin="1" data-slug="sousei-no-suna">
             <div class="card-thumb thumb-souseinosuna">
             <span class="new-badge">NEW</span>
@@ -4249,6 +4266,9 @@ const I18N = {
         cajalTitle: "シナプスの もり",
         cajalDesc:  "ゆびで しんけい を うえる。はっか させると ピカっと あみを つたわる。1888年 カハール、6〜10さい。",
         cajalTag1: "6〜10歳", cajalTag2: "スパイク・カスケード", cajalTag3: "カハール 1888",
+        shinkaiTitle: "しんかいたんけん",
+        shinkaiDesc: "潜水艦で海面からマリアナ海溝11,000mへ。5つの深海ゾーンで20種の本物の生きものに出会おう。",
+        shinkaiTag1: "深海", shinkaiTag2: "生きもの図鑑", shinkaiTag3: "5〜9歳",
         souseinosunaTitle: "創世の砂",
         souseinosunaDesc: "砂が土になり森が育ち、生きものが現れ、やがて人類が文明を築く——神様シミュレーター。",
         souseinosunaTag1: "神様シミュ", souseinosunaTag2: "生命と文明", souseinosunaTag3: "10歳〜大人",
@@ -4833,6 +4853,9 @@ const I18N = {
         cajalTitle: "Synapse Forest",
         cajalDesc:  "Plant neurons, fire one, watch the spike cascade through the forest. Cajal 1888, ages 6-10.",
         cajalTag1: "Ages 6-10", cajalTag2: "Spike Cascade", cajalTag3: "Cajal 1888",
+        shinkaiTitle: "Deep Sea Explorer",
+        shinkaiDesc: "Dive from the surface to the Mariana Trench at 11,000m. Discover 20 real creatures across 5 ocean zones.",
+        shinkaiTag1: "Deep Sea", shinkaiTag2: "Creature Guide", shinkaiTag3: "Ages 5-9",
         souseinosunaTitle: "Genesis Sand",
         souseinosunaDesc: "Scatter sand — it turns to soil, forests grow, wildlife appears, and humans rise to build a civilization.",
         souseinosunaTag1: "God Game", souseinosunaTag2: "Life & Civilization", souseinosunaTag3: "Ages 10+",
