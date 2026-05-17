@@ -330,6 +330,7 @@ header p {
 .thumb-souseinosuna { background: linear-gradient(180deg, #0a0e1a 0%, #16213e 45%, #4a2f1a 100%); }
 .thumb-vinland1000 { background: linear-gradient(180deg, #0a1628 0%, #162040 30%, #0d2847 60%, #061428 100%); }
 .thumb-shinkai { background: linear-gradient(180deg, #0a2463 0%, #1e6091 30%, #0a1628 70%, #030508 100%); }
+.thumb-flagimi { background: linear-gradient(135deg, #1d2c48 0%, #233a63 50%, #0e1524 100%); }
 
 .card-body {
     padding: 18px 20px 22px;
@@ -1068,6 +1069,23 @@ footer a:hover { color: #e6edf3; }
 
 <!-- All apps -->
 <div class="grid" id="app-grid">
+    <div class="card" data-cat="tools" data-added="2026-05-18T20:00:00+09:00" data-pin="1" data-slug="flag-imi">
+            <div class="card-thumb thumb-flagimi">
+            <span class="new-badge">NEW</span>
+            <span class="thumb-emoji">🚩</span>
+                <img class="thumb-gif" src="assets/flag-imi.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="flagImiTitle">世界の国旗の意味</h2>
+                <p data-i18n="flagImiDesc">世界197の国と地域の国旗を、色とシンボルの意味とともに日英で解説するリファレンス。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="flagImiTag1">国旗</span>
+                    <span class="tag" data-i18n="flagImiTag2">地理</span>
+                    <span class="tag" data-i18n="flagImiTag3">日英対応</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/flag-imi/" target="_blank" data-i18n="useTool">▶ ツールを使う</a>
+            </div>
+        </div>
     <div class="card" data-cat="kids learn" data-added="2026-05-18T10:00:00+09:00" data-slug="shinkai-tanken">
             <div class="card-thumb thumb-shinkai">
             <span class="thumb-emoji">🐟</span>
@@ -4126,6 +4144,9 @@ const I18N = {
         astroTitle: "西洋占星術の意味",
         astroDesc:  "12星座・10惑星・12ハウス・5アスペクトの即時リファレンス。",
         astroTag1: "占星術", astroTag2: "星座",
+        flagImiTitle: "世界の国旗の意味",
+        flagImiDesc:  "世界197の国と地域の国旗を、色とシンボルの意味とともに日英で解説するリファレンス。",
+        flagImiTag1: "国旗", flagImiTag2: "地理", flagImiTag3: "日英対応",
         stoneTitle: "パワーストーンの意味",
         stoneDesc:  "40種以上のパワーストーンを目的・チャクラ・色別に検索。",
         stoneTag1: "パワーストーン", stoneTag2: "ヒーリング",
@@ -4712,6 +4733,9 @@ const I18N = {
         astroTitle: "Western Astrology Reference",
         astroDesc:  "Western astrology: 12 signs, 10 planets, 12 houses, 5 aspects — instant lookup.",
         astroTag1: "Astrology", astroTag2: "Zodiac",
+        flagImiTitle: "Meaning of World Flags",
+        flagImiDesc:  "A bilingual reference explaining the colours and symbols of 197 national flags.",
+        flagImiTag1: "Flags", flagImiTag2: "Geography", flagImiTag3: "JP / EN",
         numeroTitle:"Numerology Reading",
         numeroDesc: "Numerology by birthdate — life, love, career, with master numbers.",
         numeroTag1: "Numerology", numeroTag2: "Divination",
