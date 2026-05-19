@@ -332,6 +332,7 @@ header p {
 .thumb-vinland1000 { background: linear-gradient(180deg, #0a1628 0%, #162040 30%, #0d2847 60%, #061428 100%); }
 .thumb-shinkai { background: linear-gradient(180deg, #0a2463 0%, #1e6091 30%, #0a1628 70%, #030508 100%); }
 .thumb-flagimi { background: linear-gradient(135deg, #1d2c48 0%, #233a63 50%, #0e1524 100%); }
+.thumb-sodatekata { background: linear-gradient(160deg, #fdf4e7 0%, #f4e3c8 55%, #ecd6b3 100%); }
 
 .card-body {
     padding: 18px 20px 22px;
@@ -1070,6 +1071,23 @@ footer a:hover { color: #e6edf3; }
 
 <!-- All apps -->
 <div class="grid" id="app-grid">
+    <div class="card" data-cat="games learn" data-added="2026-05-19T23:30:00+09:00" data-pin="1" data-slug="sodatekata">
+            <div class="card-thumb thumb-sodatekata">
+            <span class="new-badge">NEW</span>
+            <span class="thumb-emoji">🌱</span>
+                <img class="thumb-gif" src="assets/sodatekata.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="sodatekataTitle">育て方</h2>
+                <p data-i18n="sodatekataDesc">幼稚園から大学まで、何を大切に育てる？ 6つの方針の配分が、その子の心と力、そして人生をつくる教育シミュレーション。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="sodatekataTag1">育成シミュ</span>
+                    <span class="tag" data-i18n="sodatekataTag2">教育と人生</span>
+                    <span class="tag" data-i18n="sodatekataTag3">12の結末</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/sodatekata/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
     <div class="card" data-cat="tools" data-added="2026-05-18T20:00:00+09:00" data-pin="1" data-slug="flag-imi">
             <div class="card-thumb thumb-flagimi">
             <span class="new-badge">NEW</span>
@@ -4166,6 +4184,9 @@ const I18N = {
         flagImiTitle: "世界の国旗の意味",
         flagImiDesc:  "世界197の国と地域の国旗を、色とシンボルの意味とともに日英で解説するリファレンス。",
         flagImiTag1: "国旗", flagImiTag2: "地理", flagImiTag3: "日英対応",
+        sodatekataTitle: "育て方",
+        sodatekataDesc:  "幼稚園から大学まで、何を大切に育てる？ 6つの方針の配分が、その子の心と力、そして人生をつくる教育シミュレーション。",
+        sodatekataTag1: "育成シミュ", sodatekataTag2: "教育と人生", sodatekataTag3: "12の結末",
         stoneTitle: "パワーストーンの意味",
         stoneDesc:  "40種以上のパワーストーンを目的・チャクラ・色別に検索。",
         stoneTag1: "パワーストーン", stoneTag2: "ヒーリング",
@@ -4758,6 +4779,9 @@ const I18N = {
         flagImiTitle: "Meaning of World Flags",
         flagImiDesc:  "A bilingual reference explaining the colours and symbols of 197 national flags.",
         flagImiTag1: "Flags", flagImiTag2: "Geography", flagImiTag3: "JP / EN",
+        sodatekataTitle: "Sodatekata",
+        sodatekataDesc:  "From kindergarten to university — how you split six priorities shapes a child's heart, abilities, and whole life. An education simulator.",
+        sodatekataTag1: "Life sim", sodatekataTag2: "Education", sodatekataTag3: "12 endings",
         numeroTitle:"Numerology Reading",
         numeroDesc: "Numerology by birthdate — life, love, career, with master numbers.",
         numeroTag1: "Numerology", numeroTag2: "Divination",
