@@ -337,6 +337,7 @@ header p {
 .thumb-shinkai { background: linear-gradient(180deg, #0a2463 0%, #1e6091 30%, #0a1628 70%, #030508 100%); }
 .thumb-flagimi { background: linear-gradient(135deg, #1d2c48 0%, #233a63 50%, #0e1524 100%); }
 .thumb-sodatekata { background: linear-gradient(160deg, #fdf4e7 0%, #f4e3c8 55%, #ecd6b3 100%); }
+.thumb-oyasumicount { background: radial-gradient(ellipse at 58% 38%, #2b3566 0%, #141a3a 48%, #0a0e22 100%); }
 
 .card-body {
     padding: 18px 20px 22px;
@@ -1075,6 +1076,22 @@ footer a:hover { color: #e6edf3; }
 
 <!-- All apps -->
 <div class="grid" id="app-grid">
+    <div class="card" data-cat="tools" data-added="2026-05-21T16:00:00+09:00" data-slug="oyasumi-count">
+            <div class="card-thumb thumb-oyasumicount">
+            <span class="thumb-emoji">🌙</span>
+                <img class="thumb-gif" src="assets/oyasumi-count.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="oyasumiCountTitle">おやすみカウント</h2>
+                <p data-i18n="oyasumiCountDesc">起きる時刻と眠りたい長さから、ベッドに入る時刻を逆算。夜空が深まる時計で就寝までをカウントダウンし、早寝を後押しします。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="oyasumiCountTag1">早寝サポート</span>
+                    <span class="tag" data-i18n="oyasumiCountTag2">夜空の時計</span>
+                    <span class="tag" data-i18n="oyasumiCountTag3">日英対応</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/oyasumi-count/" target="_blank" data-i18n="useTool">▶ ツールを使う</a>
+            </div>
+        </div>
     <div class="card" data-cat="tools" data-added="2026-05-21T15:00:00+09:00" data-slug="c1-speaking-gym">
             <div class="card-thumb thumb-c1gym">
             <span class="thumb-emoji">🎙️</span>
@@ -4607,6 +4624,9 @@ const I18N = {
         tutankhamun1922Title: "ツタンカーメンの墓 1922",
         tutankhamun1922Desc: "砂をなぞって3000年の眠りから20の秘宝を発掘する考古学体験。",
         tutankhamun1922Tag1: "発掘体験", tutankhamun1922Tag2: "20の秘宝", tutankhamun1922Tag3: "紀元前1323年 · 1922",
+        oyasumiCountTitle: "おやすみカウント",
+        oyasumiCountDesc: "起きる時刻と眠りたい長さから、ベッドに入る時刻を逆算。夜空が深まる時計で就寝までをカウントダウンし、早寝を後押しします。",
+        oyasumiCountTag1: "早寝サポート", oyasumiCountTag2: "夜空の時計", oyasumiCountTag3: "日英対応",
         pelee1902Title: "独房 1902",
         pelee1902Desc:  "1902年、火砕流に呑まれた街でただ一人生き残った男になる3分。",
         pelee1902Tag1: "史実体験", pelee1902Tag2: "唯一の生還者", pelee1902Tag3: "5月8日 · 1902",
@@ -5224,6 +5244,9 @@ const I18N = {
         tutankhamun1922Title: "Tomb of Tutankhamun · 1922",
         tutankhamun1922Desc: "Brush away sand to unearth 20 treasures from a 3,000-year slumber.",
         tutankhamun1922Tag1: "Excavation", tutankhamun1922Tag2: "20 treasures", tutankhamun1922Tag3: "1323 BC · 1922",
+        oyasumiCountTitle: "Bedtime Countdown",
+        oyasumiCountDesc: "Works out when to go to bed from your wake-up time and sleep goal, then counts down on a clock whose night sky slowly deepens.",
+        oyasumiCountTag1: "Sleep earlier", oyasumiCountTag2: "Night-sky clock", oyasumiCountTag3: "JP / EN",
         pelee1902Title: "The Cell · 1902",
         pelee1902Desc:  "1902 — be the one man who survived a pyroclastic flow.",
         pelee1902Tag1: "History·Felt", pelee1902Tag2: "Sole survivor", pelee1902Tag3: "May 8 · 1902",
