@@ -190,6 +190,7 @@ header p {
 .thumb-yamiichi { background: linear-gradient(135deg, #3f1d1d 0%, #1a0a0a 100%); }
 .thumb-melon   { background: linear-gradient(135deg, #1a4a2a 0%, #0a2a1a 100%); }
 .thumb-ehmate  { background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 100%); }
+.thumb-c1gym   { background: linear-gradient(135deg, #0c1015 0%, #122a1e 100%); }
 .thumb-capitalism { background: linear-gradient(135deg, #1a0a00 0%, #2a1a0a 100%); }
 .thumb-birthday  { background: linear-gradient(135deg, #2a0a2a 0%, #3a1a2a 100%); }
 .thumb-shuriken  { background: linear-gradient(135deg, #0a0a2a 0%, #1a1a3a 100%); }
@@ -1074,6 +1075,22 @@ footer a:hover { color: #e6edf3; }
 
 <!-- All apps -->
 <div class="grid" id="app-grid">
+    <div class="card" data-cat="tools" data-added="2026-05-21T15:00:00+09:00" data-slug="c1-speaking-gym">
+            <div class="card-thumb thumb-c1gym">
+            <span class="thumb-emoji">🎙️</span>
+                <img class="thumb-gif" src="assets/c1-speaking-gym.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="c1gymTitle">C1 Speaking Gym</h2>
+                <p data-i18n="c1gymDesc">B2からC1をめざす英語スピーキング特訓。お題に即興でスピーチし、音声認識した発話を話速・語彙・つなぎ言葉で分析。C1モデル回答と見比べて表現を磨ける。シャドーイングとC1フレーズ集つき。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="c1gymTag1">スピーキング</span>
+                    <span class="tag" data-i18n="c1gymTag2">英語学習</span>
+                    <span class="tag" data-i18n="c1gymTag3">B2→C1</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/c1-speaking-gym/" target="_blank" data-i18n="useTool">▶ ツールを使う</a>
+            </div>
+        </div>
     <div class="card" data-cat="games learn" data-added="2026-05-19T23:30:00+09:00" data-pin="1" data-slug="sodatekata">
             <div class="card-thumb thumb-sodatekata">
             <span class="new-badge">NEW</span>
@@ -4347,6 +4364,9 @@ const I18N = {
         ehmateTitle: "English Housemate",
         ehmateDesc:  "AIの同居人Alexと英語で会話。日本語で答えても直してくれる。",
         ehmateTag1: "英会話", ehmateTag2: "AI", ehmateTag3: "音声",
+        c1gymTitle: "C1 Speaking Gym",
+        c1gymDesc:  "B2→C1をめざす英語スピーキング特訓。お題に即興で話し、発話を音声認識で分析。C1モデル回答と見比べ、シャドーイングとフレーズ集で表現を磨く。",
+        c1gymTag1: "スピーキング", c1gymTag2: "英語学習", c1gymTag3: "B2→C1",
         capitalismTitle: "格差パニック",
         capitalismDesc:  "Plinkoで資本主義の富の分配を可視化。税制を変えてジニ係数を観察。",
         capitalismTag1: "シミュレーション", capitalismTag2: "経済学", capitalismTag3: "Plinko",
@@ -4961,6 +4981,9 @@ const I18N = {
         ehmateTitle: "English Housemate",
         ehmateDesc:  "Live with Alex, your AI English roommate. Reply in Japanese, he'll translate.",
         ehmateTag1: "English", ehmateTag2: "AI", ehmateTag3: "Voice",
+        c1gymTitle: "C1 Speaking Gym",
+        c1gymDesc:  "Speaking practice for B2 learners aiming at C1. Improvise answers to prompts, see your speech transcribed and analysed, then compare with C1 model answers.",
+        c1gymTag1: "Speaking", c1gymTag2: "English", c1gymTag3: "B2→C1",
         capitalismTitle: "Inequality Panic",
         capitalismDesc:  "A Plinko model of wealth distribution. Tweak taxes, watch the Gini change.",
         capitalismTag1: "Simulation", capitalismTag2: "Economics", capitalismTag3: "Plinko",
