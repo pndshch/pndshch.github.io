@@ -202,6 +202,7 @@ header p {
 .thumb-troy      { background: linear-gradient(135deg, #060a14 0%, #141e38 100%); }
 .thumb-zenchi    { background: linear-gradient(135deg, #241a5c 0%, #0a0720 100%); }
 .thumb-himekuri  { background: radial-gradient(ellipse at 50% 22%, #322a63 0%, #14112e 55%, #0a0818 100%); }
+.thumb-aichieste { background: radial-gradient(ellipse at 50% 38%, #20303f 0%, #101722 55%, #080b10 100%); }
 .thumb-otodokei  { background: linear-gradient(135deg, #0a0c1a 0%, #12082a 100%); }
 .thumb-dokidoki  { background: radial-gradient(ellipse at center, #1a1230 0%, #07050d 70%); }
 .thumb-hoshi     { background: radial-gradient(ellipse at 30% 25%, #1e2557 0%, #0a0a26 60%, #050818 100%); }
@@ -4007,6 +4008,23 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/crowd-wisdom/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
+    <div class="card" data-cat="tools" data-added="2026-05-22T12:00:00+09:00" data-slug="aichi-este-map">
+            <div class="card-thumb thumb-aichieste">
+            <span class="new-badge">NEW</span>
+            <span class="thumb-emoji">📍</span>
+                <img class="thumb-gif" src="assets/aichi-este-map.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="aichiEsteTitle">愛知アジアンエステMAP</h2>
+                <p data-i18n="aichiEsteDesc">愛知県のアジアンメンズエステを地図で管理する個人用マップ。気になる店・訪問済み・お気に入りを色分けピンで表示し、エリアやキーワードで絞り込み。アプリ内で店舗を追加・編集でき、情報はいつでも更新できる。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="aichiEsteTag1">地図</span>
+                    <span class="tag" data-i18n="aichiEsteTag2">店舗メモ</span>
+                    <span class="tag" data-i18n="aichiEsteTag3">愛知県</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/aichi-este-map/" target="_blank" data-i18n="useTool">▶ ツールを使う</a>
+            </div>
+        </div>
     <div class="card" data-cat="fortune" data-added="2026-05-21T18:30:00+09:00" data-slug="himekuri-uranai">
             <div class="card-thumb thumb-himekuri">
             <span class="new-badge">NEW</span>
@@ -4681,6 +4699,9 @@ const I18N = {
         himekuriTitle: "日めくり星占い",
         himekuriDesc: "誕生日を入れるだけで、今日のあなたの運勢を12星座で無料診断。総合・恋愛・仕事・金運・健康運、ラッキーカラーやアイテム、運命数、12星座ランキングを毎日チェック。占いは毎日0時に自動更新、日英対応。",
         himekuriTag1: "占い", himekuriTag2: "毎日更新", himekuriTag3: "12星座",
+        aichiEsteTitle: "愛知アジアンエステMAP",
+        aichiEsteDesc: "愛知県のアジアンメンズエステを地図で管理する個人用マップ。気になる店・訪問済み・お気に入りを色分けピンで表示し、エリアやキーワードで絞り込み。アプリ内で店舗を追加・編集でき、情報はいつでも更新できる。",
+        aichiEsteTag1: "地図", aichiEsteTag2: "店舗メモ", aichiEsteTag3: "愛知県",
         olympia776bcTitle: "古代オリンピア 紀元前776年",
         olympia776bcDesc: "紀元前776年、オリンピアで最初の競技祭。スタディオン走・円盤投・やり投・幅跳び・パンクラチオンの5種目でオリーブの冠を目指す。",
         olympia776bcTag1: "スポーツ", olympia776bcTag2: "古代ギリシャ", olympia776bcTag3: "紀元前776年",
@@ -5304,6 +5325,9 @@ const I18N = {
         himekuriTitle: "Daily Star Fortune",
         himekuriDesc: "Just enter your birthday for a free daily horoscope across all 12 zodiac signs — overall, love, work, money and health luck, lucky colors and items, your life path number, and a daily 12-sign ranking. Refreshes every midnight. JP/EN.",
         himekuriTag1: "Fortune", himekuriTag2: "Daily", himekuriTag3: "12 signs",
+        aichiEsteTitle: "Aichi Asian Esthe Map",
+        aichiEsteDesc: "A personal map for tracking Asian men's relaxation salons across Aichi. Pins are color-coded by status — want to go, visited, favorite — with filtering by area and keyword. Add and edit shops right in the app; the data can be updated anytime.",
+        aichiEsteTag1: "Map", aichiEsteTag2: "Notes", aichiEsteTag3: "Aichi",
         olympia776bcTitle: "Ancient Olympics · 776 BC",
         olympia776bcDesc: "776 BC — the first recorded athletic festival at Olympia. Compete in 5 events: stadion sprint, discus, javelin, long jump, and pankration.",
         olympia776bcTag1: "Sports", olympia776bcTag2: "Ancient Greece", olympia776bcTag3: "776 BC",
