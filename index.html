@@ -202,6 +202,7 @@ header p {
 .thumb-troy      { background: linear-gradient(135deg, #060a14 0%, #141e38 100%); }
 .thumb-zenchi    { background: linear-gradient(135deg, #241a5c 0%, #0a0720 100%); }
 .thumb-himekuri  { background: radial-gradient(ellipse at 50% 22%, #322a63 0%, #14112e 55%, #0a0818 100%); }
+.thumb-yumetechou{ background: radial-gradient(ellipse at 50% 32%, #1a1849 0%, #0a0a2a 60%, #000 100%); }
 .thumb-yokuataru { background: radial-gradient(ellipse at 50% 32%, #2a151c 0%, #140d12 56%, #0a0709 100%); }
 .thumb-otodokei  { background: linear-gradient(135deg, #0a0c1a 0%, #12082a 100%); }
 .thumb-dokidoki  { background: radial-gradient(ellipse at center, #1a1230 0%, #07050d 70%); }
@@ -4008,6 +4009,23 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/crowd-wisdom/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
+    <div class="card" data-cat="tools" data-added="2026-05-28T02:55:00+09:00" data-slug="yume-techou">
+            <div class="card-thumb thumb-yumetechou">
+            <span class="new-badge">NEW</span>
+            <span class="thumb-emoji">🌙</span>
+                <img class="thumb-gif" src="assets/yume-techou.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="yumetechouTitle">夢手帳</h2>
+                <p data-i18n="yumetechouDesc">起き抜けに夢日記をつけるだけで、本文に現れた象徴を自動で読み解いてくれる夢手帳。海・落下・追われる…約60の夢の象徴をその場で解釈、明晰夢や気分も記録。音声入力・カレンダー・象徴の出現頻度の統計付き。データは端末ローカルのみ。日英対応。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="utilityTag">ツール</span>
+                    <span class="tag" data-i18n="yumetechouTag1">夢日記</span>
+                    <span class="tag" data-i18n="yumetechouTag2">象徴の自動解釈</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/yume-techou/" target="_blank" data-i18n="useTool">▶ ツールを使う</a>
+            </div>
+        </div>
     <div class="card" data-cat="games" data-added="2026-05-22T13:00:00+09:00" data-slug="yoku-ataru">
             <div class="card-thumb thumb-yokuataru">
             <span class="new-badge">NEW</span>
@@ -4702,6 +4720,9 @@ const I18N = {
         yokuataruTitle: "よく当たる",
         yokuataruDesc: "路地裏の占いの館。占い師は、あなたが来る前に「封をした紙」を卓に置く。鑑定を生き延び、最後にそれを開けたとき——あなたの選択は、すべて先に書かれていた。BGM付きの選択式ホラー。",
         yokuataruTag1: "ホラー", yokuataruTag2: "選択式", yokuataruTag3: "日英対応",
+        yumetechouTitle: "夢手帳",
+        yumetechouDesc: "起き抜けに夢日記をつけるだけで、本文に現れた象徴を自動で読み解いてくれる夢手帳。海・落下・追われる…約60の夢の象徴をその場で解釈、明晰夢や気分も記録。音声入力・カレンダー・象徴の出現頻度の統計付き。データは端末ローカルのみ。日英対応。",
+        yumetechouTag1: "夢日記", yumetechouTag2: "象徴の自動解釈",
         olympia776bcTitle: "古代オリンピア 紀元前776年",
         olympia776bcDesc: "紀元前776年、オリンピアで最初の競技祭。スタディオン走・円盤投・やり投・幅跳び・パンクラチオンの5種目でオリーブの冠を目指す。",
         olympia776bcTag1: "スポーツ", olympia776bcTag2: "古代ギリシャ", olympia776bcTag3: "紀元前776年",
@@ -5328,6 +5349,9 @@ const I18N = {
         yokuataruTitle: "She's Never Wrong",
         yokuataruDesc: "A choice-driven horror game, with sound. Before you arrive, the fortune-teller sets a sealed paper on the table. Survive the reading, break the seal at the end — and find your every choice was already written there. JP/EN.",
         yokuataruTag1: "Horror", yokuataruTag2: "Choices", yokuataruTag3: "JP / EN",
+        yumetechouTitle: "Dream Journal",
+        yumetechouDesc: "Record dreams the moment you wake — and watch the symbols in your text get decoded on the spot. About 60 classic dream symbols (water, falling, being chased…) interpreted automatically, with lucid-dream and mood tracking, voice input, calendar and frequency stats. Stored only on your device. JP/EN.",
+        yumetechouTag1: "Dream journal", yumetechouTag2: "Auto symbol decoding",
         olympia776bcTitle: "Ancient Olympics · 776 BC",
         olympia776bcDesc: "776 BC — the first recorded athletic festival at Olympia. Compete in 5 events: stadion sprint, discus, javelin, long jump, and pankration.",
         olympia776bcTag1: "Sports", olympia776bcTag2: "Ancient Greece", olympia776bcTag3: "776 BC",
