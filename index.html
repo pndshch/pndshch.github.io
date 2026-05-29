@@ -131,6 +131,7 @@ header p {
     overflow: hidden;
 }
 .thumb-keisan { background: linear-gradient(135deg, #1a0a2a 0%, #2a1a0a 100%); }
+.thumb-houchikokka { background: linear-gradient(180deg, #0c1322 0%, #1c2c4e 50%, #20402c 100%); }
 .thumb-mizumichi { background: linear-gradient(135deg, #0a2233 0%, #0d3a4a 100%); }
 .thumb-poop    { background: linear-gradient(135deg, #3a200d 0%, #1a1004 100%); }
 .thumb-gorilla { background: linear-gradient(135deg, #1a2a0d 0%, #0a1a0d 100%); }
@@ -1081,6 +1082,22 @@ footer a:hover { color: #e6edf3; }
 
 <!-- All apps -->
 <div class="grid" id="app-grid">
+    <div class="card" data-cat="games learn" data-added="2026-05-30T09:00:00+09:00" data-slug="houchi-kokka">
+            <div class="card-thumb thumb-houchikokka">
+            <span class="thumb-emoji">🏛️</span>
+                <img class="thumb-gif" src="assets/houchi-kokka.gif" alt="" onerror="this.remove()">
+            </div>
+            <div class="card-body">
+                <h2 data-i18n="houchiKokkaTitle">放置国家</h2>
+                <p data-i18n="houchiKokkaDesc">体制（資本主義・社会主義・独裁…）を選んで放置するだけ。経済・平等・自由の動きを眺めて、それぞれの主義のメリットとデメリットがだんだんわかる学習シミュ。</p>
+                <div class="tags">
+                    <span class="tag" data-i18n="houchiKokkaTag1">放置シミュ</span>
+                    <span class="tag" data-i18n="houchiKokkaTag2">主義くらべ</span>
+                    <span class="tag" data-i18n="houchiKokkaTag3">日英対応</span>
+                </div>
+                <a class="card-btn btn-play" href="https://pndshch.github.io/houchi-kokka/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
+            </div>
+        </div>
     <div class="card" data-cat="world-history games" data-added="2026-05-29T09:00:00+09:00" data-slug="eagle-1969" data-year="1969">
             <div class="card-thumb thumb-eagle1969">
             <span class="thumb-emoji">🌕</span>
@@ -4709,6 +4726,9 @@ const I18N = {
         lo1969Title: "「エル・オー」1969",
         lo1969Desc:  "1969年、最初のインターネット・メッセージは「LO」だった。あの夜の1分。",
         lo1969Tag1: "史実体験", lo1969Tag2: "ARPANET", lo1969Tag3: "10月29日 · 1969",
+        houchiKokkaTitle: "放置国家",
+        houchiKokkaDesc: "体制（資本主義・社会主義・独裁…）を選んで放置するだけ。経済・平等・自由の動きを眺めて、それぞれの主義のメリットとデメリットがだんだんわかる学習シミュ。",
+        houchiKokkaTag1: "放置シミュ", houchiKokkaTag2: "主義くらべ", houchiKokkaTag3: "日英対応",
         eagle1969Title: "イーグル着陸 1969",
         eagle1969Desc:  "1969年7月20日、月着陸船イーグルを手動操縦。岩場を避け、燃料が尽きる前に静かの海へソフトランディング。",
         eagle1969Tag1: "史実体験", eagle1969Tag2: "月着陸船", eagle1969Tag3: "7月20日 · 1969",
@@ -5344,6 +5364,9 @@ const I18N = {
         lo1969Title: "Lo and Behold · 1969",
         lo1969Desc:  "1969 — the first internet message was \"LO\". One minute of that night.",
         lo1969Tag1: "History·Felt", lo1969Tag2: "ARPANET", lo1969Tag3: "Oct 29 · 1969",
+        houchiKokkaTitle: "Idle Nation",
+        houchiKokkaDesc: "Capitalism, socialism, dictatorship… just pick a system and let it idle. Watch the economy, equality and freedom shift, and gradually grasp each -ism's merits and demerits.",
+        houchiKokkaTag1: "Idle sim", houchiKokkaTag2: "Compare -isms", houchiKokkaTag3: "JP / EN",
         eagle1969Title: "The Eagle Has Landed · 1969",
         eagle1969Desc:  "July 20, 1969 — fly the lunar module Eagle by hand, dodge the boulders and touch down softly on the Sea of Tranquility before the fuel runs out.",
         eagle1969Tag1: "History·Felt", eagle1969Tag2: "Lunar lander", eagle1969Tag3: "Jul 20 · 1969",
