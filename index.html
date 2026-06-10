@@ -21,8 +21,20 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 64px 20px 120px;
+    padding: 56px 20px 120px;
+    position: relative;
 }
+body::before {
+    content: '';
+    position: fixed;
+    top: -30vh; left: 50%;
+    transform: translateX(-50%);
+    width: 130vw; height: 70vh;
+    background: radial-gradient(ellipse at center, rgba(124,58,237,0.16) 0%, rgba(168,85,247,0.07) 40%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+}
+body > * { position: relative; z-index: 1; }
 
 /* ── Language switch ── */
 .lang-switch {
@@ -65,14 +77,16 @@ header { text-align: center; margin-bottom: 56px; }
     margin-bottom: 14px;
 }
 .logo-mark {
-    width: 40px; height: 40px;
+    width: 48px; height: 48px;
     background: linear-gradient(135deg, #7c3aed, #a855f7);
-    border-radius: 10px;
+    border-radius: 13px;
     display: flex; align-items: center; justify-content: center;
-    font-size: 22px;
+    font-size: 26px;
+    box-shadow: 0 0 28px rgba(168,85,247,0.45), 0 4px 14px rgba(0,0,0,0.4);
 }
 .logo-text {
-    font-size: 28px; font-weight: 800; letter-spacing: -0.5px;
+    font-size: 32px; font-weight: 800; letter-spacing: -0.5px;
+    text-shadow: 0 0 30px rgba(168,85,247,0.35);
 }
 .logo-text span { color: #a855f7; }
 
@@ -85,25 +99,39 @@ header p {
 /* ── Section label ── */
 .section-label {
     width: 100%;
-    max-width: 720px;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 1.2px;
-    text-transform: uppercase;
-    color: #484f58;
-    margin: 36px 0 14px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid #21262d;
+    max-width: 980px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.4px;
+    color: #c9d1d9;
+    margin: 40px 0 16px;
+}
+.section-label::before {
+    content: '';
+    width: 4px; height: 18px;
+    border-radius: 3px;
+    background: linear-gradient(180deg, #a855f7, #7c3aed);
+    box-shadow: 0 0 10px rgba(168,85,247,0.5);
+    flex-shrink: 0;
+}
+.section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, #30363d, transparent);
 }
 .section-label:first-of-type { margin-top: 0; }
 
 /* ── Card grid ── */
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(252px, 1fr));
+    gap: 16px;
     width: 100%;
-    max-width: 720px;
+    max-width: 980px;
 }
 
 .card {
@@ -652,7 +680,7 @@ header p {
     white-space: nowrap;
     box-shadow: 0 6px 20px rgba(16, 185, 129, 0.32);
 }
-@media (max-width: 720px) {
+@media (max-width: 980px) {
     .ai-news-banner {
         grid-template-columns: 1fr;
         gap: 14px;
@@ -726,7 +754,7 @@ footer a:hover { color: #e6edf3; }
 .search-wrap {
     position: relative;
     width: 100%;
-    max-width: 720px;
+    max-width: 980px;
     margin: 0 0 12px;
 }
 .search-wrap input[type="search"] {
@@ -867,7 +895,7 @@ footer a:hover { color: #e6edf3; }
     flex-wrap: wrap;
     justify-content: center;
     width: 100%;
-    max-width: 720px;
+    max-width: 980px;
     margin-bottom: 28px;
     position: sticky;
     top: 0;
@@ -904,7 +932,7 @@ footer a:hover { color: #e6edf3; }
     display: flex;
     gap: 14px;
     width: 100%;
-    max-width: 720px;
+    max-width: 980px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
@@ -938,6 +966,37 @@ footer a:hover { color: #e6edf3; }
     font-weight: 600;
     color: #c9d1d9;
     line-height: 1.3;
+}
+
+/* ── Best-of (殿堂入り) ── */
+.best-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(288px, 1fr));
+    gap: 18px;
+    width: 100%;
+    max-width: 980px;
+}
+.best-grid .card-thumb { height: 175px; }
+.best-grid .card:hover {
+    border-color: #d9b25a;
+    box-shadow: 0 10px 36px rgba(217,178,90,0.18);
+}
+.best-chip {
+    position: absolute;
+    top: 10px; left: 10px;
+    z-index: 3;
+    background: rgba(13,17,23,0.78);
+    border: 1px solid rgba(217,178,90,0.55);
+    color: #ffd166;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.6px;
+    padding: 3px 9px;
+    border-radius: 20px;
+    backdrop-filter: blur(3px);
+}
+@media (max-width: 520px) {
+    .best-grid .card-thumb { height: 165px; }
 }
 
 /* ── Grid section sub-headers ── */
@@ -981,58 +1040,58 @@ footer a:hover { color: #e6edf3; }
     <p class="app-count"><span class="count-num" id="appCountNum">100+</span><span data-i18n="appCountSuffix">アプリ・ゲーム</span></p>
     <div class="gif-marquee" aria-hidden="true">
         <div class="gif-row scroll-left">
-            <span class="gif-tile"><img src="assets/e-no-oto.gif" alt=""></span>
-            <span class="gif-tile"><img src="assets/akubi-utsushi.gif" alt=""></span>
-            <span class="gif-tile"><img src="assets/iro-maze.gif" alt=""></span>
-            <span class="gif-tile"><img src="assets/heron-oyster.gif" alt=""></span>
-            <span class="gif-tile"><img src="assets/cargo-cult-1947.gif" alt=""></span>
-            <span class="gif-tile"><img src="assets/warmth-1958.gif" alt=""></span>
-            <span class="gif-tile"><img src="assets/rosetta-1822.gif" alt=""></span>
-            <span class="gif-tile"><img src="assets/fleming-1928.gif" alt=""></span>
-            <span class="gif-tile"><img src="assets/broad-street-1854.gif" alt=""></span>
-            <span class="gif-tile"><img src="assets/kosuruto.gif" alt=""></span>
-            <span class="gif-tile"><img src="assets/eratosthenes-240bc.gif" alt=""></span>
-            <span class="gif-tile"><img src="assets/fruit-drop-ai.gif" alt=""></span>
+            <span class="gif-tile"><img loading="lazy" decoding="async" src="assets/e-no-oto.gif" alt=""></span>
+            <span class="gif-tile"><img loading="lazy" decoding="async" src="assets/akubi-utsushi.gif" alt=""></span>
+            <span class="gif-tile"><img loading="lazy" decoding="async" src="assets/iro-maze.gif" alt=""></span>
+            <span class="gif-tile"><img loading="lazy" decoding="async" src="assets/heron-oyster.gif" alt=""></span>
+            <span class="gif-tile"><img loading="lazy" decoding="async" src="assets/cargo-cult-1947.gif" alt=""></span>
+            <span class="gif-tile"><img loading="lazy" decoding="async" src="assets/warmth-1958.gif" alt=""></span>
+            <span class="gif-tile"><img loading="lazy" decoding="async" src="assets/rosetta-1822.gif" alt=""></span>
+            <span class="gif-tile"><img loading="lazy" decoding="async" src="assets/fleming-1928.gif" alt=""></span>
+            <span class="gif-tile"><img loading="lazy" decoding="async" src="assets/broad-street-1854.gif" alt=""></span>
+            <span class="gif-tile"><img loading="lazy" decoding="async" src="assets/kosuruto.gif" alt=""></span>
+            <span class="gif-tile"><img loading="lazy" decoding="async" src="assets/eratosthenes-240bc.gif" alt=""></span>
+            <span class="gif-tile"><img loading="lazy" decoding="async" src="assets/fruit-drop-ai.gif" alt=""></span>
             <!-- duplicated for seamless loop -->
-            <span class="gif-tile"><img src="assets/e-no-oto.gif" alt=""></span>
-            <span class="gif-tile"><img src="assets/akubi-utsushi.gif" alt=""></span>
-            <span class="gif-tile"><img src="assets/iro-maze.gif" alt=""></span>
-            <span class="gif-tile"><img src="assets/heron-oyster.gif" alt=""></span>
-            <span class="gif-tile"><img src="assets/cargo-cult-1947.gif" alt=""></span>
-            <span class="gif-tile"><img src="assets/warmth-1958.gif" alt=""></span>
-            <span class="gif-tile"><img src="assets/rosetta-1822.gif" alt=""></span>
-            <span class="gif-tile"><img src="assets/fleming-1928.gif" alt=""></span>
-            <span class="gif-tile"><img src="assets/broad-street-1854.gif" alt=""></span>
-            <span class="gif-tile"><img src="assets/kosuruto.gif" alt=""></span>
-            <span class="gif-tile"><img src="assets/eratosthenes-240bc.gif" alt=""></span>
-            <span class="gif-tile"><img src="assets/fruit-drop-ai.gif" alt=""></span>
+            <span class="gif-tile"><img loading="lazy" decoding="async" src="assets/e-no-oto.gif" alt=""></span>
+            <span class="gif-tile"><img loading="lazy" decoding="async" src="assets/akubi-utsushi.gif" alt=""></span>
+            <span class="gif-tile"><img loading="lazy" decoding="async" src="assets/iro-maze.gif" alt=""></span>
+            <span class="gif-tile"><img loading="lazy" decoding="async" src="assets/heron-oyster.gif" alt=""></span>
+            <span class="gif-tile"><img loading="lazy" decoding="async" src="assets/cargo-cult-1947.gif" alt=""></span>
+            <span class="gif-tile"><img loading="lazy" decoding="async" src="assets/warmth-1958.gif" alt=""></span>
+            <span class="gif-tile"><img loading="lazy" decoding="async" src="assets/rosetta-1822.gif" alt=""></span>
+            <span class="gif-tile"><img loading="lazy" decoding="async" src="assets/fleming-1928.gif" alt=""></span>
+            <span class="gif-tile"><img loading="lazy" decoding="async" src="assets/broad-street-1854.gif" alt=""></span>
+            <span class="gif-tile"><img loading="lazy" decoding="async" src="assets/kosuruto.gif" alt=""></span>
+            <span class="gif-tile"><img loading="lazy" decoding="async" src="assets/eratosthenes-240bc.gif" alt=""></span>
+            <span class="gif-tile"><img loading="lazy" decoding="async" src="assets/fruit-drop-ai.gif" alt=""></span>
         </div>
         <div class="gif-row scroll-right">
-            <span class="gif-tile"><img src="assets/ashi-oto.gif" alt=""></span>
-            <span class="gif-tile"><img src="assets/kiokuiz.gif" alt=""></span>
-            <span class="gif-tile"><img src="assets/choco-bomber.gif" alt=""></span>
-            <span class="gif-tile"><img src="assets/city-drive.gif" alt=""></span>
-            <span class="gif-tile"><img src="assets/koi-no-taki.gif" alt=""></span>
-            <span class="gif-tile"><img src="assets/rugby-try.gif" alt=""></span>
-            <span class="gif-tile"><img src="assets/yen-defender.gif" alt=""></span>
-            <span class="gif-tile"><img src="assets/pompeii-79.gif" alt=""></span>
-            <span class="gif-tile"><img src="assets/prism-1666.gif" alt=""></span>
-            <span class="gif-tile"><img src="assets/moyo-no-tane.gif" alt=""></span>
-            <span class="gif-tile"><img src="assets/lo-1969.gif" alt=""></span>
-            <span class="gif-tile"><img src="assets/gw150914.gif" alt=""></span>
+            <span class="gif-tile"><img loading="lazy" decoding="async" src="assets/ashi-oto.gif" alt=""></span>
+            <span class="gif-tile"><img loading="lazy" decoding="async" src="assets/kiokuiz.gif" alt=""></span>
+            <span class="gif-tile"><img loading="lazy" decoding="async" src="assets/choco-bomber.gif" alt=""></span>
+            <span class="gif-tile"><img loading="lazy" decoding="async" src="assets/city-drive.gif" alt=""></span>
+            <span class="gif-tile"><img loading="lazy" decoding="async" src="assets/koi-no-taki.gif" alt=""></span>
+            <span class="gif-tile"><img loading="lazy" decoding="async" src="assets/rugby-try.gif" alt=""></span>
+            <span class="gif-tile"><img loading="lazy" decoding="async" src="assets/yen-defender.gif" alt=""></span>
+            <span class="gif-tile"><img loading="lazy" decoding="async" src="assets/pompeii-79.gif" alt=""></span>
+            <span class="gif-tile"><img loading="lazy" decoding="async" src="assets/prism-1666.gif" alt=""></span>
+            <span class="gif-tile"><img loading="lazy" decoding="async" src="assets/moyo-no-tane.gif" alt=""></span>
+            <span class="gif-tile"><img loading="lazy" decoding="async" src="assets/lo-1969.gif" alt=""></span>
+            <span class="gif-tile"><img loading="lazy" decoding="async" src="assets/gw150914.gif" alt=""></span>
             <!-- duplicated for seamless loop -->
-            <span class="gif-tile"><img src="assets/ashi-oto.gif" alt=""></span>
-            <span class="gif-tile"><img src="assets/kiokuiz.gif" alt=""></span>
-            <span class="gif-tile"><img src="assets/choco-bomber.gif" alt=""></span>
-            <span class="gif-tile"><img src="assets/city-drive.gif" alt=""></span>
-            <span class="gif-tile"><img src="assets/koi-no-taki.gif" alt=""></span>
-            <span class="gif-tile"><img src="assets/rugby-try.gif" alt=""></span>
-            <span class="gif-tile"><img src="assets/yen-defender.gif" alt=""></span>
-            <span class="gif-tile"><img src="assets/pompeii-79.gif" alt=""></span>
-            <span class="gif-tile"><img src="assets/prism-1666.gif" alt=""></span>
-            <span class="gif-tile"><img src="assets/moyo-no-tane.gif" alt=""></span>
-            <span class="gif-tile"><img src="assets/lo-1969.gif" alt=""></span>
-            <span class="gif-tile"><img src="assets/gw150914.gif" alt=""></span>
+            <span class="gif-tile"><img loading="lazy" decoding="async" src="assets/ashi-oto.gif" alt=""></span>
+            <span class="gif-tile"><img loading="lazy" decoding="async" src="assets/kiokuiz.gif" alt=""></span>
+            <span class="gif-tile"><img loading="lazy" decoding="async" src="assets/choco-bomber.gif" alt=""></span>
+            <span class="gif-tile"><img loading="lazy" decoding="async" src="assets/city-drive.gif" alt=""></span>
+            <span class="gif-tile"><img loading="lazy" decoding="async" src="assets/koi-no-taki.gif" alt=""></span>
+            <span class="gif-tile"><img loading="lazy" decoding="async" src="assets/rugby-try.gif" alt=""></span>
+            <span class="gif-tile"><img loading="lazy" decoding="async" src="assets/yen-defender.gif" alt=""></span>
+            <span class="gif-tile"><img loading="lazy" decoding="async" src="assets/pompeii-79.gif" alt=""></span>
+            <span class="gif-tile"><img loading="lazy" decoding="async" src="assets/prism-1666.gif" alt=""></span>
+            <span class="gif-tile"><img loading="lazy" decoding="async" src="assets/moyo-no-tane.gif" alt=""></span>
+            <span class="gif-tile"><img loading="lazy" decoding="async" src="assets/lo-1969.gif" alt=""></span>
+            <span class="gif-tile"><img loading="lazy" decoding="async" src="assets/gw150914.gif" alt=""></span>
         </div>
     </div>
     <p class="bmc-label" data-i18n="bmcLabel">気に入ったら支援していただけると嬉しいです</p>
@@ -1043,6 +1102,10 @@ footer a:hover { color: #e6edf3; }
 
 <!-- Spotlight (JS-populated from newest app) -->
 <section class="spotlight" id="spotlight" aria-label="Spotlight"></section>
+
+<!-- Best of Pinda Lab (curated, JS-populated) -->
+<div class="section-label" id="bestLabel" data-i18n="secBest">⭐ 殿堂入り — いま遊ぶならこれ</div>
+<div class="best-grid" id="bestRow"></div>
 
 <!-- AI News Daily ribbon -->
 <a class="ai-news-banner" href="https://pndshch.github.io/ai-news-daily/" target="_blank" rel="noopener" aria-label="AI News Daily">
@@ -1081,11 +1144,12 @@ footer a:hover { color: #e6edf3; }
 <div class="feat-row" id="featRow"></div>
 
 <!-- All apps -->
+<div class="section-label" id="allLabel" data-i18n="secAll">🗂️ すべてのアプリ</div>
 <div class="grid" id="app-grid">
     <div class="card" data-cat="games learn" data-added="2026-05-30T09:00:00+09:00" data-slug="houchi-kokka">
             <div class="card-thumb thumb-houchikokka">
             <span class="thumb-emoji">🏛️</span>
-                <img class="thumb-gif" src="assets/houchi-kokka.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/houchi-kokka.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="houchiKokkaTitle">放置国家</h2>
@@ -1098,18 +1162,18 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/houchi-kokka/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="world-history games" data-added="2026-05-29T09:00:00+09:00" data-slug="eagle-1969" data-year="1969">
+    <div class="card" data-cat="world-history games" data-added="2026-06-11T10:00:00+09:00" data-slug="eagle-1969" data-year="1969">
             <div class="card-thumb thumb-eagle1969">
             <span class="thumb-emoji">🌕</span>
-                <img class="thumb-gif" src="assets/eagle-1969.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/eagle-1969.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="eagle1969Title">イーグル着陸 1969</h2>
-                <p data-i18n="eagle1969Desc">1969年7月20日、月着陸船「イーグル」を手動操縦。岩場を避け、燃料が尽きる前に静かの海へソフトランディングせよ。</p>
+                <p data-i18n="eagle1969Desc">静かの海からハドレー谷まで、アポロ計画の実在の5地点に月着陸船を降ろせ。1202アラーム、サーベイヤー3号、谷と山塊——ミッションを進めて★を集める月面着陸アーケード。音付き。</p>
                 <div class="tags">
-                    <span class="tag" data-i18n="eagle1969Tag1">史実体験</span>
-                    <span class="tag" data-i18n="eagle1969Tag2">月着陸船</span>
-                    <span class="tag" data-i18n="eagle1969Tag3">7月20日 · 1969</span>
+                    <span class="tag" data-i18n="eagle1969Tag1">月着陸アーケード</span>
+                    <span class="tag" data-i18n="eagle1969Tag2">5ミッション</span>
+                    <span class="tag" data-i18n="eagle1969Tag3">★を集めろ</span>
                 </div>
                 <a class="card-btn btn-play" href="https://pndshch.github.io/eagle-1969/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
@@ -1117,7 +1181,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="kids games learn" data-added="2026-05-29T09:00:00+09:00" data-slug="mizumichi">
             <div class="card-thumb thumb-mizumichi">
             <span class="thumb-emoji">💧</span>
-                <img class="thumb-gif" src="assets/mizumichi.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/mizumichi.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="mizumichiTitle">みずみち</h2>
@@ -1133,7 +1197,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="tools" data-added="2026-05-21T16:00:00+09:00" data-slug="oyasumi-count">
             <div class="card-thumb thumb-oyasumicount">
             <span class="thumb-emoji">🌙</span>
-                <img class="thumb-gif" src="assets/oyasumi-count.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/oyasumi-count.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="oyasumiCountTitle">おやすみカウント</h2>
@@ -1149,7 +1213,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="tools" data-added="2026-05-21T15:00:00+09:00" data-slug="c1-speaking-gym">
             <div class="card-thumb thumb-c1gym">
             <span class="thumb-emoji">🎙️</span>
-                <img class="thumb-gif" src="assets/c1-speaking-gym.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/c1-speaking-gym.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="c1gymTitle">C1 Speaking Gym</h2>
@@ -1162,11 +1226,10 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/c1-speaking-gym/" target="_blank" data-i18n="useTool">▶ ツールを使う</a>
             </div>
         </div>
-    <div class="card" data-cat="games learn" data-added="2026-05-19T23:30:00+09:00" data-pin="1" data-slug="sodatekata">
+    <div class="card" data-cat="games learn" data-added="2026-05-19T23:30:00+09:00" data-slug="sodatekata">
             <div class="card-thumb thumb-sodatekata">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">🌱</span>
-                <img class="thumb-gif" src="assets/sodatekata.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/sodatekata.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="sodatekataTitle">育て方</h2>
@@ -1179,11 +1242,10 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/sodatekata/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="tools" data-added="2026-05-18T20:00:00+09:00" data-pin="1" data-slug="flag-imi">
+    <div class="card" data-cat="tools" data-added="2026-05-18T20:00:00+09:00" data-slug="flag-imi">
             <div class="card-thumb thumb-flagimi">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">🚩</span>
-                <img class="thumb-gif" src="assets/flag-imi.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/flag-imi.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="flagImiTitle">世界の国旗の意味</h2>
@@ -1199,7 +1261,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="kids learn" data-added="2026-05-18T10:00:00+09:00" data-slug="shinkai-tanken">
             <div class="card-thumb thumb-shinkai">
             <span class="thumb-emoji">🐟</span>
-                <img class="thumb-gif" src="assets/shinkai-tanken.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/shinkai-tanken.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="shinkaiTitle">しんかいたんけん</h2>
@@ -1212,11 +1274,10 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/shinkai-tanken/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="games learn" data-added="2026-05-17T23:30:00+09:00" data-pin="1" data-slug="sousei-no-suna">
+    <div class="card" data-cat="games learn" data-added="2026-05-17T23:30:00+09:00" data-slug="sousei-no-suna">
             <div class="card-thumb thumb-souseinosuna">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">🌍</span>
-                <img class="thumb-gif" src="assets/sousei-no-suna.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/sousei-no-suna.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="souseinosunaTitle">創世の砂</h2>
@@ -1229,11 +1290,10 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/sousei-no-suna/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="games kids learn" data-added="2026-05-20T02:00:00+09:00" data-pin="1" data-slug="tane-no-bouken">
+    <div class="card" data-cat="games kids learn" data-added="2026-05-20T02:00:00+09:00" data-slug="tane-no-bouken">
             <div class="card-thumb thumb-tanenobouken">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">🌱</span>
-                <img class="thumb-gif" src="assets/thumb-tane-no-bouken.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/thumb-tane-no-bouken.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="taneboukenTitle">たねのぼうけん</h2>
@@ -1246,11 +1306,10 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/tane-no-bouken/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="games kids" data-added="2026-05-17T11:00:00+09:00" data-pin="1" data-slug="mahou-no-suna">
+    <div class="card" data-cat="games kids" data-added="2026-05-17T11:00:00+09:00" data-slug="mahou-no-suna">
             <div class="card-thumb thumb-mahounosuna">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">🏖️</span>
-                <img class="thumb-gif" src="assets/mahou-no-suna.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/mahou-no-suna.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="mahounosunaTitle">まほうの砂</h2>
@@ -1263,11 +1322,10 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/mahou-no-suna/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="games world-history learn" data-added="2026-05-17T18:00:00+09:00" data-pin="1" data-slug="bunmei-kiseki">
+    <div class="card" data-cat="games world-history learn" data-added="2026-05-17T18:00:00+09:00" data-slug="bunmei-kiseki">
             <div class="card-thumb thumb-bunmeikiseki">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">🏛️</span>
-                <img class="thumb-gif" src="assets/bunmei-kiseki.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/bunmei-kiseki.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="bunmeiTitle">文明軌跡</h2>
@@ -1280,11 +1338,10 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/bunmei-kiseki/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="tools kids learn" data-added="2026-05-14T05:10:00+09:00" data-pin="1" data-slug="jiyu-kenkyu-planner">
+    <div class="card" data-cat="tools kids learn" data-added="2026-05-14T05:10:00+09:00" data-slug="jiyu-kenkyu-planner">
             <div class="card-thumb thumb-jiyukenkyu">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">🔬</span>
-                <img class="thumb-gif" src="assets/jiyu-kenkyu-planner.svg" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/jiyu-kenkyu-planner.svg" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="jiyuTitle">自由研究プランナーJr.</h2>
@@ -1297,12 +1354,11 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/jiyu-kenkyu-planner/" target="_blank" data-i18n="useTool">▶ ツールを使う</a>
             </div>
         </div>
-    <div class="card" data-cat="games world-history learn" data-added="2026-05-13T10:20:00+09:00" data-pin="1" data-slug="gutenberg-press-1455" data-year="1455">
+    <div class="card" data-cat="games world-history learn" data-added="2026-05-13T10:20:00+09:00" data-slug="gutenberg-press-1455" data-year="1455">
             <div class="card-thumb thumb-gutenberg">
-            <span class="new-badge">NEW</span>
             <span class="year-badge">1455</span>
             <span class="thumb-emoji">▣</span>
-                <img class="thumb-gif" src="assets/gutenberg-press-1455.svg" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/gutenberg-press-1455.svg" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="gutenbergTitle">活字工房 1455</h2>
@@ -1317,10 +1373,9 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="world-history games" data-added="2026-05-15T21:00:00+09:00" data-slug="mansa-musa-1324" data-year="1324">
             <div class="card-thumb thumb-mansamusa1324">
-            <span class="new-badge">NEW</span>
             <span class="year-badge">1324</span>
             <span class="thumb-emoji">👑💰</span>
-            <img class="thumb-gif" src="assets/mansa-musa-1324.gif" alt="" onerror="this.remove()">
+            <img class="thumb-gif" loading="lazy" decoding="async" src="assets/mansa-musa-1324.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="mansamusa1324Title">マンサ・ムーサ 1324年</h2>
@@ -1335,10 +1390,9 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="world-history games" data-added="2026-05-15T12:06:00+09:00" data-slug="zhenghe-1405" data-year="1405">
             <div class="card-thumb thumb-zhenghe1405">
-            <span class="new-badge">NEW</span>
             <span class="year-badge">1405</span>
             <span class="thumb-emoji">🚢⛵</span>
-            <img class="thumb-gif" src="assets/zhenghe-1405.gif" alt="" onerror="this.remove()">
+            <img class="thumb-gif" loading="lazy" decoding="async" src="assets/zhenghe-1405.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="zhenghe1405Title">鄭和の大航海 1405年</h2>
@@ -1353,7 +1407,6 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="world-history" data-added="2026-05-14T20:00:00+09:00" data-slug="constantinople-1453" data-year="1453">
             <div class="card-thumb thumb-constantinople1453">
-            <span class="new-badge">NEW</span>
             <span class="year-badge">1453</span>
             <span class="thumb-emoji">🏰⚔️</span>
             </div>
@@ -1370,10 +1423,9 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="world-history" data-added="2026-05-15T11:15:00+09:00" data-slug="apollo-13-1970" data-year="1970">
             <div class="card-thumb thumb-apollo131970">
-            <span class="new-badge">NEW</span>
             <span class="year-badge">1970</span>
             <span class="thumb-emoji">🚀🌍</span>
-                <img class="thumb-gif" src="assets/apollo-13-1970.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/apollo-13-1970.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="apollo131970Title">アポロ13号 1970年</h2>
@@ -1388,10 +1440,9 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="world-history games" data-added="2026-05-19T12:00:00+09:00" data-slug="cuba-1962" data-year="1962">
             <div class="card-thumb thumb-cuba1962">
-            <span class="new-badge">NEW</span>
             <span class="year-badge">1962</span>
             <span class="thumb-emoji">☢️🌊</span>
-                <img class="thumb-gif" src="assets/thumb-cuba1962.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/thumb-cuba1962.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="cuba1962Title">キューバ危機 1962年</h2>
@@ -1406,10 +1457,9 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="world-history" data-added="2026-05-15T09:00:00+09:00" data-slug="hannibal-218bc" data-year="-218">
             <div class="card-thumb thumb-hannibal218bc">
-            <span class="new-badge">NEW</span>
             <span class="year-badge">紀元前218</span>
             <span class="thumb-emoji">🐘⛰️</span>
-                <img class="thumb-gif" src="assets/hannibal-218bc.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/hannibal-218bc.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="hannibal218bcTitle">ハンニバルのアルプス越え 紀元前218年</h2>
@@ -1422,11 +1472,10 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/hannibal-218bc/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="tools kids" data-added="2026-05-13T05:20:00+09:00" data-pin="1" data-slug="hon-log-jr">
+    <div class="card" data-cat="tools kids" data-added="2026-05-13T05:20:00+09:00" data-slug="hon-log-jr">
             <div class="card-thumb thumb-honlog">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">📚</span>
-                <img class="thumb-gif" src="assets/hon-log-jr.svg" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/hon-log-jr.svg" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="honlogTitle">ほんログJr.</h2>
@@ -1439,9 +1488,8 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/hon-log-jr/" target="_blank" data-i18n="useTool">▶ ツールを使う</a>
             </div>
         </div>
-    <div class="card" data-cat="learn world-history" data-added="2026-05-12T22:32:00+09:00" data-pin="1" data-slug="philippines-explorer">
+    <div class="card" data-cat="learn world-history" data-added="2026-05-12T22:32:00+09:00" data-slug="philippines-explorer">
             <div class="card-thumb thumb-philippines">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">🇵🇭</span>
             </div>
             <div class="card-body">
@@ -1455,11 +1503,10 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/philippines-explorer/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="tools kids" data-added="2026-05-12T05:04:00+09:00" data-pin="1" data-slug="yotei-board-jr">
+    <div class="card" data-cat="tools kids" data-added="2026-05-12T05:04:00+09:00" data-slug="yotei-board-jr">
             <div class="card-thumb thumb-yotei">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">📅</span>
-                <img class="thumb-gif" src="assets/yotei-board-jr.svg" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/yotei-board-jr.svg" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="yoteiTitle">こども予定ボード</h2>
@@ -1472,11 +1519,10 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/yotei-board-jr/" target="_blank" data-i18n="useTool">▶ ツールを使う</a>
             </div>
         </div>
-    <div class="card" data-cat="tools kids" data-added="2026-05-11T23:30:00+09:00" data-pin="1" data-slug="sonae-pack-jr">
+    <div class="card" data-cat="tools kids" data-added="2026-05-11T23:30:00+09:00" data-slug="sonae-pack-jr">
             <div class="card-thumb thumb-sonae">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">🎒</span>
-                <img class="thumb-gif" src="assets/sonae-pack-jr.svg" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/sonae-pack-jr.svg" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="sonaeTitle">そなえバッグJr.</h2>
@@ -1491,9 +1537,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="learn" data-added="2026-05-11T23:20:00+09:00" data-slug="chokkan-lab">
             <div class="card-thumb thumb-chokkan">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">◐</span>
-                <img class="thumb-gif" src="assets/chokkan-lab.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/chokkan-lab.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="chokkanTitle">直感ラボ</h2>
@@ -1508,9 +1553,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="kids" data-added="2026-05-21T12:00:00+09:00" data-slug="hikari-no-meiro">
             <div class="card-thumb thumb-hikari">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">🔦</span>
-                <img class="thumb-gif" src="assets/hikari-no-meiro.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/hikari-no-meiro.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="hikariTitle">ひかりのめいろ</h2>
@@ -1525,9 +1569,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="kids" data-added="2026-05-15T16:00:00+09:00" data-slug="oto-no-tokei">
             <div class="card-thumb thumb-otodokei">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">🎵</span>
-                <img class="thumb-gif" src="assets/oto-no-tokei.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/oto-no-tokei.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="otodokeiTitle">おとのとけい</h2>
@@ -1542,9 +1585,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="kids" data-added="2026-05-11T22:30:00+09:00" data-slug="voronoi-no-niwa">
             <div class="card-thumb thumb-voronoi">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">◎</span>
-                <img class="thumb-gif" src="assets/voronoi-no-niwa.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/voronoi-no-niwa.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="voronoiTitle">ボロノイの庭 1908</h2>
@@ -1559,9 +1601,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="kids" data-added="2026-05-15T08:00:00+09:00" data-slug="nakaya-1936">
             <div class="card-thumb thumb-nakaya">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">❄️</span>
-                <img class="thumb-gif" src="assets/nakaya-1936.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/nakaya-1936.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="nakayaTitle">ゆきの レシピ 1936</h2>
@@ -1576,9 +1617,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="kids" data-added="2026-05-14T08:00:00+09:00" data-slug="nenkin-2010">
             <div class="card-thumb thumb-nenkin">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">🌾</span>
-                <img class="thumb-gif" src="assets/nenkin-2010.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/nenkin-2010.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="nenkinTitle">ねんきん 2010</h2>
@@ -1593,9 +1633,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="kids" data-added="2026-05-13T08:00:00+09:00" data-slug="turing-1952">
             <div class="card-thumb thumb-turing">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">🦓</span>
-                <img class="thumb-gif" src="assets/turing-1952.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/turing-1952.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="turingTitle">ターイングもよう 1952</h2>
@@ -1610,9 +1649,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="kids" data-added="2026-05-12T07:30:00+09:00" data-slug="cajal-1888">
             <div class="card-thumb thumb-cajal">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">⚡</span>
-                <img class="thumb-gif" src="assets/cajal-1888.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/cajal-1888.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="cajalTitle">シナプスの もり</h2>
@@ -1627,9 +1665,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="kids" data-added="2026-05-11T08:30:00+09:00" data-slug="kumamushi-moshimo">
             <div class="card-thumb thumb-kumamushi">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">🐻</span>
-                <img class="thumb-gif" src="assets/kumamushi-moshimo.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/kumamushi-moshimo.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="kumamushiTitle">クマムシ・もしも</h2>
@@ -1644,9 +1681,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="kids" data-added="2026-05-11T07:00:00+09:00" data-slug="mori-no-sasayaki">
             <div class="card-thumb thumb-morisasayaki">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">🌳</span>
-                <img class="thumb-gif" src="assets/mori-no-sasayaki.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/mori-no-sasayaki.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="moriSasayakiTitle">もりのささやき</h2>
@@ -1661,9 +1697,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="kids" data-added="2026-05-11T05:30:00+09:00" data-slug="chladni-1787">
             <div class="card-thumb thumb-chladni">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">〰️</span>
-                <img class="thumb-gif" src="assets/chladni-1787.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/chladni-1787.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="chladniTitle">クラドニ もよう 1787</h2>
@@ -1678,9 +1713,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="kids" data-added="2026-05-10T23:30:00+09:00" data-slug="mitsubachi-no-chizu">
             <div class="card-thumb thumb-mitsubachi">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">🐝</span>
-                <img class="thumb-gif" src="assets/mitsubachi-no-chizu.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/mitsubachi-no-chizu.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="mitsubachiTitle">みつばち の ちず</h2>
@@ -1695,9 +1729,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="kids" data-added="2026-05-10T22:00:00+09:00" data-slug="dokidoki-zoo">
             <div class="card-thumb thumb-dokidoki">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">🫀</span>
-                <img class="thumb-gif" src="assets/dokidoki-zoo.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/dokidoki-zoo.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="dokidokiTitle">どきどき どうぶつえん</h2>
@@ -1712,9 +1745,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="kids" data-added="2026-05-10T19:00:00+09:00" data-slug="hoshi-musubi">
             <div class="card-thumb thumb-hoshi">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">✨</span>
-                <img class="thumb-gif" src="assets/hoshi-musubi.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/hoshi-musubi.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="hoshiTitle">ほしむすび</h2>
@@ -1729,9 +1761,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="kids" data-added="2026-05-10T18:30:00+09:00" data-slug="guuzen-no-yama">
             <div class="card-thumb thumb-guuzen">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">🎲⛰</span>
-                <img class="thumb-gif" src="assets/guuzen-no-yama.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/guuzen-no-yama.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="guuzenTitle">ぐうぜん の やま</h2>
@@ -1746,9 +1777,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="games" data-added="2026-05-10T17:00:00+09:00" data-slug="flappy-rl">
             <div class="card-thumb thumb-flappyrl">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">🐦</span>
-                <img class="thumb-gif" src="assets/flappy-rl.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/flappy-rl.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="flappyrlTitle">Flappy RL</h2>
@@ -1763,9 +1793,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="kids" data-added="2026-05-10T15:30:00+09:00" data-slug="odoru-enpitsu">
             <div class="card-thumb thumb-odoru">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">🪶</span>
-                <img class="thumb-gif" src="assets/odoru-enpitsu.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/odoru-enpitsu.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="odoruTitle">おどるエンピツ</h2>
@@ -1781,7 +1810,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="tools" data-added="2026-05-10T01:00:00+09:00" data-slug="shiitake-nav">
             <div class="card-thumb thumb-shiitakenav">
             <span class="thumb-emoji">🍄</span>
-                <img class="thumb-gif" src="assets/shiitake-nav.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/shiitake-nav.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="shiitakenavTitle">しいたけ栽培ナビ</h2>
@@ -1796,9 +1825,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="kids" data-added="2026-05-10T00:30:00+09:00" data-slug="himawari-137">
             <div class="card-thumb thumb-himawari">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">🌻</span>
-                <img class="thumb-gif" src="assets/himawari-137.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/himawari-137.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="himawariTitle">ひまわり 137°</h2>
@@ -1814,7 +1842,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="games" data-added="2026-05-09T23:30:00+09:00" data-slug="neural-fighter">
             <div class="card-thumb thumb-neuralfighter">
             <span class="thumb-emoji">🥊</span>
-                <img class="thumb-gif" src="assets/neural-fighter.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/neural-fighter.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="neuralfighterTitle">ニューラルファイター</h2>
@@ -1829,10 +1857,9 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="world-history" data-added="2026-05-16T05:30:00+09:00" data-slug="giza-2560bc" data-year="-2560">
             <div class="card-thumb thumb-giza">
-            <span class="new-badge">NEW</span>
             <span class="year-badge">2560 BC</span>
             <span class="thumb-emoji">🔺🏗️</span>
-                <img class="thumb-gif" src="assets/giza-2560bc.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/giza-2560bc.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="giza2560bcTitle">大ピラミッド 紀元前2560年</h2>
@@ -1847,10 +1874,9 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="world-history" data-added="2026-05-16T06:20:00+09:00" data-slug="beacon-221bc" data-year="-221">
             <div class="card-thumb thumb-beacon221bc">
-            <span class="new-badge">NEW</span>
             <span class="year-badge">221 BC</span>
             <span class="thumb-emoji">🔥🏯</span>
-                <img class="thumb-gif" src="assets/beacon-221bc.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/beacon-221bc.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="beacon221bcTitle">烽火リレー 紀元前221年</h2>
@@ -1865,10 +1891,9 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="world-history" data-added="2026-05-20T04:30:00+09:00" data-slug="troy-1184bc" data-year="-1184">
             <div class="card-thumb thumb-troy">
-            <span class="new-badge">NEW</span>
             <span class="year-badge">1184 BC</span>
             <span class="thumb-emoji">🐴⚔️</span>
-                <img class="thumb-gif" src="assets/troy-1184bc.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/troy-1184bc.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="troy1184bcTitle">トロイの木馬 紀元前1184年</h2>
@@ -1883,10 +1908,9 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="world-history" data-added="2026-05-15T06:00:00+09:00" data-slug="olympia-776bc" data-year="-776">
             <div class="card-thumb thumb-olympia">
-            <span class="new-badge">NEW</span>
             <span class="year-badge">776 BC</span>
             <span class="thumb-emoji">🏛️🏃</span>
-                <img class="thumb-gif" src="assets/olympia-776bc.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/olympia-776bc.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="olympia776bcTitle">古代オリンピア 紀元前776年</h2>
@@ -1901,10 +1925,9 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="world-history" data-added="2026-05-14T13:30:00+09:00" data-slug="thermopylae-480bc" data-year="-480">
             <div class="card-thumb thumb-thermopylae">
-            <span class="new-badge">NEW</span>
             <span class="year-badge">480 BC</span>
             <span class="thumb-emoji">🛡️⚔️</span>
-                <img class="thumb-gif" src="assets/thermopylae-480bc.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/thermopylae-480bc.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="thermopylae480bcTitle">テルモピュライの隘路 紀元前480年</h2>
@@ -1919,9 +1942,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="world-history" data-added="2026-05-15T01:00:00+09:00" data-slug="archimedes-212bc" data-year="-212">
             <div class="card-thumb thumb-archimedes">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">🔆🏛️</span>
-                <img class="thumb-gif" src="assets/archimedes-212bc.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/archimedes-212bc.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="archimedes212bcTitle">アルキメデスの鏡 紀元前212年</h2>
@@ -1934,12 +1956,11 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/archimedes-212bc/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="world-history games" data-added="2026-05-17T13:00:00+09:00" data-pin="1" data-slug="vinland-1000" data-year="1000">
+    <div class="card" data-cat="world-history games" data-added="2026-05-17T13:00:00+09:00" data-slug="vinland-1000" data-year="1000">
             <div class="card-thumb thumb-vinland1000">
-            <span class="new-badge">NEW</span>
             <span class="year-badge">c. 1000</span>
             <span class="thumb-emoji">⛵🧊</span>
-                <img class="thumb-gif" src="assets/vinland-1000.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/vinland-1000.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="vinland1000Title">ヴィンランドへの航海 西暦1000年</h2>
@@ -1952,16 +1973,14 @@ footer a:hover { color: #e6edf3; }
                 <a class="card-btn btn-play" href="https://pndshch.github.io/vinland-1000/" target="_blank" data-i18n="playBrowser">▶ ブラウザで遊ぶ</a>
             </div>
         </div>
-    <div class="card" data-cat="world-history" data-added="2026-05-16T13:00:00+09:00" data-slug="silk-road-130bc" data-year="-130">
+    <div class="card" data-cat="world-history games" data-added="2026-06-11T09:30:00+09:00" data-slug="silk-road-130bc" data-year="-130">
             <div class="card-thumb thumb-silkroad130bc">
-            <span class="new-badge">NEW</span>
-            <span class="year-badge">130 BC</span>
             <span class="thumb-emoji">🐪🏜️</span>
-                <img class="thumb-gif" src="assets/silk-road-130bc.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/silk-road-130bc.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="silkroad130bcTitle">シルクロードの隊商 紀元前130年</h2>
-                <p data-i18n="silkroad130bcDesc"><strong>紀元前130年</strong>、漢の武帝の命を受けた<strong>張騫</strong>が西域への道を切り拓いた。絹・翡翠・香辛料——東西の宝を積んだ隊商が砂漠と山脈を越え、<strong>長安からローマ</strong>まで約7000kmの古代最大の交易路を旅する。8都市で交易し、砂嵐・盗賊・匈奴の騎馬隊をかわし、オアシスで水を補給しながら富を築け。各都市の歴史的背景を学びながら遊べるトレーディング・アドベンチャー。JP/EN対応。</p>
+                <p data-i18n="silkroad130bcDesc">長安からローマへ7000km。安く買って高く売り、砂嵐・盗賊・匈奴をかわして隊商を導く交易シム。ラクダが地図の上を歩き、仕入値と売却益がひと目でわかる市場で、伝説の大商人を目指せ。</p>
                 <div class="tags">
                     <span class="tag" data-i18n="silkroad130bcTag1">交易ゲーム</span>
                     <span class="tag" data-i18n="silkroad130bcTag2">シルクロード</span>
@@ -1972,9 +1991,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="world-history" data-added="2026-05-14T22:00:00+09:00" data-slug="kon-tiki-1947" data-year="1947">
             <div class="card-thumb thumb-kontiki1947">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">⛵</span>
-                <img class="thumb-gif" src="assets/kon-tiki-1947.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/kon-tiki-1947.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="kontiki1947Title">コンティキ号 1947</h2>
@@ -1989,9 +2007,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="world-history" data-added="2026-05-15T01:20:00+09:00" data-slug="golden-record-1977" data-year="1977">
             <div class="card-thumb thumb-goldenrecord1977">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">💿🛰️</span>
-                <img class="thumb-gif" src="assets/golden-record-1977.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/golden-record-1977.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="goldenRecord1977Title">ゴールデンレコード 1977</h2>
@@ -2006,10 +2023,9 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="world-history games" data-added="2026-05-15T22:00:00+09:00" data-slug="berlin-wall-1989" data-year="1989">
             <div class="card-thumb thumb-berlinwall1989">
-            <span class="new-badge">NEW</span>
             <span class="year-badge">1989</span>
             <span class="thumb-emoji">🧱✊</span>
-                <img class="thumb-gif" src="assets/berlin-wall-1989.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/berlin-wall-1989.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="berlinWall1989Title">ベルリンの壁 1989</h2>
@@ -2024,9 +2040,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="world-history" data-added="2026-05-08T22:00:00+09:00" data-slug="gw150914" data-year="2015">
             <div class="card-thumb thumb-gw150914">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">🌀💫</span>
-                <img class="thumb-gif" src="assets/gw150914.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/gw150914.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="gw150914Title">じくうのさざなみ 2015</h2>
@@ -2041,9 +2056,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="world-history" data-added="2026-05-08T20:30:00+09:00" data-slug="romer-1676" data-year="1676">
             <div class="card-thumb thumb-romer1676">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">🪐</span>
-                <img class="thumb-gif" src="assets/romer-1676.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/romer-1676.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="romer1676Title">ロェマー 1676</h2>
@@ -2058,9 +2072,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="kids" data-added="2026-05-09T23:55:00+09:00" data-slug="moire-moyo">
             <div class="card-thumb thumb-moire">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">◎✨</span>
-                <img class="thumb-gif" src="assets/moire-moyo.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/moire-moyo.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="moireTitle">モアレ もよう</h2>
@@ -2075,9 +2088,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="kids" data-added="2026-05-09T23:00:00+09:00" data-slug="kaseki-hori">
             <div class="card-thumb thumb-kaseki">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">🦴🐚</span>
-                <img class="thumb-gif" src="assets/kaseki-hori.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/kaseki-hori.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="kasekiTitle">かせきほり</h2>
@@ -2092,9 +2104,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="kids" data-added="2026-05-09T22:00:00+09:00" data-slug="brewster-1816" data-year="1816">
             <div class="card-thumb thumb-brewster1816">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">🔮✨</span>
-                <img class="thumb-gif" src="assets/brewster-1816.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/brewster-1816.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="brewster1816Title">ブリュースター 1816</h2>
@@ -2109,9 +2120,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="kids" data-added="2026-05-09T21:00:00+09:00" data-slug="hidokei">
             <div class="card-thumb thumb-hidokei">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">🌞🪨</span>
-                <img class="thumb-gif" src="assets/hidokei.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/hidokei.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="hidokeiTitle">ひどけい</h2>
@@ -2126,9 +2136,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="kids" data-added="2026-05-09T20:00:00+09:00" data-slug="koma-no-niji">
             <div class="card-thumb thumb-koma">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">🌀🎨</span>
-                <img class="thumb-gif" src="assets/koma-no-niji.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/koma-no-niji.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="komaTitle">コマのにじ</h2>
@@ -2143,9 +2152,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="kids" data-added="2026-05-09T19:00:00+09:00" data-slug="moyo-no-tane">
             <div class="card-thumb thumb-moyo">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">🦓🐆🪸</span>
-                <img class="thumb-gif" src="assets/moyo-no-tane.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/moyo-no-tane.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="moyoTitle">もようのたね</h2>
@@ -2160,9 +2168,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="kids" data-added="2026-05-09T18:00:00+09:00" data-slug="hotaru-awase">
             <div class="card-thumb thumb-hotaru">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">✨🌳</span>
-                <img class="thumb-gif" src="assets/hotaru-awase.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/hotaru-awase.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="hotaruTitle">ホタルあわせ</h2>
@@ -2177,9 +2184,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="kids" data-added="2026-05-09T17:00:00+09:00" data-slug="sora-iro">
             <div class="card-thumb thumb-soraIro">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">☀🌌</span>
-                <img class="thumb-gif" src="assets/sora-iro.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/sora-iro.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="soraIroTitle">そらのいろ</h2>
@@ -2194,9 +2200,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="kids" data-added="2026-05-09T16:00:00+09:00" data-slug="zo-to-nezumi">
             <div class="card-thumb thumb-zonezumi">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">🐭⚖️🐘</span>
-                <img class="thumb-gif" src="assets/zo-to-nezumi.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/zo-to-nezumi.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="zonezumiTitle">ぞうとねずみ</h2>
@@ -2211,9 +2216,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="kids" data-added="2026-05-09T15:00:00+09:00" data-slug="jishaku-moyo">
             <div class="card-thumb thumb-jishaku">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">🧲</span>
-                <img class="thumb-gif" src="assets/jishaku-moyo.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/jishaku-moyo.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="jishakuTitle">じしゃくの もよう</h2>
@@ -2228,9 +2232,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="kids" data-added="2026-05-09T14:00:00+09:00" data-slug="buranko-byoshi">
             <div class="card-thumb thumb-buranko">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">🎵</span>
-                <img class="thumb-gif" src="assets/buranko-byoshi.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/buranko-byoshi.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="burankoTitle">ブランコ びょうし</h2>
@@ -2245,9 +2248,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="kids" data-added="2026-05-09T16:00:00+09:00" data-slug="atama-dokei">
             <div class="card-thumb thumb-atama">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">⏱️</span>
-                <img class="thumb-gif" src="assets/atama-dokei.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/atama-dokei.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="atamaTitle">あたまどけい</h2>
@@ -2262,9 +2264,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="kids" data-added="2026-05-09T13:00:00+09:00" data-slug="nioi-tanken">
             <div class="card-thumb thumb-nioi">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">👃</span>
-                <img class="thumb-gif" src="assets/nioi-tanken.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/nioi-tanken.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="nioiTitle">においたんけん</h2>
@@ -2279,9 +2280,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="kids" data-added="2026-05-09T12:30:00+09:00" data-slug="oikakekko">
             <div class="card-thumb thumb-oikakekko">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">🌀</span>
-                <img class="thumb-gif" src="assets/oikakekko.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/oikakekko.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="oikakekkoTitle">おいかけっこ</h2>
@@ -2296,9 +2296,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="kids" data-added="2026-05-09T11:30:00+09:00" data-slug="dobutsu-no-me">
             <div class="card-thumb thumb-dome">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">👁️</span>
-                <img class="thumb-gif" src="assets/dobutsu-no-me.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/dobutsu-no-me.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="domeTitle">どうぶつの め</h2>
@@ -2313,9 +2312,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="kids" data-added="2026-05-09T10:00:00+09:00" data-slug="iki-no-hana">
             <div class="card-thumb thumb-iki">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">🌸</span>
-                <img class="thumb-gif" src="assets/iki-no-hana.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/iki-no-hana.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="ikiTitle">いきのはな</h2>
@@ -2330,9 +2328,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="kids" data-added="2026-05-09T08:30:00+09:00" data-slug="kage-asobi">
             <div class="card-thumb thumb-kage">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">☀️</span>
-                <img class="thumb-gif" src="assets/kage-asobi.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/kage-asobi.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="kageTitle">かげあそび</h2>
@@ -2347,9 +2344,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="kids" data-added="2026-05-09T07:30:00+09:00" data-slug="ashiato-tantei">
             <div class="card-thumb thumb-ashiato">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">🐾</span>
-                <img class="thumb-gif" src="assets/ashiato-tantei.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/ashiato-tantei.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="ashiatoTitle">あしあと たんてい</h2>
@@ -2364,9 +2360,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="kids" data-added="2026-05-08T23:55:00+09:00" data-slug="sukima-no-kobito">
             <div class="card-thumb thumb-sukima">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">🪡</span>
-                <img class="thumb-gif" src="assets/sukima-no-kobito.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/sukima-no-kobito.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="sukimaTitle">すきまのこびと</h2>
@@ -2381,9 +2376,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="world-history" data-added="2026-05-08T19:30:00+09:00" data-slug="halley-1066" data-year="1066">
             <div class="card-thumb thumb-halley1066">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">☄️</span>
-                <img class="thumb-gif" src="assets/halley-1066.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/halley-1066.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="halley1066Title">ハレー彗星 1066</h2>
@@ -2398,9 +2392,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="world-history" data-added="2026-05-08T18:30:00+09:00" data-slug="prism-1666" data-year="1666">
             <div class="card-thumb thumb-prism1666">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">🌈</span>
-                <img class="thumb-gif" src="assets/prism-1666.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/prism-1666.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="prism1666Title">プリズム 1666</h2>
@@ -2415,9 +2408,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="world-history" data-added="2026-05-08T17:30:00+09:00" data-slug="lisbon-1755" data-year="1755">
             <div class="card-thumb thumb-lisbon1755">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">🌊</span>
-                <img class="thumb-gif" src="assets/lisbon-1755.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/lisbon-1755.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="lisbon1755Title">リスボン 1755</h2>
@@ -2432,10 +2424,9 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="world-history games" data-added="2026-05-18T12:00:00+09:00" data-slug="montgolfier-1783" data-year="1783">
             <div class="card-thumb thumb-montgolfier1783">
-            <span class="new-badge">NEW</span>
             <span class="year-badge">1783</span>
             <span class="thumb-emoji">🎈🔥</span>
-                <img class="thumb-gif" src="assets/montgolfier-1783.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/montgolfier-1783.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="montgolfier1783Title">モンゴルフィエの気球 1783</h2>
@@ -2450,9 +2441,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="world-history" data-added="2026-05-08T16:20:00+09:00" data-slug="antikythera-1901" data-year="1901">
             <div class="card-thumb thumb-antikythera1901">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">⚙️</span>
-                <img class="thumb-gif" src="assets/antikythera-1901.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/antikythera-1901.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="antikythera1901Title">アンティキティラ 1901</h2>
@@ -2467,9 +2457,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="world-history" data-added="2026-05-08T15:35:00+09:00" data-slug="summer-1816" data-year="1816">
             <div class="card-thumb thumb-summer1816">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">🌋</span>
-                <img class="thumb-gif" src="assets/summer-1816.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/summer-1816.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="summer1816Title">夏のない年 1816</h2>
@@ -2484,9 +2473,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="world-history" data-added="2026-05-09T15:30:00+09:00" data-slug="pompeii-79" data-year="79">
             <div class="card-thumb thumb-pompeii79">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">🌋</span>
-                <img class="thumb-gif" src="assets/pompeii-79.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/pompeii-79.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="pompeii79Title">ポンペイ 79</h2>
@@ -2501,9 +2489,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="world-history" data-added="2026-05-09T14:30:00+09:00" data-slug="roentgen-1895" data-year="1895">
             <div class="card-thumb thumb-roentgen1895">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">🦴</span>
-                <img class="thumb-gif" src="assets/roentgen-1895.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/roentgen-1895.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="roentgen1895Title">レントゲン 1895</h2>
@@ -2518,9 +2505,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="world-history" data-added="2026-05-08T21:30:00+09:00" data-slug="smallpox-1980" data-year="1980">
             <div class="card-thumb thumb-smallpox1980">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">🦠</span>
-                <img class="thumb-gif" src="assets/smallpox-1980.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/smallpox-1980.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="smallpox1980Title">天然痘 1980</h2>
@@ -2535,9 +2521,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="world-history" data-added="2026-05-09T11:30:00+09:00" data-slug="foucault-1851" data-year="1851">
             <div class="card-thumb thumb-foucault1851">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">🌍</span>
-                <img class="thumb-gif" src="assets/foucault-1851.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/foucault-1851.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="foucault1851Title">フーコーの振り子 1851</h2>
@@ -2552,9 +2537,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="world-history" data-added="2026-05-09T10:30:00+09:00" data-slug="lascaux-1940" data-year="1940">
             <div class="card-thumb thumb-lascaux1940">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">🦬</span>
-                <img class="thumb-gif" src="assets/lascaux-1940.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/lascaux-1940.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="lascaux1940Title">ラスコー 1940</h2>
@@ -2569,9 +2553,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="world-history" data-added="2026-05-09T09:30:00+09:00" data-slug="galileo-1610" data-year="1610">
             <div class="card-thumb thumb-galileo1610">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">🪐</span>
-                <img class="thumb-gif" src="assets/galileo-1610.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/galileo-1610.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="galileo1610Title">ガリレオ 1610</h2>
@@ -2586,9 +2569,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="world-history" data-added="2026-05-09T08:30:00+09:00" data-slug="kexing-1054" data-year="1054">
             <div class="card-thumb thumb-kexing1054">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">🌟</span>
-                <img class="thumb-gif" src="assets/kexing-1054.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/kexing-1054.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="kexing1054Title">客星 1054</h2>
@@ -2603,9 +2585,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="world-history" data-added="2026-05-09T07:00:00+09:00" data-slug="kitty-hawk-1903" data-year="1903">
             <div class="card-thumb thumb-kittyhawk1903">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">✈</span>
-                <img class="thumb-gif" src="assets/kitty-hawk-1903.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/kitty-hawk-1903.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="kittyhawk1903Title">キティホーク 1903</h2>
@@ -2620,9 +2601,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="world-history" data-added="2026-05-08T23:30:00+09:00" data-slug="rosetta-1822" data-year="1822">
             <div class="card-thumb thumb-rosetta1822">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">𓏛</span>
-                <img class="thumb-gif" src="assets/rosetta-1822.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/rosetta-1822.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="rosetta1822Title">ロゼッタ 1822</h2>
@@ -2637,9 +2617,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="kids" data-added="2026-05-08T22:00:00+09:00" data-slug="hitofudegaki">
             <div class="card-thumb thumb-hitofudegaki">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">✏️</span>
-                <img class="thumb-gif" src="assets/hitofudegaki.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/hitofudegaki.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="hitofudegakiTitle">ひとふでがき</h2>
@@ -2655,7 +2634,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="kids" data-added="2026-05-08T18:00:00+09:00" data-slug="me-no-tanken">
             <div class="card-thumb thumb-menotanken">
             <span class="thumb-emoji">🦉</span>
-                <img class="thumb-gif" src="assets/me-no-tanken.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/me-no-tanken.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="menotankenTitle">めの たんけん</h2>
@@ -2671,7 +2650,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="kids" data-added="2026-05-08T08:00:00+09:00" data-slug="kiin-no-mori">
             <div class="card-thumb thumb-kiin">
             <span class="thumb-emoji">🔔</span>
-                <img class="thumb-gif" src="assets/kiin-no-mori.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/kiin-no-mori.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="kiinTitle">キーンのもり</h2>
@@ -2687,7 +2666,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="kids" data-added="2026-05-08T05:00:00+09:00" data-slug="kosuruto">
             <div class="card-thumb thumb-kosuruto">
             <span class="thumb-emoji">✋</span>
-                <img class="thumb-gif" src="assets/kosuruto.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/kosuruto.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="kosurutoTitle">こすると…</h2>
@@ -2703,7 +2682,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="learn" data-added="2026-05-08T03:00:00+09:00" data-slug="uchu-elevator">
             <div class="card-thumb thumb-uchu">
             <span class="thumb-emoji">🚀</span>
-                <img class="thumb-gif" src="assets/uchu-elevator.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/uchu-elevator.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="uchuTitle">うちゅうエレベーター</h2>
@@ -2719,7 +2698,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="learn" data-added="2026-05-08T02:00:00+09:00" data-slug="tako-no-yume">
             <div class="card-thumb thumb-tako">
             <span class="thumb-emoji">🐙</span>
-                <img class="thumb-gif" src="assets/tako-no-yume.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/tako-no-yume.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="takoyumeTitle">タコのゆめ</h2>
@@ -2735,7 +2714,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="kids" data-added="2026-05-08T01:00:00+09:00" data-slug="darumasan">
             <div class="card-thumb thumb-darumasan">
             <span class="thumb-emoji">🟥</span>
-                <img class="thumb-gif" src="assets/darumasan.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/darumasan.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="darumasanTitle">だるまさんがころんだ</h2>
@@ -2751,7 +2730,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="kids" data-added="2026-05-08T00:30:00+09:00" data-slug="mongiri">
             <div class="card-thumb thumb-mongiri">
             <span class="thumb-emoji">✦</span>
-                <img class="thumb-gif" src="assets/mongiri.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/mongiri.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="mongiriTitle">もんきり</h2>
@@ -2767,7 +2746,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="kids" data-added="2026-05-07T22:45:00+09:00" data-slug="suna-no-uta">
             <div class="card-thumb thumb-sunanouta">
             <span class="thumb-emoji">🎶</span>
-                <img class="thumb-gif" src="assets/suna-no-uta.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/suna-no-uta.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="sunanoutaTitle">すなのうた</h2>
@@ -2783,7 +2762,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="kids" data-added="2026-05-07T21:30:00+09:00" data-slug="kururin-anime">
             <div class="card-thumb thumb-kururinanime">
             <span class="thumb-emoji">🎡</span>
-                <img class="thumb-gif" src="assets/kururin-anime.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/kururin-anime.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="kururinanimeTitle">くるりんアニメ</h2>
@@ -2799,7 +2778,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="kids" data-added="2026-05-07T20:00:00+09:00" data-slug="yamabiko-zoo">
             <div class="card-thumb thumb-yamabikozoo">
             <span class="thumb-emoji">🦉</span>
-                <img class="thumb-gif" src="assets/yamabiko-zoo.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/yamabiko-zoo.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="yamabikozooTitle">やまびこ どうぶつえん</h2>
@@ -2815,7 +2794,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="kids" data-added="2026-05-07T18:30:00+09:00" data-slug="kao-kamo">
             <div class="card-thumb thumb-kaokamo">
             <span class="thumb-emoji">👀</span>
-                <img class="thumb-gif" src="assets/kao-kamo.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/kao-kamo.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="kaokamoTitle">かおかも</h2>
@@ -2831,7 +2810,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="kids" data-added="2026-05-07T16:30:00+09:00" data-slug="mimi-no-meiro">
             <div class="card-thumb thumb-mimimeiro">
             <span class="thumb-emoji">🎧</span>
-                <img class="thumb-gif" src="assets/mimi-no-meiro.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/mimi-no-meiro.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="mimimeiroTitle">みみのめいろ</h2>
@@ -2847,9 +2826,8 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="kids" data-added="2026-05-16T02:00:00+09:00" data-slug="nuri-orchestra">
             <div class="card-thumb thumb-nuriorch">
             <span class="thumb-emoji">🎨</span>
-                <img class="thumb-gif" src="assets/nuri-orchestra.gif" alt="" onerror="this.remove()">
-                <span class="new-badge">NEW</span>
-            </div>
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/nuri-orchestra.gif" alt="" onerror="this.remove()">
+                </div>
             <div class="card-body">
                 <h2 data-i18n="nuriOrchTitle">ぬりぬりオーケストラ</h2>
                 <p data-i18n="nuriOrchDesc">えを かくと おんがくに なる！7つの いろ＝7つの がっき。すきな いろで じゆうに キャンバスに おえかき、さいせい ボタンを おすと、ひだりから ひかりの せんが ながれて、きみの えが メロディに へんしん。あかい まるは たいこの おと、あおい なみは ピアノの ね、みどりの もようは ふえの しらべ——たかさは おとの たかさ、いろは がっき。ペンタトニック（5おん）スケールで、どんなに めちゃくちゃに ぬっても、きれいな わおんに なるから、おんがくの けいけんが なくても だいじょうぶ。「え」と「おと」が おなじもの だった！と きづく、3〜7さいの ための しんかんかく おえかきがっき。</p>
@@ -2864,7 +2842,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="kids" data-added="2026-05-07T14:35:12+09:00" data-slug="ashi-oto">
             <div class="card-thumb thumb-ashioto">
             <span class="thumb-emoji">👣</span>
-                <img class="thumb-gif" src="assets/ashi-oto.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/ashi-oto.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="ashiotoTitle">あしおと</h2>
@@ -2880,7 +2858,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="kids" data-added="2026-05-07T13:19:52+09:00" data-slug="pikopiko-sonar">
             <div class="card-thumb thumb-pikopiko">
             <span class="thumb-emoji">🦇</span>
-                <img class="thumb-gif" src="assets/pikopiko-sonar.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/pikopiko-sonar.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="pikopikoTitle">ぴこぴこソナー</h2>
@@ -2896,7 +2874,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="kids" data-added="2026-05-08T00:20:00+09:00" data-slug="kaminari-tantei">
             <div class="card-thumb thumb-kaminari">
             <span class="thumb-emoji">⚡</span>
-                <img class="thumb-gif" src="assets/kaminari-tantei.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/kaminari-tantei.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="kaminariTitle">カミナリ・タンテイ</h2>
@@ -2912,7 +2890,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="kids" data-added="2026-05-07T23:25:00+09:00" data-slug="shizukana-mimi">
             <div class="card-thumb thumb-shizukami">
             <span class="thumb-emoji">🦔</span>
-                <img class="thumb-gif" src="assets/shizukana-mimi.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/shizukana-mimi.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="shizukamiTitle">しずかな耳</h2>
@@ -2928,7 +2906,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="kids" data-added="2026-05-07T12:15:53+09:00" data-slug="koe-monster">
             <div class="card-thumb thumb-koemon">
             <span class="thumb-emoji">🎙️</span>
-                <img class="thumb-gif" src="assets/koe-monster.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/koe-monster.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="koemonTitle">こえモンスター</h2>
@@ -2944,7 +2922,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="kids" data-added="2026-05-07T11:28:47+09:00" data-slug="e-no-oto">
             <div class="card-thumb thumb-enooto">
             <span class="thumb-emoji">🎨</span>
-                <img class="thumb-gif" src="assets/e-no-oto.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/e-no-oto.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="enootoTitle">えのおと</h2>
@@ -2960,7 +2938,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="kids" data-added="2026-05-07T10:22:51+09:00" data-slug="iro-maze">
             <div class="card-thumb thumb-iromaze">
             <span class="thumb-emoji">🎨</span>
-                <img class="thumb-gif" src="assets/iro-maze.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/iro-maze.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="iromazeTitle">いろまぜ</h2>
@@ -2976,7 +2954,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="kids" data-added="2026-05-07T09:32:39+09:00" data-slug="akubi-utsushi">
             <div class="card-thumb thumb-akubi">
             <span class="thumb-emoji">😴</span>
-                <img class="thumb-gif" src="assets/akubi-utsushi.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/akubi-utsushi.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="akubiTitle">あくびうつし</h2>
@@ -2992,7 +2970,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="kids" data-added="2026-05-04T20:40:31+09:00" data-slug="choco-bomber">
             <div class="card-thumb thumb-choco">
             <span class="thumb-emoji">🍫</span>
-                <img class="thumb-gif" src="assets/choco-bomber.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/choco-bomber.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="chocoTitle">チョコボンバー</h2>
@@ -3008,7 +2986,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="kids" data-added="2026-05-04T11:43:56+09:00" data-slug="shuriken-master">
             <div class="card-thumb thumb-shuriken">
             <span class="thumb-emoji">🥷</span>
-                <img class="thumb-gif" src="assets/shuriken-master.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/shuriken-master.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="shurikenTitle">手裏剣マスター</h2>
@@ -3024,7 +3002,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="kids" data-added="2026-05-04T20:39:22+09:00" data-slug="melon-garden">
             <div class="card-thumb thumb-melon">
             <span class="thumb-emoji">🍈</span>
-                <img class="thumb-gif" src="assets/melon-garden.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/melon-garden.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="melonTitle">花メロン探し</h2>
@@ -3040,7 +3018,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="kids" data-added="2026-05-03T16:07:46+09:00" data-slug="strep-buster">
             <div class="card-thumb thumb-strep">
             <span class="thumb-emoji">🦠</span>
-                <img class="thumb-gif" src="assets/strep-buster.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/strep-buster.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="strepTitle">ようれんきんバスター</h2>
@@ -3056,7 +3034,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="kids" data-added="2026-05-03T16:07:46+09:00" data-slug="okuri-mukae">
             <div class="card-thumb thumb-okuri">
             <span class="thumb-emoji">🚗</span>
-                <img class="thumb-gif" src="assets/okuri-mukae.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/okuri-mukae.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="okuriTitle">おくりむかえ</h2>
@@ -3072,7 +3050,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="kids" data-added="2026-05-03T16:07:46+09:00" data-slug="pocket-panpan">
             <div class="card-thumb thumb-panpan">
             <span class="thumb-emoji">👖</span>
-                <img class="thumb-gif" src="assets/pocket-panpan.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/pocket-panpan.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="panpanTitle">ポケットパンパン</h2>
@@ -3088,7 +3066,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="kids" data-added="2026-05-04T11:43:56+09:00" data-slug="birthday-33">
             <div class="card-thumb thumb-birthday">
             <span class="thumb-emoji">🎂</span>
-                <img class="thumb-gif" src="assets/birthday-33.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/birthday-33.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="birthdayTitle">33のキャンドル</h2>
@@ -3104,7 +3082,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="kids fortune" data-added="2026-05-03T16:07:46+09:00" data-slug="fortune-mom">
             <div class="card-thumb thumb-fortune">
             <span class="thumb-emoji">🔮</span>
-                <img class="thumb-gif" src="assets/fortune-mom.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/fortune-mom.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="fortuneTitle">おかあさん占い師</h2>
@@ -3225,7 +3203,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="kids" data-added="2026-05-01T00:22:51+09:00" data-slug="hiragana-game">
             <div class="card-thumb thumb-hiragana">
                 <span class="thumb-emoji">🌸</span>
-                <img class="thumb-gif" src="assets/hiragana-game.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/hiragana-game.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="hiraTitle">ひらがな あそび</h2>
@@ -3241,7 +3219,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="kids" data-added="2026-05-01T11:09:10+09:00" data-slug="1pun-keisan">
             <div class="card-thumb thumb-keisan">
             <span class="thumb-emoji">🐼</span>
-                <img class="thumb-gif" src="assets/1pun-keisan.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/1pun-keisan.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="keisanTitle">1分けいさん</h2>
@@ -3257,7 +3235,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="kids" data-added="2026-05-01T10:51:56+09:00" data-slug="hiragana-maze">
             <div class="card-thumb thumb-hiragana">
                 <span class="thumb-emoji">🌀</span>
-                <img class="thumb-gif" src="assets/hiragana-maze.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/hiragana-maze.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="mazeTitle">ひらがな迷路</h2>
@@ -3273,7 +3251,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="kids" data-added="2026-05-01T11:05:03+09:00" data-slug="hiragana-shooter">
             <div class="card-thumb thumb-hiragana">
                 <span class="thumb-emoji">🚀</span>
-                <img class="thumb-gif" src="assets/hiragana-shooter.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/hiragana-shooter.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="shooterTitle">ひらがなシューター</h2>
@@ -3289,7 +3267,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="kids" data-added="2026-04-30T21:51:07+09:00" data-slug="tentsunagi">
             <div class="card-thumb thumb-dots">
                 <span class="thumb-emoji">✏️</span>
-                <img class="thumb-gif" src="assets/tentsunagi.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/tentsunagi.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="dotsTitle">てんつなぎ</h2>
@@ -3350,7 +3328,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="learn" data-added="2026-05-07T14:06:54+09:00" data-slug="kiokuiz">
             <div class="card-thumb thumb-kiokuiz">
             <span class="thumb-emoji">🧠</span>
-                <img class="thumb-gif" src="assets/kiokuiz.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/kiokuiz.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="kiokuizTitle">キオクイズ</h2>
@@ -3366,7 +3344,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="learn" data-added="2026-05-07T21:00:00+09:00" data-slug="itoko-aeons">
             <div class="card-thumb thumb-itoko">
             <span class="thumb-emoji">🐳🦛</span>
-                <img class="thumb-gif" src="assets/itoko-aeons.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/itoko-aeons.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="itokoTitle">イトコ何億年</h2>
@@ -3382,7 +3360,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="world-history" data-added="2026-05-21T13:00:00+09:00" data-slug="tutankhamun-1922" data-year="1922">
             <div class="card-thumb thumb-tutankhamun1922">
             <span class="thumb-emoji">☥</span>
-                <img class="thumb-gif" src="assets/tutankhamun-1922.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/tutankhamun-1922.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="tutankhamun1922Title">ツタンカーメンの墓 1922</h2>
@@ -3398,7 +3376,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="world-history" data-added="2026-05-08T07:30:00+09:00" data-slug="pelee-1902" data-year="1902">
             <div class="card-thumb thumb-pelee1902">
             <span class="thumb-emoji">🌋</span>
-                <img class="thumb-gif" src="assets/pelee-1902.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/pelee-1902.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="pelee1902Title">独房 1902</h2>
@@ -3414,7 +3392,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="world-history" data-added="2026-05-08T04:30:00+09:00" data-slug="lo-1969" data-year="1969">
             <div class="card-thumb thumb-lo1969">
             <span class="thumb-emoji">📡</span>
-                <img class="thumb-gif" src="assets/lo-1969.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/lo-1969.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="lo1969Title">「エル・オー」1969</h2>
@@ -3430,7 +3408,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="world-history" data-added="2026-05-08T02:30:00+09:00" data-slug="south-pole-1911" data-year="1911">
             <div class="card-thumb thumb-southpole">
             <span class="thumb-emoji">🏔️</span>
-                <img class="thumb-gif" src="assets/south-pole-1911.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/south-pole-1911.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="southpoleTitle">南極点レース 1911</h2>
@@ -3446,7 +3424,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="world-history" data-added="2026-05-08T03:25:00+09:00" data-slug="wegener-1912" data-year="1912">
             <div class="card-thumb thumb-wegener">
             <span class="thumb-emoji">🌍</span>
-                <img class="thumb-gif" src="assets/wegener-1912.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/wegener-1912.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="wegenerTitle">大陸は動く 1912</h2>
@@ -3462,7 +3440,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="world-history" data-added="2026-05-08T01:15:00+09:00" data-slug="broad-street-1854" data-year="1854">
             <div class="card-thumb thumb-broadstreet">
             <span class="thumb-emoji">🚰</span>
-                <img class="thumb-gif" src="assets/broad-street-1854.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/broad-street-1854.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="broadstreetTitle">ブロード街 1854</h2>
@@ -3478,7 +3456,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="world-history" data-added="2026-05-08T00:20:00+09:00" data-slug="fleming-1928" data-year="1928">
             <div class="card-thumb thumb-fleming">
             <span class="thumb-emoji">🧫</span>
-                <img class="thumb-gif" src="assets/fleming-1928.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/fleming-1928.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="flemingTitle">フレミング 1928</h2>
@@ -3494,7 +3472,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="world-history" data-added="2026-05-07T23:30:00+09:00" data-slug="carrington-1859" data-year="1859">
             <div class="card-thumb thumb-carrington">
             <span class="thumb-emoji">⚡</span>
-                <img class="thumb-gif" src="assets/carrington-1859.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/carrington-1859.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="carringtonTitle">太陽嵐 1859</h2>
@@ -3509,9 +3487,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="world-history" data-added="2026-05-14T16:00:00+09:00" data-slug="tulip-mania-1637" data-year="1637">
             <div class="card-thumb thumb-tulip">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">🌷</span>
-                <img class="thumb-gif" src="assets/tulip-mania-1637.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/tulip-mania-1637.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="tulipTitle">チューリップ・バブル 1637</h2>
@@ -3526,9 +3503,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="world-history" data-added="2026-05-14T19:00:00+09:00" data-slug="pharos-280bc" data-year="-280">
             <div class="card-thumb thumb-pharos280bc">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">🏛️</span>
-                <img class="thumb-gif" src="assets/pharos-280bc.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/pharos-280bc.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="pharosTitle">ファロスの灯台 紀元前280年</h2>
@@ -3544,7 +3520,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="world-history" data-added="2026-05-07T22:30:00+09:00" data-slug="eratosthenes-240bc" data-year="-240">
             <div class="card-thumb thumb-eratosthenes">
             <span class="thumb-emoji">📐</span>
-                <img class="thumb-gif" src="assets/eratosthenes-240bc.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/eratosthenes-240bc.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="eratosthenesTitle">シエネの井戸 紀元前240年</h2>
@@ -3560,7 +3536,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="world-history" data-added="2026-05-07T21:55:00+09:00" data-slug="tunguska-1908" data-year="1908">
             <div class="card-thumb thumb-tunguska">
             <span class="thumb-emoji">☄️</span>
-                <img class="thumb-gif" src="assets/tunguska-1908.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/tunguska-1908.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="tunguskaTitle">ツングースカ 1908</h2>
@@ -3576,7 +3552,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="world-history" data-added="2026-05-07T20:05:00+09:00" data-slug="wald-1943" data-year="1943">
             <div class="card-thumb thumb-wald">
             <span class="thumb-emoji">✈️</span>
-                <img class="thumb-gif" src="assets/wald-1943.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/wald-1943.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="waldTitle">弾痕の地図</h2>
@@ -3592,7 +3568,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="japan-history" data-added="2026-05-07T19:30:00+09:00" data-slug="torishima-1841" data-year="1841">
             <div class="card-thumb thumb-torishima">
             <span class="thumb-emoji">🪨</span>
-                <img class="thumb-gif" src="assets/torishima-1841.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/torishima-1841.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="torishimaTitle">鳥島1841</h2>
@@ -3608,7 +3584,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="learn" data-added="2026-05-07T16:00:00+09:00" data-slug="kioku-run">
             <div class="card-thumb thumb-kiokurun">
             <span class="thumb-emoji">🏃</span>
-                <img class="thumb-gif" src="assets/kioku-run.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/kioku-run.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="kiokurunTitle">キオクラン</h2>
@@ -3624,7 +3600,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="world-history" data-added="2026-05-07T08:28:20+09:00" data-slug="heron-oyster" data-year="2026">
             <div class="card-thumb thumb-heron">
             <span class="thumb-emoji">🪶</span>
-                <img class="thumb-gif" src="assets/heron-oyster.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/heron-oyster.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="heronTitle">鷸蚌 — 漁夫の利</h2>
@@ -3640,7 +3616,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="learn" data-added="2026-05-07T07:33:18+09:00" data-slug="mienai-5percent">
             <div class="card-thumb thumb-mienai">
             <span class="thumb-emoji">🚪</span>
-                <img class="thumb-gif" src="assets/mienai-5percent.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/mienai-5percent.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="mienaiTitle">みえない5%</h2>
@@ -3656,7 +3632,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="world-history" data-added="2026-05-07T06:23:06+09:00" data-slug="cargo-cult-1947" data-year="1947">
             <div class="card-thumb thumb-cargo">
             <span class="thumb-emoji">🛬</span>
-                <img class="thumb-gif" src="assets/cargo-cult-1947.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/cargo-cult-1947.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="cargoTitle">貨物神1947</h2>
@@ -3672,7 +3648,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="world-history" data-added="2026-05-07T05:21:13+09:00" data-slug="warmth-1958" data-year="1958">
             <div class="card-thumb thumb-warmth">
             <span class="thumb-emoji">🧸</span>
-                <img class="thumb-gif" src="assets/warmth-1958.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/warmth-1958.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="warmthTitle">ぬくもり1958</h2>
@@ -3688,7 +3664,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="japan-history" data-added="2026-05-07T04:20:11+09:00" data-slug="ricecooker-1946" data-year="1946">
             <div class="card-thumb thumb-ricecooker">
             <span class="thumb-emoji">🍚</span>
-                <img class="thumb-gif" src="assets/ricecooker-1946.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/ricecooker-1946.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="ricecookerTitle">電気釜1946</h2>
@@ -3704,7 +3680,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="world-history" data-added="2026-05-07T03:25:10+09:00" data-slug="ninth-1824" data-year="1824">
             <div class="card-thumb thumb-ninth">
             <span class="thumb-emoji">🕯️</span>
-                <img class="thumb-gif" src="assets/ninth-1824.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/ninth-1824.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="ninthTitle">沈黙の第九</h2>
@@ -3795,7 +3771,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="games" data-added="2026-05-06T08:46:46+09:00" data-slug="koi-no-taki">
             <div class="card-thumb thumb-koi">
             <span class="thumb-emoji">🐉</span>
-                <img class="thumb-gif" src="assets/koi-no-taki.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/koi-no-taki.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="koiTitle">鯉の滝登り</h2>
@@ -3856,7 +3832,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="world-history" data-added="2026-05-06T04:24:30+09:00" data-slug="4min-wall" data-year="1954">
             <div class="card-thumb thumb-4minwall">
             <span class="thumb-emoji">🏃</span>
-                <img class="thumb-gif" src="assets/4min-wall.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/4min-wall.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="4minTitle">4分の壁</h2>
@@ -3872,7 +3848,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="games" data-added="2026-05-03T00:33:37+09:00" data-slug="city-drive">
             <div class="card-thumb thumb-city">
             <span class="thumb-emoji">🏙️</span>
-                <img class="thumb-gif" src="assets/city-drive.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/city-drive.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="cityTitle">City Drive</h2>
@@ -3888,7 +3864,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="games" data-added="2026-04-30T21:51:07+09:00" data-slug="fruit-drop-ai">
             <div class="card-thumb thumb-fruit">
                 <span class="thumb-emoji">🍓</span>
-                <img class="thumb-gif" src="assets/fruit-drop-ai.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/fruit-drop-ai.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="fruitTitle">Fruit Drop AI</h2>
@@ -3904,7 +3880,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="games" data-added="2026-05-03T16:07:46+09:00" data-slug="rugby-try">
             <div class="card-thumb thumb-rugby">
             <span class="thumb-emoji">🏉</span>
-                <img class="thumb-gif" src="assets/rugby-try.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/rugby-try.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="rugbyTitle">青天トライ</h2>
@@ -3920,7 +3896,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="games" data-added="2026-05-03T19:37:06+09:00" data-slug="health-td">
             <div class="card-thumb thumb-healthtd">
             <span class="thumb-emoji">🛡️</span>
-                <img class="thumb-gif" src="assets/health-td.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/health-td.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="healthtdTitle">免疫タワーディフェンス</h2>
@@ -3936,7 +3912,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="japan-history" data-added="2026-05-03T17:26:27+09:00" data-slug="ai-vs-todai" data-year="2024">
             <div class="card-thumb thumb-aitodai">
             <span class="thumb-emoji">🧠</span>
-                <img class="thumb-gif" src="assets/ai-vs-todai.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/ai-vs-todai.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="aitodaiTitle">AI vs 東大</h2>
@@ -3952,7 +3928,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="games" data-added="2026-05-03T17:26:27+09:00" data-slug="yen-defender">
             <div class="card-thumb thumb-yen">
             <span class="thumb-emoji">💴</span>
-                <img class="thumb-gif" src="assets/yen-defender.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/yen-defender.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="yenTitle">円を守れ！</h2>
@@ -3968,7 +3944,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="games" data-added="2026-05-03T17:26:27+09:00" data-slug="gw-rain-runner">
             <div class="card-thumb thumb-gwrain">
             <span class="thumb-emoji">🌧️</span>
-                <img class="thumb-gif" src="assets/gw-rain-runner.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/gw-rain-runner.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="gwrainTitle">GW雨よけランナー</h2>
@@ -3984,7 +3960,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="japan-history" data-added="2026-05-04T07:49:11+09:00" data-slug="yamiichi" data-year="1946">
             <div class="card-thumb thumb-yamiichi">
             <span class="thumb-emoji">🏪</span>
-                <img class="thumb-gif" src="assets/yamiichi.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/yamiichi.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="yamiichiTitle">ヤミイチ</h2>
@@ -4000,7 +3976,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="learn" data-added="2026-05-04T11:43:56+09:00" data-slug="capitalism-sim">
             <div class="card-thumb thumb-capitalism">
             <span class="thumb-emoji">💰</span>
-                <img class="thumb-gif" src="assets/capitalism-sim.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/capitalism-sim.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="capitalismTitle">格差パニック</h2>
@@ -4016,7 +3992,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="games" data-added="2026-05-04T11:43:56+09:00" data-slug="quantum-jump">
             <div class="card-thumb thumb-quantum">
             <span class="thumb-emoji">⚛️</span>
-                <img class="thumb-gif" src="assets/quantum-jump.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/quantum-jump.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="quantumTitle">量子パズル</h2>
@@ -4032,7 +4008,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="learn" data-added="2026-05-04T11:43:56+09:00" data-slug="fast-and-slow">
             <div class="card-thumb thumb-fastslow">
             <span class="thumb-emoji">🧠</span>
-                <img class="thumb-gif" src="assets/fast-and-slow.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/fast-and-slow.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="fastslowTitle">ファストアンドスロー</h2>
@@ -4062,9 +4038,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="tools" data-added="2026-05-28T02:55:00+09:00" data-slug="yume-techou">
             <div class="card-thumb thumb-yumetechou">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">🌙</span>
-                <img class="thumb-gif" src="assets/yume-techou.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/yume-techou.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="yumetechouTitle">夢手帳</h2>
@@ -4079,9 +4054,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="games" data-added="2026-05-22T13:00:00+09:00" data-slug="yoku-ataru">
             <div class="card-thumb thumb-yokuataru">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">🔮</span>
-                <img class="thumb-gif" src="assets/yoku-ataru.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/yoku-ataru.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="yokuataruTitle">よく当たる</h2>
@@ -4096,9 +4070,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="fortune" data-added="2026-05-21T18:30:00+09:00" data-slug="himekuri-uranai">
             <div class="card-thumb thumb-himekuri">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">🌙</span>
-                <img class="thumb-gif" src="assets/himekuri-uranai.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/himekuri-uranai.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="himekuriTitle">日めくり星占い</h2>
@@ -4113,9 +4086,8 @@ footer a:hover { color: #e6edf3; }
         </div>
     <div class="card" data-cat="fortune" data-added="2026-05-20T22:50:00+09:00" data-slug="zenchi-uranai">
             <div class="card-thumb thumb-zenchi">
-            <span class="new-badge">NEW</span>
             <span class="thumb-emoji">🔮</span>
-                <img class="thumb-gif" src="assets/zenchi-uranai.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/zenchi-uranai.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="zenchiTitle">全知の占術盤</h2>
@@ -4191,7 +4163,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="tools" data-added="2026-05-05T22:33:20+09:00" data-slug="english-housemate">
             <div class="card-thumb thumb-ehmate">
             <span class="thumb-emoji">🏠</span>
-                <img class="thumb-gif" src="assets/english-housemate.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/english-housemate.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="ehmateTitle">English Housemate</h2>
@@ -4282,7 +4254,7 @@ footer a:hover { color: #e6edf3; }
     <div class="card" data-cat="tools" data-added="2026-05-01T00:43:18+09:00" data-slug="merukari-sizer">
             <div class="card-thumb thumb-mercari">
                 <span class="thumb-emoji">📦</span>
-                <img class="thumb-gif" src="assets/mercari-sizer.gif" alt="" onerror="this.remove()">
+                <img class="thumb-gif" loading="lazy" decoding="async" src="assets/mercari-sizer.gif" alt="" onerror="this.remove()">
             </div>
             <div class="card-body">
                 <h2 data-i18n="merTitle">Mercari Sizer</h2>
@@ -4339,12 +4311,15 @@ const I18N = {
         catLearn: "🧠 まなぶゲーム",
         catFortune: "🔮 うらない",
         catTools: "🛠️ ツール",
-        secFeatured: "⭐ NEW (12時間以内の新作)",
+        secFeatured: "🆕 今週の新着",
         searchPlaceholder: "アプリを検索…",
         newBadge: "NEW",
         searchEmpty: "見つかりませんでした",
         spotlightKicker: "NEW SPOTLIGHT",
         spotlightCta: "今すぐひらく",
+        secBest: "⭐ 殿堂入り — いま遊ぶならこれ",
+        secAll: "🗂️ すべてのアプリ",
+        bestChip: "⭐ 殿堂入り",
         ainbLive: "DAILY",
         ainbDesc: "毎朝、arXiv・HN・Reddit・GitHub・AIラボ公式から100件超を集めて、日本語要約とハイライト付きで配信。",
         ainbCta: "今日のニュースを読む →",
@@ -4730,8 +4705,8 @@ const I18N = {
         houchiKokkaDesc: "体制（資本主義・社会主義・独裁…）を選んで放置するだけ。経済・平等・自由の動きを眺めて、それぞれの主義のメリットとデメリットがだんだんわかる学習シミュ。",
         houchiKokkaTag1: "放置シミュ", houchiKokkaTag2: "主義くらべ", houchiKokkaTag3: "日英対応",
         eagle1969Title: "イーグル着陸 1969",
-        eagle1969Desc:  "1969年7月20日、月着陸船イーグルを手動操縦。岩場を避け、燃料が尽きる前に静かの海へソフトランディング。",
-        eagle1969Tag1: "史実体験", eagle1969Tag2: "月着陸船", eagle1969Tag3: "7月20日 · 1969",
+        eagle1969Desc:  "静かの海からハドレー谷まで、アポロ計画の実在の5地点に月着陸船を降ろせ。1202アラーム、サーベイヤー3号、谷と山塊——ミッションを進めて★を集める月面着陸アーケード。音付き。",
+        eagle1969Tag1: "月着陸アーケード", eagle1969Tag2: "5ミッション", eagle1969Tag3: "★を集めろ",
         tutankhamun1922Title: "ツタンカーメンの墓 1922",
         tutankhamun1922Desc: "砂をなぞって3000年の眠りから20の秘宝を発掘する考古学体験。",
         tutankhamun1922Tag1: "発掘体験", tutankhamun1922Tag2: "20の秘宝", tutankhamun1922Tag3: "紀元前1323年 · 1922",
@@ -4796,7 +4771,7 @@ const I18N = {
         vinland1000Desc: "西暦1000年頃、ヴァイキングのレイフ・エリクソンがコロンブスより500年早く新大陸へ。氷山と嵐の北大西洋を横断する航海アクションゲーム。",
         vinland1000Tag1: "航海ゲーム", vinland1000Tag2: "ヴァイキング", vinland1000Tag3: "西暦1000年",
         silkroad130bcTitle: "シルクロードの隊商 紀元前130年",
-        silkroad130bcDesc: "紀元前130年、張騫が切り拓いたシルクロードを隊商で旅する。長安→ローマ、8都市を結ぶ交易アドベンチャー。",
+        silkroad130bcDesc: "長安からローマへ7000km。安く買って高く売り、砂嵐・盗賊をかわして隊商を導く交易シム。ラクダが地図を歩き、売却益がひと目でわかる市場で大商人を目指せ。",
         silkroad130bcTag1: "交易ゲーム", silkroad130bcTag2: "シルクロード", silkroad130bcTag3: "紀元前130年",
         kontiki1947Title: "コンティキ号 1947",
         kontiki1947Desc: "1947年、バルサ材のいかだでペルーからポリネシアへ。101日間・8,000kmの太平洋横断を追体験するカード型航海ゲーム。",
@@ -4973,12 +4948,15 @@ const I18N = {
         catLearn: "🧠 Learn-by-play",
         catFortune: "🔮 Fortune",
         catTools: "🛠️ Tools",
-        secFeatured: "⭐ NEW (last 12 hours)",
+        secFeatured: "🆕 New this week",
         searchPlaceholder: "Search apps…",
         newBadge: "NEW",
         searchEmpty: "No matches.",
         spotlightKicker: "NEW SPOTLIGHT",
         spotlightCta: "Open now",
+        secBest: "⭐ Best of Pinda Lab",
+        secAll: "🗂️ All apps",
+        bestChip: "⭐ BEST",
         ainbLive: "DAILY",
         ainbDesc: "Every morning — 100+ items from arXiv, HN, Reddit, GitHub & AI lab blogs, with bilingual summaries and curated highlights.",
         ainbCta: "Read today's drop →",
@@ -5368,8 +5346,8 @@ const I18N = {
         houchiKokkaDesc: "Capitalism, socialism, dictatorship… just pick a system and let it idle. Watch the economy, equality and freedom shift, and gradually grasp each -ism's merits and demerits.",
         houchiKokkaTag1: "Idle sim", houchiKokkaTag2: "Compare -isms", houchiKokkaTag3: "JP / EN",
         eagle1969Title: "The Eagle Has Landed · 1969",
-        eagle1969Desc:  "July 20, 1969 — fly the lunar module Eagle by hand, dodge the boulders and touch down softly on the Sea of Tranquility before the fuel runs out.",
-        eagle1969Tag1: "History·Felt", eagle1969Tag2: "Lunar lander", eagle1969Tag3: "Jul 20 · 1969",
+        eagle1969Desc:  "Land at 5 real Apollo sites, from the Sea of Tranquility to Hadley Rille. 1202 alarms, Surveyor 3, rilles and massifs — a mission-based lunar lander arcade with star ratings and sound.",
+        eagle1969Tag1: "Lunar lander", eagle1969Tag2: "5 missions", eagle1969Tag3: "Collect ★", 
         tutankhamun1922Title: "Tomb of Tutankhamun · 1922",
         tutankhamun1922Desc: "Brush away sand to unearth 20 treasures from a 3,000-year slumber.",
         tutankhamun1922Tag1: "Excavation", tutankhamun1922Tag2: "20 treasures", tutankhamun1922Tag3: "1323 BC · 1922",
@@ -5434,7 +5412,7 @@ const I18N = {
         vinland1000Desc: "c. 1000 AD — Viking explorer Leif Erikson sailed west from Greenland and reached the New World 500 years before Columbus. Navigate icebergs and storms across the North Atlantic.",
         vinland1000Tag1: "Sailing Game", vinland1000Tag2: "Vikings", vinland1000Tag3: "c. 1000 AD",
         silkroad130bcTitle: "Silk Road Caravan · 130 BC",
-        silkroad130bcDesc: "130 BC — Trade silk, jade, and spices across 8 cities from Chang'an to Rome on the greatest trade route of the ancient world.",
+        silkroad130bcDesc: "7,000 km from Chang'an to Rome. Buy low, sell high, dodge sandstorms and bandits. Your caravan walks a living map, and the market shows profit at a glance.",
         silkroad130bcTag1: "Trading Game", silkroad130bcTag2: "Silk Road", silkroad130bcTag3: "130 BC",
         kontiki1947Title: "Kon-Tiki · 1947",
         kontiki1947Desc: "1947 — a balsa raft from Peru to Polynesia. Survive 101 days and 8,000 km across the Pacific in this card-based voyage game.",
@@ -5598,7 +5576,7 @@ const I18N = {
 // ════════════════════════════════════════════
 //   NEW = added within this window (hours)
 // ════════════════════════════════════════════
-const NEW_WINDOW_HOURS = 12;
+const NEW_WINDOW_HOURS = 168;   // 7 days
 const FEATURED_MAX = 8;
 
 function hoursSince(iso) {
@@ -5627,6 +5605,7 @@ function applyLang(lang) {
     const si = document.getElementById('searchInput');
     if (si && dict.searchPlaceholder) si.placeholder = dict.searchPlaceholder;
     refreshNewBadgeText(dict.newBadge || 'NEW');
+    refreshCatCounts();
     const ee = document.getElementById('searchEmpty');
     if (ee && dict.searchEmpty) ee.textContent = dict.searchEmpty;
     try { localStorage.setItem('pl-lang', lang); } catch (e) {}
@@ -5800,6 +5779,50 @@ function buildFeatured() {
 }
 
 // ════════════════════════════════════════════
+//   Best of Pinda Lab (hand-curated)
+// ════════════════════════════════════════════
+const BEST_SLUGS = ['houchi-kokka', 'sousei-no-suna', 'eagle-1969', 'silk-road-130bc', 'mizumichi', 'yoku-ataru'];
+
+function buildBest() {
+    const row = document.getElementById('bestRow');
+    if (!row) return;
+    const grid = document.getElementById('app-grid');
+    row.innerHTML = '';
+    BEST_SLUGS.forEach(slug => {
+        const card = grid.querySelector(`.card[data-slug="${slug}"]`);
+        if (!card) return;
+        const clone = card.cloneNode(true);
+        clone.removeAttribute('data-cat');
+        const thumb = clone.querySelector('.card-thumb');
+        if (thumb) {
+            const chip = document.createElement('span');
+            chip.className = 'best-chip';
+            chip.dataset.i18n = 'bestChip';
+            chip.textContent = '⭐ 殿堂入り';
+            thumb.appendChild(chip);
+        }
+        row.appendChild(clone);
+    });
+}
+
+function refreshCatCounts() {
+    const cards = Array.from(document.querySelectorAll('#app-grid .card'));
+    document.querySelectorAll('.cat-btn').forEach(btn => {
+        const cat = btn.dataset.cat;
+        const count = cat === 'all'
+            ? cards.length
+            : cards.filter(c => (c.dataset.cat || '').split(/\s+/).includes(cat)).length;
+        let span = btn.querySelector('.cat-count');
+        if (!span) {
+            span = document.createElement('span');
+            span.className = 'cat-count';
+            btn.appendChild(span);
+        }
+        span.textContent = count;
+    });
+}
+
+// ════════════════════════════════════════════
 //   Spotlight (newest app as a guided entrance)
 // ════════════════════════════════════════════
 function buildSpotlight() {
@@ -5914,6 +5937,10 @@ function applyFilters() {
         featuredVisible ? '' : 'none';
     const lbl = document.getElementById('featuredLabel');
     if (lbl) lbl.hidden = !featuredVisible || lbl.dataset.empty === '1';
+    const bestRow = document.getElementById('bestRow');
+    const bestLbl = document.getElementById('bestLabel');
+    if (bestRow) bestRow.style.display = featuredVisible ? '' : 'none';
+    if (bestLbl) bestLbl.hidden = !featuredVisible;
     // URL sync
     const url = new URL(window.location);
     if (currentCat === 'all') url.searchParams.delete('cat');
@@ -5943,6 +5970,7 @@ document.querySelectorAll('.cat-btn').forEach(btn => {
     decorateCards();
     buildSpotlight();
     buildFeatured();
+    buildBest();
     applyLang(lang);
 
     // Hook up search
